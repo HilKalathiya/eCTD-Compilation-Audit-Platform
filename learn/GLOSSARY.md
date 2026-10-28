@@ -5,3 +5,4 @@ baseline = the snapshot you compare future changes against
 temp repo = a short-lived scratch git folder deleted after the test
 subprocess = running another program from inside Python
 false alarm = a warning that fires when nothing is wrong
+planted mistake = an error put in on purpose to check an alarm rings

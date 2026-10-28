@@ -1,5 +1,8 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-28 — T-003 done
+- `tests/test_watch.py`: 13 tests; all 11 watch.py flags have planted tests (added: assertions weakened, requirements.txt changed, large file). watch.py untouched.
+
 ## 2026-10-28 — T-002 done
 - `tests/test_watch.py`: 9 tests; all 8 watch.py flags fire on planted mistakes and a clean change gives `FLAGS: none`. watch.py untouched.
 

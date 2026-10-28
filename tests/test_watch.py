@@ -82,6 +82,25 @@ class WatchFlagTests(unittest.TestCase):
         self.write("ectd_engine/facts/c.py", '"""c."""\n' + KEY + ' = "abcd1234efgh"\n')
         self.assertIn("possible secret", self.status())
 
+    def test_assertions_weakened(self):
+        four = "    def test_one(self):\n" + "".join(f"        self.assertEqual({i}, {i})\n" for i in range(3))
+        self.write("tests/test_a.py", "import unittest\n\n\nclass A(unittest.TestCase):\n" + four)
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", "three asserts")
+        self.watch("task", "X", "ectd_engine/**", "tests/**")
+        self.write("tests/test_a.py", "import unittest\n\n\nclass A(unittest.TestCase):\n"
+                   "    def test_one(self):\n        pass\n")
+        self.assertIn("assertions net -3", self.status())
+
+    def test_requirements_changed(self):
+        self.write("requirements.txt", "somelib==1.0\n")
+        self.assertIn("requirements.txt changed", self.status())
+
+    def test_large_file(self):
+        (self.root / "ectd_engine").mkdir(exist_ok=True)
+        (self.root / "ectd_engine" / "big.bin").write_bytes(b"x" * 1_100_000)
+        self.assertIn("large file (>1 MB)", self.status())
+
     def test_clean_change_raises_no_flag(self):
         self.append("ectd_engine/facts/a.py", "Z = 2\n")
         self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")
