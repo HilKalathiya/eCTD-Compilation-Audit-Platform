@@ -1,0 +1,7 @@
+task_id,local_writing,local_judgement,ref_writing,ref_judgement,ref_validator_problems
+lt_assay,4,3,4,5,
+lt_dissolution,3,4,3,4,
+acc_total_impurities,5,4,3,4,
+acc_assay,5,4,3,4,
+acc_impurity_b_oos,3,4,5,4,
+    

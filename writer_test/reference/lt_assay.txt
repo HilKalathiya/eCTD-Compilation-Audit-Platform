@@ -1,0 +1,1 @@
+Assay decreased in all [[n_batches]] batches at [[condition]], from [[initial_range]] initially to [[final_range]] at the last time point of [[duration]], with a mean absolute change of [[mean_change]]. The lowest result, [[min_value]], was observed for [[min_value_where]]. All results remained within the acceptance criterion of [[spec]].

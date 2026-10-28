@@ -1,0 +1,13 @@
+# 07 Chat history digest (what happened, in order; full detail is in the explainer)
+
+- 2026-09-30: Explainer doc started for a "CMC Compilation & Audit Engine" (Module 3). Original blueprint (overview_discription.md) reviewed: 8 high-severity flaws found (model types data values into math script; model generates provenance JSON; OOT test flags only at >=0.164% vs ~0.124% with a prediction interval; "Month 36 accelerated" (accelerated = 6 months); total degradation products vs per-individual Q3B threshold; Q3B applied to a BLA; Pinecone/Aura/OpenAI embeddings vs single-tenant GovCloud; Claude Opus 4.6 not on GovCloud Bedrock).
+- Between 09-30 and 10-14: latest GenAI/agent tech researched (GEPA, JEPA, MCP, structured outputs, Citations, ColPali, OpenTelemetry GenAI). Section 28 written.
+- 2026-10-14: Hil widens scope to the whole eCTD. Whole-eCTD sections merged into one reading order; Weave Bio product/UX studied; UX section 34; real datasets verified (Lek, Kerendia, CDISC Pilot 01, openFDA CRLs); technical brief written for his brother; his brother flagged the OCR+VLM cross-check flaw -> confirmed by simulation, fixed.
+- 2026-10-14/18: "checks that cannot fail" audit (independence rule), 10 flaws, three real-data stress tests (checks_stress_test). Fresh-eyes review 10-18.
+- 2026-10-24: Problems and Solutions doc filled (fixes for each flagged problem).
+- 2026-10-24 to 10-26: orchestration decided (Temporal outside + LangGraph inside); model-choice and cost research report dated 10-26 (archive/model_choice_and_costs.md); explainer §14–15 updated.
+- 2026-10-27 (approx.): Built the $0 writer harness (`writer_test`), ran it on laptop (Gemma 4 E4B) and Kaggle (Gemma 4 26B); fixed Gemma 4 empty-output (thinking tokens); blind comparison with Claude (about even on an easy task). Hil replaced "PyChain WASM" with Firecracker microVMs in the doc. "Did we overcome this error?" -> only partly -> wrong-binding research (6 approaches) -> combined design built and tested.
+- 2026-10-28: Planted-error test (all caught) -> audit of the model's own output: round 1 found 4 wrong + 7 misleading -> 7 checks added; round 2: 116 accepted, 0 wrong; 3 more gaps closed after; round 3 pending. Hil asked to migrate everything to the new Claude Project theme with brain/hands roles -> this handoff.
+
+## Hil's standing asks (from chats)
+Real public data only; polished for a job portfolio; UI/UX like Weave Bio but better; open-source models (Gemma 4) and possible fine-tuning; whole eCTD scope; token-optimized workflow; short plain-language answers; answer comments in the doc thread, short.

@@ -1,0 +1,77 @@
+[SYSTEM]
+You write discussion paragraphs for the stability section (3.2.P.8.3) of a drug regulatory submission.
+
+Rules you must follow:
+1. Write one paragraph of 2 to 4 sentences, formal regulatory English, no headings or bullet points.
+2. Never write a digit or a number word (such as one, three or thirty). Every value must be a placeholder from the FACTS list, written exactly as [[fact_id]]. The only exception is the attribute name, which you may copy exactly as given.
+3. Each placeholder is replaced by its value exactly as listed in FACTS, unit included, so do not write %, months or °C after it. Read each sentence with the values in place: it must still be correct English. Write "a mean change of [[mean_change]]", not "a [[mean_change]]", and "[[n_batches]] batches", not "[[n_batches]]" alone.
+4. Describe the trend exactly as given in TREND. Never claim a trend the data do not show.
+5. State compliance exactly as given in COMPLIANCE. If it is OUT OF SPECIFICATION, state plainly that [[oos_results]] did not meet the acceptance criterion of [[spec]].
+6. Use only the facts given. Do not add causes, mechanisms or conclusions about shelf life.
+7. Include every placeholder listed under MUST MENTION.
+8. Output only the paragraph.
+
+[USER]
+ATTRIBUTE: Related compound C
+UNIT: %
+CONDITION: [[condition]]
+FACTS:
+- [[condition]]: storage condition = 30°C/65% RH
+- [[spec]]: acceptance criterion = NMT 0.30%
+- [[initial_range]]: range of initial results = 0.05–0.06%
+- [[final_range]]: range of results at the last time point = 0.09–0.11%
+- [[max_value]]: highest result = 0.11%
+- [[max_value_where]]: where the highest result occurred = Batch C2 at Month 12
+TREND: increasing
+COMPLIANCE: all results within specification
+MUST MENTION: [[spec]], [[max_value]]
+
+[ASSISTANT]
+Related compound C increased gradually at [[condition]], from [[initial_range]] initially to [[final_range]] at the last time point. The highest result, [[max_value]], was observed for [[max_value_where]]. All results remained within the acceptance criterion of [[spec]].
+
+[USER]
+ATTRIBUTE: Related compound D
+UNIT: %
+CONDITION: [[condition]]
+FACTS:
+- [[condition]]: storage condition = 40°C/75% RH
+- [[n_batches]]: number of batches = three
+- [[spec]]: acceptance criterion = NMT 0.20%
+- [[initial_range]]: range of initial results = 0.04–0.05%
+- [[final_range]]: range of results at the last time point = 0.16–0.23%
+- [[max_value]]: highest result = 0.23%
+- [[max_value_where]]: where the highest result occurred = Batch D1 at Month 6
+- [[oos_results]]: results outside the acceptance criterion = Batch D1 at Month 6 (0.23%)
+TREND: increasing
+COMPLIANCE: OUT OF SPECIFICATION
+MUST MENTION: [[spec]], [[max_value]], [[oos_results]]
+
+[ASSISTANT]
+Related compound D increased in all [[n_batches]] batches at [[condition]], from [[initial_range]] initially to [[final_range]] at the last time point. The highest result, [[max_value]], was observed for [[max_value_where]]. The result for [[oos_results]] did not meet the acceptance criterion of [[spec]] and is out of specification.
+
+[USER]
+ATTRIBUTE: Impurity B
+UNIT: %
+CONDITION: [[condition]]
+DATA (for your understanding only; do not copy numbers):
+| Batch | Month 0 | Month 3 | Month 6 |
+|---|---|---|---|
+| B1 | 0.04 | 0.08 | 0.12 |
+| B2 | 0.05 | 0.09 | 0.14 |
+| B3 | 0.05 | 0.11 | 0.18 |
+FACTS:
+- [[condition]]: storage condition = 40°C/75% RH
+- [[duration]]: longest time point tested = 6 months
+- [[n_batches]]: number of batches = three
+- [[spec]]: acceptance criterion = NMT 0.15%
+- [[initial_range]]: range of initial results across batches = 0.04–0.05%
+- [[final_range]]: range of results at the last time point = 0.12–0.18%
+- [[max_value]]: highest result = 0.18%
+- [[max_value_where]]: where the highest result occurred = Batch B3 at Month 6
+- [[min_value]]: lowest result = 0.04%
+- [[min_value_where]]: where the lowest result occurred = Batch B1 at Month 0
+- [[mean_change]]: mean absolute change from initial to last time point = 0.10%
+- [[oos_results]]: results outside the acceptance criterion = Batch B3 at Month 6 (0.18%)
+TREND: increasing
+COMPLIANCE: OUT OF SPECIFICATION
+MUST MENTION: [[spec]], [[max_value]], [[oos_results]]

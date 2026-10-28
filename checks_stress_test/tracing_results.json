@@ -1,0 +1,41 @@
+{
+ "wrong batch": {
+  "changed": 3128,
+  "pass_section": 3128,
+  "pass_product": 3128,
+  "pct_section": 100.0,
+  "pct_product": 100.0
+ },
+ "wrong test": {
+  "changed": 3595,
+  "pass_section": 3595,
+  "pass_product": 3595,
+  "pct_section": 100.0,
+  "pct_product": 100.0
+ },
+ "last-digit slip": {
+  "changed": 4000,
+  "pass_section": 2014,
+  "pass_product": 3455,
+  "pct_section": 50.4,
+  "pct_product": 86.4
+ },
+ "decimal shift": {
+  "changed": 4000,
+  "pass_section": 156,
+  "pass_product": 351,
+  "pct_section": 3.9,
+  "pct_product": 8.8
+ },
+ "digit swap": {
+  "changed": 2710,
+  "pass_section": 95,
+  "pass_product": 654,
+  "pct_section": 3.5,
+  "pct_product": 24.1
+ },
+ "_picks": {
+  "facts_picked": 4000,
+  "distinct_facts": 2894
+ }
+}

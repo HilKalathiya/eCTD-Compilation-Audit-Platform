@@ -1,0 +1,87 @@
+{
+ "adsl_cdisc_vs_rconsortium": {
+  "subjects": 254,
+  "shared_variables": 45,
+  "differing_values": 0
+ },
+ "sdtm_rederived": {
+  "randomised": [
+   86,
+   84,
+   84
+  ],
+  "completed week 24 visit": [
+   60,
+   28,
+   30
+  ],
+  "completed study": [
+   58,
+   25,
+   27
+  ],
+  "deaths": [
+   2,
+   1,
+   0
+  ],
+  "male / female": [
+   111,
+   143
+  ],
+  "age mean (SD)": [
+   75.1,
+   8.25
+  ],
+  "white (all) / white not Hispanic": [
+   230,
+   218
+  ]
+ },
+ "csr_text": {
+  "randomised": [
+   86,
+   84,
+   84
+  ],
+  "completed week 24 visit": [
+   60,
+   28,
+   30
+  ],
+  "completed study": [
+   58,
+   25,
+   27
+  ],
+  "deaths": "3 in total",
+  "male / female": [
+   111,
+   143
+  ],
+  "age mean (SD)": [
+   75.1,
+   8.25
+  ],
+  "white (all) / white not Hispanic": "218 (86%) Caucasian; 12 (5%) Hispanic"
+ },
+ "subject_level_match": {
+  "COMP24FL (completed Week 24)": true,
+  "DCDECOD = COMPLETED (completed study)": true,
+  "DTHFL (died)": true
+ },
+ "week24_completers_all_in_efficacy_population": true,
+ "planted_flag_errors": {
+  "single flag flipped": {
+   "planted": 762,
+   "caught_by_counts": 762,
+   "caught_subject_by_subject": 762
+  },
+  "two flags swapped within an arm": {
+   "planted": 520,
+   "caught_by_counts": 0,
+   "caught_subject_by_subject": 520
+  }
+ },
+ "note": "Re-counting the same ADaM flags always agrees with tables made from them, so it catches none of these by definition. Week-24 completers: SV visit 12; all are also in the efficacy population (EFFFL=Y), which is the CSR's definition. SDTM is itself built by the sponsor, so an error made when collecting or mapping the data is shared by both routes."
+}

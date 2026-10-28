@@ -1,0 +1,370 @@
+{
+  "note": "Synthetic stability data for testing the writer pipeline. Not real product data.",
+  "tasks": [
+    {
+      "task_id": "lt_assay",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Assay",
+      "unit": "% label claim",
+      "spec": {
+        "type": "range",
+        "lower": 95.0,
+        "upper": 105.0
+      },
+      "decimals": 1,
+      "condition": "25°C/60% RH",
+      "months": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        18,
+        24
+      ],
+      "batches": {
+        "B1": [
+          100.1,
+          99.9,
+          99.9,
+          99.6,
+          99.6,
+          99.3,
+          98.9
+        ],
+        "B2": [
+          99.8,
+          99.5,
+          99.5,
+          99.2,
+          99.1,
+          98.9,
+          98.7
+        ],
+        "B3": [
+          100.4,
+          100.3,
+          100.2,
+          100.2,
+          99.9,
+          99.6,
+          99.4
+        ]
+      }
+    },
+    {
+      "task_id": "lt_total_impurities",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Total impurities",
+      "unit": "%",
+      "spec": {
+        "type": "nmt",
+        "limit": 1.0,
+        "decimals": 1
+      },
+      "decimals": 2,
+      "condition": "25°C/60% RH",
+      "months": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        18,
+        24
+      ],
+      "batches": {
+        "B1": [
+          0.09,
+          0.13,
+          0.14,
+          0.16,
+          0.18,
+          0.23,
+          0.29
+        ],
+        "B2": [
+          0.1,
+          0.13,
+          0.16,
+          0.17,
+          0.2,
+          0.24,
+          0.28
+        ],
+        "B3": [
+          0.11,
+          0.15,
+          0.16,
+          0.18,
+          0.21,
+          0.25,
+          0.3
+        ]
+      }
+    },
+    {
+      "task_id": "lt_impurity_a",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Impurity A",
+      "unit": "%",
+      "spec": {
+        "type": "nmt",
+        "limit": 0.2
+      },
+      "decimals": 2,
+      "condition": "25°C/60% RH",
+      "months": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        18,
+        24
+      ],
+      "batches": {
+        "B1": [
+          0.03,
+          0.04,
+          0.04,
+          0.05,
+          0.05,
+          0.06,
+          0.07
+        ],
+        "B2": [
+          0.04,
+          0.05,
+          0.05,
+          0.05,
+          0.06,
+          0.07,
+          0.08
+        ],
+        "B3": [
+          0.03,
+          0.04,
+          0.04,
+          0.05,
+          0.05,
+          0.06,
+          0.07
+        ]
+      }
+    },
+    {
+      "task_id": "lt_dissolution",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Dissolution at 30 minutes",
+      "unit": "% dissolved",
+      "spec": {
+        "type": "nlt",
+        "limit": 80,
+        "note": "Q"
+      },
+      "decimals": 0,
+      "condition": "25°C/60% RH",
+      "months": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        18,
+        24
+      ],
+      "batches": {
+        "B1": [
+          92.0,
+          92.0,
+          92.0,
+          93.0,
+          93.0,
+          92.0,
+          92.0
+        ],
+        "B2": [
+          92.0,
+          94.0,
+          93.0,
+          94.0,
+          94.0,
+          92.0,
+          93.0
+        ],
+        "B3": [
+          92.0,
+          90.0,
+          91.0,
+          90.0,
+          90.0,
+          90.0,
+          92.0
+        ]
+      }
+    },
+    {
+      "task_id": "lt_water",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Water content",
+      "unit": "%",
+      "spec": {
+        "type": "nmt",
+        "limit": 3.0
+      },
+      "decimals": 1,
+      "condition": "25°C/60% RH",
+      "months": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        18,
+        24
+      ],
+      "batches": {
+        "B1": [
+          1.8,
+          1.8,
+          1.8,
+          1.9,
+          1.8,
+          1.8,
+          1.9
+        ],
+        "B2": [
+          1.9,
+          1.9,
+          1.9,
+          1.9,
+          1.9,
+          1.9,
+          2.0
+        ],
+        "B3": [
+          1.8,
+          1.8,
+          1.8,
+          1.8,
+          1.8,
+          1.8,
+          1.9
+        ]
+      }
+    },
+    {
+      "task_id": "acc_total_impurities",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Total impurities",
+      "unit": "%",
+      "spec": {
+        "type": "nmt",
+        "limit": 1.0,
+        "decimals": 1
+      },
+      "decimals": 2,
+      "condition": "40°C/75% RH",
+      "months": [
+        0,
+        3,
+        6
+      ],
+      "batches": {
+        "B1": [
+          0.1,
+          0.3,
+          0.52
+        ],
+        "B2": [
+          0.11,
+          0.32,
+          0.54
+        ],
+        "B3": [
+          0.12,
+          0.33,
+          0.54
+        ]
+      }
+    },
+    {
+      "task_id": "acc_assay",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Assay",
+      "unit": "% label claim",
+      "spec": {
+        "type": "range",
+        "lower": 95.0,
+        "upper": 105.0
+      },
+      "decimals": 1,
+      "condition": "40°C/75% RH",
+      "months": [
+        0,
+        3,
+        6
+      ],
+      "batches": {
+        "B1": [
+          100.2,
+          99.0,
+          98.0
+        ],
+        "B2": [
+          99.9,
+          98.7,
+          97.6
+        ],
+        "B3": [
+          100.5,
+          99.3,
+          98.1
+        ]
+      }
+    },
+    {
+      "task_id": "acc_impurity_b_oos",
+      "section": "3.2.P.8.3",
+      "product": "Product X tablets 20 mg (synthetic data)",
+      "attribute": "Impurity B",
+      "unit": "%",
+      "spec": {
+        "type": "nmt",
+        "limit": 0.15
+      },
+      "decimals": 2,
+      "condition": "40°C/75% RH",
+      "months": [
+        0,
+        3,
+        6
+      ],
+      "batches": {
+        "B1": [
+          0.04,
+          0.08,
+          0.12
+        ],
+        "B2": [
+          0.05,
+          0.09,
+          0.14
+        ],
+        "B3": [
+          0.05,
+          0.11,
+          0.18
+        ]
+      }
+    }
+  ]
+}

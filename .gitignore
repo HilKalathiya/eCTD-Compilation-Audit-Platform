@@ -1,0 +1,7 @@
+.brain/
+__pycache__/
+*.pyc
+.venv/
+*.pth
+*.zip
+.claude/settings.local.json

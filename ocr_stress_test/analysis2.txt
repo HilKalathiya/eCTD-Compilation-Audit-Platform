@@ -1,0 +1,29 @@
+== L0 clean digital {'n': 2400, 'tess_wrong': 0, 'pp_wrong': 0, 'both_wrong_same': 0, 'both_same_text': 0, 'format_only_disagree': 0}
+   fixed {'n': 2400, 'agree': 2400, 'zoom': 0, 'human': 0, 'undetected': 0, 'human_grid': 0, 'human_rule': 0}
+   same-engine None
+   naive c=0.0 {'n': 2400, 'human': 0, 'undetected': 45, 'false_alarm': 0, 'accepted': 2400, 'undetected_bind': 45}
+   naive c=0.5 {'n': 2400, 'human': 0, 'undetected': 45, 'false_alarm': 0, 'accepted': 2400, 'undetected_bind': 45}
+   naive c=0.9 {'n': 2400, 'human': 0, 'undetected': 45, 'false_alarm': 0, 'accepted': 2400, 'undetected_bind': 45}
+   naive c=1.0 {'n': 2400, 'human': 0, 'undetected': 45, 'false_alarm': 0, 'accepted': 2400, 'undetected_bind': 45}
+== L1 good scan {'n': 2400, 'tess_wrong': 5, 'pp_wrong': 0, 'both_wrong_same': 0, 'both_same_text': 0, 'format_only_disagree': 0}
+   fixed {'n': 2400, 'agree': 2397, 'zoom': 3, 'human': 0, 'undetected': 0, 'human_grid': 0, 'human_rule': 0}
+   same-engine None
+   naive c=0.0 {'n': 2400, 'human': 5, 'undetected': 45, 'false_alarm': 0, 'accepted': 2395, 'undetected_bind': 45}
+   naive c=0.5 {'n': 2400, 'human': 5, 'undetected': 45, 'false_alarm': 0, 'accepted': 2395, 'undetected_bind': 45, 'caught_by_parser': 3}
+   naive c=0.9 {'n': 2400, 'human': 5, 'undetected': 45, 'false_alarm': 0, 'accepted': 2395, 'undetected_bind': 45, 'caught_by_parser': 5}
+   naive c=1.0 {'n': 2400, 'human': 5, 'undetected': 45, 'false_alarm': 0, 'accepted': 2395, 'undetected_bind': 45, 'caught_by_parser': 5}
+== L2 poor scan {'n': 2400, 'tess_wrong': 125, 'pp_wrong': 53, 'both_wrong_same': 1, 'both_same_text': 13, 'format_only_disagree': 122}
+   fixed {'n': 2400, 'agree': 2139, 'zoom': 118, 'human': 143, 'undetected': 0, 'human_grid': 0, 'human_rule': 0}
+   same-engine {'n': 600, 'tess_page_wrong': 31, 'tess_cell_wrong': 141, 'pp_wrong': 9, 'same_engine_common': 4, 'cross_engine_common': 0}
+   naive c=0.0 {'n': 2400, 'human': 276, 'undetected': 37, 'false_alarm': 117, 'accepted': 2124, 'undetected_bind': 36, 'caught_by_parser': 11}
+   naive c=0.5 {'n': 2400, 'human': 179, 'undetected': 62, 'false_alarm': 59, 'accepted': 2221, 'undetected_bind': 43, 'caught_by_parser': 52}
+   naive c=0.9 {'n': 2400, 'human': 104, 'undetected': 77, 'false_alarm': 11, 'accepted': 2296, 'undetected_bind': 43, 'caught_by_parser': 75}
+   naive c=1.0 {'n': 2400, 'human': 84, 'undetected': 84, 'false_alarm': 0, 'accepted': 2316, 'undetected_bind': 44, 'caught_by_parser': 84}
+== L3 fax / photocopy {'n': 2400, 'tess_wrong': 230, 'pp_wrong': 192, 'both_wrong_same': 1, 'both_same_text': 7, 'format_only_disagree': 155}
+   fixed {'n': 2400, 'agree': 2204, 'zoom': 145, 'human': 51, 'undetected': 0, 'human_grid': 0, 'human_rule': 0}
+   same-engine {'n': 600, 'tess_page_wrong': 51, 'tess_cell_wrong': 24, 'pp_wrong': 54, 'same_engine_common': 1, 'cross_engine_common': 1}
+   naive c=0.0 {'n': 2400, 'human': 548, 'undetected': 36, 'false_alarm': 153, 'accepted': 1852, 'undetected_bind': 35, 'caught_by_parser': 6}
+   naive c=0.5 {'n': 2400, 'human': 320, 'undetected': 92, 'false_alarm': 74, 'accepted': 2080, 'undetected_bind': 41, 'caught_by_parser': 62}
+   naive c=0.9 {'n': 2400, 'human': 156, 'undetected': 149, 'false_alarm': 15, 'accepted': 2244, 'undetected_bind': 44, 'caught_by_parser': 91}
+   naive c=1.0 {'n': 2400, 'human': 98, 'undetected': 170, 'false_alarm': 0, 'accepted': 2302, 'undetected_bind': 44, 'caught_by_parser': 98}
+{'L0 clean digital': {'tables': 40, 'grid_ok': 40, 'header_ok': 40}, 'L1 good scan': {'tables': 40, 'grid_ok': 40, 'header_ok': 40}, 'L2 poor scan': {'tables': 40, 'grid_ok': 40, 'header_ok': 40}, 'L3 fax / photocopy': {'tables': 40, 'grid_ok': 40, 'header_ok': 40}}
