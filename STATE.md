@@ -1,5 +1,8 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-28 — T-002 done
+- `tests/test_watch.py`: 9 tests; all 8 watch.py flags fire on planted mistakes and a clean change gives `FLAGS: none`. watch.py untouched.
+
 ## 2026-10-28 — T-001 done
 - Git started: commit 1 = baseline (old work unchanged), commit 2 = `ectd_engine/` skeleton (facts, writer, validator, ledger) + `tests/test_smoke.py`.
 - Watch tool verified: touching a frozen file (`writer_test/README.md`) is flagged. Next: T-002.
