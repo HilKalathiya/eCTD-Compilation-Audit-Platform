@@ -20,3 +20,6 @@ context = what Claude holds in mind during one session
 MCP server = a connection to an outside tool that adds tools to Claude
 token = a small chunk of text, about 4 letters
 /clear = wipes the chat so Messages cost drops to zero
+dataclass = a short way to define a record with named fields
+frozen = cannot be changed after it is created
+round trip = save to text and load back; the result must be identical
