@@ -38,3 +38,4 @@
 - Open decisions for Hil: O1 SQLite vs Postgres for M1–M3; O2 repo layout; O3 next Module-3 sections (see brain/02_decisions_log.md).
 - Known limits: stability paragraphs only, one model; synthetic data; OCR check only simulated.
 - K1 done: context gauge 68.8k/1m (7%); biggest: messages 26.4k, MCP 13.1k, skills 9.8k (see learn/LEARN_K1.md).
+- K2 done: status line (tools/statusline.py) shows task id | ctx % | cost | 5h %; 60 tests pass; restart Claude Code to see it.

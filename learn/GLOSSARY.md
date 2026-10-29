@@ -25,3 +25,6 @@ frozen = cannot be changed after it is created
 round trip = save to text and load back; the result must be identical
 regex = a pattern that text must match exactly
 whitelist = only the listed things are allowed, everything else is refused
+status line = the bar at the bottom of Claude Code, fed by a script
+stdin = text sent into a program from outside
+JSON = text format of labelled values, like {"a": 1}

@@ -52,5 +52,10 @@
       }
     ]
   },
-  "enabledPlugins": {}
+  "enabledPlugins": {},
+  "statusLine": {
+    "type": "command",
+    "command": "python tools/statusline.py",
+    "padding": 0
+  }
 }
