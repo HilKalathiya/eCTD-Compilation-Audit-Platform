@@ -6,7 +6,7 @@ Biggest 3 items (tokens, % of 1m):
   2 MCP 13.1k (1.3%) = tools 6.6k + server instructions 6.5k; 356 tools loaded on demand (275.5k more, 27.6%, only if fetched). Shrink: /mcp disable servers you never use (Figma, Postman, Eraser, Zoom...).
   3 Skills 9.8k (1.0%) - 436 skills listed. Shrink: disable unused plugins with /plugin (bio-research, zoom, brightdata...).
   Next: system tools 9.2k, system prompt 4k, agents 4k (49), CLAUDE.md 2.1k (0.2%, already small).
-/usage numbers: 5-hour ___% , weekly ___% (Hil to fill in)
+/usage numbers: session (5-hour) 33% used, resets 7:09pm; week 57% used, resets Nov 1 5:29am. Session cost $0.62; 86% of input came from cache.
 New words: context = what Claude holds in mind this session; MCP server = outside tool connection; token = small chunk of text (~4 letters)
 Look at: /context output - the Messages row grows as we chat; the rest is fixed.
 Try it: /clear then /context - Messages drops to about 0.
