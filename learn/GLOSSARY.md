@@ -12,3 +12,7 @@ Docker = tool that runs programs in sealed boxes so they behave the same everywh
 container = one running sealed box made from an image
 volume = disk space kept outside a container so data survives restarts
 profile = a name in docker-compose.yml that lets you start only some containers
+requirement = a promise the system must keep (ids UR-01...)
+risk = something that could break a promise (ids RK-01...)
+control = the thing that stops or catches a risk
+GAMP 5 = pharma guide for proving software does what its written requirements say

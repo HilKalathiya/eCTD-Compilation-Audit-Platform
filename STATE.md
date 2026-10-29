@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-006 done
+- `docs/requirements.md`: 19 requirements (UR-01..19) and 14 risks (RK-01..14, each with control + test or `future:` chunk, covering every UR). `tests/test_requirements.py`: 7 tests incl. 5 planted-error ones.
+- Old stash dropped (only held the attribution setting, already committed). `tests_live` 7 OK after restarting docker (Neo4j needs ~1 min to become healthy).
+
 ## 2026-10-29 — T-005 done
 - `docker compose --profile db --profile graph up -d` starts Postgres 16 + pgvector (5432) and Neo4j 5.26 (7474/7687); passwords in git-ignored `.env` (template `.env.example`).
 - `ectd_engine/db/`: `postgres.float_columns`, `graph.check_props`; `tests_live/` 7 live tests (Decimal 0.140 exact in NUMERIC and Neo4j string, pgvector, planted float alarms). psycopg 3.3.6, neo4j 6.4.1 pinned.
