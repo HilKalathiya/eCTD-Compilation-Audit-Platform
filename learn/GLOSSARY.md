@@ -47,3 +47,5 @@ drift = a source changed after we stored its number
 graph = data stored as dots (nodes) joined by lines (relationships)
 Cypher = the query language of Neo4j
 MERGE = Cypher command: create if missing, else reuse
+cross-field check = a rule that compares two numbers from the same row
+dry run = run the job and count results without storing anything

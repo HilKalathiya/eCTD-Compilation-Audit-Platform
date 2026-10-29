@@ -53,3 +53,6 @@
 ## 2026-10-29 — K3 done
 - Guard hook: `python tools/watch.py guard` (PreToolUse on Edit|Write|MultiEdit|NotebookEdit) exits 2 for a frozen path the task does not allow; 9 tests in tests/test_guard.py. Bash writes are NOT covered. Backup: .claude/settings.backup.json (untracked). Restart Claude Code to load the hook.
 - Known: tests/test_gate.py fails (19 errors + 1 failure) since commit 6678280 "second entry of ranges": ranges.json and ranges_check.json disagree. Not touched by K3; needs a card.
+
+## 2026-10-29 — T-015 done
+- Lek loader `python -m ectd_engine.loaders.lek --dry-run` -> accepted 4965, quarantined 60 (20 batches; part > total, reason code CROSS_FIELD). Dry run only; no live load. ranges.json/units.json now cover Impurity O/L, Total impurities, Residual solvent (match ranges_check.json, so test_gate is green again). 8 tests in tests/test_lek.py. Locator row=N is the spreadsheet row (header = row 1).

@@ -3,5 +3,9 @@
   "Impurity B": {"unit": "%", "conversions": {"ppm": "0.0001"}},
   "Assay": {"unit": "%", "conversions": {}},
   "Water": {"unit": "%", "conversions": {}},
-  "Dissolution": {"unit": "%", "conversions": {}}
+  "Dissolution": {"unit": "%", "conversions": {}},
+  "Impurity O": {"unit": "%", "conversions": {}},
+  "Impurity L": {"unit": "%", "conversions": {}},
+  "Total impurities": {"unit": "%", "conversions": {}},
+  "Residual solvent": {"unit": "%", "conversions": {}}
 }
