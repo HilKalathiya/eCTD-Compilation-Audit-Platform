@@ -52,3 +52,5 @@ dry run = run the job and count results without storing anything
 word box = the rectangle (x0,y0,x1,y1) around one word on a PDF page
 text layer = real text inside a PDF (not a picture of text)
 locator = the address of a fact's source, e.g. page=3;box=317,204,329,218
+blind entry = typing a value twice without seeing your first answer
+refused = the check said no, so no fact is made

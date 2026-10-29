@@ -7,5 +7,11 @@
   "Impurity O": {"unit": "%", "conversions": {}},
   "Impurity L": {"unit": "%", "conversions": {}},
   "Total impurities": {"unit": "%", "conversions": {}},
-  "Residual solvent": {"unit": "%", "conversions": {}}
+  "Residual solvent": {"unit": "%", "conversions": {}},
+  "Shelf life": {"unit": "months", "conversions": {}},
+  "Accelerated stability duration": {"unit": "months", "conversions": {}},
+  "Strength": {"unit": "mg", "conversions": {}},
+  "Maximum daily dose": {"unit": "mg", "conversions": {}},
+  "Dissolution paddle speed": {"unit": "rpm", "conversions": {}},
+  "Dissolution medium volume": {"unit": "mL", "conversions": {}}
 }

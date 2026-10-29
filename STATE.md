@@ -59,3 +59,7 @@
 
 ## 2026-10-29 — T-015 done
 - Lek loader `python -m ectd_engine.loaders.lek --dry-run` -> accepted 4965, quarantined 60 (20 batches; part > total, reason code CROSS_FIELD). Dry run only; no live load. ranges.json/units.json now cover Impurity O/L, Total impurities, Residual solvent (match ranges_check.json, so test_gate is green again). 8 tests in tests/test_lek.py. Locator row=N is the spreadsheet row (header = row 1).
+
+## 2026-10-30 — T-017 done
+- units.json + ranges.json now cover Shelf life, Accelerated stability duration, Strength, Maximum daily dose, Dissolution paddle speed, Dissolution medium volume (match ranges_check.json after Hil fixed the "Maximun" typo). `fda_pdf --dry-run` -> 8 accepted, 0 quarantined.
+- `python -m ectd_engine.loaders.double_entry <fact_key>`: blind double typing (getpass); match as Decimal -> candidate (lineage original, "typed twice"), else REFUSED. Locator box is 0,0,0,0 (word box not located). 143 tests pass.

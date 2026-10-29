@@ -42,6 +42,15 @@ class TestLoadedFacts(unittest.TestCase):
         results = fda_pdf.load(Conn(), None, CFG, DOC, (units, {}))
         self.assertTrue(all(isinstance(r, gate.Quarantined) and r.reason_code == gate.TEST_UNKNOWN for _, r in results))
 
+    def test_all_eight_facts_pass_the_gate(self):
+        class Conn:
+            def execute(self, *a, **k): return self
+            def commit(self): pass
+            def rollback(self): pass
+        results = fda_pdf.load(Conn(), None, CFG, DOC)
+        self.assertEqual(len(results), 8)
+        self.assertTrue(all(isinstance(r, gate.Accepted) for _, r in results), [r for _, r in results])
+
     def test_pdf_has_no_blank_pages_list_is_ints(self):
         self.assertEqual(fda_pdf.no_text_pages(DOC), [])
 

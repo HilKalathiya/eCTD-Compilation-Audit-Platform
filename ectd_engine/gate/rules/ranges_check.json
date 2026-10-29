@@ -7,5 +7,11 @@
   "Impurity O": {"min":"0", "max":"1.0"},
   "Impurity L": {"min":"0", "max":"1.0"},
   "Total impurities": {"min":"0", "max":"2.0"},
-  "Residual solvent": {"min":"0", "max":"1.0"}
+  "Residual solvent": {"min":"0", "max":"1.0"},
+  "Shelf life": {"min":"0", "max":"60"},
+  "Accelerated stability duration": {"min":"0", "max":"12"},
+  "Strength": {"min":"0", "max":"1000"},
+  "Maximum daily dose": {"min":"0", "max":"1000"},
+  "Dissolution paddle speed": {"min":"25", "max":"150"},
+  "Dissolution medium volume": {"min":"100", "max": "1000"}
 }
