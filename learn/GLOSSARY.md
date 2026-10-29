@@ -8,3 +8,7 @@ false alarm = a warning that fires when nothing is wrong
 planted mistake = an error put in on purpose to check an alarm rings
 co-author trailer = a Co-Authored-By line at the end of a commit message, makes GitHub list that person
 force-push = overwrite the online history with your local one (needed after rewriting commits)
+Docker = tool that runs programs in sealed boxes so they behave the same everywhere
+container = one running sealed box made from an image
+volume = disk space kept outside a container so data survives restarts
+profile = a name in docker-compose.yml that lets you start only some containers

@@ -5,3 +5,5 @@ __pycache__/
 *.pth
 *.zip
 .claude/settings.local.json
+.env
+.claude/settings.backup.json

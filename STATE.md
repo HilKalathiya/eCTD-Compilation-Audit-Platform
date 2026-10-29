@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-005 done
+- `docker compose --profile db --profile graph up -d` starts Postgres 16 + pgvector (5432) and Neo4j 5.26 (7474/7687); passwords in git-ignored `.env` (template `.env.example`).
+- `ectd_engine/db/`: `postgres.float_columns`, `graph.check_props`; `tests_live/` 7 live tests (Decimal 0.140 exact in NUMERIC and Neo4j string, pgvector, planted float alarms). psycopg 3.3.6, neo4j 6.4.1 pinned.
+
 ## 2026-10-29 — T-004 done
 - Claude co-author lines removed from all commits (history rewritten, backup `../ectd_backup_before_rewrite.bundle`); `.claude/settings.json` now sets attribution empty. Force-pushed.
 - CLAUDE.md rule 8 now: commit without AI attribution, `git push origin main`, never force-push; REPORT has a `Pushed:` line.
