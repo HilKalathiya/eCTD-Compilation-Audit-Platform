@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-010 done
+- `002_gate_checks.sql`: 13 named CHECK constraints on `facts` (non-blank text, finite value, plain value_text, month >= 0, lineage, locator form). `tests_live/test_gate_checks.py` calls the gate directly as `ectd_app` with 9 bad inputs (all refused) + a drift test tying schema.py checks to constraint names. 30 live tests.
+- Note: DB also requires non-blank `definition`; Python's Fact does not (card asked for it). Value `1E+2`/Arabic digits are caught by the gate's value_text=value::text rule first.
+
 ## 2026-10-29 — T-009 done
 - Facts live in Postgres table `facts`; login `ectd_app` (password in git-ignored `.env`: APP_DB_USER/APP_DB_PASSWORD) can only SELECT and call `gate_insert_fact` (SECURITY DEFINER). Direct INSERT/UPDATE/DELETE = permission denied. `python -m ectd_engine.db.migrate` is idempotent.
 - `ectd_engine/facts/store.py` put/get keep "0.140" exact. Schema now refuses exponent Decimals (1E+2) and uses [0-9] not \d. Removed tracked `.claude/settings.backup.json`. 63 unit + 17 live tests.
@@ -14,14 +18,6 @@
 ## 2026-10-29 — T-006 done
 - `docs/requirements.md`: 19 requirements (UR-01..19) and 14 risks (RK-01..14, each with control + test or `future:` chunk, covering every UR). `tests/test_requirements.py`: 7 tests incl. 5 planted-error ones.
 - Old stash dropped (only held the attribution setting, already committed). `tests_live` 7 OK after restarting docker (Neo4j needs ~1 min to become healthy).
-
-## 2026-10-29 — T-005 done
-- `docker compose --profile db --profile graph up -d` starts Postgres 16 + pgvector (5432) and Neo4j 5.26 (7474/7687); passwords in git-ignored `.env` (template `.env.example`).
-- `ectd_engine/db/`: `postgres.float_columns`, `graph.check_props`; `tests_live/` 7 live tests (Decimal 0.140 exact in NUMERIC and Neo4j string, pgvector, planted float alarms). psycopg 3.3.6, neo4j 6.4.1 pinned.
-
-## 2026-10-29 — T-004 done
-- Claude co-author lines removed from all commits (history rewritten, backup `../ectd_backup_before_rewrite.bundle`); `.claude/settings.json` now sets attribution empty. Force-pushed.
-- CLAUDE.md rule 8 now: commit without AI attribution, `git push origin main`, never force-push; REPORT has a `Pushed:` line.
 
 ## 2026-10-28 — T-001 done
 - Git started: commit 1 = baseline (old work unchanged), commit 2 = `ectd_engine/` skeleton (facts, writer, validator, ledger) + `tests/test_smoke.py`.

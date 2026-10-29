@@ -32,3 +32,5 @@ role = a database login with its own list of allowed actions
 permission = one allowed action (read, insert...) granted to a role
 SECURITY DEFINER = a database function that runs with its owner's rights, not the caller's
 append-only = new rows can be added but never changed or removed
+CHECK constraint = a rule stored in the table itself; every row must pass it
+defence in depth = several independent checks, so one failing does not let bad data in
