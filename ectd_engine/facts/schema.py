@@ -7,14 +7,14 @@ from decimal import Decimal
 LINEAGES = ("original", "copy", "unknown")
 
 # the three allowed locator forms: spreadsheet row, PDF page box, spreadsheet cell
-_NUM = r"-?\d+(?:\.\d+)?"
-_VALUE_RE = re.compile(r"-?\d+(\.\d+)?")
+_NUM = r"-?[0-9]+(?:\.[0-9]+)?"
+_VALUE_RE = re.compile(r"-?[0-9]+(\.[0-9]+)?")
 _KEYS = {"fact_id", "value", "unit", "batch", "test", "condition", "month", "source", "lineage", "definition"}
 _SOURCE_KEYS = {"doc_id", "doc_version", "locator"}
 _LOCATOR_RES = (
-    re.compile(r"row=\d+"),
-    re.compile(rf"page=\d+;box={_NUM},{_NUM},{_NUM},{_NUM}"),
-    re.compile(r"cell=[A-Z]+\d+"),
+    re.compile(r"row=[0-9]+"),
+    re.compile(rf"page=[0-9]+;box={_NUM},{_NUM},{_NUM},{_NUM}"),
+    re.compile(r"cell=[A-Z]+[0-9]+"),
 )
 
 
@@ -60,6 +60,8 @@ class Fact:
             raise ValueError(f"value must be Decimal, got {type(self.value).__name__}")
         if not self.value.is_finite():
             raise ValueError("value must not be NaN or Infinity")
+        if not _VALUE_RE.fullmatch(str(self.value)):
+            raise ValueError(f"value {str(self.value)!r} must print as a plain decimal (no exponent form like 1E+2)")
         if self.month is not None:
             if isinstance(self.month, bool) or not isinstance(self.month, int) or self.month < 0:
                 raise ValueError("month must be None or an integer >= 0")

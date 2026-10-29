@@ -28,3 +28,7 @@ whitelist = only the listed things are allowed, everything else is refused
 status line = the bar at the bottom of Claude Code, fed by a script
 stdin = text sent into a program from outside
 JSON = text format of labelled values, like {"a": 1}
+role = a database login with its own list of allowed actions
+permission = one allowed action (read, insert...) granted to a role
+SECURITY DEFINER = a database function that runs with its owner's rights, not the caller's
+append-only = new rows can be added but never changed or removed

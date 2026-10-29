@@ -191,6 +191,21 @@ class PlantedErrors(unittest.TestCase):
         with self.assertRaises(ValueError):
             from_json(json.dumps(d))
 
+    def test_exponent_decimal_refused_at_build(self):
+        """UR-08, RK-05: Decimal('1E+2') prints as exponent form and is refused when the Fact is built."""
+        with self.assertRaises(ValueError):
+            make_fact(value=Decimal("1E+2"))
+
+    def test_non_ascii_digits_refused_in_value(self):
+        """UR-08, RK-05: Arabic-Indic digits in a value string are refused on load."""
+        with self.assertRaises(ValueError):
+            self._load_with_value("٠.١٤")
+
+    def test_non_ascii_digits_refused_in_locator(self):
+        """UR-02, RK-03: Arabic-Indic digits in a locator are refused."""
+        with self.assertRaises(ValueError):
+            SourcePointer("DOC-1", "v1", "row=١٢")
+
 
 if __name__ == "__main__":
     unittest.main()

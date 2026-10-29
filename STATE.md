@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-009 done
+- Facts live in Postgres table `facts`; login `ectd_app` (password in git-ignored `.env`: APP_DB_USER/APP_DB_PASSWORD) can only SELECT and call `gate_insert_fact` (SECURITY DEFINER). Direct INSERT/UPDATE/DELETE = permission denied. `python -m ectd_engine.db.migrate` is idempotent.
+- `ectd_engine/facts/store.py` put/get keep "0.140" exact. Schema now refuses exponent Decimals (1E+2) and uses [0-9] not \d. Removed tracked `.claude/settings.backup.json`. 63 unit + 17 live tests.
+
 ## 2026-10-29 — T-008 done
 - Fact box tightened: batch/condition non-empty ("n/a" allowed), value text must be plain `-?\d+(\.\d+)?`, unknown JSON keys refused. 56 tests.
 - Round-3 audit: 160 drafts, 49 rejected, 111 accepted: 92 ok / 19 awkward / 0 misleading / 0 wrong. The one "out of specification" note (acc_impurity_b_oos draft 13): B3 Month 6 = 0.18 > NMT 0.15, so facts say fails -> row is awkward, not wrong.
@@ -18,12 +22,6 @@
 ## 2026-10-29 — T-004 done
 - Claude co-author lines removed from all commits (history rewritten, backup `../ectd_backup_before_rewrite.bundle`); `.claude/settings.json` now sets attribution empty. Force-pushed.
 - CLAUDE.md rule 8 now: commit without AI attribution, `git push origin main`, never force-push; REPORT has a `Pushed:` line.
-
-## 2026-10-28 — T-003 done
-- `tests/test_watch.py`: 13 tests; all 11 watch.py flags have planted tests (added: assertions weakened, requirements.txt changed, large file). watch.py untouched.
-
-## 2026-10-28 — T-002 done
-- `tests/test_watch.py`: 9 tests; all 8 watch.py flags fire on planted mistakes and a clean change gives `FLAGS: none`. watch.py untouched.
 
 ## 2026-10-28 — T-001 done
 - Git started: commit 1 = baseline (old work unchanged), commit 2 = `ectd_engine/` skeleton (facts, writer, validator, ledger) + `tests/test_smoke.py`.
