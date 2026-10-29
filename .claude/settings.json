@@ -35,6 +35,14 @@
               "log"
             ],
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/tools/commit_guard.py"
+            ],
+            "timeout": 20
           }
         ]
       }
