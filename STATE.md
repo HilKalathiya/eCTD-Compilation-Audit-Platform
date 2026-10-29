@@ -1,5 +1,8 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-004 done
+- Claude co-author lines removed from all commits (history rewritten, backup `../ectd_backup_before_rewrite.bundle`); `.claude/settings.json` now sets attribution empty. Force-pushed.
+
 ## 2026-10-28 — T-003 done
 - `tests/test_watch.py`: 13 tests; all 11 watch.py flags have planted tests (added: assertions weakened, requirements.txt changed, large file). watch.py untouched.
 

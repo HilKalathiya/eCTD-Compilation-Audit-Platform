@@ -6,3 +6,5 @@ temp repo = a short-lived scratch git folder deleted after the test
 subprocess = running another program from inside Python
 false alarm = a warning that fires when nothing is wrong
 planted mistake = an error put in on purpose to check an alarm rings
+co-author trailer = a Co-Authored-By line at the end of a commit message, makes GitHub list that person
+force-push = overwrite the online history with your local one (needed after rewriting commits)

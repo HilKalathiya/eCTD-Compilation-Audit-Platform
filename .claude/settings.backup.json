@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./**/*.pth)",
+      "Read(./**/*.pdf)",
+      "Read(./handoff/archive/explainer_full.md)",
+      "Read(./Life Sciences & Pharmaceutical R&D/**)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|Bash|Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/tools/watch.py",
+              "log"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/tools/watch.py",
+              "log"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
