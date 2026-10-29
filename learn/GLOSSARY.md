@@ -44,3 +44,6 @@ Decimal = exact base-10 number type, so 0.1 is exactly 0.1 (float is not)
 lineage = whether a fact is an original, a copy, or unknown
 route = one independent source document that gives a value
 drift = a source changed after we stored its number
+graph = data stored as dots (nodes) joined by lines (relationships)
+Cypher = the query language of Neo4j
+MERGE = Cypher command: create if missing, else reuse

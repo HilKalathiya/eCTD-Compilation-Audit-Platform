@@ -7,6 +7,7 @@ from pathlib import Path
 import psycopg
 
 from ectd_engine.facts import schema, store
+from ectd_engine.graph import facts_graph
 
 RULES = Path(__file__).resolve().parent / "rules"
 
@@ -112,8 +113,8 @@ def quarantine(conn, candidate, q):
     conn.commit()
 
 
-def submit(candidate, batch_registry, conn, rules=None):
-    """Check a candidate in order: contract, batch, unit, range. Accepted -> store.put; else quarantine."""
+def submit(candidate, batch_registry, conn, rules=None, graph=None):
+    """Check a candidate in order: contract, batch, unit, range. Accepted -> store.put (and the graph, if given); else quarantine."""
     units, ranges = rules or load_rules()
     result = _contract(candidate)
     if isinstance(result, schema.Fact) and result.batch not in batch_registry:
@@ -129,6 +130,8 @@ def submit(candidate, batch_registry, conn, rules=None):
             conn.rollback()
             result = Quarantined(STORE_REFUSED, str(e).splitlines()[0])
         else:
+            if graph is not None:
+                facts_graph.put_fact(graph, result)
             return Accepted(result)
     quarantine(conn, candidate, result)
     return result

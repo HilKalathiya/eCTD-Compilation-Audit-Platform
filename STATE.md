@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-014 done
+- Evidence graph: `gate.submit(..., graph=None)` also writes accepted facts to Neo4j via `ectd_engine/graph/facts_graph.py` (`put_fact`, `read_all`; nodes Fact/Batch/Source, all values as text). Quarantined or store-refused facts never reach the graph.
+- `graph/compare.py`: `read_postgres`, `compare(pg, graph)` -> mismatches (missing_in_graph / missing_in_postgres / field_differs; "0.140" != "0.14"). 11 tests in `tests/test_graph.py` (1 live, ran). If the graph write fails after Postgres committed, the error propagates and compare shows the drift.
+
 ## 2026-10-29 — T-013 done
 - Gate part b: `ectd_engine/gate/agree.py` `agree(facts)` for one (batch, test, condition, month) -> Verified | SingleSource | Conflict (ReviewItem kind "conflict", both values + sources). Routes = distinct doc_id among lineage "original"; copy/unknown never count; originals that disagree as Decimal -> Conflict; mixed keys or empty -> ValueError.
 - `drift(stored_fact, reread_value)` -> None if equal as Decimal, else ReviewItem "source changed". Pure functions, no DB (saving review items waits for C1.5). 10 tests in `tests/test_agree.py`; 107 tests OK. 0.14 vs 0.014 gap from T-011 now catchable once agree() is wired in.
