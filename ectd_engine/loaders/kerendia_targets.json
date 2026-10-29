@@ -1,0 +1,15 @@
+{
+  "doc_id": "215341Orig1s000ChemR.pdf",
+  "doc_version": "FDA-2021-original",
+  "pdf": "data/public/kerendia/215341Orig1s000ChemR.pdf",
+  "targets": [
+    {"key": "shelf_life_p3", "test": "Shelf life", "unit": "months", "page": 3, "expected": "36", "label": ["shall", "be", "months"], "definition": "Recommended expiry dating period of Kerendia tablets (recommendation on page 3)"},
+    {"key": "shelf_life_p5", "test": "Shelf life", "unit": "months", "page": 5, "expected": "36", "label": ["period", "of", "when", "stored"], "definition": "Recommended expiry dating period of Kerendia tablets (stability section)"},
+    {"key": "accelerated_months", "test": "Accelerated stability duration", "unit": "months", "page": 5, "expected": "6", "label": ["for", "months", "at"], "definition": "Months of stability shown at accelerated storage (40C/75%RH)"},
+    {"key": "strength_low", "test": "Strength", "unit": "mg", "page": 4, "expected": "10", "label": ["dose", "strengths", "of", "and"], "definition": "Lower tablet strength of Kerendia"},
+    {"key": "strength_high", "test": "Strength", "unit": "mg", "page": 4, "expected": "20", "label": ["dose", "strengths", "of", "and"], "definition": "Higher tablet strength of Kerendia"},
+    {"key": "max_daily_dose", "test": "Maximum daily dose", "unit": "mg", "page": 4, "expected": "20", "label": ["maximum", "daily", "dose", "of"], "definition": "Maximum daily dose used for the impurity threshold"},
+    {"key": "dissolution_rpm", "test": "Dissolution paddle speed", "unit": "rpm", "page": 23, "expected": "75", "label": ["rpm"], "definition": "Stirring speed of the dissolution method"},
+    {"key": "dissolution_volume", "test": "Dissolution medium volume", "unit": "mL", "page": 23, "expected": "900", "label": ["mL"], "definition": "Volume of dissolution medium"}
+  ]
+}

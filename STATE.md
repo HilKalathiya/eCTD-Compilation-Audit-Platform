@@ -1,5 +1,8 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-016 done
+- `python -m ectd_engine.loaders.fda_pdf --dry-run`: 8 facts from the Kerendia chemistry review (NDA 215341, 36 pages, all with text) with locator `page=N;box=...`; targets in `loaders/kerendia_targets.json`. PDF + sha256 in `data/public/` (SOURCES.md). pymupdf==1.27.2.3 added. All 8 quarantine (TEST_UNKNOWN) until the 6 new tests get units+ranges (Hil types ranges_check.json first); units.json/ranges.json NOT edited (test_gate needs them to match ranges_check). 10 tests in `tests/test_fda_pdf.py`.
+
 ## 2026-10-29 — T-014 done
 - Evidence graph: `gate.submit(..., graph=None)` also writes accepted facts to Neo4j via `ectd_engine/graph/facts_graph.py` (`put_fact`, `read_all`; nodes Fact/Batch/Source, all values as text). Quarantined or store-refused facts never reach the graph.
 - `graph/compare.py`: `read_postgres`, `compare(pg, graph)` -> mismatches (missing_in_graph / missing_in_postgres / field_differs; "0.140" != "0.14"). 11 tests in `tests/test_graph.py` (1 live, ran). If the graph write fails after Postgres committed, the error propagates and compare shows the drift.

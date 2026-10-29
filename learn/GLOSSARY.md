@@ -49,3 +49,6 @@ Cypher = the query language of Neo4j
 MERGE = Cypher command: create if missing, else reuse
 cross-field check = a rule that compares two numbers from the same row
 dry run = run the job and count results without storing anything
+word box = the rectangle (x0,y0,x1,y1) around one word on a PDF page
+text layer = real text inside a PDF (not a picture of text)
+locator = the address of a fact's source, e.g. page=3;box=317,204,329,218
