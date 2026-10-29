@@ -1,9 +1,12 @@
-"""commit_guard.py - Stop hook: Claude Code may not finish a turn with work that is not on GitHub.
+"""commit_guard.py - Stop hook: Claude Code may not finish a TASK with work that is not on GitHub.
 
-Claude Code runs this when it is about to stop (see .claude/settings.json). If the project has
-uncommitted changes, or commits that are not pushed to origin yet, it answers "block" with a
-reason, so Claude Code commits and pushes first. It blocks once per stop: when Claude Code tries
-to stop again right after (stop_hook_active), it lets it go, so it can never loop forever.
+Claude Code runs this when it is about to stop (see .claude/settings.json). Every task ends by
+updating STATE.md (CLAUDE.md step 8), so a changed STATE.md means "task finished". It answers
+"block" with a reason only when (a) STATE.md is changed but not committed, or (b) there are
+commits not pushed to origin yet. Other uncommitted files (for example the log of a long job that
+is still running) are left alone, so ordinary turns in the middle of a task are not blocked.
+It blocks once per stop: when Claude Code tries to stop again right after (stop_hook_active),
+it lets it go, so it can never loop forever.
 
 Manual check:  python tools/commit_guard.py < nul      (Windows; prints nothing when all is pushed)
 Standard library only. Output is built with json.dumps, never by hand.
@@ -52,9 +55,11 @@ def problems():
     code, dirty = git("status", "--porcelain")
     if code != 0:
         return []  # not a git repo, or git missing: nothing to guard, never crash
-    if dirty:
-        n = len(dirty.splitlines())
-        found.append(f"{n} file(s) changed but not committed")
+    lines = dirty.splitlines()
+    # "XY path" (or "R  old -> new"); split on whitespace because git() strips the first line's leading space
+    paths = [line.split(None, 1)[-1].split(" -> ")[-1].strip('"') for line in lines]
+    if "STATE.md" in paths:  # the task is finished (STATE.md updated) but its work is not committed
+        found.append(f"task finished (STATE.md updated) but {len(lines)} file(s) changed and not committed")
     code, ahead = git("rev-list", "--count", "@{u}..HEAD")
     if code != 0:
         found.append("this branch has no upstream on GitHub yet (use git push -u origin <branch>)")
@@ -72,8 +77,8 @@ def main():
         return 0  # already reminded once this stop; never block twice
     found = problems()
     if found:
-        reason = ("Project rule: commit and push to GitHub after every task. Not done yet: "
-                  + "; ".join(found) + ". Run git add -A, git commit -m \"<task id>: <title>\", git push. "
+        reason = ("Project rule: commit and push to GitHub once at the end of every task. Not done yet: "
+                  + "; ".join(found) + ". Commit and push now: git add the task's files, git commit -m \"<task id>: <title>\", git push. "
                   "Hil is the only author: no Co-Authored-By or Claude lines in the message. "
                   "If these changes must not be committed, say why to Hil instead.")
         sys.stdout.write(json.dumps({"decision": "block", "reason": reason}) + "\n")

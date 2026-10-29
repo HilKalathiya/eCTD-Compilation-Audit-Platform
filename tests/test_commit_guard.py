@@ -1,4 +1,4 @@
-"""Planted-mistake tests: prove tools/commit_guard.py blocks unsaved or unpushed work, and stays quiet when all is pushed."""
+"""Planted-mistake tests: prove tools/commit_guard.py blocks a finished task (STATE.md changed) or unpushed work, and stays quiet otherwise."""
 import json
 import os
 import subprocess
@@ -21,6 +21,7 @@ class CommitGuardTests(unittest.TestCase):
         subprocess.run(["git", "init", "-q", "--bare", str(self.remote)], check=True)
         subprocess.run(["git", "init", "-q", str(self.root)], check=True)
         (self.root / "a.txt").write_text("a\n")
+        (self.root / "STATE.md").write_text("state\n")
         self.git("add", "-A")
         self.git("commit", "-q", "-m", "base")
         self.git("remote", "add", "origin", str(self.remote))
@@ -39,8 +40,14 @@ class CommitGuardTests(unittest.TestCase):
     def test_clean_and_pushed_is_quiet(self):
         self.assertIsNone(self.guard())
 
-    def test_uncommitted_change_blocks(self):
+    def test_running_job_log_is_quiet(self):
+        # mid-task: a long job keeps rewriting its log; that alone must not block
         (self.root / "a.txt").write_text("changed\n")
+        (self.root / "job.log").write_text("still running\n")
+        self.assertIsNone(self.guard())
+
+    def test_state_changed_but_not_committed_blocks(self):
+        (self.root / "STATE.md").write_text("task done\n")
         out = self.guard()
         self.assertEqual(out["decision"], "block")
         self.assertIn("not committed", out["reason"])
@@ -54,11 +61,11 @@ class CommitGuardTests(unittest.TestCase):
         self.assertIn("not pushed", out["reason"])
 
     def test_second_stop_is_let_through(self):
-        (self.root / "a.txt").write_text("changed\n")
+        (self.root / "STATE.md").write_text("task done\n")
         self.assertIsNone(self.guard({"stop_hook_active": True}))
 
     def test_git_missing_does_not_crash(self):
-        (self.root / "a.txt").write_text("changed\n")
+        (self.root / "STATE.md").write_text("task done\n")  # would block if git were found
         empty = Path(self._tmp.name) / "empty"
         empty.mkdir()
         # no git on PATH and nowhere else: the hook must exit 0 quietly, not print a traceback
