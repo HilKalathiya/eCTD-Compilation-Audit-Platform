@@ -1,4 +1,8 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "deny": [
       "Read(./**/*.pth)",
@@ -48,8 +52,5 @@
       }
     ]
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+  "enabledPlugins": {}
 }
