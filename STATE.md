@@ -73,3 +73,6 @@
 
 ## 2026-10-29 — T-015 done
 - Lek loader `python -m ectd_engine.loaders.lek --dry-run` -> accepted 4965, quarantined 60 (20 batches; part > total, reason code CROSS_FIELD). Dry run only; no live load. ranges.json/units.json now cover Impurity O/L, Total impurities, Residual solvent (match ranges_check.json, so test_gate is green again). 8 tests in tests/test_lek.py. Locator row=N is the spreadsheet row (header = row 1).
+
+## 2026-10-30 — T-020 done
+- Stats 1: `ectd_engine/stats/basic.py` (mean, sd n-1, rsd_percent, round_to half-up, conforms rounds to each limit's own decimals first). Decimal only, prec 50. 6 tests in tests/test_stats_basic.py; 5 NIST StRD files in data/public/nist/ (certified values parsed from headers) all match to 15 digits. Full suite 173 OK.
