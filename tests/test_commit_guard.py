@@ -29,8 +29,8 @@ class CommitGuardTests(unittest.TestCase):
     def git(self, *args):
         subprocess.run(GIT + list(args), cwd=self.root, check=True, capture_output=True)
 
-    def guard(self, payload=None):
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+    def guard(self, payload=None, **extra_env):
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root), **extra_env)
         r = subprocess.run([sys.executable, str(GUARD)], input=json.dumps(payload or {}),
                            capture_output=True, text=True, env=env)
         self.assertEqual(r.returncode, 0, r.stderr)
@@ -56,6 +56,14 @@ class CommitGuardTests(unittest.TestCase):
     def test_second_stop_is_let_through(self):
         (self.root / "a.txt").write_text("changed\n")
         self.assertIsNone(self.guard({"stop_hook_active": True}))
+
+    def test_git_missing_does_not_crash(self):
+        (self.root / "a.txt").write_text("changed\n")
+        empty = Path(self._tmp.name) / "empty"
+        empty.mkdir()
+        # no git on PATH and nowhere else: the hook must exit 0 quietly, not print a traceback
+        hide = {k: str(empty) for k in ("PATH", "ProgramFiles", "ProgramW6432", "ProgramFiles(x86)", "LOCALAPPDATA")}
+        self.assertIsNone(self.guard(CLAUDE_CODE_GIT_BASH_PATH="", **hide))
 
 
 if __name__ == "__main__":

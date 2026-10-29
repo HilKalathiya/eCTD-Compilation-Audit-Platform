@@ -10,6 +10,7 @@ Standard library only. Output is built with json.dumps, never by hand.
 """
 import json
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -17,8 +18,31 @@ from pathlib import Path
 ROOT = Path(os.environ.get("CLAUDE_PROJECT_DIR") or Path(__file__).resolve().parent.parent).resolve()
 
 
+def find_git():
+    """git.exe is not always on the PATH Claude Code gives hooks on Windows, so also look in the usual places."""
+    found = shutil.which("git")
+    if found:
+        return found
+    places = []
+    bash = os.environ.get("CLAUDE_CODE_GIT_BASH_PATH")  # Claude Code on Windows: ...\Git\bin\bash.exe
+    if bash:
+        places.append(Path(bash).parent / "git.exe")
+    for base in ("ProgramFiles", "ProgramW6432", "ProgramFiles(x86)", "LOCALAPPDATA"):
+        if os.environ.get(base):
+            root = Path(os.environ[base]) / ("Programs" if base == "LOCALAPPDATA" else "") / "Git"
+            places += [root / "cmd" / "git.exe", root / "bin" / "git.exe"]
+    return next((str(p) for p in places if p.is_file()), None)
+
+
 def git(*args):
-    r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    exe = find_git()
+    if not exe:
+        return 127, ""
+    try:
+        r = subprocess.run([exe, "-c", "safe.directory=*", *args], cwd=ROOT, capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=30)
+    except (OSError, subprocess.SubprocessError):
+        return 127, ""
     return r.returncode, r.stdout.strip()
 
 
@@ -27,7 +51,7 @@ def problems():
     found = []
     code, dirty = git("status", "--porcelain")
     if code != 0:
-        return []  # not a git repo, or git missing: nothing to guard
+        return []  # not a git repo, or git missing: nothing to guard, never crash
     if dirty:
         n = len(dirty.splitlines())
         found.append(f"{n} file(s) changed but not committed")
