@@ -30,3 +30,4 @@
 - Pending, needs Hil on laptop: round-3 audit `python -m writer_test.run --model gemma4:e4b --audit 20` (close Excel first); report counts ok/awkward/misleading/wrong.
 - Open decisions for Hil: O1 SQLite vs Postgres for M1–M3; O2 repo layout; O3 next Module-3 sections (see brain/02_decisions_log.md).
 - Known limits: stability paragraphs only, one model; synthetic data; OCR check only simulated.
+- K1 done: context gauge 68.8k/1m (7%); biggest: messages 26.4k, MCP 13.1k, skills 9.8k (see learn/LEARN_K1.md).

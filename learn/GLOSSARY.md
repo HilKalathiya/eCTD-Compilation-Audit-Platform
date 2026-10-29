@@ -16,3 +16,7 @@ requirement = a promise the system must keep (ids UR-01...)
 risk = something that could break a promise (ids RK-01...)
 control = the thing that stops or catches a risk
 GAMP 5 = pharma guide for proving software does what its written requirements say
+context = what Claude holds in mind during one session
+MCP server = a connection to an outside tool that adds tools to Claude
+token = a small chunk of text, about 4 letters
+/clear = wipes the chat so Messages cost drops to zero
