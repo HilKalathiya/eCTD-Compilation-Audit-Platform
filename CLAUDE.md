@@ -15,7 +15,7 @@ Independence rule: every new check ships with a planted-error test showing it ca
 5. No new dependency without listing it in the report; pin versions in `requirements.txt`. No network calls except Ollama at `http://localhost:11434` and downloads the card names.
 6. Public data only. Never alter `Laboratory.csv` (CC BY 4.0) or CDISC Pilot 01 files. Planted errors go in copies, in memory.
 7. Before the REPORT run `python tools/watch.py status --tests` and fix every FLAG, or list it under "Decisions I made" with the reason.
-8. Finish: update `STATE.md` (<= 40 lines total, newest first), then reply with the REPORT.
+8. Finish: update `STATE.md`, commit 'T-<n>: <title>' with NO Co-Authored-By or AI attribution line, `git push origin main`. Not done until `git status -sb` shows nothing ahead. Push failed = Blocker. Never force-push.
 
 ## Teaching mode (Hil is a beginner and wants to follow along)
 - Before each step print ONE line: `NOW: <what you are about to do, plain words, <= 15 words>`. No jargon; if you must use a term, add its meaning in brackets the first time.
@@ -42,6 +42,7 @@ Test tail: <= 30 lines only if something failed
 Decisions I made: <bullets, only if I chose something the card left open>
 Blockers/questions: <or "none">
 STATE.md: <one line>
+Pushed: <hash> -> origin/main | FAILED: <error>
 Learn note: learn/LEARN_<id>.md
 ```
 

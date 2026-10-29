@@ -2,6 +2,7 @@
 
 ## 2026-10-29 — T-004 done
 - Claude co-author lines removed from all commits (history rewritten, backup `../ectd_backup_before_rewrite.bundle`); `.claude/settings.json` now sets attribution empty. Force-pushed.
+- CLAUDE.md rule 8 now: commit without AI attribution, `git push origin main`, never force-push; REPORT has a `Pushed:` line.
 
 ## 2026-10-28 — T-003 done
 - `tests/test_watch.py`: 13 tests; all 11 watch.py flags have planted tests (added: assertions weakened, requirements.txt changed, large file). watch.py untouched.
