@@ -1,6 +1,7 @@
 """Tests that a hand-typed value is accepted only when two blind typings match, and refused otherwise."""
 import json
 import unittest
+from pathlib import Path
 
 from ectd_engine.facts import schema
 from ectd_engine.loaders import double_entry, fda_pdf
@@ -20,6 +21,15 @@ class TestDoubleEntry(unittest.TestCase):
         self.assertEqual(c["lineage"], "original")
         self.assertIn("typed twice", c["definition"])
         schema.from_json(json.dumps(c))
+
+    def test_locator_is_typed_page_without_box(self):
+        c = enter("36", "36")
+        self.assertEqual(c["source"]["locator"], f"typed=page={TARGET['page']}")
+        self.assertNotIn("box", c["source"]["locator"])
+
+    def test_no_float_in_loader_source(self):
+        text = Path(double_entry.__file__).read_text(encoding="utf-8")
+        self.assertNotRegex(text, r"[0-9]+\.[0-9]+|float\(")
 
     def test_mismatch_is_refused(self):
         with self.assertRaisesRegex(double_entry.Refused, "do not match"):

@@ -63,3 +63,6 @@
 ## 2026-10-30 — T-017 done
 - units.json + ranges.json now cover Shelf life, Accelerated stability duration, Strength, Maximum daily dose, Dissolution paddle speed, Dissolution medium volume (match ranges_check.json after Hil fixed the "Maximun" typo). `fda_pdf --dry-run` -> 8 accepted, 0 quarantined.
 - `python -m ectd_engine.loaders.double_entry <fact_key>`: blind double typing (getpass); match as Decimal -> candidate (lineage original, "typed twice"), else REFUSED. Locator box is 0,0,0,0 (word box not located). 143 tests pass.
+
+## 2026-10-30 — T-018 done
+- Locator forms now 5: row, page+box, cell, `xml=/path`, `typed=page=N` (schema.py + migration 004, same verdicts; live test compares both). double_entry.py now emits `typed=page=N` (no fake box, no float). 148 tests pass, live locator test ran.

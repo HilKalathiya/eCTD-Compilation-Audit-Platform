@@ -6,7 +6,7 @@ from decimal import Decimal
 
 LINEAGES = ("original", "copy", "unknown")
 
-# the three allowed locator forms: spreadsheet row, PDF page box, spreadsheet cell
+# the five allowed locator forms: spreadsheet row, PDF page box, spreadsheet cell, XML path, hand-typed page
 _NUM = r"-?[0-9]+(?:\.[0-9]+)?"
 _VALUE_RE = re.compile(r"-?[0-9]+(\.[0-9]+)?")
 _KEYS = {"fact_id", "value", "unit", "batch", "test", "condition", "month", "source", "lineage", "definition"}
@@ -15,6 +15,8 @@ _LOCATOR_RES = (
     re.compile(r"row=[0-9]+"),
     re.compile(rf"page=[0-9]+;box={_NUM},{_NUM},{_NUM},{_NUM}"),
     re.compile(r"cell=[A-Z]+[0-9]+"),
+    re.compile(r"xml=/[A-Za-z0-9_:\[\]/@=.'-]+"),
+    re.compile(r"typed=page=[0-9]+"),
 )
 
 
@@ -34,7 +36,7 @@ class SourcePointer:
         _need_text("doc_version", self.doc_version)
         _need_text("locator", self.locator)
         if not any(r.fullmatch(self.locator) for r in _LOCATOR_RES):
-            raise ValueError(f"locator {self.locator!r} is not row=N, page=N;box=x0,y0,x1,y1 or cell=B7")
+            raise ValueError(f"locator {self.locator!r} is not row=N, page=N;box=x0,y0,x1,y1, cell=B7, xml=/path or typed=page=N")
 
 
 @dataclass(frozen=True)

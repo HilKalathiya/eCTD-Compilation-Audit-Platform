@@ -29,8 +29,9 @@ def enter_twice(target, cfg, first, second):
     b = _number(second(), "second")
     if a != b:
         raise Refused(f"{target['key']}: the two typings do not match; nothing accepted")
-    cand = fda_pdf.candidate({**target, "expected": str(a)}, (0.0, 0.0, 0.0, 0.0), cfg)
-    cand["definition"] = f"{target['definition']} (typed twice by hand; word box not located)"
+    cand = fda_pdf.candidate({**target, "expected": str(a)}, (Decimal(0),) * 4, cfg)
+    cand["source"]["locator"] = f"typed=page={target['page']}"  # typed by hand: a page, no box
+    cand["definition"] = f"{target['definition']} (typed twice by hand)"
     return cand
 
 

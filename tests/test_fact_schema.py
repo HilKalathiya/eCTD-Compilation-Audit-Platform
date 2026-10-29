@@ -1,6 +1,7 @@
 """Tests that the Fact record keeps exact numbers and refuses every kind of loose data."""
 import json
 import unittest
+import uuid
 from dataclasses import FrozenInstanceError
 from decimal import Decimal
 
@@ -205,6 +206,71 @@ class PlantedErrors(unittest.TestCase):
         """UR-02, RK-03: Arabic-Indic digits in a locator are refused."""
         with self.assertRaises(ValueError):
             SourcePointer("DOC-1", "v1", "row=١٢")
+
+
+GOOD_LOCATORS = ("row=12", "page=4;box=1,2,3.5,4", "cell=B7", "xml=/a", "xml=/doc/item[2]/@id='x'", "typed=page=3")
+BAD_LOCATORS = ("xml=", "xml=document", "xml=/", "typed=page=x", "typed=page=", "typed=page=3;box=1,2,3,4",
+                "box=0,0,0,0", "xml=/a b", "row=1\n", "")
+
+
+class LocatorForms(unittest.TestCase):
+    def test_new_forms_accepted(self):
+        """UR-02, UR-13: xml=/path and typed=page=N are accepted and round-trip."""
+        for loc in ("xml=/doc/item[2]/@id='x'", "xml=/a:b/c-d.e", "typed=page=3"):
+            f = make_fact(source=SourcePointer("D", "v1", loc))
+            self.assertEqual(from_json(to_json(f)), f)
+
+    def test_planted_bad_locators_refused(self):
+        """UR-02, RK-14: empty xml, xml without leading /, bad page, mixed form, bare box are refused."""
+        for loc in BAD_LOCATORS:
+            with self.subTest(loc=loc), self.assertRaises(ValueError):
+                SourcePointer("D", "v1", loc)
+
+
+class LocatorFormsLive(unittest.TestCase):
+    """Postgres must give the same verdict as Python for every locator string."""
+
+    @classmethod
+    def setUpClass(cls):
+        try:
+            import psycopg
+            from ectd_engine.db import migrate, postgres
+            from ectd_engine.facts import store
+            cls.psycopg = psycopg
+            migrate.migrate()
+            cls.owner = postgres.connect()
+            cls.app = store.connect_app()
+        except Exception as e:
+            raise unittest.SkipTest(f"Postgres not available: {e}")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.app.close()
+        cls.owner.execute("DELETE FROM facts WHERE fact_id LIKE 'T18-%'")
+        cls.owner.commit()
+        cls.owner.close()
+
+    def _db_accepts(self, loc):
+        try:
+            self.app.execute(
+                "SELECT gate_insert_fact(%s, 0.14, '0.14', 'u', 'b', 't', 'c', 6, 'D', 'v1', %s, 'original', 'x')",
+                ("T18-" + uuid.uuid4().hex[:10], loc))
+            self.app.commit()
+            return True
+        except self.psycopg.errors.CheckViolation:
+            self.app.rollback()
+            return False
+
+    def test_same_verdicts_as_python(self):
+        """UR-02, RK-14: every good locator is stored and every bad one refused, same as schema.py."""
+        for loc in GOOD_LOCATORS + BAD_LOCATORS:
+            try:
+                SourcePointer("D", "v1", loc)
+                py = True
+            except ValueError:
+                py = False
+            with self.subTest(loc=loc):
+                self.assertEqual(self._db_accepts(loc), py)
 
 
 if __name__ == "__main__":

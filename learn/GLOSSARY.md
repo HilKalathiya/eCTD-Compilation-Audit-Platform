@@ -54,3 +54,5 @@ text layer = real text inside a PDF (not a picture of text)
 locator = the address of a fact's source, e.g. page=3;box=317,204,329,218
 blind entry = typing a value twice without seeing your first answer
 refused = the check said no, so no fact is made
+xml path = a route through XML tags, e.g. /doc/item[2]
+typed locator = typed=page=N, a page number with no box
