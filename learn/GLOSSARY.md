@@ -37,3 +37,6 @@ defence in depth = several independent checks, so one failing does not let bad d
 quarantine = a shelf where rejected rows are kept with the reason, never deleted
 false alarm = a good row the gate wrongly rejected
 rule table = a plain file listing allowed units and believable ranges
+hook = a script Claude Code runs automatically at set moments
+exit code 2 = a hook's way of saying "block this action"
+PreToolUse = the hook moment just before a tool runs

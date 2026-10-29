@@ -38,3 +38,7 @@
 - Known limits: stability paragraphs only, one model; synthetic data; OCR check only simulated.
 - K1 done: context gauge 68.8k/1m (7%); biggest: messages 26.4k, MCP 13.1k, skills 9.8k (see learn/LEARN_K1.md).
 - K2 done: status line (tools/statusline.py) shows task id | ctx % | cost | 5h %; 60 tests pass; restart Claude Code to see it.
+
+## 2026-10-29 — K3 done
+- Guard hook: `python tools/watch.py guard` (PreToolUse on Edit|Write|MultiEdit|NotebookEdit) exits 2 for a frozen path the task does not allow; 9 tests in tests/test_guard.py. Bash writes are NOT covered. Backup: .claude/settings.backup.json (untracked). Restart Claude Code to load the hook.
+- Known: tests/test_gate.py fails (19 errors + 1 failure) since commit 6678280 "second entry of ranges": ranges.json and ranges_check.json disagree. Not touched by K3; needs a card.

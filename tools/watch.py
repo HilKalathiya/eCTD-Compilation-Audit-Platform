@@ -7,6 +7,7 @@ Commands (run from the project root, plain Python 3.8+, standard library only):
   python tools/watch.py task T-002 "ectd_engine/facts/**" "tests/**"   start a task: id + allowed paths
   python tools/watch.py task clear        clear the current task
   python tools/watch.py log               hook entry point (reads Claude Code hook JSON on stdin)
+  python tools/watch.py guard             PreToolUse hook: exit 2 blocks Edit/Write on a frozen path the task does not allow
   python tools/watch.py now [N]           the last N actions in PLAIN ENGLISH (for a human, default 15)
   python tools/watch.py live              live feed in plain English; keep it open in a second terminal (Ctrl+C stops)
 
@@ -120,6 +121,36 @@ def cmd_run(args):
     for ln in tail:
         out("  " + ln[:160])
     return 0
+
+
+# ---------------------------------------------------------------- guard (PreToolUse hook)
+GUARDED_TOOLS = ("Edit", "Write", "MultiEdit", "NotebookEdit")
+
+
+def cmd_guard():
+    """Read hook JSON on stdin; exit 2 (block) only for a frozen path the current task does not allow."""
+    try:
+        data = json.loads(sys.stdin.read())
+        if data.get("tool_name") not in GUARDED_TOOLS:
+            return 0
+        ti = data.get("tool_input") or {}
+        raw = ti.get("file_path") or ti.get("notebook_path")
+        if not raw:
+            return 0
+        p = Path(raw)
+        rel = (p if p.is_absolute() else ROOT / p).resolve().relative_to(ROOT).as_posix()
+    except Exception:
+        return 0
+    if not any(rel.startswith(fz) or rel == fz for fz in FROZEN):
+        return 0
+    task = load_task()
+    allowed = (task or {}).get("allowed") or []
+    if any(matches(rel, a) for a in allowed):
+        return 0
+    why = f"task {task['id']} does not allow it" if task else "no task is active"
+    sys.stderr.write(f"BLOCKED by watch guard: {rel} is a FROZEN path and {why}. "
+                     "Ask the brain for a TASK CARD that lists this path.\n")
+    return 2
 
 
 # ---------------------------------------------------------------- guard flags
@@ -394,6 +425,8 @@ def main():
         return cmd_now(rest)
     if cmd == "live":
         return cmd_live()
+    if cmd == "guard":
+        return cmd_guard()
     sys.stdout.write(__doc__)
     return 2
 
