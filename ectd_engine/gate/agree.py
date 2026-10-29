@@ -38,15 +38,24 @@ def agree(facts):
     if len({_key(f) for f in facts}) != 1:
         raise ValueError("agree() facts must share one batch, test, condition and month")
     originals = [f for f in facts if f.lineage == "original"]  # copy and unknown never count
+    name = "/".join(map(str, _key(facts[0])))
     if len({f.value for f in originals}) > 1:
-        return ReviewItem(
-            "conflict",
-            "independent originals give different values for " + "/".join(map(str, _key(facts[0]))),
-            tuple(f.value for f in originals),
-            tuple(f.source for f in originals),
-        )
+        values = tuple(f.value for f in originals)
+        sources = tuple(f.source for f in originals)
+        if len({f.source.doc_id for f in originals}) == 1 and len({f.source.doc_version for f in originals}) > 1:
+            cited = "; ".join(f"v{f.source.doc_version} = {f.value}" for f in originals)
+            return ReviewItem("version change", f"same document {originals[0].source.doc_id} changed between versions for {name}: {cited}", values, sources)
+        return ReviewItem("conflict", "independent originals give different values for " + name, values, sources)
     routes = tuple(sorted({f.source.doc_id for f in originals}))
     value = originals[0].value if originals else facts[0].value
+    odd = [f for f in facts if f.lineage != "original" and originals and f.value != value]
+    if odd:
+        return ReviewItem(
+            "copy disagrees",
+            f"a copy/unknown source differs from the original ({value}) for {name}",
+            (value,) + tuple(f.value for f in odd),
+            tuple(f.source for f in originals[:1] + odd),
+        )
     if len(routes) >= 2:
         return Verified(value, routes)
     return SingleSource(value, routes)

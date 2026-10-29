@@ -1,5 +1,16 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-30 — T-019 done
+- `python -m ectd_engine.loaders.dailymed --dry-run`: Kerendia label XML (set id fc726765-…) v1 (2021-07-09: 10, 20 mg) and v12 (2025-07-29: 10, 20, 40 mg) -> 5 `Strength` facts, all accepted, locator `xml=/document/.../numerator[1]` (the value sits in its `value` attribute). XML + sha256 in `data/public/kerendia/` (SOURCES.md). The DailyMed `.xml?version=N` URL ignores N; the `getFile.cfm?type=zip&version=N` URL works.
+- `agree()` now also returns ReviewItem kind `version change` (same doc_id, different doc_version, different values, both versions cited) and `copy disagrees` (copy/unknown differs from the original). Two different docs disagreeing is still `conflict`. 160 tests OK.
+
+## 2026-10-30 — T-018 done
+- Locator forms now 5: row, page+box, cell, `xml=/path`, `typed=page=N` (schema.py + migration 004, same verdicts; live test compares both). double_entry.py now emits `typed=page=N` (no fake box, no float). 148 tests pass, live locator test ran.
+
+## 2026-10-30 — T-017 done
+- units.json + ranges.json now cover Shelf life, Accelerated stability duration, Strength, Maximum daily dose, Dissolution paddle speed, Dissolution medium volume (match ranges_check.json after Hil fixed the "Maximun" typo). `fda_pdf --dry-run` -> 8 accepted, 0 quarantined.
+- `python -m ectd_engine.loaders.double_entry <fact_key>`: blind double typing (getpass); match as Decimal -> candidate (lineage original, "typed twice"), else REFUSED. Locator box is 0,0,0,0 (word box not located). 143 tests pass.
+
 ## 2026-10-29 — T-016 done
 - `python -m ectd_engine.loaders.fda_pdf --dry-run`: 8 facts from the Kerendia chemistry review (NDA 215341, 36 pages, all with text) with locator `page=N;box=...`; targets in `loaders/kerendia_targets.json`. PDF + sha256 in `data/public/` (SOURCES.md). pymupdf==1.27.2.3 added. All 8 quarantine (TEST_UNKNOWN) until the 6 new tests get units+ranges (Hil types ranges_check.json first); units.json/ranges.json NOT edited (test_gate needs them to match ranges_check). 10 tests in `tests/test_fda_pdf.py`.
 
@@ -59,10 +70,3 @@
 
 ## 2026-10-29 — T-015 done
 - Lek loader `python -m ectd_engine.loaders.lek --dry-run` -> accepted 4965, quarantined 60 (20 batches; part > total, reason code CROSS_FIELD). Dry run only; no live load. ranges.json/units.json now cover Impurity O/L, Total impurities, Residual solvent (match ranges_check.json, so test_gate is green again). 8 tests in tests/test_lek.py. Locator row=N is the spreadsheet row (header = row 1).
-
-## 2026-10-30 — T-017 done
-- units.json + ranges.json now cover Shelf life, Accelerated stability duration, Strength, Maximum daily dose, Dissolution paddle speed, Dissolution medium volume (match ranges_check.json after Hil fixed the "Maximun" typo). `fda_pdf --dry-run` -> 8 accepted, 0 quarantined.
-- `python -m ectd_engine.loaders.double_entry <fact_key>`: blind double typing (getpass); match as Decimal -> candidate (lineage original, "typed twice"), else REFUSED. Locator box is 0,0,0,0 (word box not located). 143 tests pass.
-
-## 2026-10-30 — T-018 done
-- Locator forms now 5: row, page+box, cell, `xml=/path`, `typed=page=N` (schema.py + migration 004, same verdicts; live test compares both). double_entry.py now emits `typed=page=N` (no fake box, no float). 148 tests pass, live locator test ran.

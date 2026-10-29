@@ -7,9 +7,9 @@ from ectd_engine.facts.schema import Fact, SourcePointer
 from ectd_engine.gate.agree import ReviewItem, SingleSource, Verified, agree, drift
 
 
-def fact(fid, value, doc, lineage="original", test="Assay", month=3):
+def fact(fid, value, doc, lineage="original", test="Assay", month=3, version="v1"):
     return Fact(fid, Decimal(value), "mg", "B1", test, "25C/60RH", month,
-                SourcePointer(doc, "v1", "row=1"), lineage, "def")
+                SourcePointer(doc, version, "row=1"), lineage, "def")
 
 
 class AgreeTests(unittest.TestCase):
@@ -34,8 +34,34 @@ class AgreeTests(unittest.TestCase):
         self.assertIsInstance(r, Verified)
         self.assertEqual(r.routes, ("d1", "d2"))
 
-    def test_copy_with_other_value_does_not_cause_conflict(self):
-        self.assertIsInstance(agree([fact("a", "1.5", "d1"), fact("b", "9.9", "d2", "copy")]), SingleSource)
+    def test_copy_with_other_value_is_not_a_conflict_but_is_flagged(self):
+        r = agree([fact("a", "1.5", "d1"), fact("b", "9.9", "d2", "copy")])
+        self.assertIsInstance(r, ReviewItem)
+        self.assertEqual(r.kind, "copy disagrees")
+
+    def test_planted_copy_015_vs_original_014(self):
+        r = agree([fact("a", "0.14", "d1"), fact("b", "0.15", "d2", "unknown")])
+        self.assertEqual(r.kind, "copy disagrees")
+        self.assertEqual(r.values, (Decimal("0.14"), Decimal("0.15")))
+        self.assertEqual({s.doc_id for s in r.sources}, {"d1", "d2"})
+
+    def test_copy_with_same_value_still_single(self):
+        self.assertIsInstance(agree([fact("a", "1.5", "d1"), fact("b", "1.50", "d2", "copy")]), SingleSource)
+
+    def test_same_doc_new_version_is_version_change_not_conflict(self):
+        r = agree([fact("a", "20", "set1", version="2021"), fact("b", "40", "set1", version="2025")])
+        self.assertEqual(r.kind, "version change")
+        self.assertEqual(set(r.values), {Decimal("20"), Decimal("40")})
+        self.assertEqual({s.doc_version for s in r.sources}, {"2021", "2025"})
+        self.assertIn("v2021", r.detail)
+        self.assertIn("v2025", r.detail)
+
+    def test_same_doc_same_version_two_values_is_conflict(self):
+        self.assertEqual(agree([fact("a", "20", "set1"), fact("b", "40", "set1")]).kind, "conflict")
+
+    def test_version_change_plus_other_doc_disagreeing_is_conflict(self):
+        r = agree([fact("a", "20", "set1", version="2021"), fact("b", "40", "set1", version="2025"), fact("c", "20", "d2")])
+        self.assertEqual(r.kind, "conflict")
 
     def test_mixed_keys_raise(self):
         for other in (fact("b", "1.5", "d2", test="Water"), fact("b", "1.5", "d2", month=6)):

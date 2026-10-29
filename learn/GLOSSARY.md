@@ -56,3 +56,7 @@ blind entry = typing a value twice without seeing your first answer
 refused = the check said no, so no fact is made
 xml path = a route through XML tags, e.g. /doc/item[2]
 typed locator = typed=page=N, a page number with no box
+SPL = Structured Product Labeling, the XML format of a drug label on DailyMed
+set id = the permanent ID of one label across all its versions
+version change = review item: the same document changed between versions
+copy disagrees = review item: a copy or unknown source differs from the original

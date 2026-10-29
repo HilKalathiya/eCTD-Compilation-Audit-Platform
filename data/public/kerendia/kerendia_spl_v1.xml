@@ -1,0 +1,1841 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="https://www.accessdata.fda.gov/spl/stylesheet/spl.xsl" type="text/xsl"?>
+<document xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 https://www.accessdata.fda.gov/spl/schema/spl.xsd">
+   <id root="fc726765-5d5a-4d6e-b037-b847bda9fb7c"/>
+   <code code="34391-3" codeSystem="2.16.840.1.113883.6.1" displayName="HUMAN PRESCRIPTION DRUG LABEL"/>
+   <title>These highlights do not include all the information needed to use KERENDIA safely and effectively.  See full prescribing information for KERENDIA.<br/>Initial U.S. Approval: 2021</title>
+   <effectiveTime value="20210709"/>
+   <setId root="fc726765-5d5a-4d6e-b037-b847bda9fb7c"/>
+   <versionNumber value="1"/>
+   <author>
+      <time/>
+      <assignedEntity>
+         <representedOrganization>
+            <id extension="005436809" root="1.3.6.1.4.1.519.1"/>
+            <name>Bayer Healthcare Pharmaceuticals Inc.</name>
+            <assignedEntity>
+               <assignedOrganization>
+                  <assignedEntity>
+                     <assignedOrganization>
+                        <id extension="314947622" root="1.3.6.1.4.1.519.1"/>
+                        <name>Bayer AG</name>
+                     </assignedOrganization>
+                     <performance>
+                        <actDefinition>
+                           <code code="C43360" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="MANUFACTURE"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-540" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                     <performance>
+                        <actDefinition>
+                           <code code="C43360" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="MANUFACTURE"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-541" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                     <performance>
+                        <actDefinition>
+                           <code code="C25391" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="ANALYSIS"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-540" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                     <performance>
+                        <actDefinition>
+                           <code code="C25391" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="ANALYSIS"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-541" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                  </assignedEntity>
+                  <assignedEntity>
+                     <assignedOrganization>
+                        <id extension="143696495" root="1.3.6.1.4.1.519.1"/>
+                        <name>Sharp Corporation</name>
+                     </assignedOrganization>
+                     <performance>
+                        <actDefinition>
+                           <code code="C84731" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="PACK"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-540" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                     <performance>
+                        <actDefinition>
+                           <code code="C84731" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="PACK"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-541" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                  </assignedEntity>
+                  <assignedEntity>
+                     <assignedOrganization>
+                        <id extension="323208116" root="1.3.6.1.4.1.519.1"/>
+                        <name>Bayer, AG</name>
+                     </assignedOrganization>
+                     <performance>
+                        <actDefinition>
+                           <code code="C82401" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="API MANUFACTURE"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-540" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                     <performance>
+                        <actDefinition>
+                           <code code="C82401" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="API MANUFACTURE"/>
+                           <product>
+                              <manufacturedProduct classCode="MANU">
+                                 <manufacturedMaterialKind>
+                                    <code code="50419-541" codeSystem="2.16.840.1.113883.6.69"/>
+                                 </manufacturedMaterialKind>
+                              </manufacturedProduct>
+                           </product>
+                        </actDefinition>
+                     </performance>
+                  </assignedEntity>
+               </assignedOrganization>
+            </assignedEntity>
+         </representedOrganization>
+      </assignedEntity>
+   </author>
+   <component>
+      <structuredBody>
+         <component>
+            <section>
+               <id root="fab0dfef-96cf-4506-9b57-1a7cdcd587cf"/>
+               <code code="48780-1" codeSystem="2.16.840.1.113883.6.1" displayName="SPL product data elements section"/>
+               <effectiveTime value="20210709"/>
+               <subject>
+                  <manufacturedProduct>
+                     <manufacturedProduct>
+                        <code codeSystem="2.16.840.1.113883.6.69" code="50419-540"/>
+                        <name>Kerendia</name>
+                        <formCode code="C42931" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="TABLET, FILM COATED"/>
+                        <asEntityWithGeneric>
+                           <genericMedicine>
+                              <name>finerenone</name>
+                           </genericMedicine>
+                        </asEntityWithGeneric>
+                        <ingredient classCode="ACTIB">
+                           <quantity>
+                              <numerator unit="mg" value="10"/>
+                              <denominator value="1" unit="1"/>
+                           </quantity>
+                           <ingredientSubstance>
+                              <code code="DE2O63YV8R" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>FINERENONE</name>
+                              <activeMoiety>
+                                 <activeMoiety>
+                                    <code code="DE2O63YV8R" codeSystem="2.16.840.1.113883.4.9"/>
+                                    <name>FINERENONE</name>
+                                 </activeMoiety>
+                              </activeMoiety>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="EWQ57Q8I5X" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>LACTOSE MONOHYDRATE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="OP1R32D61U" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>MICROCRYSTALLINE CELLULOSE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="M28OL1HH48" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>CROSCARMELLOSE SODIUM</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="3NXW29V3WO" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>HYPROMELLOSE, UNSPECIFIED</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="70097M6I30" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>MAGNESIUM STEARATE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="368GB5141J" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>SODIUM LAURYL SULFATE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <asContent>
+                           <quantity>
+                              <numerator unit="1" value="30"/>
+                              <denominator value="1"/>
+                           </quantity>
+                           <containerPackagedProduct>
+                              <code code="50419-540-01" codeSystem="2.16.840.1.113883.6.69"/>
+                              <formCode code="C43173" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="BOTTLE, PLASTIC"/>
+                           </containerPackagedProduct>
+                           <subjectOf>
+                              <marketingAct>
+                                 <code code="C53292" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                                 <statusCode code="active"/>
+                                 <effectiveTime>
+                                    <low value="20210709"/>
+                                 </effectiveTime>
+                              </marketingAct>
+                           </subjectOf>
+                           <subjectOf>
+                              <characteristic classCode="OBS">
+                                 <code code="SPLCMBPRDTP" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                                 <value code="C112160" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="Type 0: Not a Combination Product" xsi:type="CE"/>
+                              </characteristic>
+                           </subjectOf>
+                        </asContent>
+                        <asContent>
+                           <quantity>
+                              <numerator unit="1" value="90"/>
+                              <denominator value="1"/>
+                           </quantity>
+                           <containerPackagedProduct>
+                              <code code="50419-540-02" codeSystem="2.16.840.1.113883.6.69"/>
+                              <formCode code="C43173" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="BOTTLE, PLASTIC"/>
+                           </containerPackagedProduct>
+                           <subjectOf>
+                              <marketingAct>
+                                 <code code="C53292" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                                 <statusCode code="active"/>
+                                 <effectiveTime>
+                                    <low value="20210709"/>
+                                 </effectiveTime>
+                              </marketingAct>
+                           </subjectOf>
+                           <subjectOf>
+                              <characteristic classCode="OBS">
+                                 <code code="SPLCMBPRDTP" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                                 <value code="C112160" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="Type 0: Not a Combination Product" xsi:type="CE"/>
+                              </characteristic>
+                           </subjectOf>
+                        </asContent>
+                        <asContent>
+                           <quantity>
+                              <numerator unit="1" value="7"/>
+                              <denominator value="1"/>
+                           </quantity>
+                           <containerPackagedProduct>
+                              <code code="50419-540-70" codeSystem="2.16.840.1.113883.6.69"/>
+                              <formCode code="C43173" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="BOTTLE, PLASTIC"/>
+                           </containerPackagedProduct>
+                           <subjectOf>
+                              <marketingAct>
+                                 <code code="C53292" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                                 <statusCode code="active"/>
+                                 <effectiveTime>
+                                    <low value="20210709"/>
+                                 </effectiveTime>
+                              </marketingAct>
+                           </subjectOf>
+                           <subjectOf>
+                              <characteristic classCode="OBS">
+                                 <code code="SPLCMBPRDTP" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                                 <value code="C112160" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="Type 0: Not a Combination Product" xsi:type="CE"/>
+                              </characteristic>
+                           </subjectOf>
+                        </asContent>
+                     </manufacturedProduct>
+                     <subjectOf>
+                        <approval>
+                           <id extension="NDA215341" root="2.16.840.1.113883.3.150"/>
+                           <code code="C73594" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="NDA"/>
+                           <effectiveTime>
+                              <low value="20210709"/>
+                           </effectiveTime>
+                           <author>
+                              <territorialAuthority>
+                                 <territory>
+                                    <code code="USA" codeSystem="2.16.840.1.113883.5.28"/>
+                                 </territory>
+                              </territorialAuthority>
+                           </author>
+                        </approval>
+                     </subjectOf>
+                     <subjectOf>
+                        <marketingAct>
+                           <code code="C53292" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                           <statusCode code="active"/>
+                           <effectiveTime>
+                              <low value="20210709"/>
+                           </effectiveTime>
+                        </marketingAct>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLCOLOR" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value code="C48328" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="PINK" xsi:type="CE"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLSIZE" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value unit="mm" value="4" xsi:type="PQ"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLSHAPE" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value code="C48345" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="OVAL" xsi:type="CE"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLSCORE" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value value="1" xsi:type="INT"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLIMPRINT" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value xsi:type="ST">10;FI</value>
+                        </characteristic>
+                     </subjectOf>
+                     <consumedIn>
+                        <substanceAdministration>
+                           <routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="ORAL"/>
+                        </substanceAdministration>
+                     </consumedIn>
+                  </manufacturedProduct>
+               </subject>
+               <subject>
+                  <manufacturedProduct>
+                     <manufacturedProduct>
+                        <code codeSystem="2.16.840.1.113883.6.69" code="50419-541"/>
+                        <name>Kerendia</name>
+                        <formCode code="C42931" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="TABLET, FILM COATED"/>
+                        <asEntityWithGeneric>
+                           <genericMedicine>
+                              <name>finerenone</name>
+                           </genericMedicine>
+                        </asEntityWithGeneric>
+                        <ingredient classCode="ACTIB">
+                           <quantity>
+                              <numerator unit="mg" value="20"/>
+                              <denominator value="1" unit="1"/>
+                           </quantity>
+                           <ingredientSubstance>
+                              <code code="DE2O63YV8R" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>FINERENONE</name>
+                              <activeMoiety>
+                                 <activeMoiety>
+                                    <code code="DE2O63YV8R" codeSystem="2.16.840.1.113883.4.9"/>
+                                    <name>FINERENONE</name>
+                                 </activeMoiety>
+                              </activeMoiety>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="EWQ57Q8I5X" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>LACTOSE MONOHYDRATE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="OP1R32D61U" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>MICROCRYSTALLINE CELLULOSE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="M28OL1HH48" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>CROSCARMELLOSE SODIUM</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="3NXW29V3WO" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>HYPROMELLOSE, UNSPECIFIED</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="70097M6I30" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>MAGNESIUM STEARATE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <ingredient classCode="IACT">
+                           <ingredientSubstance>
+                              <code code="368GB5141J" codeSystem="2.16.840.1.113883.4.9"/>
+                              <name>SODIUM LAURYL SULFATE</name>
+                           </ingredientSubstance>
+                        </ingredient>
+                        <asContent>
+                           <quantity>
+                              <numerator unit="1" value="30"/>
+                              <denominator value="1"/>
+                           </quantity>
+                           <containerPackagedProduct>
+                              <code code="50419-541-01" codeSystem="2.16.840.1.113883.6.69"/>
+                              <formCode code="C43173" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="BOTTLE, PLASTIC"/>
+                           </containerPackagedProduct>
+                           <subjectOf>
+                              <marketingAct>
+                                 <code code="C53292" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                                 <statusCode code="active"/>
+                                 <effectiveTime>
+                                    <low value="20210709"/>
+                                 </effectiveTime>
+                              </marketingAct>
+                           </subjectOf>
+                           <subjectOf>
+                              <characteristic classCode="OBS">
+                                 <code code="SPLCMBPRDTP" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                                 <value code="C112160" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="Type 0: Not a Combination Product" xsi:type="CE"/>
+                              </characteristic>
+                           </subjectOf>
+                        </asContent>
+                        <asContent>
+                           <quantity>
+                              <numerator unit="1" value="90"/>
+                              <denominator value="1"/>
+                           </quantity>
+                           <containerPackagedProduct>
+                              <code code="50419-541-02" codeSystem="2.16.840.1.113883.6.69"/>
+                              <formCode code="C43173" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="BOTTLE, PLASTIC"/>
+                           </containerPackagedProduct>
+                           <subjectOf>
+                              <marketingAct>
+                                 <code code="C53292" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                                 <statusCode code="active"/>
+                                 <effectiveTime>
+                                    <low value="20210709"/>
+                                 </effectiveTime>
+                              </marketingAct>
+                           </subjectOf>
+                           <subjectOf>
+                              <characteristic classCode="OBS">
+                                 <code code="SPLCMBPRDTP" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                                 <value code="C112160" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="Type 0: Not a Combination Product" xsi:type="CE"/>
+                              </characteristic>
+                           </subjectOf>
+                        </asContent>
+                        <asContent>
+                           <quantity>
+                              <numerator unit="1" value="7"/>
+                              <denominator value="1"/>
+                           </quantity>
+                           <containerPackagedProduct>
+                              <code code="50419-541-70" codeSystem="2.16.840.1.113883.6.69"/>
+                              <formCode code="C43173" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="BOTTLE, PLASTIC"/>
+                           </containerPackagedProduct>
+                           <subjectOf>
+                              <marketingAct>
+                                 <code code="C96974" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                                 <statusCode code="active"/>
+                                 <effectiveTime>
+                                    <low value="20210709"/>
+                                 </effectiveTime>
+                              </marketingAct>
+                           </subjectOf>
+                           <subjectOf>
+                              <characteristic classCode="OBS">
+                                 <code code="SPLCMBPRDTP" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                                 <value code="C112160" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="Type 0: Not a Combination Product" xsi:type="CE"/>
+                              </characteristic>
+                           </subjectOf>
+                        </asContent>
+                     </manufacturedProduct>
+                     <subjectOf>
+                        <approval>
+                           <id extension="NDA215341" root="2.16.840.1.113883.3.150"/>
+                           <code code="C73594" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="NDA"/>
+                           <effectiveTime>
+                              <low value="20210709"/>
+                           </effectiveTime>
+                           <author>
+                              <territorialAuthority>
+                                 <territory>
+                                    <code code="USA" codeSystem="2.16.840.1.113883.5.28"/>
+                                 </territory>
+                              </territorialAuthority>
+                           </author>
+                        </approval>
+                     </subjectOf>
+                     <subjectOf>
+                        <marketingAct>
+                           <code code="C53292" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+                           <statusCode code="active"/>
+                           <effectiveTime>
+                              <low value="20210709"/>
+                           </effectiveTime>
+                        </marketingAct>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLCOLOR" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value code="C48330" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="YELLOW" xsi:type="CE"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLSIZE" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value unit="mm" value="4" xsi:type="PQ"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLSHAPE" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value code="C48345" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="OVAL" xsi:type="CE"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLSCORE" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value value="1" xsi:type="INT"/>
+                        </characteristic>
+                     </subjectOf>
+                     <subjectOf>
+                        <characteristic classCode="OBS">
+                           <code code="SPLIMPRINT" codeSystem="2.16.840.1.113883.1.11.19255"/>
+                           <value xsi:type="ST">20;FI</value>
+                        </characteristic>
+                     </subjectOf>
+                     <consumedIn>
+                        <substanceAdministration>
+                           <routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="ORAL"/>
+                        </substanceAdministration>
+                     </consumedIn>
+                  </manufacturedProduct>
+               </subject>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_3db0a731-4570-4b99-9a13-c21ee5bcece9">
+               <id root="c115d109-1cfe-470e-b246-ff8675dfd58d"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34067-9" displayName="INDICATIONS &amp; USAGE SECTION"/>
+               <title>1 INDICATIONS AND USAGE </title>
+               <text>
+                  <paragraph>Kerendia is indicated to reduce the risk of sustained eGFR decline, end-stage kidney disease, cardiovascular death, non-fatal myocardial infarction, and hospitalization for heart failure in adult patients with chronic kidney disease (CKD) associated with type 2 diabetes (T2D).</paragraph>
+               </text>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <list listType="unordered">
+                           <item>
+                              <caption> </caption>Kerendia is a non-steroidal mineralocorticoid receptor antagonist (MRA) indicated to reduce the risk of sustained eGFR decline, end stage kidney disease, cardiovascular death, non-fatal myocardial infarction, and hospitalization for heart failure in adult patients with chronic kidney disease (CKD) associated with type 2 diabetes (T2D). (<linkHtml href="#ID_3db0a731-4570-4b99-9a13-c21ee5bcece9">1</linkHtml>)</item>
+                        </list>
+                     </text>
+                  </highlight>
+               </excerpt>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_ee9bd1b5-c25f-47d3-a17a-5b7f6de871df">
+               <id root="b69ce98d-1e7b-4d4b-b3ff-28be3c931622"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34068-7" displayName="DOSAGE &amp; ADMINISTRATION SECTION"/>
+               <title>2 DOSAGE AND ADMINISTRATION </title>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <list listType="unordered">
+                           <item>
+                              <caption>•</caption>The recommended starting dosage is 10 mg or 20 mg orally once daily based on estimated glomerular filtration rate (eGFR) and serum potassium thresholds. (<linkHtml href="#_2.1_Prior_to">2.1</linkHtml>)</item>
+                           <item>
+                              <caption>•</caption>Increase dosage after 4 weeks to the target dose of 20 mg once daily, based on eGFR and serum potassium thresholds. (<linkHtml href="#ID_1c2fc977-9540-4eab-ba6b-14419c7911b9">2.3</linkHtml>)</item>
+                           <item>
+                              <caption>•</caption>Tablets may be taken with or without food (<linkHtml href="#ID_a1f32193-0fda-4261-9a9b-e77ec679b73f">2.2</linkHtml>)</item>
+                        </list>
+                     </text>
+                  </highlight>
+               </excerpt>
+               <component>
+                  <section ID="ID_eac7430e-0473-4742-9469-d54be9269d5e">
+                     <id root="3ff86452-5415-409b-9767-02da75bd5b2f"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>2.1 Prior to Initiation of Kerendia </title>
+                     <text>
+                        <paragraph>Measure serum potassium levels and estimated glomerular filtration rate (eGFR) before initiation. Do not initiate treatment if serum potassium is &gt; 5.0 mEq/L <content styleCode="italics">[see Warnings and Precautions (<linkHtml href="#_5.1_Hyperkalemia">5.1</linkHtml>)]. </content>
+                        </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_a1f32193-0fda-4261-9a9b-e77ec679b73f">
+                     <id root="3a0ec787-1411-42a4-a23d-18de1986da78"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>2.2 Recommended Starting Dosage </title>
+                     <text>
+                        <paragraph>The recommended starting dose of Kerendia is based on eGFR and is presented in Table 1. </paragraph>
+                        <table width="242pt">
+                           <caption>Table 1: Recommended Starting Dosage </caption>
+                           <col width="27%"/>
+                           <col width="23%"/>
+                           <tbody>
+                              <tr>
+                                 <td valign="bottom" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>
+                                       <content styleCode="bold">eGFR (mL/min/1.73m<sup>2</sup>)</content>
+                                    </paragraph>
+                                 </td>
+                                 <td valign="bottom" styleCode="Rrule Botrule Toprule ">
+                                    <paragraph>
+                                       <content styleCode="bold">Starting Dose</content>
+                                    </paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td valign="bottom" styleCode="Rrule Lrule Botrule ">
+                                    <paragraph>≥ 60 </paragraph>
+                                 </td>
+                                 <td valign="bottom" styleCode="Rrule Botrule ">
+                                    <paragraph>20 mg once daily</paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td valign="bottom" styleCode="Rrule Lrule Botrule ">
+                                    <paragraph>≥ 25 to &lt; 60</paragraph>
+                                 </td>
+                                 <td valign="bottom" styleCode="Rrule Botrule ">
+                                    <paragraph>10 mg once daily</paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td valign="bottom" styleCode="Rrule Botrule Lrule ">
+                                    <paragraph>&lt; 25 </paragraph>
+                                 </td>
+                                 <td valign="bottom" styleCode="Rrule Botrule ">
+                                    <paragraph>Not Recommended </paragraph>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <paragraph>For patients who are unable to swallow whole tablets, Kerendia may be crushed and mixed with water or soft foods such as applesauce immediately prior to use and administered orally <content styleCode="italics">[see Clinical Pharmacology (</content>
+                           <content styleCode="italics">
+                              <linkHtml href="#_12.3_Pharmacokinetics_[Module">12.3</linkHtml>)]</content>. </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_1c2fc977-9540-4eab-ba6b-14419c7911b9">
+                     <id root="9cbb8b19-f2c3-4854-88c0-54d0eaa2a27b"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>2.3 Monitoring and Dose Adjustment </title>
+                     <text>
+                        <paragraph>The target daily dose of Kerendia is 20 mg. </paragraph>
+                        <paragraph>Measure serum potassium 4 weeks after initiating treatment and adjust dose (see Table 2); if serum potassium levels are &gt; 4.8 to 5.0 mEq/L, initiation of Kerendia treatment may be considered with additional serum potassium monitoring within the first 4 weeks based on clinical judgement and serum potassium levels <content styleCode="italics">[see Warnings and Precautions (<linkHtml href="#_5.1_Hyperkalemia_[Module">5.1</linkHtml>)].</content> Monitor serum potassium 4 weeks after a dose adjustment and throughout treatment, and adjust the dose as needed (see Table 2) <content styleCode="italics">[see Warnings and Precautions (</content>
+                           <content styleCode="italics">
+                              <linkHtml href="#_5.1_Hyperkalemia_[Module">5.1</linkHtml>) and Drug Interactions (<linkHtml href="#_7.1_Effects_of">7.1</linkHtml>)].</content>
+                        </paragraph>
+                        <table width="487.1pt">
+                           <caption>Table 2: Dose Adjustment Based on Current Serum Potassium Concentration and Current Dose</caption>
+                           <col width="12%"/>
+                           <col width="12%"/>
+                           <col width="38%"/>
+                           <col width="38%"/>
+                           <tbody>
+                              <tr>
+                                 <td colspan="2" valign="top" styleCode="Rrule Botrule Lrule Toprule "/>
+                                 <td colspan="2" align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>
+                                       <content styleCode="bold">Current Kerendia Dose </content>
+                                    </paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td colspan="2" valign="top" styleCode="Rrule Lrule Botrule "/>
+                                 <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>
+                                       <content styleCode="bold">10 mg once daily</content>
+                                    </paragraph>
+                                 </td>
+                                 <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>
+                                       <content styleCode="bold">20 mg once daily</content>
+                                    </paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td rowspan="3" align="center" valign="top" styleCode="Rrule Lrule Botrule ">
+                                    <paragraph>
+                                       <content styleCode="bold">Current Serum Potassium (mEq/L)</content>
+                                    </paragraph>
+                                 </td>
+                                 <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>
+                                       <content styleCode="bold">≤ 4.8</content>
+                                    </paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>Increase the dose to 20 mg once daily.<sup>*</sup>
+                                    </paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>Maintain 20 mg once daily. </paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td align="center" valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>
+                                       <content styleCode="bold">&gt; 4.8 – 5.5</content>
+                                    </paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>Maintain 10 mg once daily.</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>Maintain 20 mg once daily. </paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>
+                                       <content styleCode="bold">&gt; 5.5</content>
+                                    </paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>Withhold Kerendia. </paragraph>
+                                    <paragraph>Consider restarting at 10 mg once daily when serum potassium ≤ 5.0 mEq/L.</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>Withhold Kerendia. </paragraph>
+                                    <paragraph>Restart at 10 mg once daily when serum potassium ≤ 5.0 mEq/L.</paragraph>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <paragraph>* If eGFR has decreased by more than 30% compared to previous measurement, maintain 10 mg dose.</paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_97bea027-7785-47fb-92ed-7aa571ce2372">
+                     <id root="3f239dee-d0f5-4c0f-9c99-25cafb24323f"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>2.4 Missed doses </title>
+                     <text>
+                        <paragraph>Direct a patient to take a missed dose as soon as possible after it is noticed, but only on the same day. If this is not possible, the patient should skip the dose and continue with the next dose as prescribed. </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_962b3ef0-fdb9-44cd-be80-b1ed8f06880d">
+               <id root="463bc0c8-7dc9-4747-b944-8bb495406ede"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="43678-2" displayName="DOSAGE FORMS &amp; STRENGTHS SECTION"/>
+               <title>3 DOSAGE FORMS AND STRENGTHS </title>
+               <text>
+                  <paragraph>Kerendia is available as a film-coated, oblong tablet in two strengths.</paragraph>
+                  <paragraph>10 mg tablet: pink, with “FI” on one side, “10” on the other side.</paragraph>
+                  <paragraph>20 mg tablet: yellow, with “FI” on one side, “20” on the other side.</paragraph>
+               </text>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <list listType="unordered">
+                           <item>
+                              <caption> </caption>Tablets: 10 mg and 20 mg (<linkHtml href="#ID_962b3ef0-fdb9-44cd-be80-b1ed8f06880d">3</linkHtml>)</item>
+                        </list>
+                     </text>
+                  </highlight>
+               </excerpt>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_9332f569-b7ac-41a9-8165-8341dc9258a5">
+               <id root="c8a68ebb-f3d9-48ee-a4d1-1f9e11d91a2a"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34070-3" displayName="CONTRAINDICATIONS SECTION"/>
+               <title>4 CONTRAINDICATIONS </title>
+               <text>
+                  <paragraph>Kerendia is contraindicated in patients: </paragraph>
+                  <list listType="unordered">
+                     <item>
+                        <caption>•</caption>Who are receiving concomitant treatment with strong CYP3A4 inhibitors <content styleCode="italics">[see Drug Interactions (</content>
+                        <content styleCode="italics">
+                           <linkHtml href="#_7.1_Effects_of">7.1</linkHtml>)].</content>
+                     </item>
+                     <item>
+                        <caption>•</caption>With adrenal insufficiency.</item>
+                  </list>
+               </text>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <list listType="unordered">
+                           <item>
+                              <caption>•</caption>Concomitant use with strong CYP3A4 inhibitors. (<linkHtml href="#ID_9332f569-b7ac-41a9-8165-8341dc9258a5">4</linkHtml>, <linkHtml href="#_7.1_Effects_of">7.1</linkHtml>)</item>
+                           <item>
+                              <caption>•</caption>Patients with adrenal insufficiency. (<linkHtml href="#_4_CONTRAINDICATIONS_[Module">4</linkHtml>)</item>
+                        </list>
+                     </text>
+                  </highlight>
+               </excerpt>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_0d3b5bb8-a3dc-45ca-a8eb-9d6fa141e9aa">
+               <id root="bc78a4cf-570c-411f-8e08-bd73e2f605db"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="43685-7" displayName="WARNINGS AND PRECAUTIONS SECTION"/>
+               <title>5 WARNINGS AND PRECAUTIONS </title>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <list listType="unordered">
+                           <item>
+                              <caption>•</caption>Hyperkalemia. Patients with decreased kidney function and higher baseline potassium levels are at increased risk.  Monitor serum potassium levels and adjust dose as needed. (<linkHtml href="#_2.1_Prior_to">2.1</linkHtml>, <linkHtml href="#_2.2_Recommended_Starting">2.2</linkHtml>, <linkHtml href="#ID_1c2fc977-9540-4eab-ba6b-14419c7911b9">2.3</linkHtml>, <linkHtml href="#_5.1_Hyperkalemia_[Module">5.1</linkHtml>) </item>
+                        </list>
+                     </text>
+                  </highlight>
+               </excerpt>
+               <component>
+                  <section ID="ID_bea3425c-b1d8-4385-b6ba-fb494f67550c">
+                     <id root="0e5ef829-3868-4fa3-9d12-c378b024b93b"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>5.1 Hyperkalemia </title>
+                     <text>
+                        <paragraph>Kerendia can cause hyperkalemia <content styleCode="italics">[(see Adverse Reactions (<linkHtml href="#ID_78425596-f1c6-4f9b-85e4-b66580116248">6.1</linkHtml>)]</content>. </paragraph>
+                        <paragraph>The risk for developing hyperkalemia increases with decreasing kidney function and is greater in patients with higher baseline potassium levels or other risk factors for hyperkalemia. Measure serum potassium and eGFR in all patients before initiation of treatment with Kerendia and dose accordingly <content styleCode="italics">[see Dosage and Administration (<linkHtml href="#_2.1_Prior_to">2.1</linkHtml>)]</content>. Do not initiate Kerendia if serum potassium is &gt; 5.0 mEq/L. </paragraph>
+                        <paragraph>Measure serum potassium periodically during treatment with Kerendia and adjust dose accordingly <content styleCode="italics">[see Dosage and Administration (<linkHtml href="#_2.3_Monitoring_and">2.3</linkHtml>)]</content>. More frequent monitoring may be necessary for patients at risk for hyperkalemia, including those on concomitant medications that impair potassium excretion or increase serum potassium <content styleCode="italics">[see Drug Interactions (</content>
+                           <content styleCode="italics">
+                              <linkHtml href="#_7.1_Effects_of">7.1</linkHtml>), <linkHtml href="#_7.2_Drugs_That">7.2</linkHtml>)]</content>.</paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_2770c6ac-29e2-461a-a0c1-2dffef4bc8de">
+               <id root="67e61f96-72b0-4336-a978-4a031aa7d7ae"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34084-4" displayName="ADVERSE REACTIONS SECTION"/>
+               <title>6 ADVERSE REACTIONS </title>
+               <text>
+                  <paragraph>The following serious adverse reactions are discussed elsewhere in the labeling:</paragraph>
+                  <list listType="unordered">
+                     <item>
+                        <caption>•</caption>Hyperkalemia <content styleCode="italics">[see Warnings and Precautions (</content>
+                        <content styleCode="italics">
+                           <linkHtml href="#_5.1_Hyperkalemia">5.1</linkHtml>)]</content>
+                     </item>
+                  </list>
+               </text>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <list listType="unordered">
+                           <item>
+                              <caption> </caption>Adverse reactions occurring in ≥ 1% of patients on Kerendia and more frequently than placebo are hyperkalemia, hypotension, and hyponatremia. (<linkHtml href="#ID_78425596-f1c6-4f9b-85e4-b66580116248">6.1</linkHtml>)</item>
+                        </list>
+                        <paragraph>
+                           <content styleCode="bold">To report SUSPECTED ADVERSE REACTIONS, contact </content>
+                           <content styleCode="bold">Bayer HealthCare Pharmaceuticals Inc. at 1-888-842-</content>
+                           <content styleCode="bold"> or FDA at 1-800-FDA-1088 or <linkHtml href="http://www.fda.gov/medwatch">www.fda.gov/medwatch.</linkHtml>
+                           </content>
+                        </paragraph>
+                     </text>
+                  </highlight>
+               </excerpt>
+               <component>
+                  <section ID="ID_78425596-f1c6-4f9b-85e4-b66580116248">
+                     <id root="a11506bc-05fe-4793-a68e-63ea4969efb7"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>6.1 Clinical Trials Experience </title>
+                     <text>
+                        <paragraph>Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice.</paragraph>
+                        <paragraph>The safety of Kerendia was evaluated in the randomized, double-blind, placebo-controlled, multicenter pivotal phase 3 study FIDELIO-DKD. In this study, 2827 patients received Kerendia (10 or 20 mg once daily) and 2831 received placebo. For patients in the Kerendia group, the mean duration of treatment was 2.2 years.</paragraph>
+                        <paragraph>Overall, serious adverse reactions occurred in 32% of patients receiving Kerendia and in 34% of patients receiving placebo. Permanent discontinuation due to adverse reactions occurred in 7% of patients receiving Kerendia and in 6% of patients receiving placebo. Hyperkalemia led to permanent discontinuation of treatment in 2.3% of patients receiving Kerendia versus 0.9% of patients receiving placebo.</paragraph>
+                        <paragraph>The most frequently reported (≥ 10%) adverse reaction was hyperkalemia <content styleCode="italics">[see Warnings and Precautions (</content>
+                           <content styleCode="italics">
+                              <linkHtml href="#_5.1_Hyperkalemia_[Module">5.1</linkHtml>)].</content> Hospitalization due to hyperkalemia for the Kerendia group was 1.4% versus 0.3% in the placebo group. </paragraph>
+                        <paragraph>Table 3 shows adverse reactions in FIDELIO-DKD that occurred more commonly on Kerendia than on placebo, and in at least 1% of patients treated with Kerendia. </paragraph>
+                        <table width="446.4pt">
+                           <caption>Table 3: Adverse reactions reported in ≥ 1% of patients on Kerendia and more frequently than placebo in the phase 3 study FIDELIO-DKD</caption>
+                           <col width="36%"/>
+                           <col width="29%"/>
+                           <col width="29%"/>
+                           <tbody>
+                              <tr>
+                                 <td valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>Adverse reactions</paragraph>
+                                 </td>
+                                 <td valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>Kerendia</paragraph>
+                                    <paragraph>N = 2827</paragraph>
+                                    <paragraph>n (%)</paragraph>
+                                 </td>
+                                 <td valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>Placebo</paragraph>
+                                    <paragraph>N = 2831</paragraph>
+                                    <paragraph>n (%)</paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td valign="middle" styleCode="Rrule Lrule Botrule ">
+                                    <paragraph>Hyperkalemia</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>516 (18.3)</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>255 (9.0)</paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td valign="middle" styleCode="Rrule Lrule Botrule ">
+                                    <paragraph>Hypotension</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>135 (4.8)</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                                    <paragraph>96 (3.4)</paragraph>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>Hyponatremia</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>40 (1.4)</paragraph>
+                                 </td>
+                                 <td valign="top" styleCode="Rrule Botrule Lrule Toprule ">
+                                    <paragraph>19 (0.7)</paragraph>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <paragraph>
+                           <content styleCode="underline">Laboratory Test</content>
+                        </paragraph>
+                        <paragraph>Initiation of Kerendia may cause an initial small decrease in estimated GFR that occurs within the first 4 weeks of starting therapy, and then stabilizes. In a study that included patients with chronic kidney disease associated with type 2 diabetes, this decrease was reversible after treatment discontinuation. </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_15cb8b9a-7c85-47f9-8b3f-402eb172ce21">
+               <id root="9ef8c6dc-315d-4d76-875a-8db02619d7a2"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34073-7" displayName="DRUG INTERACTIONS SECTION"/>
+               <title>7 DRUG INTERACTIONS </title>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <list listType="unordered">
+                           <item>
+                              <caption>•</caption>Strong CYP3A4 Inhibitors: Use is contraindicated. (<linkHtml href="#_7.1_Effects_of">7.1</linkHtml>)</item>
+                           <item>
+                              <caption>•</caption>Grapefruit or Grapefruit Juice: Avoid concomitant use. (<linkHtml href="#_7.1_Effects_of">7.1</linkHtml>) </item>
+                           <item>
+                              <caption>•</caption>Moderate or weak CYP3A4 Inhibitors: Monitor serum potassium during drug initiation or dosage adjustment of either Kerendia or the moderate or weak CYP3A4 inhibitor, and adjust Kerendia dosage as appropriate (<linkHtml href="#_7.1_CYP3A4_Inhibitors">7.1</linkHtml>)</item>
+                        </list>
+                     </text>
+                  </highlight>
+               </excerpt>
+               <component>
+                  <section ID="ID_e4505468-cb0a-42f5-bd90-a1e7b9b7d05f">
+                     <id root="991669cd-276f-4315-a654-1ac54d75dd16"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>7.1 Effects of other drugs on Kerendia </title>
+                     <text>
+                        <paragraph>
+                           <content styleCode="italics">Strong CYP3A4 Inhibitors</content>
+                        </paragraph>
+                        <paragraph>Kerendia is a CYP3A4 substrate. Concomitant use with a strong CYP3A4 inhibitor increases finerenone exposure <content styleCode="italics">[see Clinical Pharmacology (<linkHtml href="#ID_f6208299-fee8-4e20-b085-ee039353a88d">12.3</linkHtml>)]</content>, which may increase the risk of Kerendia adverse reactions. Concomitant use of Kerendia with strong CYP3A4 inhibitors is contraindicated <content styleCode="italics">[see Contraindications (<linkHtml href="#_4_CONTRAINDICATIONS_[Module">4</linkHtml>)]</content>. Avoid concomitant intake of grapefruit or grapefruit juice.  </paragraph>
+                        <paragraph>
+                           <content styleCode="italics">Moderate and Weak CYP3A4 Inhibitors</content>
+                        </paragraph>
+                        <paragraph>Kerendia is a CYP3A4 substrate. Concomitant use with a moderate or weak CYP3A4 inhibitor increases finerenone exposure <content styleCode="italics">[see Clinical Pharmacology (<linkHtml href="#_12.3_Pharmacokinetics_[Module">12.3</linkHtml>)]</content>, which may increase the risk of Kerendia adverse reactions. Monitor serum potassium during drug initiation or dosage adjustment of either Kerendia or the moderate or weak CYP3A4 inhibitor, and adjust Kerendia dosage as appropriate <content styleCode="italics">[see Dosing and Administration (</content>
+                           <content styleCode="italics">
+                              <linkHtml href="#ID_1c2fc977-9540-4eab-ba6b-14419c7911b9">2.3</linkHtml>) and Drug Interaction (<linkHtml href="#_7.2_Drugs_That">7.2</linkHtml>)]</content>.</paragraph>
+                        <paragraph>
+                           <content styleCode="italics">Strong and Moderate CYP3A4 Inducers</content>
+                        </paragraph>
+                        <paragraph>Kerendia is a CYP3A4 substrate. Concomitant use of Kerendia with a strong or moderate CYP3A4 inducer decreases finerenone exposure <content styleCode="italics">[see Clinical Pharmacology (<linkHtml href="#_12.3_Pharmacokinetics_[Module">12.3</linkHtml>)],</content> which may reduce the efficacy of Kerendia. Avoid concomitant use of Kerendia with strong or moderate CYP3A4 inducers. </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_81318ae5-2737-44e7-8dfe-e7e0134969bf">
+                     <id root="0240a29e-671f-4fcf-a702-247a9c7258b5"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>7.2 Drugs That Affect Serum Potassium </title>
+                     <text>
+                        <paragraph>More frequent serum potassium monitoring is warranted in patients receiving concomitant therapy with drugs or supplements that increase serum potassium. <content styleCode="italics">[see Dosage and Administration (</content>
+                           <content styleCode="italics">
+                              <linkHtml href="#ID_1c2fc977-9540-4eab-ba6b-14419c7911b9">2.3</linkHtml>) and Warnings and Precautions (<linkHtml href="#_5.1_Hyperkalemia_[Module">5.1</linkHtml>)].</content>
+                        </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_b8ce7acb-e648-497e-ac71-0dc527546f5b">
+               <id root="e2523389-96cc-4ae4-929a-8a4fedd96985"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="43684-0" displayName="USE IN SPECIFIC POPULATIONS SECTION"/>
+               <title>8 USE IN SPECIFIC POPULATIONS </title>
+               <text>
+                  <paragraph>Click here to enter Use in Specific Populations</paragraph>
+               </text>
+               <effectiveTime value="20210709"/>
+               <excerpt>
+                  <highlight>
+                     <text>
+                        <paragraph>Lactation: Breastfeeding not recommended (<linkHtml href="#_8.2_Lactation_[Module">8.2</linkHtml>)</paragraph>
+                     </text>
+                  </highlight>
+               </excerpt>
+               <component>
+                  <section ID="ID_d6e50315-2478-4c30-841e-4980390ab7d0">
+                     <id root="ac4d6d49-0bfe-4e63-b4f7-f06eee238037"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42228-7" displayName="PREGNANCY SECTION"/>
+                     <title>8.1 Pregnancy </title>
+                     <effectiveTime value="20210709"/>
+                     <component>
+                        <section ID="ID_acffe1d5-de71-4286-ac71-610eb96046d4">
+                           <id root="24cdaf40-02ff-409a-b88c-b84df55c9ae5"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="69759-9" displayName="RISKS"/>
+                           <title>Risk Summary </title>
+                           <text>
+                              <paragraph>There are no available data on Kerendia use in pregnancy to evaluate for a drug-associated risk of major birth defects, miscarriage or adverse maternal or fetal outcomes. Animal studies have shown developmental toxicity at exposures about 4 times those expected in humans. <content styleCode="italics">(see Data)</content>.  The clinical significance of these findings is unclear. </paragraph>
+                              <paragraph>The estimated background risk of major birth defects and miscarriage for the indicated population is unknown. All pregnancies have a background risk of birth defect, loss or other adverse outcomes. In the U.S. general population, the estimated background risk of major birth defects and miscarriage in clinically recognized pregnancies is 2 to 4% and 15 to 20%, respectively.</paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_55dab3dc-d479-4ee9-8785-6f117203f44d">
+                           <id root="d9739bfa-eec5-4410-9c52-b2c59a410d20"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>Data </title>
+                           <effectiveTime value="20210709"/>
+                           <component>
+                              <section ID="ID_73d9e526-7f70-4a60-a1ef-5551cba82e85">
+                                 <id root="6d067a44-1984-4491-b0de-c2d8a4aba011"/>
+                                 <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                                 <title>
+                                    <content styleCode="underline">Animal Data</content>
+                                 </title>
+                                 <text>
+                                    <paragraph>In the embryo-fetal toxicity study in rats, finerenone resulted in reduced placental weights and signs of fetal toxicity, including reduced fetal weights and retarded ossification at the maternal toxic dose of 10 mg/kg/day corresponding to an AUC<sub>unbound</sub> of 19 times that in humans. At 30 mg/kg/day, the incidence of visceral and skeletal variations was increased (slight edema, shortened umbilical cord, slightly enlarged fontanelle) and one fetus showed complex malformations including a rare malformation (double aortic arch) at an AUC<sub>unbound</sub> of about 25 times that in humans. The doses free of any findings (low dose in rats, high dose in rabbits) provide safety margins of 10 to 13 times for the AUC<sub>unbound</sub> expected in humans. </paragraph>
+                                    <paragraph>When rats were exposed during pregnancy and lactation in the pre- and postnatal developmental toxicity study, increased pup mortality and other adverse effects (lower pup weight, delayed pinna unfolding) were observed at about 4 times the AUC<sub>unbound</sub> expected in humans. In addition, the offspring showed slightly increased locomotor activity, but no other neurobehavioral changes starting at about 4 times the AUC<sub>unbound</sub> expected in humans. The dose free of findings provides a safety margin of about 2 times for the AUC<sub>unbound</sub> expected in humans. </paragraph>
+                                 </text>
+                                 <effectiveTime value="20210709"/>
+                              </section>
+                           </component>
+                        </section>
+                     </component>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_5b921dfe-8cd6-4bb5-b81b-0c948a742eb1">
+                     <id root="6fa2fce1-bba0-44e5-9f1d-a9571c571ed7"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="77290-5" displayName="LACTATION SECTION"/>
+                     <title>8.2 Lactation </title>
+                     <effectiveTime value="20210709"/>
+                     <component>
+                        <section ID="ID_35fd3857-13f9-4bbe-b548-2c0653e6b9ba">
+                           <id root="265189d4-d22f-49dc-8d34-3fbd49bec781"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="69759-9" displayName="RISKS"/>
+                           <title>Risk Summary </title>
+                           <text>
+                              <paragraph>There are no data on the presence of finerenone or its metabolite in human milk, the effects on the breastfed infant or the effects of the drug on milk production. In a pre- and postnatal developmental toxicity study in rats, increased pup mortality and lower pup weight were observed at about 4 times the AUC<sub>unbound</sub> expected in humans. These findings suggest that finerenone is present in rat milk <content styleCode="italics">[see Use in Specific Populations (</content>
+                                 <content styleCode="italics">
+                                    <linkHtml href="#ID_d6e50315-2478-4c30-841e-4980390ab7d0">8.1</linkHtml>) and Data]. </content>When a drug is present in animal milk, it is likely that the drug will be present in human milk. Because of the potential risk to breastfed infants from exposure to KERENDA, avoid breastfeeding during treatment and for 1 day after treatment. </paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_66359fc4-89e3-4960-a676-b73423aa6d4a">
+                     <id root="41f77e49-73c0-4069-876f-19f7b64c057d"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="34081-0" displayName="PEDIATRIC USE SECTION"/>
+                     <title>8.4 Pediatric Use </title>
+                     <text>
+                        <paragraph>The safety and efficacy of Kerendia have not been established in patients below 18 years of age.</paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_9172578e-e615-4477-8022-f2e54b961ed9">
+                     <id root="ad68d467-b128-41db-8d89-6edd1139bdf3"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="34082-8" displayName="GERIATRIC USE SECTION"/>
+                     <title>8.5 Geriatric Use </title>
+                     <text>
+                        <paragraph>Of the 2827 patients who received Kerendia in the FIDELIO-DKD study, 58% of patients were 65 years and older, and 15% were 75 years and older. No overall differences in safety or efficacy were observed between these patients and younger patients. No dose adjustment is required.</paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_2215630a-9325-4a46-ac09-3fdc29d8ce37">
+                     <id root="ca06b66e-2e02-4f8d-b23f-bbb888e153a4"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="88829-7" displayName="HEPATIC IMPAIRMENT SUBSECTION"/>
+                     <title>8.6 Hepatic Impairment </title>
+                     <text>
+                        <paragraph>Avoid use of Kerendia in patients with severe hepatic impairment (Child Pugh C). </paragraph>
+                        <paragraph>No dosage adjustment is recommended in patients with mild or moderate hepatic impairment (Child Pugh A or B).</paragraph>
+                        <paragraph>Consider additional serum potassium monitoring in patients with moderate hepatic impairment (Child Pugh B) <content styleCode="italics">[see Dosing and Administration (<linkHtml href="#ID_1c2fc977-9540-4eab-ba6b-14419c7911b9">2.3</linkHtml>) and Clinical Pharmacology (<linkHtml href="#_12.3_Pharmacokinetics_[Module">12.3</linkHtml>)].</content>
+                        </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_f049bb46-5626-4076-b434-e2071333549a">
+               <id root="7cfe49e0-f3e5-483e-9222-45f1346d5ba1"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34088-5" displayName="OVERDOSAGE SECTION"/>
+               <title>10 OVERDOSAGE </title>
+               <text>
+                  <paragraph>In the event of suspected overdose, immediately interrupt or reduce Kerendia treatment. The most likely manifestation of overdose is hyperkalemia.  If hyperkalemia develops, standard treatment should be initiated.  </paragraph>
+                  <paragraph>Finerenone is unlikely to be efficiently removed by hemodialysis given its fraction bound to plasma proteins of about 90%. </paragraph>
+               </text>
+               <effectiveTime value="20210709"/>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_02c0cf23-0bda-47b1-ae02-66e40c5ee752">
+               <id root="24cb9a5a-5d10-4b38-b0ea-2a27c84e966f"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34089-3" displayName="DESCRIPTION SECTION"/>
+               <title>11 DESCRIPTION </title>
+               <text>
+                  <paragraph>Kerendia contains finerenone, a nonsteroidal mineralocorticoid receptor antagonist. Finerenone’s chemical name is (<content styleCode="italics">4S</content>)<content styleCode="italics">-</content>4-(4-cyano-2- methoxyphenyl)-5-ethoxy-2,8-dimethyl-1,4-dihydro-1,6-naphthyridine-3-carboxamide. The molecular formula is C<sub>21</sub>H<sub>22</sub>N<sub>4</sub>O<sub>3 </sub>and the molecular weight is 378.43 g/mol. The structural formula is:</paragraph>
+                  <renderMultiMedia referencedObject="EDEBB6CF-2717-46DB-A67D-060225AA2161" ID="id1308825898"/>
+                  <paragraph>Finerenone is a white to yellow crystalline powder. It is practically insoluble in water; and sparingly soluble in 0.1 M HCl, ethanol, and acetone.</paragraph>
+                  <paragraph>Each Kerendia tablet contains 10 mg or 20 mg of finerenone. The inactive ingredients of Kerendia are lactose monohydrate, cellulose microcrystalline, croscarmellose sodium, hypromellose, magnesium stearate, and sodium lauryl sulfate. The film coating contains hypromellose, titanium dioxide and talc, in addition to ferric oxide red (10 mg strength tablets) or ferric oxide yellow (20 mg strength tablets).</paragraph>
+               </text>
+               <effectiveTime value="20210709"/>
+               <component>
+                  <observationMedia ID="EDEBB6CF-2717-46DB-A67D-060225AA2161">
+                     <text>Kerendia Chemical Structure</text>
+                     <value xsi:type="ED" mediaType="image/jpeg">
+                        <reference value="image-03.jpg"/>
+                     </value>
+                  </observationMedia>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_664b76f8-3d76-4d8e-83f9-3d2d71ad44fe">
+               <id root="011eadda-9afe-4a7e-8d4c-093de77ec8f3"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34090-1" displayName="CLINICAL PHARMACOLOGY SECTION"/>
+               <title>12 CLINICAL PHARMACOLOGY </title>
+               <effectiveTime value="20210709"/>
+               <component>
+                  <section ID="ID_77d544fc-234e-4489-b078-c29134ebbaad">
+                     <id root="b2895e98-bfdf-4961-bb25-44ab523bcdd9"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="43679-0" displayName="MECHANISM OF ACTION SECTION"/>
+                     <title>12.1 Mechanism of Action </title>
+                     <text>
+                        <paragraph>Finerenone is a nonsteroidal, selective antagonist of the mineralocorticoid receptor (MR), which is activated by aldosterone and cortisol and regulates gene transcription. Finerenone blocks MR mediated sodium reabsorption and MR overactivation in both epithelial (e.g., kidney) and nonepithelial (e.g., heart, and blood vessels) tissues. MR overactivation is thought to contribute to fibrosis and inflammation. Finerenone has a high potency and selectivity for the MR and has no relevant affinity for androgen, progesterone, estrogen, and glucocorticoid receptors. </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_c6416193-760b-4f70-bcdd-04f6db15b9b9">
+                     <id root="39369564-71a2-4d09-ad5f-cd1c35538307"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="43681-6" displayName="PHARMACODYNAMICS SECTION"/>
+                     <title>12.2 Pharmacodynamics </title>
+                     <text>
+                        <paragraph>In FIDELIO-DKD, a randomized, double-blind, placebo-controlled, multicenter study in adult patients with chronic kidney disease associated with type 2 diabetes, the placebo-corrected relative reduction in urinary albumin-to-creatinine ratio (UACR) in patients randomized to finerenone was 31% at Month 4 (95% CI 29-34%) and remained stable for the duration of the trial. </paragraph>
+                        <paragraph>In patients treated with Kerendia, the mean systolic blood pressure decreased by 3 mmHg and the mean diastolic blood pressure decreased by 1-2 mmHg at month 1, remaining stable thereafter.</paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                     <component>
+                        <section ID="ID_e465eb8e-1c40-4099-8ef5-52d365783d74">
+                           <id root="afdd2eed-5dfd-4d8d-918d-8816eac29ac4"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Cardiac Electrophysiology</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>At a dose 4 times the maximum approved recommended dose, finerenone does not prolong the QT interval to any clinically relevant extent.</paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_f6208299-fee8-4e20-b085-ee039353a88d">
+                     <id root="52f9be9f-beb4-4816-8c63-239ab91be3ec"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="43682-4" displayName="PHARMACOKINETICS SECTION"/>
+                     <title>12.3 Pharmacokinetics </title>
+                     <text>
+                        <paragraph>Finerenone exposure increased proportionally over a dose range of 1.25 to 80 mg (0.06 to 4 times the maximum approved recommended dosage). Steady state of finerenone was achieved after 2 days of dosing. The estimated steady-state geometric mean C<sub>max,md</sub> was 160 µg/L and steady-state geometric mean AUC<sub>τ,md</sub> was 686 µg.h/L following administration of finerenone 20 mg to patients.</paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                     <component>
+                        <section ID="ID_811e0a27-b1b6-449c-a8f1-edcfc5878dd0">
+                           <id root="9ae0c51f-c089-48e6-85c3-00376198140c"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Absorption</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>Finerenone is completely absorbed after oral administration but undergoes metabolism resulting in absolute bioavailability of 44%. Finerenone C<sub>max</sub>  was achieved between 0.5 and 1.25 hours after dosing.</paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_c4587eeb-46e2-4c12-925b-ef61c0aed055">
+                           <id root="80a6bc62-0372-4cc4-a436-27d6b9b9fb4b"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Effect of Food</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>There was no clinically significant effect on finerenone AUC following administration with high fat, high calorie food. </paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_057c7cbd-a93b-42a9-b7f5-afb84ce7ffad">
+                           <id root="dc56b7a9-1ad3-476f-9065-411aad535b45"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Distribution</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>The volume of distribution at steady-state (Vss) of finerenone is 52.6 L. Plasma protein binding of finerenone is 92%, primarily to serum albumin, in vitro.</paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_49ff8a10-a6c3-4569-b656-b87bf2df1df9">
+                           <id root="6fdade79-ea18-41fe-b539-4dbc605192ff"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Elimination</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>The terminal half-life of finerenone is about 2 to 3 hours, and the systemic blood clearance is about 25 L/h.</paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_5aa12d66-d531-45a4-8dfd-3dc0ecb65305">
+                           <id root="e4505d8c-8ce8-4597-85c2-919397b0de6c"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Metabolism</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>Finerenone is primarily metabolized by CYP3A4 (90%) and to a lesser extent by CYP2C8 (10%) to inactive metabolites. </paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_28b3e428-7acd-4365-8a74-a46090916dd9">
+                           <id root="990ddbf1-ce6e-4971-b4ec-3568736d4a13"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Excretion</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>About 80% of the administered dose is excreted in urine (&lt;1% as unchanged) and approximately 20% in feces (&lt; 0.2% as unchanged). </paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_4d3209ed-7d3f-4427-a003-b98cf4992b2f">
+                           <id root="bcd77584-54f5-47f7-9691-5535665018a1"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Specific Populations</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <text>
+                              <paragraph>There are no clinically significant effects of age (18 to 79 years), sex, race/ethnicity (White, Asian, Black, and Hispanic), or weight (58 to 121 kg) on the pharmacokinetics of finerenone. </paragraph>
+                           </text>
+                           <effectiveTime value="20210709"/>
+                           <component>
+                              <section ID="ID_5ec7e351-f201-44ff-b7bc-ba5d1b3db885">
+                                 <id root="e33f9a22-bb15-4c2e-8424-4bc754616aac"/>
+                                 <code codeSystem="2.16.840.1.113883.6.1" code="88828-9" displayName="RENAL IMPAIRMENT SUBSECTION"/>
+                                 <title>Renal Impairment </title>
+                                 <text>
+                                    <paragraph>There were no clinically relevant differences in finerenone AUC or C<sub>max</sub> values in patients with eGFR 15 to &lt; 90 mL/min/1.73m<sup>2 </sup>compared to eGFR ≥ 90 mL/min/1.73 m<sup>2</sup>. For dosing recommendations based on eGFR and serum potassium levels <content styleCode="italics">see Dosage and Administration (</content>
+                                       <content styleCode="italics">
+                                          <linkHtml href="#ID_ee9bd1b5-c25f-47d3-a17a-5b7f6de871df">2</linkHtml>)</content>.</paragraph>
+                                 </text>
+                                 <effectiveTime value="20210709"/>
+                              </section>
+                           </component>
+                           <component>
+                              <section ID="ID_05a29440-64d4-442f-9cb9-24182850730e">
+                                 <id root="d30f0c85-738e-4205-9cc0-a2cbbd7b5c54"/>
+                                 <code codeSystem="2.16.840.1.113883.6.1" code="88829-7" displayName="HEPATIC IMPAIRMENT SUBSECTION"/>
+                                 <title>Hepatic Impairment </title>
+                                 <text>
+                                    <paragraph>There was no clinically significant effect on finerenone exposure in cirrhotic patients with mild hepatic impairment (Child Pugh A).</paragraph>
+                                    <paragraph>Finerenone mean AUC was increased by 38% and C<sub>max</sub> was unchanged in cirrhotic patients with moderate hepatic impairment (Child Pugh B) compared to healthy control subjects.</paragraph>
+                                    <paragraph>The effect of severe hepatic impairment (Child Pugh C) on finerenone exposure was not studied<content styleCode="italics">.  </content>
+                                    </paragraph>
+                                 </text>
+                                 <effectiveTime value="20210709"/>
+                              </section>
+                           </component>
+                        </section>
+                     </component>
+                     <component>
+                        <section ID="ID_9d6317d2-7a3d-40d5-a5c6-f2aac88a4326">
+                           <id root="317d32b8-47cf-4f54-a457-5fc558cd02bf"/>
+                           <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                           <title>
+                              <content styleCode="italics">Drug Interaction Studies</content>
+                              <content styleCode="italics"/>
+                           </title>
+                           <effectiveTime value="20210709"/>
+                           <component>
+                              <section ID="ID_b0d989e4-133b-4f8c-98db-14386a521ccb">
+                                 <id root="28ff193d-39b3-4ea3-b630-035627440d5a"/>
+                                 <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                                 <title>Clinical Studies and Model-Informed Approaches </title>
+                                 <text>
+                                    <paragraph>
+                                       <content styleCode="italics">Strong CYP3A Inhibitors</content>: Concomitant use of itraconazole (strong CYP3A4 inhibitor) increased finerenone AUC by &gt;400%.</paragraph>
+                                    <paragraph>
+                                       <content styleCode="italics">Moderate CYP3A Inhibitors</content>: Concomitant use of erythromycin (moderate CYP3A4 inhibitor) increased finerenone mean AUC and C<sub>max</sub> by 248% and 88%, respectively. </paragraph>
+                                    <paragraph>
+                                       <content styleCode="italics">Weak CYP3A Inhibitors</content>: Concomitant use of amiodarone (weak CYP3A4 inhibitor) increased finerenone AUC by 21%. </paragraph>
+                                    <paragraph>
+                                       <content styleCode="italics">Strong or Moderate CYP3A Inducers</content>: Concomitant use of efavirenz (moderate CYP3A4 inducer) and rifampicin (strong CYP3A4 inducer) decreased finerenone AUC by 80% and 90%, respectively. </paragraph>
+                                    <paragraph>
+                                       <content styleCode="italics">Other Drugs</content>: There was no clinically significant difference in finerenone pharmacokinetics when used concomitantly with gemfibrozil (strong CYP2C8 inhibitor), omeprazole (proton pump inhibitor), or an aluminium hydroxide and magnesium hydroxide antacid.  There were no clinically significant pharmacokinetic differences for either finerenone or concomitant digoxin (P-gp substrate) or warfarin (CYP2C9 substrate). There were no clinically significant differences in the pharmacokinetics of either midazolam (CYP3A4 substrate) or repaglinide (CYP2C8 substrate) when used concomitantly with finerenone.</paragraph>
+                                 </text>
+                                 <effectiveTime value="20210709"/>
+                              </section>
+                           </component>
+                        </section>
+                     </component>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_02551235-b6e1-4042-9dfb-5b6fc73794f5">
+               <id root="eaae1b8e-8d05-4031-ae8e-26c85e3ddfa3"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="43680-8" displayName="NONCLINICAL TOXICOLOGY SECTION"/>
+               <title>13 NONCLINICAL TOXICOLOGY </title>
+               <text>
+                  <paragraph>Click here to enter Nonclinical Toxicology</paragraph>
+               </text>
+               <effectiveTime value="20210709"/>
+               <component>
+                  <section ID="ID_0a726db3-5cfa-4505-839c-4f3609e2448e">
+                     <id root="6b354733-852c-438b-8874-790815fe5cfe"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="34083-6" displayName="CARCINOGENESIS &amp; MUTAGENESIS &amp; IMPAIRMENT OF FERTILITY SECTION"/>
+                     <title>13.1 Carcinogenesis, Mutagenesis, Impairment of Fertility </title>
+                     <text>
+                        <paragraph>Finerenone was non-genotoxic in an in vitro bacterial reverse mutation (Ames) assay, the in vitro chromosomal aberration assay in cultured Chinese hamster V79 cells, or the in vivo micronucleus assay in mice.</paragraph>
+                        <paragraph>In 2-year carcinogenicity studies, finerenone did not show a statistically significant increase in tumor response in Wistar rats or in CD1 mice. In male mice, Leydig cell adenoma was numerically increased at a dose representing 26 times the AUC<sub>unbound</sub> in humans and is not considered clinically relevant. Finerenone did not impair fertility in male rats but impaired fertility in female rats at 20 times AUC to the maximum human exposure.</paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_fd5b61df-5d62-4cc2-8398-ba456e6e98c7">
+               <id root="fe5df038-01ec-4132-989f-657eafee9427"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34092-7" displayName="CLINICAL STUDIES SECTION"/>
+               <title>14 CLINICAL STUDIES </title>
+               <text>
+                  <paragraph>The FIDELIO-DKD study was a randomized, double-blind, placebo-controlled, multicenter study in adult patients with chronic kidney disease (CKD) associated with type 2 diabetes (T2D), defined as either having an UACR of 30 to 300 mg/g, eGFR 25 to 60 mL/min/1.73 m<sup>2</sup> and diabetic retinopathy, or as having an UACR of ≥300 mg/g and an eGFR of 25 to 75 mL/min/1.73 m<sup>2</sup>. The trial excluded patients with known significant non-diabetic kidney disease. All patients were to have a serum potassium ≤4.8 mEq/L at screening and be receiving standard of care background therapy, including a maximum tolerated labeled dose of an angiotensin-converting enzyme inhibitor (ACEi) or angiotensin receptor blocker (ARB). Patients with a clinical diagnosis of chronic heart failure with reduced ejection fraction and persistent symptoms (New York Heart Association class II to IV) were excluded. The starting dose of Kerendia was based on screening eGFR (10 mg once daily in patients with an eGFR of 25 to &lt;60 mL/min/1.73 m<sup>2</sup> and 20 mg once daily in patients with an eGFR ≥60 mL/min/1.73 m<sup>2</sup>). The dose of Kerendia could be titrated during the study, with a target dose of 20 mg daily.  </paragraph>
+                  <paragraph>The primary objective of the study was to determine whether Kerendia reduced the incidence of a sustained decline in eGFR of ≥40%, kidney failure (defined as chronic dialysis, kidney transplantation, or a sustained decrease in eGFR to &lt;15 mL/min/1.73m<sup>2</sup>), or renal death.</paragraph>
+                  <paragraph>A total of 5674 patients were randomized to receive Kerendia (N=2833) or placebo (N=2841) and were followed for a median of 2.6 years. The mean age of the study population was 66 years, and 70% of patients were male. The trial population was 63% White, 25% Asian, and 5% Black. At baseline, the mean eGFR was 44 mL/min/1.73m<sup>2</sup>, with 55% of patients having an eGFR &lt;45 mL/min/1.73m<sup>2</sup>. Median urine albumin-to-creatinine ratio (UACR) was 852 mg/g, and mean glycated hemoglobin A1c (HbA1c) was 7.7%. Approximately 46% of patients had a history of atherosclerotic cardiovascular disease.</paragraph>
+                  <paragraph>At baseline, 99.8% of patients were treated with an ACEi or ARB. Approximately 97% were on an antidiabetic agent (insulin [64.1%], biguanides [44%], glucagon-like peptide-1 [GLP-1] receptor agonists [7%], sodium-glucose cotransporter 2 [SGLT2] inhibitors [5%]), 74% were on a statin, and 57% were on an antiplatelet agent.</paragraph>
+                  <paragraph>Kerendia reduced the incidence of the primary composite endpoint of a sustained decline in eGFR of ≥40%, kidney failure, or renal death (HR 0.82, 95% CI 0.73-0.93, p=0.001) as shown in Table 4 and Figure 1. The treatment effect reflected a reduction in a sustained decline in eGFR of ≥40% and progression to kidney failure. There were few renal deaths during the trial. </paragraph>
+                  <paragraph>Kerendia also reduced the incidence of the composite endpoint of cardiovascular (CV) death, non-fatal myocardial infarction (MI), non-fatal stroke or hospitalization for heart failure (HR 0.86, 95% CI 0.75-0.99, p=0.034) as shown in Table 4 and Figure 2. The treatment effect reflected a reduction in CV death, non-fatal MI, and hospitalization for heart failure. </paragraph>
+                  <paragraph>The treatment effect on the primary and secondary composite endpoints was generally consistent across subgroups.</paragraph>
+                  <table width="529.55pt" cellpadding="5.75pt">
+                     <caption>Table 4: Analysis of the Primary and Secondary Time-to-Event Endpoints (and their Individual Components) in Phase 3 Study FIDELIO-DKD</caption>
+                     <col width="29%"/>
+                     <col width="14%"/>
+                     <col width="9%"/>
+                     <col width="17%"/>
+                     <col width="8%"/>
+                     <col width="12%"/>
+                     <col width="11%"/>
+                     <tbody>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Botrule Lrule Toprule "/>
+                           <td colspan="2" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>Kerendia</paragraph>
+                              <paragraph>N=2833</paragraph>
+                           </td>
+                           <td colspan="2" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>Placebo</paragraph>
+                              <paragraph>N=2841</paragraph>
+                           </td>
+                           <td colspan="2" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>Treatment Effect </paragraph>
+                              <paragraph>Kerendia / Placebo</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>
+                                 <content styleCode="bold">Primary and Secondary Time-to-event Endpoints: </content>
+                              </paragraph>
+                           </td>
+                           <td valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>n (%)</paragraph>
+                           </td>
+                           <td valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>Event Rate (100 pt-yr)</paragraph>
+                           </td>
+                           <td valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>n (%)</paragraph>
+                           </td>
+                           <td valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>Event Rate (100 pt-yr)</paragraph>
+                           </td>
+                           <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>Hazard Ratio</paragraph>
+                              <paragraph> (95% CI)</paragraph>
+                           </td>
+                           <td valign="top" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>p-value</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>Primary composite of kidney failure, sustained eGFR decline ≥40% or renal death</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>504 (17.8%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>7.6</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>600 (21.1%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>9.1</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.82<br/>[0.73; 0.93]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.001</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>Kidney failure</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>208 (7.3%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>3.0</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>235 (8.3%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>3.4</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.87<br/>[0.72; 1.05]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>Sustained eGFR decline ≥40%</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>479 (16.9%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>7.2</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>577 (20.3%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>8.7</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.81<br/>[0.72; 0.92]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>Renal death</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>2 (&lt;0.1%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>2 (&lt;0.1%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>Secondary composite of CV death, non-fatal MI, non-fatal stroke or hospitalization for heart failure</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>367 (13.0%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>5.1 </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>420 (14.8%)</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>5.9</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.86<br/>[0.75; 0.99]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.034</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>CV death</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>128 (4.5%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>1.7</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>150 (5.3%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>2.0</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.86<br/>[0.68;1.08]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>Non-fatal MI</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>70 (2.5%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.9</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>87 (3.1%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>1.2</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>0.80<br/>[0.58;1.09]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Lrule Botrule ">
+                              <paragraph>Non-fatal stroke</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>90 (3.2%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>1.2</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>87 (3.1%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>1.2</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>1.03<br/>[0.76;1.38]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Lrule Toprule Botrule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td valign="top" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>Hospitalization for heart failure</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>139 (4.9%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>1.9 </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>162 (5.7%) </paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>2.2</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>0.86<br/>[0.68;1.08]</paragraph>
+                           </td>
+                           <td align="center" valign="middle" styleCode="Rrule Botrule Lrule Toprule ">
+                              <paragraph>-</paragraph>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <paragraph>p-value: two-sided p-value from stratified logrank test</paragraph>
+                  <paragraph>CI = confidence interval, CV = cardiovascular, eGFR = estimated glomerular filtration rate, MI = myocardial infarction, N = number of subjects, n = number of subjects with event, pt-yr = patient year.</paragraph>
+                  <paragraph>NOTE: Time to first event was analyzed in a Cox proportional hazards model. For patients with multiple events, only the first event contributed to the composite endpoint. Sums of the numbers of first events for the single components do not add up to the numbers of events in the composite endpoint. </paragraph>
+                  <renderMultiMedia referencedObject="ID_60c39d7b-46d9-42df-9b67-065c8541be2d" ID="id2078478939">
+                     <caption>Figure 1: Time to first occurrence of kidney failure, sustained decline in eGFR ≥40% from baseline, or renal death in the FIDELIO-DKD stud</caption>
+                  </renderMultiMedia>
+                  <renderMultiMedia referencedObject="ID_37d0209d-c45e-46a3-9951-e7f8acf0466e" ID="id699659500">
+                     <caption>Figure 2: Time to first occurrence of CV death, non-fatal myocardial infarction, non-fatal stroke or hospitalization for heart failure in the FIDELIO-DKD study</caption>
+                  </renderMultiMedia>
+               </text>
+               <effectiveTime value="20210709"/>
+               <component>
+                  <observationMedia ID="ID_60c39d7b-46d9-42df-9b67-065c8541be2d">
+                     <text>Figure 1 Time to Occurence of Kidney Failure</text>
+                     <value xsi:type="ED" mediaType="image/jpeg">
+                        <reference value="image-04.jpg"/>
+                     </value>
+                  </observationMedia>
+               </component>
+               <component>
+                  <observationMedia ID="ID_37d0209d-c45e-46a3-9951-e7f8acf0466e">
+                     <text>Time to Occurrence of CV death</text>
+                     <value xsi:type="ED" mediaType="image/jpeg">
+                        <reference value="image-05.jpg"/>
+                     </value>
+                  </observationMedia>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_a1fbd081-aba6-44d7-a0a2-122e86e3079e">
+               <id root="b5bad68d-9ab6-4c46-9348-c856358a8932"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34069-5" displayName="HOW SUPPLIED SECTION"/>
+               <title>16 HOW SUPPLIED/STORAGE AND HANDLING </title>
+               <effectiveTime value="20210709"/>
+               <component>
+                  <section ID="ID_3108b70e-7a63-4588-82c5-2531f7ce138f">
+                     <id root="b8f35488-139d-4065-939c-c0e04b084289"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>16.1 How Supplied </title>
+                     <text>
+                        <paragraph>Kerendia is available as a film-coated tablet in two strengths. The 10 mg is a pink oblong tablet with “FI” on one side of tablet and “10” on the other side of tablet. The 20 mg tablet is a yellow oblong tablet with “FI” on one side of tablet and “20” on the other side of tablet. Kerendia 10 mg and 20 mg are available in bottles of 30 tablets and bottles of 90 tablets.</paragraph>
+                        <list listType="ordered">
+                           <item>
+                              <caption> </caption>
+                              <content styleCode="bold">Bottle Count	Strength	NDC Code</content>
+                           </item>
+                           <item>
+                              <caption> </caption>        30	10 mg	NDC 50419-540-01</item>
+                           <item>
+                              <caption> </caption>        90	10 mg	NDC 50419-540-02</item>
+                           <item>
+                              <caption> </caption>        30	20 mg	NDC 50419-541-01</item>
+                           <item>
+                              <caption> </caption>        90	20 mg	NDC 50419-541-02</item>
+                        </list>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+               <component>
+                  <section ID="ID_a79b8bc5-536c-4eab-9d2f-a952eb956fcf">
+                     <id root="0966f488-8b2a-48be-971d-ddef0938d6b0"/>
+                     <code codeSystem="2.16.840.1.113883.6.1" code="42229-5" displayName="SPL UNCLASSIFIED SECTION"/>
+                     <title>16.2 Storage and Handling </title>
+                     <text>
+                        <paragraph>Store at 20°C to 25°C (68°F to 77°F); excursions are permitted from 15°C to 30°C (59°F to 86°F<content styleCode="italics">) [see USP Controlled Room Temperature].</content>
+                        </paragraph>
+                     </text>
+                     <effectiveTime value="20210709"/>
+                  </section>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_80c466ec-39a5-4646-a4bb-55252515ba6e">
+               <id root="70e4835a-0f38-4c30-b33d-03fd651f400a"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="34076-0" displayName="INFORMATION FOR PATIENTS SECTION"/>
+               <title>17 PATIENT COUNSELING INFORMATION </title>
+               <text>
+                  <paragraph>Advise patients of the need for periodic monitoring of serum potassium levels. Advise patients receiving Kerendia to consult with their physician before using potassium supplements or salt substitutes containing potassium <content styleCode="italics">[see Warnings and Precautions (</content>
+                     <content styleCode="italics">
+                        <linkHtml href="#_5.1_Hyperkalemia_[Module">5.1</linkHtml>)]. </content>
+                  </paragraph>
+                  <paragraph>Advise patients to avoid strong or moderate CYP3A4 inducers and to find alternative medicinal products with no or weak potential to induce CYP3A4 <content styleCode="italics">[see Drug Interactions (</content>
+                     <content styleCode="italics">
+                        <linkHtml href="#_7.1_Effects_of">7.1</linkHtml>)]</content>
+                  </paragraph>
+                  <paragraph>Avoid concomitant intake of grapefruit or grapefruit juice as it is expected to increase the plasma concentration of finerenone <content styleCode="italics">[see Drug Interactions (</content>
+                     <content styleCode="italics">
+                        <linkHtml href="#_7.1_Effects_of">7.1</linkHtml>)].</content>
+                  </paragraph>
+                  <paragraph>Advise women that breastfeeding is not recommended at the time of treatment with KERENDIA and for 1 day after treatment <content styleCode="italics">[see Use in Specific Populations (</content>
+                     <content styleCode="italics">
+                        <linkHtml href="#ID_5b921dfe-8cd6-4bb5-b81b-0c948a742eb1">8.2</linkHtml>)].</content>
+                  </paragraph>
+               </text>
+               <effectiveTime value="20210709"/>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_6f9cbe67-d8e2-4299-b293-e5bbef7aa9d5">
+               <id root="a834c71e-7d73-4781-998e-b0404b2a1e2b"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="51945-4" displayName="PACKAGE LABEL.PRINCIPAL DISPLAY PANEL"/>
+               <title>PACKAGE/LABEL PRINCIPAL DISPLAY PANEL </title>
+               <text>
+                  <paragraph>NDC 50419-541-01</paragraph>
+                  <paragraph>Rx only</paragraph>
+                  <paragraph>Kerendia</paragraph>
+                  <paragraph>(finerenone) tablets</paragraph>
+                  <paragraph>
+                     <content styleCode="bold">20 mg</content>
+                  </paragraph>
+                  <paragraph>Oral use</paragraph>
+                  <paragraph>
+                     <content styleCode="bold">30</content> tablets</paragraph>
+                  <renderMultiMedia referencedObject="ID_86e5d271-4c05-4a83-8466-c2bc32a8b548" ID="id-1461569105"/>
+               </text>
+               <effectiveTime value="20210709"/>
+               <component>
+                  <observationMedia ID="ID_86e5d271-4c05-4a83-8466-c2bc32a8b548">
+                     <text>Kerendia 20 mg label</text>
+                     <value xsi:type="ED" mediaType="image/jpeg">
+                        <reference value="image-01.jpg"/>
+                     </value>
+                  </observationMedia>
+               </component>
+            </section>
+         </component>
+         <component>
+            <section ID="ID_f5fa85f9-07bc-489e-a1e9-62c42340261e">
+               <id root="364a9a5f-9b9f-4dc7-93ea-5164e77b882a"/>
+               <code codeSystem="2.16.840.1.113883.6.1" code="51945-4" displayName="PACKAGE LABEL.PRINCIPAL DISPLAY PANEL"/>
+               <title>Package/Label Display Panel </title>
+               <text>
+                  <paragraph>NDC 50419-540-01</paragraph>
+                  <paragraph>Rx only</paragraph>
+                  <paragraph>Kerendia</paragraph>
+                  <paragraph>(finerenone) tablets</paragraph>
+                  <paragraph>
+                     <content styleCode="bold">10 mg</content>
+                  </paragraph>
+                  <paragraph>Oral use</paragraph>
+                  <paragraph>
+                     <content styleCode="bold">30</content> tablets</paragraph>
+                  <renderMultiMedia referencedObject="C83A41F8-771C-4661-A9BE-C3D8D10DC49E" ID="id1213549033"/>
+               </text>
+               <effectiveTime value="20210709"/>
+               <component>
+                  <observationMedia ID="C83A41F8-771C-4661-A9BE-C3D8D10DC49E">
+                     <text>Kerendia 10 mg label</text>
+                     <value xsi:type="ED" mediaType="image/jpeg">
+                        <reference value="image-02.jpg"/>
+                     </value>
+                  </observationMedia>
+               </component>
+            </section>
+         </component>
+      </structuredBody>
+   </component>
+</document>
