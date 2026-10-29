@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-008 done
+- Fact box tightened: batch/condition non-empty ("n/a" allowed), value text must be plain `-?\d+(\.\d+)?`, unknown JSON keys refused. 56 tests.
+- Round-3 audit: 160 drafts, 49 rejected, 111 accepted: 92 ok / 19 awkward / 0 misleading / 0 wrong. The one "out of specification" note (acc_impurity_b_oos draft 13): B3 Month 6 = 0.18 > NMT 0.15, so facts say fails -> row is awkward, not wrong.
+
 ## 2026-10-29 — T-007 done
 - `ectd_engine/facts/schema.py`: frozen `SourcePointer` + `Fact` (Decimal only, 3 locator forms, lineage/month checks); `to_json` (value as string) / `from_json` re-runs all checks. `tests/test_fact_schema.py`: 23 tests incl. planted errors. Next: C1.2 (database).
 

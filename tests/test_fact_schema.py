@@ -147,6 +147,50 @@ class PlantedErrors(unittest.TestCase):
         with self.assertRaises(ValueError):
             from_json(json.dumps(d))
 
+    def test_empty_batch_refused(self):
+        """UR-10, RK-02: empty batch is refused."""
+        with self.assertRaises(ValueError):
+            make_fact(batch="")
+
+    def test_empty_condition_refused(self):
+        """UR-10, RK-02: empty condition is refused."""
+        with self.assertRaises(ValueError):
+            make_fact(condition="")
+
+    def test_na_batch_and_condition_accepted(self):
+        """UR-10: the literal 'n/a' is allowed when a fact has no batch or condition."""
+        f = make_fact(batch="n/a", condition="n/a")
+        self.assertEqual(from_json(to_json(f)), f)
+
+    def _load_with_value(self, raw):
+        d = json.loads(to_json(make_fact()))
+        d["value"] = raw
+        return from_json(json.dumps(d))
+
+    def test_value_with_spaces_refused(self):
+        """UR-08, RK-05: value ' 0.14 ' (spaces) is refused on load."""
+        with self.assertRaises(ValueError):
+            self._load_with_value(" 0.14 ")
+
+    def test_value_with_exponent_refused(self):
+        """UR-08, RK-05: value '1e3' (exponent) is refused on load."""
+        with self.assertRaises(ValueError):
+            self._load_with_value("1e3")
+
+    def test_extra_json_key_refused(self):
+        """UR-06, RK-03: an unknown JSON key 'note' is refused on load."""
+        d = json.loads(to_json(make_fact()))
+        d["note"] = "hidden"
+        with self.assertRaises(ValueError):
+            from_json(json.dumps(d))
+
+    def test_extra_source_key_refused(self):
+        """UR-02, RK-03: an unknown key inside source is refused on load."""
+        d = json.loads(to_json(make_fact()))
+        d["source"]["note"] = "hidden"
+        with self.assertRaises(ValueError):
+            from_json(json.dumps(d))
+
 
 if __name__ == "__main__":
     unittest.main()

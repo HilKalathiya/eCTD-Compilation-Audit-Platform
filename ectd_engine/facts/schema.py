@@ -2,12 +2,15 @@
 import json
 import re
 from dataclasses import dataclass
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal
 
 LINEAGES = ("original", "copy", "unknown")
 
 # the three allowed locator forms: spreadsheet row, PDF page box, spreadsheet cell
 _NUM = r"-?\d+(?:\.\d+)?"
+_VALUE_RE = re.compile(r"-?\d+(\.\d+)?")
+_KEYS = {"fact_id", "value", "unit", "batch", "test", "condition", "month", "source", "lineage", "definition"}
+_SOURCE_KEYS = {"doc_id", "doc_version", "locator"}
 _LOCATOR_RES = (
     re.compile(r"row=\d+"),
     re.compile(rf"page=\d+;box={_NUM},{_NUM},{_NUM},{_NUM}"),
@@ -51,6 +54,8 @@ class Fact:
         _need_text("fact_id", self.fact_id)
         _need_text("unit", self.unit)
         _need_text("test", self.test)
+        _need_text("batch", self.batch)
+        _need_text("condition", self.condition)
         if not isinstance(self.value, Decimal):
             raise ValueError(f"value must be Decimal, got {type(self.value).__name__}")
         if not self.value.is_finite():
@@ -88,13 +93,14 @@ def to_json(fact):
 def from_json(text):
     """Rebuild a Fact from JSON text, re-running every check."""
     d = json.loads(text)
+    if set(d) != _KEYS or set(d["source"]) != _SOURCE_KEYS:
+        raise ValueError("JSON has missing or unknown keys")
     raw = d["value"]
     if not isinstance(raw, str):
         raise ValueError("value must be a JSON string (a JSON number would lose digits)")
-    try:
-        value = Decimal(raw)
-    except InvalidOperation:
-        raise ValueError(f"value {raw!r} is not a decimal number")
+    if not _VALUE_RE.fullmatch(raw):
+        raise ValueError(f"value {raw!r} is not a plain decimal number")
+    value = Decimal(raw)
     s = d["source"]
     return Fact(
         fact_id=d["fact_id"],

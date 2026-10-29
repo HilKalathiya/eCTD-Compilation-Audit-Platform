@@ -23,3 +23,5 @@ token = a small chunk of text, about 4 letters
 dataclass = a short way to define a record with named fields
 frozen = cannot be changed after it is created
 round trip = save to text and load back; the result must be identical
+regex = a pattern that text must match exactly
+whitelist = only the listed things are allowed, everything else is refused
