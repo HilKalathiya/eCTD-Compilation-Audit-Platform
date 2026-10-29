@@ -40,9 +40,17 @@ def load_rules(rules_dir=RULES):
     units = json.loads((rules_dir / "units.json").read_text(encoding="utf-8"))
     ranges = json.loads((rules_dir / "ranges.json").read_text(encoding="utf-8"))
     check = json.loads((rules_dir / "ranges_check.json").read_text(encoding="utf-8"))
-    if ranges != check:
+    if range_limits(ranges) != range_limits(check):
         raise ValueError("ranges.json and ranges_check.json disagree; fix the rule files before using the gate")
     return units, ranges
+
+
+def range_limits(ranges):
+    """Turn a ranges table into {test: (min, max)} as Decimals so '1' and '1.0' compare equal."""
+    try:
+        return {test: (Decimal(rule["min"]), Decimal(rule["max"])) for test, rule in ranges.items()}
+    except (ArithmeticError, TypeError, KeyError, AttributeError) as e:
+        raise ValueError(f"range rule is not a pair of decimal numbers: {e!r}") from e
 
 
 def _blank(v):

@@ -40,3 +40,4 @@ rule table = a plain file listing allowed units and believable ranges
 hook = a script Claude Code runs automatically at set moments
 exit code 2 = a hook's way of saying "block this action"
 PreToolUse = the hook moment just before a tool runs
+Decimal = exact base-10 number type, so 0.1 is exactly 0.1 (float is not)

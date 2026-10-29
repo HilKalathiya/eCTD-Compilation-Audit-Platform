@@ -1,5 +1,8 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-012 done
+- `gate.load_rules` now compares `ranges.json` vs `ranges_check.json` as {test: (Decimal min, Decimal max)}: "1" == "1.0", "5.1" != "5.0", extra test name or non-number -> ValueError. New helper `gate.range_limits`. 4 new planted tests in `tests/test_gate.py`; 97 tests OK (fixes the red test_gate noted under K3).
+
 ## 2026-10-29 — T-011 done
 - Write gate part a: `ectd_engine/gate/gate.py` `submit(candidate, batch_registry, conn)` -> Accepted | Quarantined. Order: contract, batch, unit (table conversion only), range. Rules in `gate/rules/` (`ranges.json` + `ranges_check.json` must be identical, loader refuses otherwise).
 - `003_quarantine.sql`: table `gate_quarantine_rows` + `gate_quarantine()` (ectd_app EXECUTE only); non-blank checks now `~ '[^[:space:]]'`; Python Fact requires non-blank definition. Codes: FIELD_MISSING, CONTRACT_INVALID, BATCH_UNKNOWN, TEST_UNKNOWN, UNIT_NOT_ALLOWED, RANGE_OUT, STORE_REFUSED.

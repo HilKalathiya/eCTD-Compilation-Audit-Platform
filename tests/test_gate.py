@@ -146,19 +146,40 @@ class RuleFileTests(unittest.TestCase):
     def test_range_files_entered_twice_are_identical(self):
         a = (RULES_DIR / "ranges.json").read_text(encoding="utf-8")
         b = (RULES_DIR / "ranges_check.json").read_text(encoding="utf-8")
-        self.assertEqual(json.loads(a), json.loads(b))
+        self.assertEqual(gate.range_limits(json.loads(a)), gate.range_limits(json.loads(b)))
 
-    def test_disagreeing_range_files_refuse_to_load(self):
+    def _load_with_check(self, mutate):
+        """Copy the rule files to a temp dir, let `mutate` change the check copy, then try to load."""
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             d = Path(d)
             for n in ("units.json", "ranges.json"):
                 (d / n).write_text((RULES_DIR / n).read_text(encoding="utf-8"), encoding="utf-8")
             planted = json.loads((RULES_DIR / "ranges.json").read_text(encoding="utf-8"))
-            planted["Impurity A"]["max"] = "10.0"
+            mutate(planted)
             (d / "ranges_check.json").write_text(json.dumps(planted), encoding="utf-8")
-            with self.assertRaises(ValueError):
-                gate.load_rules(d)
+            return gate.load_rules(d)
+
+    def test_disagreeing_range_files_refuse_to_load(self):
+        with self.assertRaises(ValueError):
+            self._load_with_check(lambda p: p["Impurity A"].update(max="10.0"))
+
+    def test_same_number_spelled_differently_loads(self):
+        self._load_with_check(lambda p: p["Impurity A"].update(max="1.00", min="0.0"))  # "1.0" vs "1.00", "0" vs "0.0"
+
+    def test_close_but_different_number_refuses_to_load(self):
+        with self.assertRaises(ValueError):
+            self._load_with_check(lambda p: p["Assay"].update(min="90.1"))
+        with self.assertRaises(ValueError):
+            self._load_with_check(lambda p: p["Water"].update(max="5.1"))
+
+    def test_extra_test_name_in_one_file_refuses_to_load(self):
+        with self.assertRaises(ValueError):
+            self._load_with_check(lambda p: p.update({"Extra": {"min": "0", "max": "1"}}))
+
+    def test_non_number_in_range_file_refuses_to_load(self):
+        with self.assertRaises(ValueError):
+            self._load_with_check(lambda p: p["Impurity A"].update(max="abc"))
 
     def test_every_test_has_unit_and_range_rule(self):
         units, ranges = gate.load_rules()
