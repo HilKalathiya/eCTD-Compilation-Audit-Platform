@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-013 done
+- Gate part b: `ectd_engine/gate/agree.py` `agree(facts)` for one (batch, test, condition, month) -> Verified | SingleSource | Conflict (ReviewItem kind "conflict", both values + sources). Routes = distinct doc_id among lineage "original"; copy/unknown never count; originals that disagree as Decimal -> Conflict; mixed keys or empty -> ValueError.
+- `drift(stored_fact, reread_value)` -> None if equal as Decimal, else ReviewItem "source changed". Pure functions, no DB (saving review items waits for C1.5). 10 tests in `tests/test_agree.py`; 107 tests OK. 0.14 vs 0.014 gap from T-011 now catchable once agree() is wired in.
+
 ## 2026-10-29 — T-012 done
 - `gate.load_rules` now compares `ranges.json` vs `ranges_check.json` as {test: (Decimal min, Decimal max)}: "1" == "1.0", "5.1" != "5.0", extra test name or non-number -> ValueError. New helper `gate.range_limits`. 4 new planted tests in `tests/test_gate.py`; 97 tests OK (fixes the red test_gate noted under K3).
 
