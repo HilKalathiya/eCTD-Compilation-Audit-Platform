@@ -34,3 +34,6 @@ SECURITY DEFINER = a database function that runs with its owner's rights, not th
 append-only = new rows can be added but never changed or removed
 CHECK constraint = a rule stored in the table itself; every row must pass it
 defence in depth = several independent checks, so one failing does not let bad data in
+quarantine = a shelf where rejected rows are kept with the reason, never deleted
+false alarm = a good row the gate wrongly rejected
+rule table = a plain file listing allowed units and believable ranges

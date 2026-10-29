@@ -1,0 +1,7 @@
+{
+  "Impurity A": {"unit": "%", "conversions": {"ppm": "0.0001"}},
+  "Impurity B": {"unit": "%", "conversions": {"ppm": "0.0001"}},
+  "Assay": {"unit": "%", "conversions": {}},
+  "Water": {"unit": "%", "conversions": {}},
+  "Dissolution": {"unit": "%", "conversions": {}}
+}

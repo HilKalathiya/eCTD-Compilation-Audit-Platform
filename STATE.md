@@ -1,5 +1,10 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-29 — T-011 done
+- Write gate part a: `ectd_engine/gate/gate.py` `submit(candidate, batch_registry, conn)` -> Accepted | Quarantined. Order: contract, batch, unit (table conversion only), range. Rules in `gate/rules/` (`ranges.json` + `ranges_check.json` must be identical, loader refuses otherwise).
+- `003_quarantine.sql`: table `gate_quarantine_rows` + `gate_quarantine()` (ectd_app EXECUTE only); non-blank checks now `~ '[^[:space:]]'`; Python Fact requires non-blank definition. Codes: FIELD_MISSING, CONTRACT_INVALID, BATCH_UNKNOWN, TEST_UNKNOWN, UNIT_NOT_ALLOWED, RANGE_OUT, STORE_REFUSED.
+- Known gap: 0.14 -> 0.014 passes (needs C1.4 two-route agreement). Rule values (5 tests) are placeholders, to be confirmed by Hil.
+
 ## 2026-10-29 — T-010 done
 - `002_gate_checks.sql`: 13 named CHECK constraints on `facts` (non-blank text, finite value, plain value_text, month >= 0, lineage, locator form). `tests_live/test_gate_checks.py` calls the gate directly as `ectd_app` with 9 bad inputs (all refused) + a drift test tying schema.py checks to constraint names. 30 live tests.
 - Note: DB also requires non-blank `definition`; Python's Fact does not (card asked for it). Value `1E+2`/Arabic digits are caught by the gate's value_text=value::text rule first.

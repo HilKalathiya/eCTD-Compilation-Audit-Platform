@@ -56,6 +56,7 @@ class Fact:
         _need_text("test", self.test)
         _need_text("batch", self.batch)
         _need_text("condition", self.condition)
+        _need_text("definition", self.definition)
         if not isinstance(self.value, Decimal):
             raise ValueError(f"value must be Decimal, got {type(self.value).__name__}")
         if not self.value.is_finite():

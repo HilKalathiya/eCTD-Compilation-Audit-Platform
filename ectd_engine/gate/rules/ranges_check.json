@@ -1,0 +1,7 @@
+{
+  "Impurity A": {"min": "0", "max": "1.0"},
+  "Impurity B": {"min": "0", "max": "1.0"},
+  "Assay": {"min": "90.0", "max": "110.0"},
+  "Water": {"min": "0", "max": "5.0"},
+  "Dissolution": {"min": "0", "max": "110.0"}
+}

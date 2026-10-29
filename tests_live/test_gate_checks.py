@@ -21,7 +21,7 @@ _NEED_TEXT_CONSTRAINTS = {
     "doc_id": "facts_doc_id_nonblank", "doc_version": "facts_doc_version_nonblank",
     "locator": "facts_locator_nonblank", "fact_id": "facts_fact_id_nonblank",
     "unit": "facts_unit_nonblank", "test": "facts_test_nonblank", "batch": "facts_batch_nonblank",
-    "condition": "facts_condition_nonblank",
+    "condition": "facts_condition_nonblank", "definition": "facts_definition_nonblank",
 }
 # the other `raise ValueError` checks, by class: SourcePointer locator form; Fact type/finite/plain/month/source/lineage
 _OTHER_RAISES = {
@@ -29,7 +29,7 @@ _OTHER_RAISES = {
     "Fact": [None, "facts_value_finite", "facts_value_plain_text", "facts_month_nonneg", None, "facts_lineage_allowed"],
 }
 # None = Python-only check (type checks the database cannot see: value is a Decimal, source is a SourcePointer)
-_EXTRA_DB_ONLY = {"facts_definition_nonblank"}  # stricter than Python on purpose (T-010 card)
+_EXTRA_DB_ONLY = set()  # T-011: Python now also requires a non-blank definition
 
 
 def call_gate(conn, **over):
