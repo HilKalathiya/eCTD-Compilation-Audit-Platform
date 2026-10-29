@@ -60,3 +60,5 @@ SPL = Structured Product Labeling, the XML format of a drug label on DailyMed
 set id = the permanent ID of one label across all its versions
 version change = review item: the same document changed between versions
 copy disagrees = review item: a copy or unknown source differs from the original
+output style = a saved set of rules for how Claude talks (.claude/output-styles/)
+frontmatter = the settings lines between --- marks at the top of a file

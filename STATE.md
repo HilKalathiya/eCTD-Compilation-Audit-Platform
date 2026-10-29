@@ -1,5 +1,8 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-30 — K4 done
+- Output style `Plain words` (`.claude/output-styles/plain-words.md`, 5 rules, keep-coding-instructions true) set via `"outputStyle": "Plain words"` in `.claude/settings.json` (exact case; hooks, deny list, attribution untouched). 7 tests in `tests/test_output_style.py`. Restart Claude Code, then `/output-style`.
+
 ## 2026-10-30 — T-019 done
 - `python -m ectd_engine.loaders.dailymed --dry-run`: Kerendia label XML (set id fc726765-…) v1 (2021-07-09: 10, 20 mg) and v12 (2025-07-29: 10, 20, 40 mg) -> 5 `Strength` facts, all accepted, locator `xml=/document/.../numerator[1]` (the value sits in its `value` attribute). XML + sha256 in `data/public/kerendia/` (SOURCES.md). The DailyMed `.xml?version=N` URL ignores N; the `getFile.cfm?type=zip&version=N` URL works.
 - `agree()` now also returns ReviewItem kind `version change` (same doc_id, different doc_version, different values, both versions cited) and `copy disagrees` (copy/unknown differs from the original). Two different docs disagreeing is still `conflict`. 160 tests OK.
