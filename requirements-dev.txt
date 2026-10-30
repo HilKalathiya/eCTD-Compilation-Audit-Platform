@@ -1,0 +1,3 @@
+# Test-only reference tools (never imported by ectd_engine)
+statsmodels==0.15.0
+scipy==1.13.1

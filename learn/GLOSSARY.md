@@ -67,3 +67,7 @@ ROUND_HALF_UP = rounding rule where exactly .5 always goes up (0.125 -> 0.13)
 SD = standard deviation, how spread out the values are
 %RSD = SD divided by the mean, times 100
 NIST StRD = US government test datasets with known-correct statistics
+confidence bound = edge of the range where the true average line probably lies
+extrapolation = predicting past the last tested month
+residual SD = typical gap between the data points and the fitted line
+t quantile = multiplier from the t table that sets how wide the confidence bound is
