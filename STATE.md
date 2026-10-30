@@ -1,5 +1,8 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-30 — K5 done
+- `/where`, `/explain`, `/recap` moved to `.claude/skills/<name>/SKILL.md` (text unchanged, disable-model-invocation true); new `/verify` (allowed-tools only `Bash(python tools/watch.py *)`) runs `watch.py status --tests`. `.claude/commands/` removed. 8 tests in `tests/test_skills.py`. Restart Claude Code to see the 4 skills.
+
 ## 2026-10-30 — T-023 done
 - `ectd_engine/stats/oot.py`: `check(history, (month, value), level=0.99)` -> OK | OOT (with low/high) | NotEnoughData (< 3 points or all same month); uses the two-sided PREDICTION interval (`interval`). `check_with_policy` returns (result, note).
 - `ectd_engine/stats/loq.py`: `parse` ("<LOQ", "<0.05", "ND" -> Below), `Policy` EXCLUDE (default) / REPORT_ONLY / SUBSTITUTE (needs value + reason, else ValueError), `apply_policy`, `shelf_life_with_policy` -> (ShelfLife or None, note). 22 tests in `tests/test_oot_loq.py`; PI matches statsmodels to 10 digits. q1e.py/tdist.py unchanged. Suite 226 OK.

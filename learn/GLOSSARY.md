@@ -79,3 +79,5 @@ prediction interval = range where one single new result is expected to land
 OOT = out of trend: a new result outside the prediction interval of earlier points
 LOQ = limit of quantitation, the smallest amount the method can measure
 ND = not detected
+skill = a packaged instruction that loads only when you call it
+frontmatter = the small settings block at the top of a file

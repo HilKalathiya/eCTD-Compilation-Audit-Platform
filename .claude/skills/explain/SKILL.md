@@ -1,6 +1,8 @@
 ---
+name: explain
 description: Explain what you just did (or a file/idea) in plain words for a beginner
 argument-hint: [file or idea, optional]
+disable-model-invocation: true
 ---
 
 Explain to a beginner what you just did, or: $ARGUMENTS
