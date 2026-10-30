@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-30 — T-023 done
+- `ectd_engine/stats/oot.py`: `check(history, (month, value), level=0.99)` -> OK | OOT (with low/high) | NotEnoughData (< 3 points or all same month); uses the two-sided PREDICTION interval (`interval`). `check_with_policy` returns (result, note).
+- `ectd_engine/stats/loq.py`: `parse` ("<LOQ", "<0.05", "ND" -> Below), `Policy` EXCLUDE (default) / REPORT_ONLY / SUBSTITUTE (needs value + reason, else ValueError), `apply_policy`, `shelf_life_with_policy` -> (ShelfLife or None, note). 22 tests in `tests/test_oot_loq.py`; PI matches statsmodels to 10 digits. q1e.py/tdist.py unchanged. Suite 226 OK.
+
 ## 2026-10-30 — T-022 done
 - `ectd_engine/stats/pool.py`: `poolability(batches, spec_min, spec_max)` -> decision ("separate" / "common slope, separate intercepts" / "fully pooled"), `p_slope`, `p_intercept`, shelf life (separate = shortest batch; common slope = pooled error, df N-k-1, own intercepts; pooled = `shelf_life` on all points). `decide()` pools only if p > 0.25. `tdist.f_cdf` added (general incomplete beta). q1e.py unchanged (only called; `_one_side` reused).
 - 12 tests in `tests/test_pool.py`; p-values match statsmodels anova_lm to 10 digits (cases a/b/c).
