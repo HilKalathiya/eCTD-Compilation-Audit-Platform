@@ -71,3 +71,7 @@ confidence bound = edge of the range where the true average line probably lies
 extrapolation = predicting past the last tested month
 residual SD = typical gap between the data points and the fitted line
 t quantile = multiplier from the t table that sets how wide the confidence bound is
+ANCOVA = compares the lines of several groups at once
+p-value = chance of a gap this big if the groups were really the same
+pooling = fitting one line to all batches together
+poolability = the test of whether batches may be pooled (Q1E, p > 0.25)

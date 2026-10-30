@@ -56,6 +56,23 @@ def _ibeta_half(a, x):
     return 1 - front * _betacf(b, a, 1 - x) / b
 
 
+def _gamma_half(two_x):
+    """Gamma(two_x / 2) for a whole number two_x >= 1 (exact for whole and half-whole arguments)."""
+    if two_x % 2 == 0:
+        return Decimal(factorial(two_x // 2 - 1))
+    m = (two_x - 1) // 2  # Gamma(m + 1/2)
+    return Decimal(factorial(2 * m)) / Decimal(4**m * factorial(m)) * _PI.sqrt()
+
+
+def _ibeta(a, b, x, comp):
+    """Regularized incomplete beta I_x(a, b) where comp = 1 - x (passed in to keep digits), a and b whole/half-whole."""
+    beta = _gamma_half(int(a * 2)) * _gamma_half(int(b * 2)) / _gamma_half(int((a + b) * 2))
+    front = x**a * comp**b / beta
+    if x < (a + 1) / (a + b + 2):
+        return front * _betacf(a, b, x) / a
+    return 1 - front * _betacf(b, a, comp) / b
+
+
 def _check_df(df):
     if not isinstance(df, int) or isinstance(df, bool) or df < 1:
         raise ValueError("df must be a whole number >= 1")
@@ -106,3 +123,17 @@ def t_quantile(p, df):
     if p < _HALF:
         return -_quantile(1 - p, df)
     return _quantile(p, df)
+
+
+def f_cdf(x, d1, d2):
+    """P(F <= x) for the F distribution with d1 and d2 degrees of freedom."""
+    if not isinstance(x, Decimal):
+        raise TypeError(f"expected Decimal, got {type(x).__name__}: {x!r}")
+    _check_df(d1)
+    _check_df(d2)
+    if x <= 0:
+        return Decimal(0)
+    with localcontext() as ctx:
+        ctx.prec = PREC
+        scaled = Decimal(d1) * x
+        return _ibeta(Decimal(d1) / 2, Decimal(d2) / 2, scaled / (scaled + d2), Decimal(d2) / (scaled + d2))

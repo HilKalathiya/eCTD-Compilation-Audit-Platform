@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-30 — T-022 done
+- `ectd_engine/stats/pool.py`: `poolability(batches, spec_min, spec_max)` -> decision ("separate" / "common slope, separate intercepts" / "fully pooled"), `p_slope`, `p_intercept`, shelf life (separate = shortest batch; common slope = pooled error, df N-k-1, own intercepts; pooled = `shelf_life` on all points). `decide()` pools only if p > 0.25. `tdist.f_cdf` added (general incomplete beta). q1e.py unchanged (only called; `_one_side` reused).
+- 12 tests in `tests/test_pool.py`; p-values match statsmodels anova_lm to 10 digits (cases a/b/c).
+
 ## 2026-10-30 — T-021 done
 - `ectd_engine/stats/tdist.py`: Student t cdf/quantile in Decimal (incomplete beta, bisection; checked vs t-table and scipy). `q1e.py`: `fit`, `Fit.bound(month, side)` (one-sided 95% bound of the mean line), `shelf_life(points, spec_min, spec_max, cap_months)` solved to 0.01 month (half-up), cap = min(2 x longest, longest + 12) with `capped` + reason; `line_shelf_life` is the wrong-way comparator for tests only.
 - Matches statsmodels to 10 digits (slope, intercept, bound); shelf life within 0.01 month. `requirements-dev.txt` pins statsmodels 0.15.0 + scipy 1.13.1 (test-only). Poolability stays C1.11.
