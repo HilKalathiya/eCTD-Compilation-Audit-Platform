@@ -81,3 +81,6 @@ LOQ = limit of quantitation, the smallest amount the method can measure
 ND = not detected
 skill = a packaged instruction that loads only when you call it
 frontmatter = the small settings block at the top of a file
+expirest = R package that computes shelf life the ICH Q1E way
+certified value = answer NIST has proven correct for a test dataset
+flaky test = a test that passes and fails at random

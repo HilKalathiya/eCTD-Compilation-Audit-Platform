@@ -91,3 +91,7 @@
 
 ## 2026-10-30 â€” T-020 done
 - Stats 1: `ectd_engine/stats/basic.py` (mean, sd n-1, rsd_percent, round_to half-up, conforms rounds to each limit's own decimals first). Decimal only, prec 50. 6 tests in tests/test_stats_basic.py; 5 NIST StRD files in data/public/nist/ (certified values parsed from headers) all match to 15 digits. Full suite 173 OK.
+
+## 2026-10-30 — T-024 done
+- Outside check: `tests/test_r_crosscheck.py` (9 tests) runs R expirest 0.1.7 via `tests/r/q1e.R`: pooling decision equal for cases a/b/c, shelf life (and per-batch) equal within 0.01 month; single-batch assay (lower) and impurity (upper) too. NIST Norris.dat: slope, intercept, residual SD match to 15 digits.
+- Flaky hunt: full suite 6 runs, 0 failures, no random/time use in tests. R 4.6.1 installed with winget; expirest lives in the per-user folder Documents-independent `~/R/win-library/4.6` (the test sets R_LIBS_USER itself). Missing R makes the test FAIL ("install R"). expirest does not apply our extrapolation cap; all cases are uncapped.
