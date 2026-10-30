@@ -84,3 +84,5 @@ frontmatter = the small settings block at the top of a file
 expirest = R package that computes shelf life the ICH Q1E way
 certified value = answer NIST has proven correct for a test dataset
 flaky test = a test that passes and fails at random
+prefix = a fixed start added to every name so one set of data can be found and removed without touching the rest
+proof = a check that goes back to the original file instead of trusting what was stored
