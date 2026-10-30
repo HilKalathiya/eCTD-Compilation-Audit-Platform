@@ -54,7 +54,7 @@ def prefixed():
 
 
 def wipe_postgres(owner):
-    """Delete only the demo rows from an earlier run (they must go before migrate: migration 002 re-adds an older locator rule)."""
+    """Delete only the demo rows from an earlier run."""
     if owner.execute("SELECT to_regclass('facts')").fetchone()[0] is not None:
         owner.execute("DELETE FROM facts WHERE fact_id LIKE %s", (PREFIX + "%",))
         owner.execute("DELETE FROM gate_quarantine_rows WHERE fact_id LIKE %s", (PREFIX + "%",))
@@ -161,8 +161,8 @@ def run(tamper=None, out=print):
     """Load the three sources, print 5 PROOF lines, return 0 only if all 5 hold. tamper(session) is a test hook."""
     try:
         owner = postgres.connect()
-        wipe_postgres(owner)
         migrate.migrate()
+        wipe_postgres(owner)
         app, driver = store.connect_app(), db_graph.connect()
     except Exception as e:
         out(f"FAIL: cannot reach the databases ({e!r}); {DOWN}")

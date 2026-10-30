@@ -86,3 +86,5 @@ certified value = answer NIST has proven correct for a test dataset
 flaky test = a test that passes and fails at random
 prefix = a fixed start added to every name so one set of data can be found and removed without touching the rest
 proof = a check that goes back to the original file instead of trusting what was stored
+migration = a numbered file that changes the database setup
+sha256 = a fingerprint of a file's text; any edit changes it
