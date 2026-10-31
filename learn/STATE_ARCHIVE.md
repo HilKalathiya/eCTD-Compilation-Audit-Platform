@@ -73,3 +73,6 @@
 
 ## 2026-10-30 — T-020 done
 - Stats 1: `ectd_engine/stats/basic.py` (mean, sd n-1, rsd_percent, round_to half-up, conforms rounds to each limit's own decimals first). Decimal only, prec 50. 6 tests in tests/test_stats_basic.py; 5 NIST StRD files in data/public/nist/ (certified values parsed from headers) all match to 15 digits. Full suite 173 OK.
+
+## 2026-10-30 — K4 done
+- Output style `Plain words` (`.claude/output-styles/plain-words.md`, 5 rules, keep-coding-instructions true) set via `"outputStyle": "Plain words"` in `.claude/settings.json` (exact case; hooks, deny list, attribution untouched). 7 tests in `tests/test_output_style.py`. Restart Claude Code, then `/output-style`.

@@ -93,3 +93,7 @@ table_id = name of a table inside a page, like p11-t2 (page 11, table 2)
 borderless table = a table with no drawn lines; found by wide gaps between words
 path-scoped rule = a rule file that loads only for files matching a path pattern
 frontmatter = the small settings block at the top of a file, between two --- lines
+BM25 = word search that ranks passages by how rare and frequent the query words are
+embedding = a list of numbers that captures the meaning of a text
+RRF (reciprocal rank fusion) = mix several ranked lists by adding 1/(60+rank) points per hit
+recall@5 = share of questions where a right passage is among the top 5 hits
