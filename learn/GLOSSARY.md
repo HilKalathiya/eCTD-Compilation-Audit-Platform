@@ -88,3 +88,6 @@ prefix = a fixed start added to every name so one set of data can be found and r
 proof = a check that goes back to the original file instead of trusting what was stored
 migration = a numbered file that changes the database setup
 sha256 = a fingerprint of a file's text; any edit changes it
+chunk = a small piece of text cut from a document so it can be searched and quoted
+table_id = name of a table inside a page, like p11-t2 (page 11, table 2)
+borderless table = a table with no drawn lines; found by wide gaps between words

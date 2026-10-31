@@ -1,5 +1,9 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-10-31 — T-027 (C2.1) done
+- ICH Step-4 PDFs (M4Q(R1), Q1A(R2), Q1E, Q3B(R2), Q6A) in `data/public/ich/` (SOURCES.md has URL, date, sha256). `ectd_engine/knowledge/chunk.py`: ~800-char text chunks on paragraph/heading boundaries (never across pages); tables as one chunk each (ruled via find_tables, borderless via word gaps), cut only between rows if > 1500 chars; ids `<doc>:p<page>-c<n>` / `table_id p<page>-t<n>`; Symbol-font characters (≤ ≥ ±) mapped to real ones.
+- Migration 006 `kb_chunks` (no value column; page is the only number). `python -m ectd_engine.knowledge.load [--dry-run]`; reload is idempotent. 21 tests in `tests/test_ich_chunks.py` (3 Q3B threshold tables complete; planted missing row / page 0 / no doc refused; live reload no duplicates). Q1E has no real table: its decision tree (p12) is a drawing, kept as text chunks.
+
 ## 2026-10-30 — T-026 (C1 fix) done
 - `migrate` now records each migration file in table `schema_migrations` (filename, sha256, applied_at) and runs only unrecorded files, each in its own transaction. An old DB without the table gets 001-004 recorded without re-running. A recorded file whose text changed -> error "migration edited after it ran". Migration 005 creates the table. The T-025 CheckViolation bug is fixed; `demo_facts` now migrates first, then wipes only its own rows. `tests/test_migrate.py`: 3 live tests (incl. planted edit).
 
