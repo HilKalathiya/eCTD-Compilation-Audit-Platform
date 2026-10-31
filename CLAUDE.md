@@ -3,7 +3,8 @@
 Project: eCTD Evidence Engine. A Claude Project (the BRAIN) writes TASK CARDS. You execute them exactly, run the tests, report briefly. Repo root = `E:\E\Project` (Windows). Python 3.10+.
 
 ## Core rule (never violate)
-The language model never writes a number. Code computes every value from facts (fact IDs). Models write prose with `[[placeholders]]`; a validator checks; code renders values. Use `decimal.Decimal` with `ROUND_HALF_UP` to the specification's decimals (never Python `round()`).
+The language model never writes a number. Code computes every value from facts (fact IDs). Models write prose with `[[placeholders]]`; a validator checks; code renders values.
+Engine rules: .claude/rules/engine.md (load for ectd_engine/**)
 Independence rule: every new check ships with a planted-error test showing it can FAIL. Never loosen or remove a check to make a run pass; that needs a TASK CARD.
 
 ## How to work

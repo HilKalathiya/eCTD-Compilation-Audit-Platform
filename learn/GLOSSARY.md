@@ -91,3 +91,5 @@ sha256 = a fingerprint of a file's text; any edit changes it
 chunk = a small piece of text cut from a document so it can be searched and quoted
 table_id = name of a table inside a page, like p11-t2 (page 11, table 2)
 borderless table = a table with no drawn lines; found by wide gaps between words
+path-scoped rule = a rule file that loads only for files matching a path pattern
+frontmatter = the small settings block at the top of a file, between two --- lines
