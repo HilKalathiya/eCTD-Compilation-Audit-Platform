@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-01 — T-033 (C2.3) done
+- `knowledge/cite.py`: `verify(doc_id, page, quote, pdf_dir=None)` -> `Citation(doc_id, version, page, quote, pdf_sha256)` or `CitationRejected(reason)`. Re-reads the page from the PDF with PyMuPDF (never kb_chunks); PDF sha256 must equal SOURCES.md; only whitespace collapse, end-of-line hyphen join, fi/fl ligatures, curly quotes are normalised. 15 tests in `tests/test_citations.py` (planted word, digit, wrong page, altered PDF bytes, wrong sha in SOURCES, empty quote all refused).
+- Gold: first 200 chars of rerank top-1 verified for 26 of 30. Rejected: q02 (footnote marker order), q03/q04 (chunker turned Symbol-font U+F0B1 into a real +-), q29 (running header kept, page number inside it in the PDF). Real <= / +- signs are always refused (PDF stores U+F0A3/F0B1): pinned by a test; needs a card to decide.
+- Helpers: `watch.py` run always prints the Ran/OK/FAILED lines (planted test: 30 lines after the summary). test-runner gets Monitor (tools exactly Bash, Read, Monitor; `test_agents.py` updated, Edit/Write/no-Monitor plants refused). `test_retrieval.RerankLiveTests`: real reranker, cache bypassed.
+
 ## 2026-11-01 — K7 (test-runner helper) done
 - `.claude/agents/test-runner.md`: subagent, model haiku, tools exactly Bash + Read, runs the given test command (default `python tools/watch.py status --tests --timeout 900`) and replies in <= 10 lines; never edits, never git. CLAUDE.md rule now: "Subagents may not write code or tests. Only test-runner may be used, to run tests." `tests/test_agents.py` (6 tests; planted Edit tool / missing model / missing "never edit" all refused). Manual check by Hil pending (`/context` before/after).
 

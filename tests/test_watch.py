@@ -128,6 +128,15 @@ class WatchFlagTests(unittest.TestCase):
         self.assertIn("TIMEOUT - raise --timeout", out)
         self.assertNotIn("EXIT 0", out)
 
+    def test_tests_summary_line_shown_when_output_follows_it(self):
+        # an exit hook prints 30 lines AFTER unittest's summary, pushing it out of the last-20-lines tail
+        late = "atexit.register(lambda: print(*['late'] * 30, sep=chr(10)))"
+        self.write("tests/test_long.py", "import atexit, unittest\n\n" + late + "\n\n\nclass L(unittest.TestCase):\n"
+                   "    def test_long(self):\n        self.fail('planted')\n")
+        out = self.watch("status", "--tests")
+        self.assertRegex(out, r"Ran \d+ tests? in ")
+        self.assertIn("FAILED", out)
+
     def dirty_a(self):
         self.append("ectd_engine/facts/a.py", "Z = 2\n")
         self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")

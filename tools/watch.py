@@ -167,6 +167,13 @@ def cmd_run(args):
     out(f"EXIT {code}  ({time.time() - t0:.1f}s)  $ {args[0][:100]}")
     for ln in tail:
         out("  " + ln[:160])
+    # a long failure report can push the unittest summary out of the 20-line tail: always show it
+    lines = (text or "").strip().splitlines()
+    ran = [l for l in lines if re.match(r"Ran \d+ tests? in ", l)]
+    verdict = [l for l in lines if re.match(r"(OK|FAILED)\b", l)]
+    for ln in (ran[-1:] + verdict[-1:]):
+        if ln not in tail:
+            out("  " + ln[:160])
     return 0
 
 

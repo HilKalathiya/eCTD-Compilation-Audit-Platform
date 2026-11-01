@@ -110,3 +110,6 @@ LOGERROR = line in activity.log saying the logging hook itself failed
 subagent = a small helper with its own separate chat
 haiku = the smallest, cheapest Claude model
 frontmatter = the settings block at the top of a file, between two --- lines
+verbatim = word for word, nothing changed
+sha256 = a fingerprint of a file; one changed byte gives a different fingerprint
+normalise = tidy spaces, hyphens and quote marks so two texts can be compared fairly

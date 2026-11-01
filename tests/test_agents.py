@@ -30,8 +30,8 @@ def problems(text):
     if meta.get("model") != "haiku":
         out.append("model is not haiku")
     tools = sorted(t.strip() for t in meta.get("tools", "").split(",") if t.strip())
-    if tools != ["Bash", "Read"]:
-        out.append("tools are not exactly Bash and Read")
+    if tools != ["Bash", "Monitor", "Read"]:
+        out.append("tools are not exactly Bash, Read and Monitor")
     if "never edit" not in body.lower():
         out.append("body does not say never edit")
     return out
@@ -52,7 +52,15 @@ class AgentTests(unittest.TestCase):
 
     def test_planted_edit_tool_refused(self):
         text = AGENT.read_text(encoding="utf-8").replace("tools: Bash, Read", "tools: Bash, Read, Edit")
-        self.assertIn("tools are not exactly Bash and Read", problems(text))
+        self.assertIn("tools are not exactly Bash, Read and Monitor", problems(text))
+
+    def test_planted_write_tool_refused(self):
+        text = AGENT.read_text(encoding="utf-8").replace("tools: Bash, Read", "tools: Bash, Read, Write")
+        self.assertIn("tools are not exactly Bash, Read and Monitor", problems(text))
+
+    def test_planted_missing_monitor_refused(self):
+        text = AGENT.read_text(encoding="utf-8").replace(", Monitor", "")
+        self.assertIn("tools are not exactly Bash, Read and Monitor", problems(text))
 
     def test_planted_missing_model_refused(self):
         text = re.sub(r"^model:.*\n", "", AGENT.read_text(encoding="utf-8"), flags=re.M)

@@ -164,5 +164,20 @@ class RerankCacheTests(unittest.TestCase):
         self.assertEqual(again, self.fake_predict("q?", self.TEXTS))
 
 
+class RerankLiveTests(unittest.TestCase):
+    """The real model, with the disk cache switched off, so a broken model or setup cannot hide behind cached scores."""
+
+    def test_live_model_ranks_the_obvious_pair_first(self):
+        import tempfile
+        question = "What is the identification threshold for degradation products?"
+        good = "The identification threshold for a degradation product in a new drug product is 0.2% for a daily dose of 10 mg to 2 g."
+        bad = "The committee meeting was held in November and the minutes were circulated to all members afterwards."
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(rerank, "CACHE_DIR", Path(tmp)):
+            first = rerank.scores(question, [bad, good])
+            self.assertEqual(len(list(Path(tmp).iterdir())), 2)  # both pairs were really scored, none read from the old cache
+        self.assertGreater(first[1], first[0])
+        self.assertEqual(max(range(2), key=lambda i: first[i]), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
