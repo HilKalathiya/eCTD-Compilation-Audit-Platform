@@ -1,5 +1,8 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-01 — K7 (test-runner helper) done
+- `.claude/agents/test-runner.md`: subagent, model haiku, tools exactly Bash + Read, runs the given test command (default `python tools/watch.py status --tests --timeout 900`) and replies in <= 10 lines; never edits, never git. CLAUDE.md rule now: "Subagents may not write code or tests. Only test-runner may be used, to run tests." `tests/test_agents.py` (6 tests; planted Edit tool / missing model / missing "never edit" all refused). Manual check by Hil pending (`/context` before/after).
+
 ## 2026-11-01 — T-032 (hook + rerank cache fix) done
 - `watch.py log`: root cause of the T-031 gap = a lone surrogate (damaged em-dash) in the PowerShell input; the UTF-8 write raised and the bare `except: pass` hid it. Now such characters become `?`, and any other failure writes `LOGERROR <tool> <reason>`. Planted tests: multi-line PowerShell with a broken character, non-ASCII input, broken JSON.
 - `knowledge/rerank.py`: scores cached in `.cache/rerank/` (gitignored), key = sha256(model + VERSION + question + passage text); changed passage, question, model or VERSION = miss. 6 cache tests (no database needed). Retrieval tests also embed each gold question once (lru_cache on `embed.embed_query`, same vectors). Full suite 752 s -> 270 s / 274 s (two runs, FLAGS none). CLAUDE.md: PowerShell/git line.

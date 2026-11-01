@@ -107,3 +107,6 @@ float32 = normal-size decimal numbers in a model (float16 is half-size and very 
 lone surrogate = half of a two-part character that UTF-8 cannot write
 cache key = fingerprint of the inputs; if it changes, the saved answer is not reused
 LOGERROR = line in activity.log saying the logging hook itself failed
+subagent = a small helper with its own separate chat
+haiku = the smallest, cheapest Claude model
+frontmatter = the settings block at the top of a file, between two --- lines
