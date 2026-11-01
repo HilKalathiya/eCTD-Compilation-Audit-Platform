@@ -1,18 +1,21 @@
 """Live test that guideline search finds the right passage for the brain's 30 gold questions (needs Docker and Ollama)."""
 import dataclasses
 import json
+import time
 import unittest
 import urllib.request
 from pathlib import Path
+from unittest import mock
 
 from ectd_engine.db import migrate, postgres
 from ectd_engine.gate import gate
-from ectd_engine.knowledge import embed, load, search
+from ectd_engine.knowledge import embed, load, rerank, search
 from tests.test_gate import cand, run
 from tests.test_migrate import require_database
 
 GOLD = json.loads((Path(__file__).parent / "gold" / "retrieval_gold.json").read_text(encoding="utf-8"))["questions"]
 MIN_RECALL = 0.80
+MIN_RERANK = 0.87
 
 
 def norm(s):
@@ -46,20 +49,34 @@ class RetrievalTests(unittest.TestCase):
         cls.conn.close()
 
     def recall(self, mode, show=False):
+        """Share of gold questions with a right passage in the top 5; also seconds per query (stored in self.secs)."""
         hits = 0
+        start = time.perf_counter()
         for q in GOLD:
             got = search.search(q["q"], 5, self.conn, mode)
             ok = any(is_hit(q, x) for x in got)
             hits += ok
             if show:
                 print(f"  {q['id']} {'HIT ' if ok else 'MISS'} {q['doc_id']}  {q['q'][:70]}")
+        self.secs = (time.perf_counter() - start) / len(GOLD)
         return hits / len(GOLD)
 
     def test_recall_at_5(self):
-        hybrid = self.recall("hybrid", show=True)
-        fts, vec = self.recall("fts"), self.recall("vector")
-        print(f"recall@5 hybrid={hybrid:.3f} fts-only={fts:.3f} vector-only={vec:.3f} ({len(GOLD)} questions)")
+        fts, vec, hybrid = self.recall("fts"), self.recall("vector"), self.recall("hybrid")
+        print("rerank per question:")
+        rerank = self.recall("rerank", show=True)
+        print(f"recall@5 fts={fts:.3f} vector={vec:.3f} hybrid={hybrid:.3f} rerank={rerank:.3f} "
+              f"({len(GOLD)} questions); rerank {self.secs:.2f} s per query")
         self.assertGreaterEqual(hybrid, MIN_RECALL)
+        self.assertGreaterEqual(rerank, vec)
+        self.assertGreaterEqual(rerank, MIN_RERANK)
+
+    def test_planted_reversed_reranker_drops_below_vector(self):
+        vec = self.recall("vector")
+        with mock.patch.object(rerank, "scores", lambda q, texts: list(range(len(texts)))):
+            bad = self.recall("rerank")
+        print(f"planted reversed reranker recall@5={bad:.3f} vector={vec:.3f}")
+        self.assertLess(bad, vec)
 
     def test_each_hit_carries_doc_page_table(self):
         got = search.search("identification threshold for degradation products", 5, self.conn)

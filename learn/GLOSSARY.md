@@ -101,3 +101,6 @@ timeout = the longest we wait before giving up
 process tree = a program plus every program it started
 write evidence = a logged step that really wrote a given file (not just read it)
 exit code 124 = the usual number meaning "ran out of time"
+cross-encoder = model that reads the question and a passage together and scores the pair
+reranker = step that re-orders search hits with a better, slower model
+float32 = normal-size decimal numbers in a model (float16 is half-size and very slow on CPU)

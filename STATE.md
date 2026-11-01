@@ -1,4 +1,8 @@
-# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
+﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
+
+## 2026-11-01 — T-031 (C2.2b) done
+- knowledge/rerank.py: sentence-transformers CrossEncoder mixedbread-ai/mxbai-rerank-base-v1 (CPU, float32, max_length 512, batch 16, loaded once per process; pinned sentence-transformers==6.2.0). search(q, mode="rerank") = FTS top 12 + vector top 12 (dedupe, <= 24 passages) -> rerank -> top 5. Cap is 24 not 40 because 40 took 16 s/question; 24 takes ~8-11 s. float16 (the default load) took 178 s/question: never use it.
+- Gold recall@5: fts 0.667, vector 0.867, hybrid 0.800, rerank 0.933. Rerank misses: q22 (Q6A), q29 (M4Q_R1). Planted reversed-reranker test drops below vector. FTS query unchanged (websearch_to_tsquery not tried). Full retrieval test ~9 min.
 
 ## 2026-11-01 — T-030 (C0.3 fix) done
 - `watch.py`: activity log keeps whole commands (cap 4000 chars, newline -> " ⏎ "); display cuts only when printing. "changed with no logged action" now needs real write evidence (Write/Edit target, or `>`/`tee`/Set-Content/open('w')/write_text/cp-mv-Copy-Item destination/git checkout --/git apply naming the file; deletes also count `rm`/`del`). `cat`/`grep` no longer count. Timeout exits 124. 6 new tests in `tests/test_watch.py`.
@@ -35,10 +39,3 @@
 - `ectd_engine/stats/oot.py`: `check(history, (month, value), level=0.99)` -> OK | OOT (with low/high) | NotEnoughData (< 3 points or all same month); uses the two-sided PREDICTION interval (`interval`). `check_with_policy` returns (result, note).
 - `ectd_engine/stats/loq.py`: `parse` ("<LOQ", "<0.05", "ND" -> Below), `Policy` EXCLUDE (default) / REPORT_ONLY / SUBSTITUTE (needs value + reason, else ValueError), `apply_policy`, `shelf_life_with_policy` -> (ShelfLife or None, note). 22 tests in `tests/test_oot_loq.py`; PI matches statsmodels to 10 digits. q1e.py/tdist.py unchanged. Suite 226 OK.
 
-## 2026-10-30 — T-022 done
-- `ectd_engine/stats/pool.py`: `poolability(batches, spec_min, spec_max)` -> decision ("separate" / "common slope, separate intercepts" / "fully pooled"), `p_slope`, `p_intercept`, shelf life (separate = shortest batch; common slope = pooled error, df N-k-1, own intercepts; pooled = `shelf_life` on all points). `decide()` pools only if p > 0.25. `tdist.f_cdf` added (general incomplete beta). q1e.py unchanged (only called; `_one_side` reused).
-- 12 tests in `tests/test_pool.py`; p-values match statsmodels anova_lm to 10 digits (cases a/b/c).
-
-## 2026-10-30 — T-021 done
-- `ectd_engine/stats/tdist.py`: Student t cdf/quantile in Decimal (incomplete beta, bisection; checked vs t-table and scipy). `q1e.py`: `fit`, `Fit.bound(month, side)` (one-sided 95% bound of the mean line), `shelf_life(points, spec_min, spec_max, cap_months)` solved to 0.01 month (half-up), cap = min(2 x longest, longest + 12) with `capped` + reason; `line_shelf_life` is the wrong-way comparator for tests only.
-- Matches statsmodels to 10 digits (slope, intercept, bound); shelf life within 0.01 month. `requirements-dev.txt` pins statsmodels 0.15.0 + scipy 1.13.1 (test-only). Poolability stays C1.11.

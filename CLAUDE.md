@@ -10,6 +10,7 @@ Independence rule: every new check ships with a planted-error test showing it ca
 ## How to work
 0. FIRST ACTION of every task: run the `python tools/watch.py task ...` line from the card (it records the allowed paths). Hooks log your tool calls to `.brain/activity.log` automatically; the brain reads that log and `python tools/watch.py status` to check your work. Never edit `.brain/`, `tools/watch.py` or `.claude/`. Do not use subagents to write code or tests unless the card says so.
 1. Read the TASK CARD. Read ONLY the files in READ ONLY (plus `STATE.md`). Do not explore the repo.
+Never run git stash; never write inside .brain/ (watch.py owns it).
 2. Big files: never `cat`/read in full (`Laboratory.csv`, `handoff/archive/explainer_full.md`, PDFs, `*.pth`). Use `head`, `grep -n`, or `python tools/section.py explainer <n>` (prints one section).
 3. Plan briefly, implement, run the ACCEPT commands. Fix until they pass, or stop and report the blocker. At most 1 clarifying question; otherwise pick the simplest option and say so.
 4. Tests: standard library `unittest` unless the card says pytest. Never delete, skip, xfail or weaken a test to get green; if a test is wrong, say so in the REPORT and wait for a card.

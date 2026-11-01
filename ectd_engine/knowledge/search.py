@@ -6,6 +6,7 @@ from ectd_engine.knowledge import embed
 
 RRF_K = 60
 POOL = 20
+RERANK_POOL = 12  # per side; 12 + 12 candidates keeps CPU reranking near 10 s per question
 WORD_RE = re.compile(r"[A-Za-z0-9]+")
 
 
@@ -50,17 +51,21 @@ def fuse(lists, k=5):
 
 
 def search(q, k=5, conn=None, mode="hybrid"):
-    """Top-k Quotes for a question. mode 'fts' or 'vector' runs one side only (for measuring)."""
+    """Top-k Quotes for a question. mode 'fts' or 'vector' runs one side only (for measuring); 'rerank' re-reads the top 12 of each side (up to 24 passages)."""
     own = conn is None
     if own:
         from ectd_engine.db import postgres
         conn = postgres.connect()
     try:
+        n = RERANK_POOL if mode == "rerank" else POOL
         lists = []
-        if mode in ("hybrid", "fts"):
-            lists.append(fts_hits(conn, q))
-        if mode in ("hybrid", "vector"):
-            lists.append(vector_hits(conn, q))
+        if mode in ("hybrid", "fts", "rerank"):
+            lists.append(fts_hits(conn, q, n))
+        if mode in ("hybrid", "vector", "rerank"):
+            lists.append(vector_hits(conn, q, n))
+        if mode == "rerank":
+            from ectd_engine.knowledge import rerank
+            return rerank.rerank(q, fuse(lists, 2 * n), k)
         return fuse(lists, k)
     finally:
         if own:
