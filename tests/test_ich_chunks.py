@@ -220,6 +220,53 @@ class LiveStoreTests(unittest.TestCase):
             load.store(self.conn, [c])
         self.conn.rollback()
 
+    def planted(self, doc_id, chunk_id):
+        text = "planted stale text"
+        return {"chunk_id": chunk_id, "doc_id": doc_id, "doc_version": "Step 4 2000-01-01", "page": 1,
+                "table_id": None, "heading_path": "", "text": text, "sha256": ch.sha(text)}
+
+    def rows(self, chunk_id):
+        return self.conn.execute("SELECT count(*) FROM kb_chunks WHERE chunk_id = %s", (chunk_id,)).fetchone()[0]
+
+    def test_reload_deletes_stale_chunk_of_same_document(self):
+        q1e = ch.chunk_document("Q1E")
+        load.store(self.conn, q1e)
+        self.conn.execute(load.SQL, self.planted("Q1E", "Q1E:stale-1"))  # a row that is not in the real chunk list
+        self.conn.commit()
+        self.assertEqual(self.rows("Q1E:stale-1"), 1)
+        load.store(self.conn, q1e)
+        self.assertEqual(self.rows("Q1E:stale-1"), 0)
+        n = self.conn.execute("SELECT count(*) FROM kb_chunks WHERE doc_id = 'Q1E'").fetchone()[0]
+        self.assertEqual(n, len(q1e))
+
+    def test_reload_of_one_document_keeps_other_documents(self):
+        other = self.planted("Q6A", "Q6A:keep-me")
+        try:
+            self.conn.execute(load.SQL, other)
+            self.conn.commit()
+            load.store(self.conn, ch.chunk_document("Q1E"))
+            self.assertEqual(self.rows("Q6A:keep-me"), 1)
+        finally:
+            self.conn.execute("DELETE FROM kb_chunks WHERE chunk_id = 'Q6A:keep-me'")
+            self.conn.commit()
+
+    def test_reload_twice_leaves_no_duplicates(self):
+        q1e = ch.chunk_document("Q1E")
+        load.store(self.conn, q1e)
+        load.store(self.conn, q1e)
+        ids = [r[0] for r in self.conn.execute("SELECT chunk_id FROM kb_chunks WHERE doc_id = 'Q1E'").fetchall()]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(len(ids), len(q1e))
+
+    def test_failed_reload_deletes_nothing(self):
+        q1e = ch.chunk_document("Q1E")
+        load.store(self.conn, q1e)
+        bad = {**q1e[0], "chunk_id": "Q1E:bad-page", "page": 0}  # the database refuses page 0
+        with self.assertRaises(Exception):
+            load.store(self.conn, [bad])  # would delete every real Q1E row if it were not one transaction
+        n = self.conn.execute("SELECT count(*) FROM kb_chunks WHERE doc_id = 'Q1E'").fetchone()[0]
+        self.assertEqual(n, len(q1e))
+
     def test_no_number_columns_beyond_page(self):
         cols = self.conn.execute("SELECT column_name, data_type FROM information_schema.columns "
                                  "WHERE table_name = 'kb_chunks'").fetchall()

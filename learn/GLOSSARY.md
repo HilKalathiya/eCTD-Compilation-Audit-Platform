@@ -115,3 +115,6 @@ sha256 = a fingerprint of a file; one changed byte gives a different fingerprint
 normalise = tidy spaces, hyphens and quote marks so two texts can be compared fairly
 private-use code = a font's hidden character number with no normal meaning (Symbol font stores ≤ this way)
 running header = the title or page number repeated at the top or bottom of many pages
+retry = try the same step again after a short wait
+transaction = a group of database steps that all happen or none do
+stale row = a stored row whose source no longer exists

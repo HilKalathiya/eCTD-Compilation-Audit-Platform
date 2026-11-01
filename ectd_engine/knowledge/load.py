@@ -47,11 +47,26 @@ SQL = ("INSERT INTO kb_chunks (chunk_id, doc_id, doc_version, page, table_id, he
        "text_sha256 = EXCLUDED.text_sha256 WHERE kb_chunks.text_sha256 <> EXCLUDED.text_sha256")
 
 
+DELETE_STALE = "DELETE FROM kb_chunks WHERE doc_id = %s AND NOT (chunk_id = ANY(%s))"
+
+
 def store(conn, chunks):
-    """Insert chunks; a chunk_id already stored is skipped (or updated if its text changed). Returns the chunk count sent."""
+    """In ONE transaction: add/update these chunks, and delete that document's stored chunks that are no longer in the list.
+
+    Only the documents named in `chunks` are touched; other documents keep their rows. Returns the chunk count sent.
+    """
+    ids_by_doc = {}
     for c in chunks:
-        conn.execute(SQL, c)
-    conn.commit()
+        ids_by_doc.setdefault(c["doc_id"], []).append(c["chunk_id"])
+    try:
+        for c in chunks:
+            conn.execute(SQL, c)
+        for doc_id, ids in ids_by_doc.items():
+            conn.execute(DELETE_STALE, (doc_id, ids))
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
     return len(chunks)
 
 

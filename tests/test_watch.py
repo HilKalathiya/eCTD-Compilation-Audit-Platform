@@ -1,9 +1,11 @@
 """Planted-mistake tests: prove each alarm in tools/watch.py fires, and stays quiet on a clean change."""
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -17,6 +19,42 @@ KEY = "api_" + "key"
 TEST_A = "import unittest\n\n\nclass A(unittest.TestCase):\n    def test_one(self):\n        self.assertTrue(True)\n"
 
 
+def git_retry(root, *args, run=subprocess.run, tries=3, pause=0.3):
+    """Run one git command in root; if it fails, wait a moment and try again (up to `tries` times), then raise with git's message."""
+    last = None
+    for attempt in range(tries):
+        try:  # Windows sometimes refuses to start the program at all (WinError 5): that counts as a failed try too
+            last = run([*GIT, "-C", str(root), *args], capture_output=True, text=True)
+        except OSError as e:
+            last = subprocess.CompletedProcess(args, -1, "", f"{type(e).__name__}: {e}")
+        if last.returncode == 0:
+            return last
+        if attempt < tries - 1:
+            time.sleep(pause)
+    raise RuntimeError(f"git {' '.join(args)} failed {tries}x, exit {last.returncode}: {last.stderr.strip()}")
+
+
+def run_retry(cmd, tries=3, pause=0.3, **kw):
+    """subprocess.run that tries again when Windows refuses to start the program (WinError 5)."""
+    for attempt in range(tries):
+        try:
+            return subprocess.run(cmd, **kw)
+        except PermissionError:
+            if attempt == tries - 1:
+                raise
+            time.sleep(pause)
+
+
+def build_repo(root, run=subprocess.run, pause=0.3):
+    """Turn root into a git repo with one 'base' commit (author set locally) and check that the commit really exists."""
+    git_retry(root, "init", "-q", run=run, pause=pause)
+    git_retry(root, "config", "user.name", "t", run=run, pause=pause)
+    git_retry(root, "config", "user.email", "t@t", run=run, pause=pause)
+    git_retry(root, "add", "-A", run=run, pause=pause)
+    git_retry(root, "commit", "-q", "-m", "base", run=run, pause=pause)
+    git_retry(root, "rev-parse", "--verify", "HEAD", run=run, pause=pause)
+
+
 class WatchFlagTests(unittest.TestCase):
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
@@ -25,9 +63,7 @@ class WatchFlagTests(unittest.TestCase):
         self.write("writer_test/README.md", "frozen readme\n")
         self.write("ectd_engine/facts/a.py", '"""a."""\nX = 1\n')
         self.write("tests/test_a.py", TEST_A)
-        self.git("init", "-q")
-        self.git("add", "-A")
-        self.git("commit", "-q", "-m", "base")
+        build_repo(self.root)
         self.watch("task", "X", "ectd_engine/**", "tests/**")
 
     def write(self, rel, text):
@@ -40,16 +76,25 @@ class WatchFlagTests(unittest.TestCase):
             f.write(text)
 
     def git(self, *args):
-        subprocess.run([*GIT, "-C", str(self.root), *args], check=True, capture_output=True)
+        git_retry(self.root, *args)
 
     def watch(self, *args):
         env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
-        r = subprocess.run([sys.executable, str(WATCH), *args], env=env, capture_output=True,
-                           text=True, timeout=60)
+        r = run_retry([sys.executable, str(WATCH), *args], env=env, capture_output=True,
+                      text=True, timeout=60)
         return r.stdout
 
     def status(self):
-        return self.watch("status")
+        # tools/watch.py hides a failed git call and then prints "CHANGED ... 0 file(s)". If git itself shows changes
+        # but the watcher says 0, that was a git hiccup: ask again (never changes what the test asserts).
+        for attempt in range(3):
+            out = self.watch("status")
+            dirty = [ln for ln in git_retry(self.root, "status", "--porcelain").stdout.splitlines()
+                     if ".brain" not in ln]
+            if not dirty or "CHANGED since task start: 0 file(s)" not in out:
+                return out
+            time.sleep(0.3)
+        return out
 
     def test_frozen_path_touched(self):
         self.append("writer_test/README.md", "planted\n")
@@ -248,6 +293,67 @@ class WatchFlagTests(unittest.TestCase):
         self.append("ectd_engine/facts/a.py", "Z = 2\n")
         self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")
         self.assertIn("FLAGS: none", self.status())
+
+
+class GitRetryTests(unittest.TestCase):
+    """The repo-building helper survives one failed git call, and still fails loudly if git keeps failing."""
+
+    def fake(self, fail_first):
+        calls = []
+
+        def run(cmd, **kw):
+            calls.append(cmd)
+            bad = len(calls) <= fail_first
+            return subprocess.CompletedProcess(cmd, 128 if bad else 0, "", "fatal: planted" if bad else "")
+        return run, calls
+
+    def test_one_failure_then_success_builds_the_repo(self):
+        run, calls = self.fake(fail_first=1)
+        build_repo("x", run=run, pause=0)
+        self.assertEqual(len(calls), 7)  # init failed once and was repeated, then 5 more steps ran
+        self.assertEqual(calls[0], calls[1])
+
+    def test_windows_refusing_to_start_git_is_retried(self):
+        calls = []
+
+        def run(cmd, **kw):
+            calls.append(cmd)
+            if len(calls) == 1:
+                raise PermissionError("[WinError 5] Access is denied")
+            return subprocess.CompletedProcess(cmd, 0, "", "")
+        git_retry("x", "init", run=run, pause=0)
+        self.assertEqual(len(calls), 2)
+
+    def test_always_failing_git_raises_with_git_message(self):
+        run, calls = self.fake(fail_first=99)
+        with self.assertRaises(RuntimeError) as cm:
+            build_repo("x", run=run, pause=0)
+        self.assertIn("planted", str(cm.exception))
+        self.assertEqual(len(calls), 3)
+
+    def test_status_asks_again_when_watcher_wrongly_says_zero_changes(self):
+        class Fake(WatchFlagTests):
+            calls = 0
+
+            def watch(self, *args):
+                Fake.calls += 1
+                return ("CHANGED since task start: 0 file(s)\n" if Fake.calls == 1
+                        else "CHANGED since task start: 1 file(s)\n")
+        t = Fake("test_clean_change_raises_no_flag")
+        t.root = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, t.root, True)
+        (t.root / "f.txt").write_text("x", encoding="utf-8")
+        build_repo(t.root)
+        (t.root / "f.txt").write_text("changed", encoding="utf-8")
+        self.assertIn("1 file(s)", t.status())
+        self.assertEqual(Fake.calls, 2)
+
+    def test_real_repo_has_base_commit_and_local_author(self):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "f.txt").write_text("x", encoding="utf-8")
+            build_repo(d)
+            out = git_retry(d, "log", "-1", "--format=%an %s").stdout.strip()
+            self.assertEqual(out, "t base")
 
 
 if __name__ == "__main__":

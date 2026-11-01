@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-02 — T-035 (fix) done
+- `tests/test_watch.py`: temp git repos are built by `build_repo`/`git_retry` (3 tries, local author, base commit checked; also retries WinError 5). `status()` asks again if the watcher says 0 changed files while git shows changes. 5 helper tests added.
+- `load.store()`: one transaction; upserts a document's chunks and deletes that document's rows not in the new set; other documents untouched; rollback on error. 4 new tests in `test_ich_chunks.py`.
+- Open: `tools/watch.py git()` hides failed git calls (prints 0 changed); needs its own card. Suite: 348 tests, 3 clean runs in a row.
+
 ## 2026-11-01 — T-034 (C2.3 fix) done
 - `chunk.SYMBOL_MAP` (shared by chunk.py and cite.py): U+F0A3 -> ≤, U+F0B1 -> ±, U+F0B7 -> bullet (only codes found in the 5 PDFs; the old map's 5 other entries never occur). `cite.normalise` maps them on page text and quote; "<" is still not "≤". `cite.MIN_QUOTE` = 40 chars. Running header/footer lines (same text, page number aside, on >= 50% of pages) are dropped from chunks (`chunk.running_lines`).
 - Gold citations: 30 of 30 verify, MIN_VERIFIED = 28. Rerank recall 0.933 (hybrid 0.867, vector 0.900, fts 0.700). Misses: q22, q29.
