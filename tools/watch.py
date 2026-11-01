@@ -57,7 +57,25 @@ def is_repo():
 LOG_CAP = 4000  # the log keeps whole commands; only printing cuts them short
 
 
+def _append_log(line):
+    """Append one timestamped line to the activity log (and trim the log when it grows past ~2 MB)."""
+    # a lone surrogate (a half-broken character in the tool input) cannot be written as UTF-8: swap it for "?"
+    line = line.encode("utf-8", "replace").decode("utf-8")
+    BRAIN.mkdir(exist_ok=True)
+    with open(ACTIVITY, "a", encoding="utf-8") as f:
+        f.write(time.strftime("%Y-%m-%dT%H:%M:%S ") + line + "\n")
+    if ACTIVITY.stat().st_size > 2_000_000:
+        kept, size = [], 0  # keep the newest ~800 KB of lines
+        for ln in reversed(ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines()):
+            size += len(ln) + 1
+            if size > 800_000:
+                break
+            kept.append(ln)
+        ACTIVITY.write_text("\n".join(reversed(kept)) + "\n", encoding="utf-8")
+
+
 def cmd_log():
+    tool = "?"
     try:
         # read raw bytes: Windows decodes text stdin as cp1252, which chokes on characters like the arrow below
         d = json.loads(sys.stdin.buffer.read().decode("utf-8", "replace") or "{}")
@@ -77,19 +95,13 @@ def cmd_log():
                 except ValueError:
                     pass
             line = f"{tool} {target[:LOG_CAP]}"
-        BRAIN.mkdir(exist_ok=True)
-        with open(ACTIVITY, "a", encoding="utf-8") as f:
-            f.write(time.strftime("%Y-%m-%dT%H:%M:%S ") + line + "\n")
-        if ACTIVITY.stat().st_size > 2_000_000:
-            kept, size = [], 0  # keep the newest ~800 KB of lines
-            for ln in reversed(ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines()):
-                size += len(ln) + 1
-                if size > 800_000:
-                    break
-                kept.append(ln)
-            ACTIVITY.write_text("\n".join(reversed(kept)) + "\n", encoding="utf-8")
-    except Exception:
-        pass  # a logging hook must never disturb the work
+        _append_log(line)
+    except Exception as e:  # a logging hook must never disturb the work, but it must say when it failed
+        try:
+            reason = f"{type(e).__name__}: {e}".encode("ascii", "replace").decode("ascii")
+            _append_log(f"LOGERROR {str(tool).encode('ascii', 'replace').decode('ascii')} {reason[:200]}")
+        except Exception:
+            pass
     return 0
 
 

@@ -1,5 +1,6 @@
 """Live test that guideline search finds the right passage for the brain's 30 gold questions (needs Docker and Ollama)."""
 import dataclasses
+import functools
 import json
 import time
 import unittest
@@ -43,9 +44,13 @@ class RetrievalTests(unittest.TestCase):
         cls.conn = postgres.connect()
         load.store(cls.conn, [c for cs in load.build_all().values() for c in cs])
         embed.embed_missing(cls.conn)
+        # the same 30 questions are embedded in every mode and test: ask Ollama once per question (vectors are unchanged)
+        cls._embed_patch = mock.patch.object(embed, "embed_query", functools.lru_cache(maxsize=None)(embed.embed_query))
+        cls._embed_patch.start()
 
     @classmethod
     def tearDownClass(cls):
+        cls._embed_patch.stop()
         cls.conn.close()
 
     def recall(self, mode, show=False):
@@ -99,6 +104,64 @@ class RetrievalTests(unittest.TestCase):
         names = {f.name for f in dataclasses.fields(search.Quote)}
         self.assertEqual(names, {"chunk_id", "doc_id", "page", "table_id", "text", "score"})
         self.assertFalse(names & {"value", "unit", "number"})
+
+
+class RerankCacheTests(unittest.TestCase):
+    """The score cache must never change the answer; a changed passage, question or model must miss (no database needed)."""
+    TEXTS = ["alpha impurity limit", "beta stability data", "gamma dissolution test"]
+
+    def setUp(self):
+        import tempfile
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        for patcher in (mock.patch.object(rerank, "CACHE_DIR", Path(tmp.name)),
+                        mock.patch.object(rerank, "_predict", self.fake_predict)):
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        self.calls = []
+
+    def fake_predict(self, question, texts):
+        self.calls.append(list(texts))
+        return [len(t) / 7 + len(question) / 3 for t in texts]  # deterministic, text-dependent, not round numbers
+
+    def quotes(self, texts):
+        return [search.Quote(f"D:p1-c{i}", "D", 1, None, t, 0.0) for i, t in enumerate(texts)]
+
+    def test_cache_hit_returns_same_order_and_scores_without_the_model(self):
+        first = rerank.rerank("q?", self.quotes(self.TEXTS), 3)
+        n = len(self.calls)
+        second = rerank.rerank("q?", self.quotes(self.TEXTS), 3)
+        self.assertEqual(len(self.calls), n)  # nothing recomputed
+        self.assertEqual(first, second)
+        self.assertEqual([x.chunk_id for x in first], [x.chunk_id for x in second])
+
+    def test_planted_changed_passage_is_a_miss(self):
+        rerank.scores("q?", self.TEXTS)
+        rerank.scores("q?", [self.TEXTS[0], self.TEXTS[1], "gamma dissolution test CHANGED"])
+        self.assertEqual(self.calls[-1], ["gamma dissolution test CHANGED"])  # only the changed passage recomputed
+
+    def test_planted_changed_question_is_a_miss(self):
+        rerank.scores("q?", self.TEXTS)
+        rerank.scores("other question?", self.TEXTS)
+        self.assertEqual(self.calls[-1], self.TEXTS)
+
+    def test_planted_changed_model_name_is_a_miss(self):
+        rerank.scores("q?", self.TEXTS)
+        with mock.patch.object(rerank, "MODEL", "some/other-model"):
+            rerank.scores("q?", self.TEXTS)
+        self.assertEqual(self.calls[-1], self.TEXTS)
+
+    def test_planted_changed_version_is_a_miss(self):
+        rerank.scores("q?", self.TEXTS)
+        with mock.patch.object(rerank, "VERSION", "2"):
+            rerank.scores("q?", self.TEXTS)
+        self.assertEqual(self.calls[-1], self.TEXTS)
+
+    def test_corrupt_cache_entry_is_recomputed(self):
+        rerank.scores("q?", self.TEXTS)
+        next(rerank.CACHE_DIR.iterdir()).write_text("not a number", encoding="ascii")
+        again = rerank.scores("q?", self.TEXTS)
+        self.assertEqual(again, self.fake_predict("q?", self.TEXTS))
 
 
 if __name__ == "__main__":

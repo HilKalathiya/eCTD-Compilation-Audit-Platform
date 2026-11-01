@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-01 — T-032 (hook + rerank cache fix) done
+- `watch.py log`: root cause of the T-031 gap = a lone surrogate (damaged em-dash) in the PowerShell input; the UTF-8 write raised and the bare `except: pass` hid it. Now such characters become `?`, and any other failure writes `LOGERROR <tool> <reason>`. Planted tests: multi-line PowerShell with a broken character, non-ASCII input, broken JSON.
+- `knowledge/rerank.py`: scores cached in `.cache/rerank/` (gitignored), key = sha256(model + VERSION + question + passage text); changed passage, question, model or VERSION = miss. 6 cache tests (no database needed). Retrieval tests also embed each gold question once (lru_cache on `embed.embed_query`, same vectors). Full suite 752 s -> 270 s / 274 s (two runs, FLAGS none). CLAUDE.md: PowerShell/git line.
+
 ## 2026-11-01 — T-031 (C2.2b) done
 - knowledge/rerank.py: sentence-transformers CrossEncoder mixedbread-ai/mxbai-rerank-base-v1 (CPU, float32, max_length 512, batch 16, loaded once per process; pinned sentence-transformers==6.2.0). search(q, mode="rerank") = FTS top 12 + vector top 12 (dedupe, <= 24 passages) -> rerank -> top 5. Cap is 24 not 40 because 40 took 16 s/question; 24 takes ~8-11 s. float16 (the default load) took 178 s/question: never use it.
 - Gold recall@5: fts 0.667, vector 0.867, hybrid 0.800, rerank 0.933. Rerank misses: q22 (Q6A), q29 (M4Q_R1). Planted reversed-reranker test drops below vector. FTS query unchanged (websearch_to_tsquery not tried). Full retrieval test ~9 min.
@@ -31,11 +35,3 @@
 ## 2026-10-30 — T-024 done
 - Outside check: `tests/test_r_crosscheck.py` (9 tests) runs R expirest 0.1.7 via `tests/r/q1e.R`: pooling decision equal for cases a/b/c, shelf life (and per-batch) equal within 0.01 month; single-batch assay (lower) and impurity (upper) too. NIST Norris.dat: slope, intercept, residual SD match to 15 digits.
 - Flaky hunt: full suite 6 runs, 0 failures, no random/time use in tests. R 4.6.1 installed with winget; expirest lives in the per-user folder Documents-independent `~/R/win-library/4.6` (the test sets R_LIBS_USER itself). Missing R makes the test FAIL ("install R"). expirest does not apply our extrapolation cap; all cases are uncapped.
-
-## 2026-10-30 — K5 done
-- `/where`, `/explain`, `/recap` moved to `.claude/skills/<name>/SKILL.md` (text unchanged, disable-model-invocation true); new `/verify` (allowed-tools only `Bash(python tools/watch.py *)`) runs `watch.py status --tests`. `.claude/commands/` removed. 8 tests in `tests/test_skills.py`. Restart Claude Code to see the 4 skills.
-
-## 2026-10-30 — T-023 done
-- `ectd_engine/stats/oot.py`: `check(history, (month, value), level=0.99)` -> OK | OOT (with low/high) | NotEnoughData (< 3 points or all same month); uses the two-sided PREDICTION interval (`interval`). `check_with_policy` returns (result, note).
-- `ectd_engine/stats/loq.py`: `parse` ("<LOQ", "<0.05", "ND" -> Below), `Policy` EXCLUDE (default) / REPORT_ONLY / SUBSTITUTE (needs value + reason, else ValueError), `apply_policy`, `shelf_life_with_policy` -> (ShelfLife or None, note). 22 tests in `tests/test_oot_loq.py`; PI matches statsmodels to 10 digits. q1e.py/tdist.py unchanged. Suite 226 OK.
-

@@ -84,3 +84,11 @@
 ## 2026-10-30 — T-021 done
 - `ectd_engine/stats/tdist.py`: Student t cdf/quantile in Decimal (incomplete beta, bisection; checked vs t-table and scipy). `q1e.py`: `fit`, `Fit.bound(month, side)` (one-sided 95% bound of the mean line), `shelf_life(points, spec_min, spec_max, cap_months)` solved to 0.01 month (half-up), cap = min(2 x longest, longest + 12) with `capped` + reason; `line_shelf_life` is the wrong-way comparator for tests only.
 - Matches statsmodels to 10 digits (slope, intercept, bound); shelf life within 0.01 month. `requirements-dev.txt` pins statsmodels 0.15.0 + scipy 1.13.1 (test-only). Poolability stays C1.11.
+
+## 2026-10-30 — K5 done
+- `/where`, `/explain`, `/recap` moved to `.claude/skills/<name>/SKILL.md` (text unchanged, disable-model-invocation true); new `/verify` (allowed-tools only `Bash(python tools/watch.py *)`) runs `watch.py status --tests`. `.claude/commands/` removed. 8 tests in `tests/test_skills.py`. Restart Claude Code to see the 4 skills.
+
+## 2026-10-30 — T-023 done
+- `ectd_engine/stats/oot.py`: `check(history, (month, value), level=0.99)` -> OK | OOT (with low/high) | NotEnoughData (< 3 points or all same month); uses the two-sided PREDICTION interval (`interval`). `check_with_policy` returns (result, note).
+- `ectd_engine/stats/loq.py`: `parse` ("<LOQ", "<0.05", "ND" -> Below), `Policy` EXCLUDE (default) / REPORT_ONLY / SUBSTITUTE (needs value + reason, else ValueError), `apply_policy`, `shelf_life_with_policy` -> (ShelfLife or None, note). 22 tests in `tests/test_oot_loq.py`; PI matches statsmodels to 10 digits. q1e.py/tdist.py unchanged. Suite 226 OK.
+

@@ -104,3 +104,6 @@ exit code 124 = the usual number meaning "ran out of time"
 cross-encoder = model that reads the question and a passage together and scores the pair
 reranker = step that re-orders search hits with a better, slower model
 float32 = normal-size decimal numbers in a model (float16 is half-size and very slow on CPU)
+lone surrogate = half of a two-part character that UTF-8 cannot write
+cache key = fingerprint of the inputs; if it changes, the saved answer is not reused
+LOGERROR = line in activity.log saying the logging hook itself failed

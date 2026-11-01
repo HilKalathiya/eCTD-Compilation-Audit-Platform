@@ -62,6 +62,7 @@ python -m writer_test.run --model gemma4:e4b --audit 20             # close Exce
 python -m writer_test.mutation_test --tasks 1000 --per-type 300     # planted-error test
 python -m writer_test.compare --run outputs\ollama_gemma4-e4b       # blind rating vs reference\
 ```
+In PowerShell, git may be missing from PATH: use Bash for git.
 Windows notes: Excel locks CSVs (`PermissionError`) — write timestamped files. Ollama model `gemma4:e4b` (thinking off: `--think off`, `--num-predict 600`).
 
 ## Layout (see `handoff/brain/06_file_map.md` for the full map)

@@ -150,6 +150,35 @@ class WatchFlagTests(unittest.TestCase):
         self.assertGreater(len(logged), 2900)  # not cut at ~120 chars
         self.assertNotIn("no logged action", self.status())
 
+    def run_hook(self, raw):
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        subprocess.run([sys.executable, str(WATCH), "log"], input=raw, env=env, timeout=60)
+        p = self.root / ".brain" / "activity.log"
+        return p.read_text(encoding="utf-8").splitlines() if p.exists() else []
+
+    def test_multiline_powershell_with_broken_character_is_logged(self):
+        self.dirty_a()
+        # T-031 bug: a lone surrogate (damaged em-dash, \udc97) made the UTF-8 write fail and the line vanished
+        cmd = 'cd C:\\x\n$l = Get-Content STATE.md\nAdd-Content ectd_engine\\facts\\a.py -Value "## T-031 \udc97 é ⏎"\n'
+        raw = json.dumps({"hook_event_name": "PostToolUse", "tool_name": "PowerShell", "tool_input": {"command": cmd}})
+        logged = self.run_hook(raw.encode("utf-8"))[-1]
+        self.assertIn("PowerShell cd C:\\x", logged)
+        self.assertIn("Add-Content ectd_engine\\facts\\a.py", logged)
+        self.assertNotIn("LOGERROR", logged)
+        self.assertNotIn("no logged action", self.status())
+
+    def test_non_ascii_powershell_is_logged_as_utf8(self):
+        raw = json.dumps({"hook_event_name": "PostToolUse", "tool_name": "PowerShell",
+                          "tool_input": {"command": "Write-Output 'café — 日本'\nGet-Date"}}, ensure_ascii=False)
+        logged = self.run_hook(raw.encode("utf-8"))[-1]
+        self.assertIn("café — 日本' ⏎ Get-Date", logged)
+
+    def test_broken_input_writes_a_logerror_line(self):
+        lines = self.run_hook(b"{this is not json")
+        self.assertEqual(len(lines), 1)
+        self.assertIn(" LOGERROR ", lines[0])
+        self.assertIn("JSONDecodeError", lines[0])
+
     def test_copy_item_destination_is_write_evidence(self):
         self.dirty_a()
         self.log("PowerShell Copy-Item C:\\tmp\\new_a.py -Destination ectd_engine\\facts\\a.py")
