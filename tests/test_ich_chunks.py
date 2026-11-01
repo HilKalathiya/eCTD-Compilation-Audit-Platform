@@ -123,6 +123,51 @@ class IchChunkTests(unittest.TestCase):
         self.assertRegex(text, r"Q3B_R2 \(Step 4 2006-06-02\): \d+ chunks, [1-9]\d* table chunks")
 
 
+class SymbolAndHeaderTests(unittest.TestCase):
+    """One test per entry of the shared SYMBOL_MAP, and running headers / footers leave the chunks."""
+
+    def test_symbol_map_is_exactly_the_codes_found_in_the_pdfs(self):
+        self.assertEqual(sorted(ch.SYMBOL_MAP), ["", "", ""])
+
+    def test_less_or_equal_code_becomes_sign(self):
+        self.assertEqual(ch.fix_symbols("() 1 g"), "(≤) 1 g")
+
+    def test_plus_minus_code_becomes_sign(self):
+        self.assertEqual(ch.fix_symbols("25  2"), "25 ± 2")
+
+    def test_bullet_code_becomes_bullet(self):
+        self.assertEqual(ch.fix_symbols(" Batch"), "• Batch")
+
+    def test_no_private_use_code_is_left_in_any_chunk(self):
+        for doc_id, chunks in ch.chunk_all().items():
+            for c in chunks:
+                self.assertFalse([x for x in c["text"] if 0xE000 <= ord(x) <= 0xF8FF], c["chunk_id"])
+
+    def test_running_headers_are_found_and_absent_from_chunks(self):
+        heads = {"M4Q_R1": "The Common Technical Document - Quality", "Q1A_R2": "Stability Testing of New Drug Substances and Products",
+                 "Q1E": "Evaluation of Stability Data", "Q3B_R2": "Impurities in New Drug Products",
+                 "Q6A": "Specifications: New Chemical Drug Substances and Products"}
+        for doc_id, head in heads.items():
+            with fitz.open(ch.ICH_DIR / ch.DOCS[doc_id]) as doc:
+                running = ch.running_lines(doc)
+            self.assertIn(head, running, doc_id)
+            self.assertIn("<page number>", running, doc_id)
+            for c in ch.chunk_document(doc_id):
+                self.assertFalse(any(line.strip() == head for line in c["text"].split(chr(10))), c["chunk_id"])
+
+    def test_planted_header_on_every_page_is_removed_and_one_off_line_kept(self):
+        doc = fitz.open()
+        for i in range(4):
+            page = doc.new_page()
+            page.insert_text((72, 40), "Running Title of Guideline", fontsize=9)
+            page.insert_text((72, 300), "Body paragraph number %d is long enough to keep." % i, fontsize=11)
+            page.insert_text((300, 800), str(i + 1), fontsize=9)
+        keys = ch.running_lines(doc)
+        self.assertIn("Running Title of Guideline", keys)
+        self.assertNotIn("Body paragraph number 0 is long enough to keep.", keys)
+        self.assertEqual(ch._line_key("Running Title of Guideline 7"), "Running Title of Guideline")
+
+
 class RefusedChunkTests(unittest.TestCase):
     def good(self):
         text = "A sentence."

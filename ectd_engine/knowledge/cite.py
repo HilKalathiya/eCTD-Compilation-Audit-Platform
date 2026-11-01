@@ -10,7 +10,8 @@ import fitz  # PyMuPDF
 from ectd_engine.knowledge import chunk
 
 SOURCES = chunk.ROOT / "data" / "public" / "SOURCES.md"
-# The ONLY changes made to both the page text and the quote before the exact comparison:
+MIN_QUOTE = 40  # characters (after normalising); shorter quotes prove nothing
+# The ONLY changes made to both the page text and the quote before the exact comparison (plus chunk.SYMBOL_MAP):
 LIGATURES = {"ﬁ": "fi", "ﬂ": "fl"}
 QUOTES = {"‘": "'", "’": "'", "“": '"', "”": '"'}
 HYPHEN_BREAK = re.compile(r"(?<=\w)-\s*\n\s*(?=\w)")
@@ -30,8 +31,9 @@ class Citation:
 
 
 def normalise(text):
-    """Hyphen at end of line joined, ligatures and curly quotes replaced, whitespace collapsed. Nothing else."""
-    text = HYPHEN_BREAK.sub("", text)
+    """Symbol-font codes mapped (chunk.SYMBOL_MAP), end-of-line hyphen joined, ligatures and curly quotes replaced,
+    whitespace collapsed. Nothing else."""
+    text = HYPHEN_BREAK.sub("", chunk.fix_symbols(text))
     text = "".join(LIGATURES.get(c, QUOTES.get(c, c)) for c in text)
     return " ".join(text.split())
 
@@ -62,6 +64,8 @@ def verify(doc_id, page, quote, pdf_dir=None):
         raise CitationRejected(f"unknown document {doc_id!r}")
     if not isinstance(quote, str) or not normalise(quote):
         raise CitationRejected("empty quote")
+    if len(normalise(quote)) < MIN_QUOTE:
+        raise CitationRejected(f"quote too short ({len(normalise(quote))} chars, minimum {MIN_QUOTE})")
     path = Path(pdf_dir or chunk.ICH_DIR) / chunk.DOCS[doc_id]
     if not path.is_file():
         raise CitationRejected(f"PDF not found: {path.name}")

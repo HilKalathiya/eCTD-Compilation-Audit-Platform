@@ -88,7 +88,7 @@ class WatchFlagTests(unittest.TestCase):
         self.write("tests/test_a.py", "import unittest\n\n\nclass A(unittest.TestCase):\n" + four)
         self.git("add", "-A")
         self.git("commit", "-q", "-m", "three asserts")
-        self.watch("task", "X", "ectd_engine/**", "tests/**")
+        self.watch("task", "X2", "ectd_engine/**", "tests/**")  # a NEW id: the same id would keep the original start
         self.write("tests/test_a.py", "import unittest\n\n\nclass A(unittest.TestCase):\n"
                    "    def test_one(self):\n        pass\n")
         self.assertIn("assertions net -3", self.status())
@@ -204,6 +204,45 @@ class WatchFlagTests(unittest.TestCase):
                             "--timeout", "1"], env=env, capture_output=True, text=True, timeout=60)
         self.assertEqual(r.returncode, 124)
         self.assertIn("TIMEOUT - raise --timeout", r.stdout)
+
+    def test_variable_path_then_open_write_is_write_evidence(self):
+        self.dirty_a()
+        self.log("Bash python -c \"X='ectd_engine/facts/a.py'; s=open(X).read(); open(X,'w').write(s)\"")
+        self.assertNotIn("no logged action", self.status())
+
+    def test_variable_path_then_write_text_is_write_evidence(self):
+        self.dirty_a()
+        self.log("Bash python -c \"p='ectd_engine/facts/a.py'; p.write_text('x')\"")
+        self.assertNotIn("no logged action", self.status())
+
+    def test_variable_path_only_read_is_not_write_evidence(self):
+        self.dirty_a()
+        self.log("Bash python -c \"X='ectd_engine/facts/a.py'; print(open(X).read()); open(X,'r').close()\"")
+        self.assertIn("no logged action: ectd_engine/facts/a.py", self.status())
+
+    def test_variable_for_another_file_is_not_write_evidence(self):
+        self.dirty_a()
+        self.log("Bash python -c \"X='ectd_engine/facts/a.py'; Y='other.txt'; open(Y,'w').write('x')\"")
+        self.assertIn("no logged action: ectd_engine/facts/a.py", self.status())
+
+    def test_same_task_id_again_keeps_original_start(self):
+        task = self.root / ".brain" / "task.json"
+        before = json.loads(task.read_text(encoding="utf-8"))
+        before["started"] = "2020-01-01T00:00:00"
+        task.write_text(json.dumps(before), encoding="utf-8")
+        self.watch("task", "X", "ectd_engine/**")
+        after = json.loads(task.read_text(encoding="utf-8"))
+        self.assertEqual(after["started"], "2020-01-01T00:00:00")
+        self.assertEqual(after["start_head"], before["start_head"])
+        self.assertEqual(after["allowed"], ["ectd_engine/**"])  # the new allowed list still applies
+
+    def test_different_task_id_gets_a_new_start(self):
+        task = self.root / ".brain" / "task.json"
+        before = json.loads(task.read_text(encoding="utf-8"))
+        before["started"] = "2020-01-01T00:00:00"
+        task.write_text(json.dumps(before), encoding="utf-8")
+        self.watch("task", "Y", "tests/**")
+        self.assertNotEqual(json.loads(task.read_text(encoding="utf-8"))["started"], "2020-01-01T00:00:00")
 
     def test_clean_change_raises_no_flag(self):
         self.append("ectd_engine/facts/a.py", "Z = 2\n")

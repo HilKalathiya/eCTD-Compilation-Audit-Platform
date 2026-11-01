@@ -49,12 +49,33 @@ def _inside(box, outer):
     return outer[0] - 1 <= cx <= outer[2] + 1 and outer[1] - 1 <= cy <= outer[3] + 1
 
 
-SYMBOLS = {"": "≤", "": "≥", "": "±", "": "°", "": "•",
-           "": " ", "": "×", "": "→"}  # Symbol-font characters the PDF stores as private-use codes
+# Symbol-font characters the PDFs store as private-use codes -> the real sign. Only codes found in the 5 PDFs.
+SYMBOL_MAP = {"": "≤",   # <= (Q3B thresholds)
+              "": "±",   # +/- (Q1A storage conditions)
+              "": "•"}   # bullet (list items)
 
 
 def fix_symbols(text):
-    return "".join(SYMBOLS.get(ch, ch) for ch in text)
+    return "".join(SYMBOL_MAP.get(ch, ch) for ch in text)
+
+
+def _line_key(text):
+    """A line with a standalone page number at its start or end removed; a bare number line is the page-number key."""
+    t = " ".join(text.split())
+    if re.fullmatch(r"\d+", t):
+        return "<page number>"
+    return re.sub(r"^\d+\s+|\s+\d+$", "", t)
+
+
+def running_lines(doc):
+    """Line keys that repeat (page number aside) on at least half of the pages = running headers and footers."""
+    counts = {}
+    for page in doc:
+        keys = {_line_key("".join(s["text"] for s in l["spans"]))
+                for b in page.get_text("dict")["blocks"] if b["type"] == 0 for l in b["lines"] if l["spans"]}
+        for k in keys - {""}:
+            counts[k] = counts.get(k, 0) + 1
+    return {k for k, n in counts.items() if n * 2 >= len(doc)}
 
 
 def _clean(cell):
@@ -165,7 +186,7 @@ def _split_long(text):
     return pieces + [cur]
 
 
-def page_blocks(page, table_boxes):
+def page_blocks(page, table_boxes, running=frozenset()):
     """Paragraphs of one page as (y, text, is_heading), skipping header/footer bands and table areas.
     A run of bold lines is a heading of its own; the other lines of the block stay a paragraph."""
     out = []
@@ -176,6 +197,7 @@ def page_blocks(page, table_boxes):
             continue
         lines = [(fix_symbols("".join(s["text"] for s in l["spans"]).strip()), all(s["flags"] & 16 for s in l["spans"]), l["bbox"][1])
                  for l in b["lines"] if l["spans"]]
+        lines = [x for x in lines if _line_key(x[0]) not in running]  # running header / footer lines
         group = []  # consecutive lines of the same kind (bold or not)
         for t, bold, y in [x for x in lines if x[0]] + [("", None, 0)]:
             if group and bold != group[0][1]:
@@ -193,13 +215,14 @@ def chunk_document(doc_id, path=None):
     """All chunks of one guideline, in reading order."""
     doc = fitz.open(path or ICH_DIR / DOCS[doc_id])
     version = doc_version(doc)
+    running = running_lines(doc)
     chunks, path_stack = [], []
     for page_no, page in enumerate(doc, start=1):
         tables = ruled_tables(page)
         if tables or len(page.get_drawings()) < DRAW_MAX:  # many lines but no ruled table = a flow chart, not a table
             tables += borderless_tables(page, [t[0] for t in tables])
         tables.sort(key=lambda t: t[0][1])
-        blocks = page_blocks(page, [t[0] for t in tables])
+        blocks = page_blocks(page, [t[0] for t in tables], running)
         events = [(y, "text", (t, h)) for y, t, h in blocks]
         events += [(bbox[1], "table", (n, rows, title)) for n, (bbox, rows, title) in enumerate(tables, start=1)]
         events.sort(key=lambda e: e[0])

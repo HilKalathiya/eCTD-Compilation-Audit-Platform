@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-01 — T-034 (C2.3 fix) done
+- `chunk.SYMBOL_MAP` (shared by chunk.py and cite.py): U+F0A3 -> ≤, U+F0B1 -> ±, U+F0B7 -> bullet (only codes found in the 5 PDFs; the old map's 5 other entries never occur). `cite.normalise` maps them on page text and quote; "<" is still not "≤". `cite.MIN_QUOTE` = 40 chars. Running header/footer lines (same text, page number aside, on >= 50% of pages) are dropped from chunks (`chunk.running_lines`).
+- Gold citations: 30 of 30 verify, MIN_VERIFIED = 28. Rerank recall 0.933 (hybrid 0.867, vector 0.900, fts 0.700). Misses: q22, q29.
+- `watch.py`: write evidence for `X='path'` then open(X,'w')/X.write_text; same task id again keeps the original start. Known gap (needs a card): `load.store` never deletes chunks that no longer exist, so after a chunker change stale rows stay (I removed 20 once by script).
+
 ## 2026-11-01 — T-033 (C2.3) done
 - `knowledge/cite.py`: `verify(doc_id, page, quote, pdf_dir=None)` -> `Citation(doc_id, version, page, quote, pdf_sha256)` or `CitationRejected(reason)`. Re-reads the page from the PDF with PyMuPDF (never kb_chunks); PDF sha256 must equal SOURCES.md; only whitespace collapse, end-of-line hyphen join, fi/fl ligatures, curly quotes are normalised. 15 tests in `tests/test_citations.py` (planted word, digit, wrong page, altered PDF bytes, wrong sha in SOURCES, empty quote all refused).
 - Gold: first 200 chars of rerank top-1 verified for 26 of 30. Rejected: q02 (footnote marker order), q03/q04 (chunker turned Symbol-font U+F0B1 into a real +-), q29 (running header kept, page number inside it in the PDF). Real <= / +- signs are always refused (PDF stores U+F0A3/F0B1): pinned by a test; needs a card to decide.

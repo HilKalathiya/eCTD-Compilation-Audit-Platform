@@ -115,6 +115,10 @@ def cmd_task(args):
         return 0
     head = (git("rev-parse", "HEAD", check=True) or "").strip() or None
     data = {"id": args[0], "allowed": args[1:], "start_head": head, "started": time.strftime("%Y-%m-%dT%H:%M:%S")}
+    old = load_task()
+    if old and old.get("id") == args[0]:  # same task id again: keep the ORIGINAL start (head and time)
+        data["start_head"], data["started"] = old.get("start_head"), old.get("started")
+        head = data["start_head"]
     TASK.write_text(json.dumps(data, indent=1), encoding="utf-8")
     out(f"task {args[0]} started; allowed={args[1:] or 'ANY'}; base={head[:8] if head else 'no commits'}")
     return 0
@@ -231,7 +235,17 @@ def command_writes(cmd, path):
         r"\bgit\s+checkout\b[^;|&]*?\s--\s[^;|&]*?" + P,                 # git checkout -- path
         r"\bgit\s+apply\b.*" + P,                                        # git apply (the patch names the path)
     ]
-    return any(re.search(pt, cmd) for pt in pats)
+    if any(re.search(pt, cmd) for pt in pats):
+        return True
+    # a variable holds the path:  X='path' ... open(X,'w') / X.write_text(...) / Path(X).write_text(...)
+    for m in re.finditer(r"(\$?\w+)\s*=\s*(?:path\(\s*)?" + P, cmd):
+        v = re.escape(m.group(1))
+        use = [r"\bopen\(\s*" + v + r"\b[^)]*['\"][wax][bt+]*['\"]",
+               r"(?<![\w.])" + v + r"\s*\.write_(?:text|bytes)",
+               r"\bpath\(\s*" + v + r"\s*\)\s*\.write_(?:text|bytes)"]
+        if any(re.search(pt, cmd[m.end():]) for pt in use):
+            return True
+    return False
 
 
 def command_deletes(cmd, path):

@@ -11,7 +11,8 @@ from tests.test_migrate import require_database
 from tests.test_retrieval import GOLD, require_ollama
 
 ROW = "1 mg - 10 mg 0.5% or 20 µg TDI, whichever is lower"  # Q3B(R2) page 11, identification table
-MIN_VERIFIED = 26  # of 30; the 4 known rejections are explained in test_gold_top1_first_200_chars_verify
+QUOTE_LE = "Reporting Thresholds Maximum Daily Dose1 Threshold2,3 ≤ 1 g 0.1% > 1 g 0.05%"  # Q3B(R2) page 11
+MIN_VERIFIED = 28  # of 30
 
 
 def flat(c):
@@ -74,12 +75,18 @@ class VerifyTests(unittest.TestCase):
             with mock.patch.object(cite, "SOURCES", bad), self.assertRaisesRegex(cite.CitationRejected, "sha256"):
                 cite.verify("Q3B_R2", 11, ROW)
 
+    def test_planted_short_quote_is_rejected(self):
+        with self.assertRaisesRegex(cite.CitationRejected, "too short"):
+            cite.verify("Q3B_R2", 11, "the")
+
     def test_normalisation_is_only_the_four_allowed_changes(self):
         n = cite.normalise
         self.assertEqual(n("a  b\n\tc"), "a b c")                      # whitespace collapse
         self.assertEqual(n("sta-\nbility"), "stability")                 # end-of-line hyphen join
         self.assertEqual(n("ﬁnal ﬂow"), "final flow")          # fi / fl ligatures
         self.assertEqual(n("“the” ‘x’"), "\"the\" 'x'")  # curly quotes
+        self.assertEqual(n("()  "), "(≤) ± •")  # Symbol-font codes (chunk.SYMBOL_MAP)
+        self.assertNotEqual(n("<"), n("≤"))                        # a look-alike sign is never accepted
         self.assertNotEqual(n("20 mg"), n("21 mg"))                      # digits are never touched
         self.assertNotEqual(n("lower"), n("Lower"))                      # case is never touched
         self.assertNotEqual(n("a - b"), n("a b"))                        # a hyphen inside a line stays
@@ -91,7 +98,7 @@ class VerifyTests(unittest.TestCase):
             self.assertEqual(cite.verify("Q3B_R2", 11, flat(tables[tid])).page, 11, tid)
         t1 = flat(tables["p11-t1"])
         self.assertEqual(cite.verify("Q3B_R2", 11, t1.split("≤")[0]).page, 11)  # heading and column titles
-        self.assertEqual(cite.verify("Q3B_R2", 11, "> 1 g 0.05%").page, 11)
+        self.assertEqual(cite.verify("Q3B_R2", 11, "Threshold2,3 ≤ 1 g 0.1% > 1 g 0.05% Identification").page, 11)
 
     def test_planted_changed_table_number_is_rejected(self):
         t2 = flat([c for c in chunk.chunk_document("Q3B_R2") if c["chunk_id"] == "Q3B_R2:p11-t2"][0])
@@ -99,11 +106,12 @@ class VerifyTests(unittest.TestCase):
         with self.assertRaises(cite.CitationRejected):
             cite.verify("Q3B_R2", 11, t2.replace("0.2%", "0.3%"))
 
-    def test_known_limit_symbol_font_characters_are_rejected(self):
-        # The PDF stores the 'less than or equal' sign as private-use code U+F0A3, so the real sign is NOT on the page.
-        # We do not widen the normalisation for it: such a quote is refused (a card must decide how to handle it).
-        with self.assertRaises(cite.CitationRejected):
-            cite.verify("Q3B_R2", 11, "≤ 1 g 0.1%")
+    def test_q3b_quote_with_less_or_equal_sign_verifies(self):
+        self.assertEqual(cite.verify("Q3B_R2", 11, QUOTE_LE).page, 11)
+
+    def test_planted_same_quote_with_less_than_sign_is_rejected(self):
+        with self.assertRaisesRegex(cite.CitationRejected, "not found"):
+            cite.verify("Q3B_R2", 11, QUOTE_LE.replace("≤", "<"))
 
 
 class GoldCitationTests(unittest.TestCase):
@@ -125,9 +133,8 @@ class GoldCitationTests(unittest.TestCase):
     def test_gold_top1_first_200_chars_verify(self):
         """First 200 chars of each rerank top-1 hit (table chunks: cells joined by spaces) are checked against the PDF.
 
-        Known rejections (chunk text is not a verbatim stretch of the PDF page, so a correct refusal):
-        a running page header kept in the chunk while the PDF puts the page number inside it (q29), a Symbol-font sign the
-        chunker had turned into a real sign (q03, q04), and a footnote marker that sits elsewhere on the page (q02).
+        Every rejection is printed with its reason. A rejection is correct when the chunk text is not a verbatim stretch
+        of the PDF page (for example a footnote marker that sits elsewhere on the page).
         """
         verified, rejected = [], {}
         for q in GOLD:
