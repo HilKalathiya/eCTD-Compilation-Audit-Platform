@@ -2,8 +2,8 @@
 
 Commands (run from the project root, plain Python 3.8+, standard library only):
   python tools/watch.py status            compact dashboard (<= ~45 lines): task, git, activity, FLAGS
-  python tools/watch.py status --tests    same, plus runs the unit tests in tests/
-  python tools/watch.py run "<command>"   run a command (e.g. an ACCEPT line), print EXIT code + last 20 lines
+  python tools/watch.py status --tests    same, plus runs the unit tests in tests/ (--timeout N seconds, default 900)
+  python tools/watch.py run "<command>"   run a command (e.g. an ACCEPT line), print EXIT code + last 20 lines (--timeout N)
   python tools/watch.py task T-002 "ectd_engine/facts/**" "tests/**"   start a task: id + allowed paths
   python tools/watch.py task clear        clear the current task
   python tools/watch.py log               hook entry point (reads Claude Code hook JSON on stdin)
@@ -104,19 +104,42 @@ def load_task():
 
 
 # ---------------------------------------------------------------- run
+DEFAULT_TIMEOUT = 900
+
+
+def split_timeout(args):
+    """Pull '--timeout N' out of args -> (remaining args, seconds)."""
+    rest, secs, i = [], DEFAULT_TIMEOUT, 0
+    while i < len(args):
+        if args[i] == "--timeout" and i + 1 < len(args) and args[i + 1].isdigit():
+            secs, i = int(args[i + 1]), i + 2
+        else:
+            rest.append(args[i])
+            i += 1
+    return rest, secs
+
+
 def cmd_run(args):
+    args, timeout = split_timeout(args)
     if not args:
-        out("usage: watch.py run \"<command>\"")
+        out("usage: watch.py run \"<command>\" [--timeout N]")
         return 2
     t0 = time.time()
+    p = subprocess.Popen(args[0], shell=True, cwd=str(ROOT), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                         text=True, encoding="utf-8", errors="replace")
     try:
-        r = subprocess.run(args[0], shell=True, cwd=str(ROOT), capture_output=True, text=True,
-                           encoding="utf-8", errors="replace", timeout=300)
-        text = (r.stdout or "") + (r.stderr or "")
-        code = r.returncode
+        text, _ = p.communicate(timeout=timeout)
+        code = p.returncode
     except subprocess.TimeoutExpired:
-        text, code = "TIMEOUT after 300 s", 124
-    tail = text.strip().splitlines()[-20:]
+        # kill the whole process tree: with shell=True the child python would otherwise keep the pipe open
+        if os.name == "nt":
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(p.pid)], capture_output=True)
+        else:
+            p.kill()
+        p.communicate()
+        out(f"TIMEOUT - raise --timeout  (limit {timeout} s)  $ {args[0][:100]}")
+        return 0
+    tail = (text or "").strip().splitlines()[-20:]
     out(f"EXIT {code}  ({time.time() - t0:.1f}s)  $ {args[0][:100]}")
     for ln in tail:
         out("  " + ln[:160])
@@ -255,6 +278,14 @@ def flags(task, changed):
     src = [p for p in paths if p.startswith("ectd_engine/") and p.endswith(".py") and not is_test(p)]
     if src and not any(is_test(p) for p in paths):
         fl.append("engine code changed but NO test file changed")
+    # 6 changed by a hand the log never saw (e.g. a subagent); only when the log exists
+    if ACTIVITY.exists():
+        since = (task or {}).get("started") or ""
+        seen = "\n".join(l for l in ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines()
+                         if l[:19] >= since).replace("\\", "/").lower()
+        for p in paths:
+            if p.lower() not in seen:
+                fl.append(f"changed with no logged action: {p}")
     for p in paths:
         try:
             if (ROOT / p).is_file() and (ROOT / p).stat().st_size > 1_000_000 and not p.startswith(tuple(FROZEN)):
@@ -396,8 +427,9 @@ def cmd_status(args):
     for f in fl[:12]:
         out("  ! " + f)
     if "--tests" in args:
+        timeout_args = ["--timeout", str(split_timeout(args)[1])]
         if (ROOT / "tests").is_dir():
-            cmd_run(["python -m unittest discover tests"])
+            cmd_run([f'"{sys.executable}" -m unittest discover tests', *timeout_args])
         else:
             out("TESTS: no tests/ folder yet")
     st = ROOT / "STATE.md"

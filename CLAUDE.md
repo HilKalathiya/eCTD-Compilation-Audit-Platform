@@ -8,7 +8,7 @@ Engine rules: .claude/rules/engine.md (load for ectd_engine/**)
 Independence rule: every new check ships with a planted-error test showing it can FAIL. Never loosen or remove a check to make a run pass; that needs a TASK CARD.
 
 ## How to work
-0. FIRST ACTION of every task: run the `python tools/watch.py task ...` line from the card (it records the allowed paths). Hooks log your tool calls to `.brain/activity.log` automatically; the brain reads that log and `python tools/watch.py status` to check your work. Never edit `.brain/`, `tools/watch.py` or `.claude/`.
+0. FIRST ACTION of every task: run the `python tools/watch.py task ...` line from the card (it records the allowed paths). Hooks log your tool calls to `.brain/activity.log` automatically; the brain reads that log and `python tools/watch.py status` to check your work. Never edit `.brain/`, `tools/watch.py` or `.claude/`. Do not use subagents to write code or tests unless the card says so.
 1. Read the TASK CARD. Read ONLY the files in READ ONLY (plus `STATE.md`). Do not explore the repo.
 2. Big files: never `cat`/read in full (`Laboratory.csv`, `handoff/archive/explainer_full.md`, PDFs, `*.pth`). Use `head`, `grep -n`, or `python tools/section.py explainer <n>` (prints one section).
 3. Plan briefly, implement, run the ACCEPT commands. Fix until they pass, or stop and report the blocker. At most 1 clarifying question; otherwise pick the simplest option and say so.

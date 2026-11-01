@@ -97,3 +97,5 @@ BM25 = word search that ranks passages by how rare and frequent the query words 
 embedding = a list of numbers that captures the meaning of a text
 RRF (reciprocal rank fusion) = mix several ranked lists by adding 1/(60+rank) points per hit
 recall@5 = share of questions where a right passage is among the top 5 hits
+timeout = the longest we wait before giving up
+process tree = a program plus every program it started

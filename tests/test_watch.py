@@ -101,6 +101,32 @@ class WatchFlagTests(unittest.TestCase):
         (self.root / "ectd_engine" / "big.bin").write_bytes(b"x" * 1_100_000)
         self.assertIn("large file (>1 MB)", self.status())
 
+    def log(self, text):
+        import time
+        (self.root / ".brain").mkdir(exist_ok=True)
+        with open(self.root / ".brain" / "activity.log", "a", encoding="utf-8") as f:
+            f.write(time.strftime("%Y-%m-%dT%H:%M:%S ") + text + "\n")
+
+    def test_unlogged_writer_flagged(self):
+        self.append("ectd_engine/facts/a.py", "Z = 2\n")
+        self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")
+        self.log("Edit tests/test_a.py")  # the log exists, but never mentions a.py
+        self.assertIn("changed with no logged action: ectd_engine/facts/a.py", self.status())
+
+    def test_logged_writer_not_flagged(self):
+        self.append("ectd_engine/facts/a.py", "Z = 2\n")
+        self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")
+        self.log("Edit ectd_engine/facts/a.py")
+        self.log("Bash echo more >> tests/test_a.py")  # a path inside a Bash command counts too
+        self.assertNotIn("no logged action", self.status())
+
+    def test_tests_timeout_is_not_ok(self):
+        self.write("tests/test_slow.py", "import time, unittest\n\n\nclass S(unittest.TestCase):\n"
+                   "    def test_slow(self):\n        time.sleep(8)\n")
+        out = self.watch("status", "--tests", "--timeout", "1")
+        self.assertIn("TIMEOUT - raise --timeout", out)
+        self.assertNotIn("EXIT 0", out)
+
     def test_clean_change_raises_no_flag(self):
         self.append("ectd_engine/facts/a.py", "Z = 2\n")
         self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")
