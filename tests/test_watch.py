@@ -356,5 +356,134 @@ class GitRetryTests(unittest.TestCase):
             self.assertEqual(out, "t base")
 
 
+class GitFailureTests(unittest.TestCase):
+    """T-036: if git fails, the watcher must say so (exit 2) - never print 'FLAGS: none' on a failed look."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.root = Path(self._tmp.name)
+        (self.root / "f.txt").write_text("x", encoding="utf-8")
+        build_repo(self.root)
+
+    def load(self):
+        """Load a fresh copy of tools/watch.py that looks at self.root, with no waiting between git tries."""
+        import importlib.util
+        os.environ["CLAUDE_PROJECT_DIR"] = str(self.root)
+        self.addCleanup(os.environ.pop, "CLAUDE_PROJECT_DIR", None)
+        spec = importlib.util.spec_from_file_location("watch_under_test", WATCH)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.GIT_PAUSE = 0
+        return mod
+
+    def status_with(self, fake, *args):
+        """Run watch.status in-process with subprocess.run replaced by `fake`; return (exit code, printed text)."""
+        import contextlib
+        import io
+        mod = self.load()
+        real = subprocess.run
+        buf = io.StringIO()
+        mod.subprocess = type("S", (), {"run": staticmethod(lambda cmd, **kw: fake(real, cmd, **kw)),
+                                         "SubprocessError": subprocess.SubprocessError,
+                                         "TimeoutExpired": subprocess.TimeoutExpired,
+                                         "Popen": subprocess.Popen, "PIPE": subprocess.PIPE,
+                                         "STDOUT": subprocess.STDOUT})
+        with contextlib.redirect_stdout(buf):
+            code = mod.cmd_status(list(args))
+        return code, buf.getvalue()
+
+    @staticmethod
+    def bad(cmd):
+        return subprocess.CompletedProcess(cmd, 128, "", "fatal: planted failure")
+
+    def test_always_failing_git_is_an_error_not_green(self):
+        code, text = self.status_with(lambda real, cmd, **kw: self.bad(cmd))
+        self.assertEqual(code, 2)
+        self.assertIn("GIT ERROR: git ", text)
+        self.assertIn("planted failure", text)
+        self.assertIn("git failed - result unknown", text)
+        self.assertNotIn("FLAGS: none", text)
+        self.assertNotIn("CHANGED since", text)
+
+    def test_git_that_cannot_start_is_an_error_not_green(self):
+        def fake(real, cmd, **kw):
+            raise PermissionError("[WinError 5] Access is denied")
+        code, text = self.status_with(fake)
+        self.assertEqual(code, 2)
+        self.assertIn("GIT ERROR", text)
+        self.assertNotIn("FLAGS: none", text)
+
+    def test_only_the_diff_call_failing_is_still_an_error(self):
+        # the old code turned exactly this into '0 file(s)' and 'FLAGS: none'
+        (self.root / "f.txt").write_text("changed", encoding="utf-8")
+        calls = []
+
+        def fake(real, cmd, **kw):
+            calls.append(cmd)
+            return self.bad(cmd) if "diff" in cmd else real(cmd, **kw)
+        code, text = self.status_with(fake)
+        self.assertEqual(code, 2)
+        self.assertIn("GIT ERROR: git diff", text)
+        self.assertNotIn("FLAGS: none", text)
+        self.assertGreaterEqual(sum("diff" in c for c in calls), 3)  # it tried 3 times
+
+    def test_one_failure_then_success_gives_the_normal_result(self):
+        (self.root / "f.txt").write_text("changed", encoding="utf-8")
+        state = {"n": 0}
+
+        def fake(real, cmd, **kw):
+            state["n"] += 1
+            return self.bad(cmd) if state["n"] == 1 else real(cmd, **kw)
+        code, text = self.status_with(fake)
+        self.assertEqual(code, 0)
+        self.assertNotIn("GIT ERROR", text)
+        self.assertIn("1 file(s)", text)
+        self.assertIn("M f.txt", text)
+
+    def test_real_repo_clean_is_unchanged_behaviour(self):
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        r = run_retry([sys.executable, str(WATCH), "status"], env=env, capture_output=True, text=True, timeout=60)
+        self.assertEqual(r.returncode, 0)
+        self.assertIn("CHANGED since HEAD: 0 file(s)", r.stdout)
+        self.assertIn("FLAGS: none", r.stdout)
+        self.assertNotIn("GIT ERROR", r.stdout)
+
+    def test_repo_with_no_commits_is_not_an_error(self):
+        empty = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, empty, True)
+        git_retry(empty, "init", "-q")
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(empty))
+        r = run_retry([sys.executable, str(WATCH), "status"], env=env, capture_output=True, text=True, timeout=60)
+        self.assertEqual(r.returncode, 0)
+        self.assertIn("no commits yet", r.stdout)
+        self.assertNotIn("GIT ERROR", r.stdout)
+
+    def test_folder_that_is_not_a_repo_is_not_an_error(self):
+        plain = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, plain, True)
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(plain), GIT_CEILING_DIRECTORIES=str(plain.parent))
+        r = run_retry([sys.executable, str(WATCH), "status"], env=env, capture_output=True, text=True, timeout=60)
+        self.assertEqual(r.returncode, 0)
+        self.assertIn("no repository yet", r.stdout)
+
+    def test_task_command_reports_git_error(self):
+        mod = self.load()
+        import contextlib
+        import io
+        mod.subprocess = type("S", (), {"run": staticmethod(lambda cmd, **kw: self.bad(cmd)),
+                                         "SubprocessError": subprocess.SubprocessError})
+        buf = io.StringIO()
+        old_argv = sys.argv
+        sys.argv = ["watch.py", "task", "T-x"]
+        try:
+            with contextlib.redirect_stdout(buf):
+                code = mod.main()
+        finally:
+            sys.argv = old_argv
+        self.assertEqual(code, 2)
+        self.assertIn("GIT ERROR", buf.getvalue())
+
+
 if __name__ == "__main__":
     unittest.main()

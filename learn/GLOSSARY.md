@@ -118,3 +118,6 @@ running header = the title or page number repeated at the top or bottom of many 
 retry = try the same step again after a short wait
 transaction = a group of database steps that all happen or none do
 stale row = a stored row whose source no longer exists
+GitError = our own error type meaning "git kept failing, so the answer is unknown"
+exit code = the number a program returns when it ends (0 = fine, 2 = error)
+false green = a check that says "all fine" when it really could not look.

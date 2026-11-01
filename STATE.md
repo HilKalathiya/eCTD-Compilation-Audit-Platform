@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-02 — T-036 (fix) done (watcher: no false green when git fails)
+- `tools/watch.py git()`: a failed call (non-zero exit or OSError) is retried 3 times, then raises `GitError`. `status` prints `GIT ERROR: <command> -> <message>`, `FLAGS: 1`, `! git failed - result unknown`, exit 2; `task` prints GIT ERROR, exit 2. "No commits yet" and "not a repo" are still normal answers (matched on git's message, run with LC_ALL=C).
+- `tests/test_watch.py`: new `GitFailureTests` (8 tests): always-failing git, git cannot start, only `diff` failing, one failure then success, clean real repo, no-commits repo, non-repo folder, `task`.
+
 ## 2026-11-02 — T-035 (fix) done
 - `tests/test_watch.py`: temp git repos are built by `build_repo`/`git_retry` (3 tries, local author, base commit checked; also retries WinError 5). `status()` asks again if the watcher says 0 changed files while git shows changes. 5 helper tests added.
 - `load.store()`: one transaction; upserts a document's chunks and deletes that document's rows not in the new set; other documents untouched; rollback on error. 4 new tests in `test_ich_chunks.py`.

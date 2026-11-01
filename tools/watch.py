@@ -38,19 +38,44 @@ def out(text=""):
     sys.stdout.write(str(text).encode("ascii", "replace").decode("ascii") + "\n")
 
 
-def git(*args, check=False):
-    try:
-        r = subprocess.run(["git", "-c", "safe.directory=*", "-C", str(ROOT), *args],
-                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
-    except (OSError, subprocess.SubprocessError):
-        return None
-    if r.returncode != 0:
-        return None if check else r.stdout
-    return r.stdout
+class GitError(Exception):
+    """A git call kept failing: the answer is unknown, so nobody may report 'nothing changed'."""
+
+
+GIT_TRIES = 3
+GIT_PAUSE = 0.3
+NOT_A_REPO = r"not a git repository"
+NO_COMMITS = r"unknown revision|ambiguous argument|Needed a single revision"
+
+
+def git(*args, expect=None):
+    """Run one git command and return its text. A failure is retried (3 tries), then GitError is raised.
+    `expect` = regex for a failure that is a normal answer (e.g. 'no commits yet'): then None comes back at once."""
+    cmd = "git " + " ".join(args)
+    msg = "unknown"
+    for attempt in range(GIT_TRIES):
+        try:
+            r = subprocess.run(["git", "-c", "safe.directory=*", "-C", str(ROOT), *args],
+                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60,
+                               env=dict(os.environ, LC_ALL="C", LANG="C"))
+            if r.returncode == 0:
+                return r.stdout
+            msg = f"exit {r.returncode}: {(r.stderr or '').strip()[:200]}"
+            if expect and re.search(expect, r.stderr or "", re.I):
+                return None
+        except (OSError, subprocess.SubprocessError) as e:
+            msg = f"{type(e).__name__}: {e}"[:200]
+        if attempt < GIT_TRIES - 1:
+            time.sleep(GIT_PAUSE)
+    raise GitError(f"{cmd} -> {msg}")
 
 
 def is_repo():
-    return git("rev-parse", "--is-inside-work-tree", check=True) is not None
+    return git("rev-parse", "--is-inside-work-tree", expect=NOT_A_REPO) is not None
+
+
+def has_commits():
+    return git("rev-parse", "HEAD", expect=NO_COMMITS + "|" + NOT_A_REPO) is not None
 
 
 # ---------------------------------------------------------------- log (hook)
@@ -113,7 +138,7 @@ def cmd_task(args):
             TASK.unlink()
         out("task cleared")
         return 0
-    head = (git("rev-parse", "HEAD", check=True) or "").strip() or None
+    head = (git("rev-parse", "HEAD", expect=NO_COMMITS + "|" + NOT_A_REPO) or "").strip() or None
     data = {"id": args[0], "allowed": args[1:], "start_head": head, "started": time.strftime("%Y-%m-%dT%H:%M:%S")}
     old = load_task()
     if old and old.get("id") == args[0]:  # same task id again: keep the ORIGINAL start (head and time)
@@ -279,7 +304,7 @@ def matches(path, pattern):
 def changed_files(base):
     """(status, path) for tracked changes since base (or HEAD) plus untracked files."""
     res = {}
-    diff = git("diff", "--name-status", base or "HEAD") if (base or git("rev-parse", "HEAD", check=True)) else ""
+    diff = git("diff", "--name-status", base or "HEAD") if (base or has_commits()) else ""
     for ln in (diff or "").splitlines():
         parts = ln.split("\t")
         if len(parts) >= 2:
@@ -480,6 +505,17 @@ def cmd_live():
 
 # ---------------------------------------------------------------- status
 def cmd_status(args):
+    """Dashboard; if git keeps failing, say so (exit 2) instead of showing a false 'nothing changed'."""
+    try:
+        return _status(args)
+    except GitError as e:
+        out(f"GIT ERROR: {e}")
+        out("FLAGS: 1")
+        out("  ! git failed - result unknown")
+        return 2
+
+
+def _status(args):
     rc = 0
     task = load_task()
     out(f"== BRAIN STATUS {time.strftime('%Y-%m-%d %H:%M')} ==")
@@ -490,11 +526,11 @@ def cmd_status(args):
     if not is_repo():
         out("GIT: no repository yet (T-001 not done)")
         changed = {}
-    elif git("rev-parse", "HEAD", check=True) is None:
+    elif not has_commits():
         out("GIT: repository has no commits yet (flags suspended until the first commit)")
         changed = {}
     else:
-        branch = (git("rev-parse", "--abbrev-ref", "HEAD", check=True) or "?").strip()
+        branch = (git("rev-parse", "--abbrev-ref", "HEAD") or "?").strip()
         log = (git("log", "--oneline", "-5") or "").strip().splitlines()
         since = ""
         if task and task.get("start_head"):
@@ -543,7 +579,11 @@ def main():
     if cmd == "log":
         return cmd_log()
     if cmd == "task":
-        return cmd_task(rest)
+        try:
+            return cmd_task(rest)
+        except GitError as e:
+            out(f"GIT ERROR: {e}")
+            return 2
     if cmd == "run":
         return cmd_run(rest)
     if cmd == "status":
