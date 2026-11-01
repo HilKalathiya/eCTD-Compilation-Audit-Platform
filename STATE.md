@@ -1,11 +1,14 @@
 # STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-01 — T-030 (C0.3 fix) done
+- `watch.py`: activity log keeps whole commands (cap 4000 chars, newline -> " ⏎ "); display cuts only when printing. "changed with no logged action" now needs real write evidence (Write/Edit target, or `>`/`tee`/Set-Content/open('w')/write_text/cp-mv-Copy-Item destination/git checkout --/git apply naming the file; deletes also count `rm`/`del`). `cat`/`grep` no longer count. Timeout exits 124. 6 new tests in `tests/test_watch.py`.
+
 ## 2026-11-01 — T-029 (C0.3 fix) done
 - `watch.py`: test timeout default 900 s, `--timeout N` (works on `status --tests` and `run`); on timeout the whole process tree is killed and it prints `TIMEOUT - raise --timeout` (never EXIT 0). New FLAG `changed with no logged action: <file>` (file changed since task start, path absent from `.brain/activity.log`; only checked when the log exists). Log hook matcher now also covers PowerShell and NotebookEdit. CLAUDE.md: no subagents for code/tests unless the card says so. 3 new planted tests in `tests/test_watch.py`.
 
 ## 2026-11-01 — T-028 (C2.2a) done
 - Migration 007: `kb_chunks.fts` (english tsvector, GIN) + `embedding vector(768)` (HNSW cosine) + `embedding_sha256` (cache key; a chunk is re-embedded only if its text hash changed). `knowledge/embed.py` (Ollama `embeddinggemma`, `python -m ectd_engine.knowledge.embed`), `knowledge/search.py`: `search(q, k=5, conn=None, mode)` -> `Quote(chunk_id, doc_id, page, table_id, text, score)`; RRF k=60 over FTS top 20 (any question word, ts_rank_cd) + vector top 20. Quote has no value field.
-- Gold (30 Qs, `tests/gold/retrieval_gold.json`, sha c04bf734..): recall@5 hybrid 0.800, FTS-only 0.667, vector-only 0.867. Misses (hybrid): q02 q05 q18 q22 q23 q29. Hybrid is on the pass line, below vector-only; reranker is T-029. 5 live tests in `tests/test_retrieval.py` incl. planted `kb=` locator refused by the gate. First embed of 505 chunks takes ~3 min.
+- Gold (30 Qs, `tests/gold/retrieval_gold.json`, sha c04bf734..): recall@5 hybrid 0.800, FTS-only 0.667, vector-only 0.867. Misses (hybrid): q02 q05 q18 q22 q23 q29. Hybrid is on the pass line, below vector-only; reranker is T-031. 5 live tests in `tests/test_retrieval.py` incl. planted `kb=` locator refused by the gate. First embed of 505 chunks takes ~3 min.
 
 ## 2026-10-31 — K6 done
 - Engine rules (Decimal only, no `float()`/`round()`, values via fact-store API) moved from CLAUDE.md to `.claude/rules/engine.md` (`paths: ectd_engine/**`). CLAUDE.md now has one pointer line. 5 tests in `tests/test_rules.py`.

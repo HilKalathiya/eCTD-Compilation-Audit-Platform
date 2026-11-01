@@ -99,3 +99,5 @@ RRF (reciprocal rank fusion) = mix several ranked lists by adding 1/(60+rank) po
 recall@5 = share of questions where a right passage is among the top 5 hits
 timeout = the longest we wait before giving up
 process tree = a program plus every program it started
+write evidence = a logged step that really wrote a given file (not just read it)
+exit code 124 = the usual number meaning "ran out of time"

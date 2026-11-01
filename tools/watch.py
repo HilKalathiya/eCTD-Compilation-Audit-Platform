@@ -54,28 +54,40 @@ def is_repo():
 
 
 # ---------------------------------------------------------------- log (hook)
+LOG_CAP = 4000  # the log keeps whole commands; only printing cuts them short
+
+
 def cmd_log():
     try:
-        d = json.loads(sys.stdin.read() or "{}")
+        # read raw bytes: Windows decodes text stdin as cp1252, which chokes on characters like the arrow below
+        d = json.loads(sys.stdin.buffer.read().decode("utf-8", "replace") or "{}")
         ev = d.get("hook_event_name", "?")
         if ev == "Stop":
             line = "STOP (turn finished)"
         else:
             tool = d.get("tool_name", "?")
             ti = d.get("tool_input") or {}
-            target = ti.get("file_path") or ti.get("command") or ti.get("pattern") or ti.get("path") or ""
-            target = re.sub(r"\s+", " ", str(target)).strip()
-            try:
-                target = os.path.relpath(target, ROOT).replace("\\", "/") if os.path.isabs(target) else target
-            except ValueError:
-                pass
-            line = f"{tool} {target[:110]}"
+            file_target = ti.get("file_path") or ti.get("notebook_path")
+            target = str(file_target or ti.get("command") or ti.get("pattern") or ti.get("path") or "")
+            target = re.sub(r"\s*\n\s*", " ⏎ ", target.replace("\r", "").strip())  # newline -> " ⏎ "
+            target = re.sub(r"[ \t]+", " ", target)
+            if file_target and os.path.isabs(target):
+                try:
+                    target = os.path.relpath(target, ROOT).replace("\\", "/")
+                except ValueError:
+                    pass
+            line = f"{tool} {target[:LOG_CAP]}"
         BRAIN.mkdir(exist_ok=True)
         with open(ACTIVITY, "a", encoding="utf-8") as f:
             f.write(time.strftime("%Y-%m-%dT%H:%M:%S ") + line + "\n")
-        if ACTIVITY.stat().st_size > 300_000:
-            lines = ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines()[-1000:]
-            ACTIVITY.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        if ACTIVITY.stat().st_size > 2_000_000:
+            kept, size = [], 0  # keep the newest ~800 KB of lines
+            for ln in reversed(ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines()):
+                size += len(ln) + 1
+                if size > 800_000:
+                    break
+                kept.append(ln)
+            ACTIVITY.write_text("\n".join(reversed(kept)) + "\n", encoding="utf-8")
     except Exception:
         pass  # a logging hook must never disturb the work
     return 0
@@ -138,7 +150,7 @@ def cmd_run(args):
             p.kill()
         p.communicate()
         out(f"TIMEOUT - raise --timeout  (limit {timeout} s)  $ {args[0][:100]}")
-        return 0
+        return 124
     tail = (text or "").strip().splitlines()[-20:]
     out(f"EXIT {code}  ({time.time() - t0:.1f}s)  $ {args[0][:100]}")
     for ln in tail:
@@ -174,6 +186,53 @@ def cmd_guard():
     sys.stderr.write(f"BLOCKED by watch guard: {rel} is a FROZEN path and {why}. "
                      "Ask the brain for a TASK CARD that lists this path.\n")
     return 2
+
+
+# ---------------------------------------------------------------- write evidence
+WRITE_TOOLS = ("Write", "Edit", "MultiEdit", "NotebookEdit")
+SHELL_TOOLS = ("Bash", "PowerShell")
+# a path token: starts at a word boundary (optional quote + directory prefix), ends at a path boundary
+PATH_START = r"""(?<![\w.\-])['"]?(?:[^\s'";|&<>()]*/)?"""
+PATH_END = r"""['"]?(?![\w.\-/])"""
+
+
+def command_writes(cmd, path):
+    """True if a shell line has `path` right after something that writes it (reads like cat/grep do not count)."""
+    cmd, path = cmd.replace("\\", "/").lower(), path.lower()
+    P = PATH_START + re.escape(path) + PATH_END
+    last = r"(?:\s+-\w+)*\s*(?:$|[;|&]|⏎)"
+    pats = [
+        r">>?\s*" + P,                                                   # redirect: > >> cat >
+        r"\btee\b(?:\s+-\w+)*\s+" + P,                                   # tee
+        r"\b(?:set-content|add-content|out-file)\b[^;|]*?" + P,          # PowerShell writers
+        r"\bopen\([^)]*" + P + r"[^)]*['\"][wax][bt+]*['\"]",            # open(path, 'w')
+        P + r"\s*\)\s*\.write_(?:text|bytes)",                           # Path(path).write_text
+        r"\b(?:cp|mv|copy-item|move-item|copy|move)\b[^;|&]*?\s" + P + last,  # destination = last argument
+        r"-destination\s+" + P,                                          # Copy-Item -Destination
+        r"\bgit\s+checkout\b[^;|&]*?\s--\s[^;|&]*?" + P,                 # git checkout -- path
+        r"\bgit\s+apply\b.*" + P,                                        # git apply (the patch names the path)
+    ]
+    return any(re.search(pt, cmd) for pt in pats)
+
+
+def command_deletes(cmd, path):
+    cmd, path = cmd.replace("\\", "/").lower(), path.lower()
+    P = PATH_START + re.escape(path) + PATH_END
+    return bool(re.search(r"\b(?:rm|del|erase|remove-item|unlink|git\s+rm|mv|move-item|git\s+mv)\b[^;|&]*?" + P, cmd))
+
+
+def has_write_evidence(path, acts, status=None):
+    """acts = [(tool, target)] from the activity log: a Write/Edit on the file, or a writing command naming it."""
+    p = path.replace("\\", "/").lower()
+    for tool, target in acts:
+        if tool in WRITE_TOOLS:
+            t = target.replace("\\", "/").lower()
+            if t == p or t.endswith("/" + p):
+                return True
+        elif tool in SHELL_TOOLS:
+            if command_writes(target, p) or (status == "D" and command_deletes(target, p)):
+                return True
+    return False
 
 
 # ---------------------------------------------------------------- guard flags
@@ -281,10 +340,10 @@ def flags(task, changed):
     # 6 changed by a hand the log never saw (e.g. a subagent); only when the log exists
     if ACTIVITY.exists():
         since = (task or {}).get("started") or ""
-        seen = "\n".join(l for l in ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines()
-                         if l[:19] >= since).replace("\\", "/").lower()
+        acts = [(l[20:].partition(" ")[0], l[20:].partition(" ")[2])
+                for l in ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines() if l[:19] >= since]
         for p in paths:
-            if p.lower() not in seen:
+            if not has_write_evidence(p, acts, changed.get(p)):
                 fl.append(f"changed with no logged action: {p}")
     for p in paths:
         try:
@@ -334,6 +393,7 @@ def plain(line):
     name = target.replace("\\", "/").split("/")[-1] or target
     d = doc_of(target) if tool in ("Edit", "MultiEdit", "Write", "Read") else ""
     tail = f" - {d}" if d else ""
+    target = target[:110]
     if body.startswith("STOP"):
         return f"{hhmm}  finished this step - waiting for you"
     if tool in ("Edit", "MultiEdit"):
@@ -344,7 +404,7 @@ def plain(line):
         return f"{hhmm}  read the file {name}{tail}"
     if tool in ("Grep", "Glob"):
         return f"{hhmm}  searched the files for: {target[:60]}"
-    if tool == "Bash":
+    if tool in SHELL_TOOLS:
         for pat, text in BASH_RULES:
             if re.search(pat, target):
                 extra = f": {target[:50]}" if "install" in text else ""
@@ -387,6 +447,7 @@ def cmd_live():
 
 # ---------------------------------------------------------------- status
 def cmd_status(args):
+    rc = 0
     task = load_task()
     out(f"== BRAIN STATUS {time.strftime('%Y-%m-%d %H:%M')} ==")
     if task:
@@ -419,7 +480,7 @@ def cmd_status(args):
         lines = ACTIVITY.read_text(encoding="utf-8", errors="replace").splitlines()
         out(f"ACTIVITY (last 10 of {len(lines)}):")
         for ln in lines[-10:]:
-            out("  " + ln[11:])
+            out("  " + ln[11:130])
     else:
         out("ACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)")
     fl = flags(task, changed) if changed else []
@@ -429,14 +490,15 @@ def cmd_status(args):
     if "--tests" in args:
         timeout_args = ["--timeout", str(split_timeout(args)[1])]
         if (ROOT / "tests").is_dir():
-            cmd_run([f'"{sys.executable}" -m unittest discover tests', *timeout_args])
+            if cmd_run([f'"{sys.executable}" -m unittest discover tests', *timeout_args]) == 124:
+                rc = 124
         else:
             out("TESTS: no tests/ folder yet")
     st = ROOT / "STATE.md"
     if st.exists():
         body = [l for l in st.read_text(encoding="utf-8", errors="replace").splitlines() if l.strip()]
         out("STATE.md head: " + " | ".join(l.strip("-# ").strip()[:70] for l in body[1:4]))
-    return 0
+    return rc
 
 
 def main():

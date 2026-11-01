@@ -1,4 +1,5 @@
 """Planted-mistake tests: prove each alarm in tools/watch.py fires, and stays quiet on a clean change."""
+import json
 import os
 import subprocess
 import sys
@@ -126,6 +127,45 @@ class WatchFlagTests(unittest.TestCase):
         out = self.watch("status", "--tests", "--timeout", "1")
         self.assertIn("TIMEOUT - raise --timeout", out)
         self.assertNotIn("EXIT 0", out)
+
+    def dirty_a(self):
+        self.append("ectd_engine/facts/a.py", "Z = 2\n")
+        self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")
+        self.log("Edit tests/test_a.py")
+
+    def test_cat_only_is_not_write_evidence(self):
+        self.dirty_a()
+        self.log("Bash cat ectd_engine/facts/a.py")
+        self.assertIn("changed with no logged action: ectd_engine/facts/a.py", self.status())
+
+    def test_long_heredoc_command_is_write_evidence(self):
+        self.dirty_a()
+        # ~3000 chars, many lines, and non-ASCII text (a cp1252 stdin used to drop such lines silently)
+        cmd = "cat > ectd_engine/facts/a.py <<'E'\n# — ⏎\n" + "x = 1\n" * 500 + "E"
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        hook = json.dumps({"hook_event_name": "PreToolUse", "tool_name": "Bash", "tool_input": {"command": cmd}},
+                          ensure_ascii=False)  # real UTF-8 bytes, as Claude Code sends them
+        subprocess.run([sys.executable, str(WATCH), "log"], input=hook.encode("utf-8"), env=env, timeout=60)
+        logged = (self.root / ".brain" / "activity.log").read_text(encoding="utf-8").splitlines()[-1]
+        self.assertGreater(len(logged), 2900)  # not cut at ~120 chars
+        self.assertNotIn("no logged action", self.status())
+
+    def test_copy_item_destination_is_write_evidence(self):
+        self.dirty_a()
+        self.log("PowerShell Copy-Item C:\\tmp\\new_a.py -Destination ectd_engine\\facts\\a.py")
+        self.assertNotIn("no logged action", self.status())
+
+    def test_copy_item_source_only_is_not_write_evidence(self):
+        self.dirty_a()
+        self.log("PowerShell Copy-Item ectd_engine/facts/a.py C:/tmp/backup.py")
+        self.assertIn("no logged action: ectd_engine/facts/a.py", self.status())
+
+    def test_run_timeout_exit_code_is_124(self):
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        r = subprocess.run([sys.executable, str(WATCH), "run", f'"{sys.executable}" -c "import time; time.sleep(8)"',
+                            "--timeout", "1"], env=env, capture_output=True, text=True, timeout=60)
+        self.assertEqual(r.returncode, 124)
+        self.assertIn("TIMEOUT - raise --timeout", r.stdout)
 
     def test_clean_change_raises_no_flag(self):
         self.append("ectd_engine/facts/a.py", "Z = 2\n")
