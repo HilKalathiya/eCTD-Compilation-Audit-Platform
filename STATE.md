@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-02 — T-039 (C3.2) done (engine LLM client + structured outputs)
+- `ectd_engine/writer/llm.py` (Ollama /api/chat, OpenAI /chat/completions, Mock; stdlib only; optional `schema=` sends Ollama `format` / OpenAI `response_format`), `prompt.py` (copy of the frozen one, import only), `loop.py` (`run_task`: draft -> validator -> re-read of finished text -> retry, max 4; returns accepted + every draft + rendered text), `structured.py` (own schema check; a value is accepted only if schema fits AND text/number appears word for word in the source; numbers parsed as Decimal). `tools/writer_run.py --backend ollama|openai|mock`.
+- Mock: writer_test 8/8, engine 8/8 (2 drafts each in both). 17 tests in `tests/test_writer_llm.py` (planted: raw number, schema break, value not in source, number inside "B2"; fake local HTTP server checks both payload shapes). Not yet run against a real model (laptop run is Hil's).
+
 ## 2026-11-02 — T-038 (C3.1) done (validator ported into the engine)
 - Ported from `writer_test/` (left untouched): `ectd_engine/writer/facts.py` (Decimal everywhere: `to_decimal`, `decimal_task`, `tolerance`; no float/round), `ectd_engine/validator/validator.py` (byte-identical), `ectd_engine/validator/rendercheck.py` (import only). Not ported: prompt.py (the ported test reads it from the frozen folder).
 - Original vs port: 43 tests -> 43 (`tests/test_validator_port.py`, same names and assertions); mutation test 8303/8303 caught -> 8303/8303 (`tests/test_mutation_port.py`, report identical line for line; +4 wrapper tests that fail if any mutant survives or the kill count drops). Line-by-line diff report in `learn/LEARN_T-038.md`.

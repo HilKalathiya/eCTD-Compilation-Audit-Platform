@@ -127,3 +127,6 @@ boundary = the exact edge of a range, where "included or not" matters (1 g)
 port = copy working code to a new place and adjust it, without rewriting its logic
 mutant = a paragraph with one deliberate mistake, used to see if the checker notices
 kill rate = the share of mutants (wrong paragraphs) the checker rejects
+structured output = the model must answer in a fixed JSON shape, not free text
+schema = the written description of the shape a JSON answer must have
+verbatim = word for word, exactly as written in the source
