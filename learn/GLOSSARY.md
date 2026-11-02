@@ -121,3 +121,6 @@ stale row = a stored row whose source no longer exists
 GitError = our own error type meaning "git kept failing, so the answer is unknown"
 exit code = the number a program returns when it ends (0 = fine, 2 = error)
 false green = a check that says "all fine" when it really could not look.
+double entry = two people type the same data separately and code compares them
+append-only = a table where rows can be added but never changed or deleted
+boundary = the exact edge of a range, where "included or not" matters (1 g)

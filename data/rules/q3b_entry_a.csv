@@ -1,0 +1,11 @@
+kind,max_daily_dose,percent,tdi
+reporting,≤ 1 g,0.1,
+reporting,> 1 g,0.05,
+identification,< 1 mg,1.0,5 µg
+identification,1 mg - 10 mg,0.5,20 µg
+identification,>10 mg - 2 g,0.2,2 mg
+identification,> 2 g,0.10,
+qualification,< 10 mg,1.0,50 µg
+qualification,10 mg - 100 mg,0.5,200 µg
+qualification,>100 mg - 2 g,0.2,3 mg
+qualification,> 2 g,0.15,

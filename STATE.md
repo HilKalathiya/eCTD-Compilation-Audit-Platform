@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-02 — T-037 (C2.4) done (Q3B threshold table, double entry)
+- `data/rules/q3b_entry_a.csv` (typed from PDF p11) and Hil's `q3b_entry_b.csv` agree on all 10 rows (0 differences). `ectd_engine/rules/q3b.py`: `load()` refuses on any A/B difference, any row not word for word on Q3B p11 (`cite.verify`), or a gap/overlap in dose ranges; `threshold(kind, dose_mg, version="latest")` -> (percent, tdi_ug|None, rule_id), Decimal only, boundaries as printed; refuses if a typed file changed after load.
+- Migration 008 `rule_thresholds` (append-only trigger; a new doc_version adds rows). `store()` refuses same rule_id with other content. 19 tests in `tests/test_rules_q3b.py` incl. planted: row only in A/B, 0.1 vs 0.15, <= vs <, tdi differs, same typo in both (PDF check fails), dropped row, edited entry_b after load.
+
 ## 2026-11-02 — T-036 (fix) done (watcher: no false green when git fails)
 - `tools/watch.py git()`: a failed call (non-zero exit or OSError) is retried 3 times, then raises `GitError`. `status` prints `GIT ERROR: <command> -> <message>`, `FLAGS: 1`, `! git failed - result unknown`, exit 2; `task` prints GIT ERROR, exit 2. "No commits yet" and "not a repo" are still normal answers (matched on git's message, run with LC_ALL=C).
 - `tests/test_watch.py`: new `GitFailureTests` (8 tests): always-failing git, git cannot start, only `diff` failing, one failure then success, clean real repo, no-commits repo, non-repo folder, `task`.
