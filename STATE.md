@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-02 — T-040 (C3.3) done (round-3 drafts replayed through the port)
+- `python tools/replay.py` runs every saved draft through the frozen validator (writer_test, read-only) and `ectd_engine`'s: same verdict and same sorted problem list required. Result: 171 drafts, 171 same, 0 different (111 accepted, 60 rejected). Sources: `audit_20261029_135323.jsonl` (160 = round-3 audit) + `drafts.jsonl` (11). Rounds 1-2 audits and the 2-row aborted `audit_20261029_133616.jsonl` are not included. Per-draft table: `evidence/T-040/replay.csv`.
+- 6 tests in `tests/test_replay.py` incl. planted flipped verdict (reports 1 different, exit 1) and missing/empty draft file (exit 2, no 0/0 pass).
+- T-039 laptop: gemma4:e4b 8/8 accepted, 94 s, lt_dissolution 3 drafts (files in `evidence/T-039_laptop/`).
+
 ## 2026-11-02 — T-039 (C3.2) done (engine LLM client + structured outputs)
 - `ectd_engine/writer/llm.py` (Ollama /api/chat, OpenAI /chat/completions, Mock; stdlib only; optional `schema=` sends Ollama `format` / OpenAI `response_format`), `prompt.py` (copy of the frozen one, import only), `loop.py` (`run_task`: draft -> validator -> re-read of finished text -> retry, max 4; returns accepted + every draft + rendered text), `structured.py` (own schema check; a value is accepted only if schema fits AND text/number appears word for word in the source; numbers parsed as Decimal). `tools/writer_run.py --backend ollama|openai|mock`.
 - Mock: writer_test 8/8, engine 8/8 (2 drafts each in both). 17 tests in `tests/test_writer_llm.py` (planted: raw number, schema break, value not in source, number inside "B2"; fake local HTTP server checks both payload shapes). Not yet run against a real model (laptop run is Hil's).

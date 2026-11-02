@@ -130,3 +130,5 @@ kill rate = the share of mutants (wrong paragraphs) the checker rejects
 structured output = the model must answer in a fixed JSON shape, not free text
 schema = the written description of the shape a JSON answer must have
 verbatim = word for word, exactly as written in the source
+replay = run saved inputs again through new code to see if the answers match
+verdict = the checker's answer for one draft: accepted or rejected, with the reasons

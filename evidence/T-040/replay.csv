@@ -1,0 +1,172 @@
+source,line,task_id,draft,frozen_verdict,port_verdict,frozen_rules,port_rules,same
+audit_20261029_135323.jsonl,1,lt_assay,1,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,2,lt_assay,2,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,3,lt_assay,3,rejected,rejected,"a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]')","a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]')",yes
+audit_20261029_135323.jsonl,4,lt_assay,4,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,5,lt_assay,5,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,6,lt_assay,6,rejected,rejected,"number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,7,lt_assay,7,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,8,lt_assay,8,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,9,lt_assay,9,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,10,lt_assay,10,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,11,lt_assay,11,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,12,lt_assay,12,rejected,rejected,"number written as a word | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written as a word | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,13,lt_assay,13,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,14,lt_assay,14,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,15,lt_assay,15,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,16,lt_assay,16,rejected,rejected,"number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,17,lt_assay,17,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,18,lt_assay,18,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,19,lt_assay,19,rejected,rejected,"a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]') | number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]') | number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,20,lt_assay,20,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,21,lt_total_impurities,1,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,22,lt_total_impurities,2,rejected,rejected,number written outside a placeholder,number written outside a placeholder,yes
+audit_20261029_135323.jsonl,23,lt_total_impurities,3,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,24,lt_total_impurities,4,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,25,lt_total_impurities,5,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,26,lt_total_impurities,6,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]] | puts results from different time points 'at the last time point',describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]] | puts results from different time points 'at the last time point',yes
+audit_20261029_135323.jsonl,27,lt_total_impurities,7,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,28,lt_total_impurities,8,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,29,lt_total_impurities,9,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,30,lt_total_impurities,10,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,31,lt_total_impurities,11,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,32,lt_total_impurities,12,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,33,lt_total_impurities,13,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,34,lt_total_impurities,14,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,35,lt_total_impurities,15,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,36,lt_total_impurities,16,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,37,lt_total_impurities,17,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,38,lt_total_impurities,18,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,39,lt_total_impurities,19,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,40,lt_total_impurities,20,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,41,lt_impurity_a,1,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,42,lt_impurity_a,2,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,43,lt_impurity_a,3,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,44,lt_impurity_a,4,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,45,lt_impurity_a,5,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,46,lt_impurity_a,6,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,47,lt_impurity_a,7,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,48,lt_impurity_a,8,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,49,lt_impurity_a,9,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,50,lt_impurity_a,10,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,51,lt_impurity_a,11,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,52,lt_impurity_a,12,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,53,lt_impurity_a,13,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,54,lt_impurity_a,14,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,55,lt_impurity_a,15,rejected,rejected,unit repeated after a placeholder (the value already carries it),unit repeated after a placeholder (the value already carries it),yes
+audit_20261029_135323.jsonl,56,lt_impurity_a,16,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,57,lt_impurity_a,17,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,58,lt_impurity_a,18,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,59,lt_impurity_a,19,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,60,lt_impurity_a,20,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,61,lt_dissolution,1,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,62,lt_dissolution,2,rejected,rejected,"number written as a word | says results ranged from the initial to the final range, but some results lie outside both","number written as a word | says results ranged from the initial to the final range, but some results lie outside both",yes
+audit_20261029_135323.jsonl,63,lt_dissolution,3,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,64,lt_dissolution,4,rejected,rejected,"number written as a word | says results ranged from the initial to the final range, but some results lie outside both","number written as a word | says results ranged from the initial to the final range, but some results lie outside both",yes
+audit_20261029_135323.jsonl,65,lt_dissolution,5,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,66,lt_dissolution,6,rejected,rejected,"names the test only in part and runs it into the storage condition; write it in full: 'Dissolution at 30 minutes' | says results ranged from the initial to the final range, but some results lie outside both","names the test only in part and runs it into the storage condition; write it in full: 'Dissolution at 30 minutes' | says results ranged from the initial to the final range, but some results lie outside both",yes
+audit_20261029_135323.jsonl,67,lt_dissolution,7,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,68,lt_dissolution,8,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,69,lt_dissolution,9,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,70,lt_dissolution,10,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,71,lt_dissolution,11,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,72,lt_dissolution,12,rejected,rejected,"number written as a word | says results ranged from the initial to the final range, but some results lie outside both","number written as a word | says results ranged from the initial to the final range, but some results lie outside both",yes
+audit_20261029_135323.jsonl,73,lt_dissolution,13,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,74,lt_dissolution,14,rejected,rejected,"says results ranged from the initial to the final range, but some results lie outside both","says results ranged from the initial to the final range, but some results lie outside both",yes
+audit_20261029_135323.jsonl,75,lt_dissolution,15,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,76,lt_dissolution,16,rejected,rejected,describes timing or the shape of the change in words (not computed) | number written as a word,describes timing or the shape of the change in words (not computed) | number written as a word,yes
+audit_20261029_135323.jsonl,77,lt_dissolution,17,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,78,lt_dissolution,18,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,79,lt_dissolution,19,rejected,rejected,"number written as a word | says results ranged from the initial to the final range, but some results lie outside both","number written as a word | says results ranged from the initial to the final range, but some results lie outside both",yes
+audit_20261029_135323.jsonl,80,lt_dissolution,20,rejected,rejected,number written as a word,number written as a word,yes
+audit_20261029_135323.jsonl,81,lt_water,1,rejected,rejected,"number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,82,lt_water,2,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,83,lt_water,3,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,84,lt_water,4,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,85,lt_water,5,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,86,lt_water,6,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,87,lt_water,7,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,88,lt_water,8,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,89,lt_water,9,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,90,lt_water,10,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,91,lt_water,11,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,92,lt_water,12,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,93,lt_water,13,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,94,lt_water,14,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,95,lt_water,15,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,96,lt_water,16,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,97,lt_water,17,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,98,lt_water,18,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,99,lt_water,19,rejected,rejected,"a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]')","a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]')",yes
+audit_20261029_135323.jsonl,100,lt_water,20,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,101,acc_total_impurities,1,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,102,acc_total_impurities,2,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,103,acc_total_impurities,3,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,104,acc_total_impurities,4,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,105,acc_total_impurities,5,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,106,acc_total_impurities,6,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,107,acc_total_impurities,7,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,108,acc_total_impurities,8,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,109,acc_total_impurities,9,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,110,acc_total_impurities,10,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,111,acc_total_impurities,11,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,112,acc_total_impurities,12,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,113,acc_total_impurities,13,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,114,acc_total_impurities,14,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,115,acc_total_impurities,15,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,116,acc_total_impurities,16,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,117,acc_total_impurities,17,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,118,acc_total_impurities,18,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,119,acc_total_impurities,19,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,120,acc_total_impurities,20,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,121,acc_assay,1,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,122,acc_assay,2,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,123,acc_assay,3,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,124,acc_assay,4,rejected,rejected,"a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]')","a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]')",yes
+audit_20261029_135323.jsonl,125,acc_assay,5,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,126,acc_assay,6,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,127,acc_assay,7,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,128,acc_assay,8,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,129,acc_assay,9,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,130,acc_assay,10,rejected,rejected,"a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]') | number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]') | number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,131,acc_assay,11,rejected,rejected,"number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,132,acc_assay,12,rejected,rejected,"number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,133,acc_assay,13,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,134,acc_assay,14,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,135,acc_assay,15,rejected,rejected,"number written as a word | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written as a word | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,136,acc_assay,16,rejected,rejected,"a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]') | number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","a value placeholder is used as a noun (write 'a change of [[mean_change]]', not 'a [[mean_change]]') | number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,137,acc_assay,17,rejected,rejected,"number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'","number written outside a placeholder | repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N'",yes
+audit_20261029_135323.jsonl,138,acc_assay,18,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,139,acc_assay,19,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,140,acc_assay,20,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,141,acc_impurity_b_oos,1,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,142,acc_impurity_b_oos,2,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,143,acc_impurity_b_oos,3,rejected,rejected,"adds a cause, conclusion or shelf-life claim that no fact supports | sentence starts with 'Because', which is not this section's test (Impurity B); name only the tested attribute","adds a cause, conclusion or shelf-life claim that no fact supports | sentence starts with 'Because', which is not this section's test (Impurity B); name only the tested attribute",yes
+audit_20261029_135323.jsonl,144,acc_impurity_b_oos,4,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,145,acc_impurity_b_oos,5,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,146,acc_impurity_b_oos,6,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,147,acc_impurity_b_oos,7,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,148,acc_impurity_b_oos,8,rejected,rejected,"'final' is next to [[initial_range]], which is not from the last time point | describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]]","'final' is next to [[initial_range]], which is not from the last time point | describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]]",yes
+audit_20261029_135323.jsonl,149,acc_impurity_b_oos,9,rejected,rejected,"sentence starts with 'Since', which is not this section's test (Impurity B); name only the tested attribute","sentence starts with 'Since', which is not this section's test (Impurity B); name only the tested attribute",yes
+audit_20261029_135323.jsonl,150,acc_impurity_b_oos,10,rejected,rejected,"adds a cause, conclusion or shelf-life claim that no fact supports | sentence starts with 'Because', which is not this section's test (Impurity B); name only the tested attribute","adds a cause, conclusion or shelf-life claim that no fact supports | sentence starts with 'Because', which is not this section's test (Impurity B); name only the tested attribute",yes
+audit_20261029_135323.jsonl,151,acc_impurity_b_oos,11,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,152,acc_impurity_b_oos,12,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,153,acc_impurity_b_oos,13,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,154,acc_impurity_b_oos,14,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,155,acc_impurity_b_oos,15,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,156,acc_impurity_b_oos,16,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,157,acc_impurity_b_oos,17,rejected,rejected,describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]],yes
+audit_20261029_135323.jsonl,158,acc_impurity_b_oos,18,accepted,accepted,,,yes
+audit_20261029_135323.jsonl,159,acc_impurity_b_oos,19,rejected,rejected,"adds a cause, conclusion or shelf-life claim that no fact supports | describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]] | says the condition, product or batch is out of specification; only a result can be | sentence starts with 'Because', which is not this section's test (Impurity B); name only the tested attribute","adds a cause, conclusion or shelf-life claim that no fact supports | describes a change from or to one batch's single result; describe change between [[initial_range]] and [[final_range]] | says the condition, product or batch is out of specification; only a result can be | sentence starts with 'Because', which is not this section's test (Impurity B); name only the tested attribute",yes
+audit_20261029_135323.jsonl,160,acc_impurity_b_oos,20,accepted,accepted,,,yes
+drafts.jsonl,1,lt_assay,1,rejected,rejected,unknown placeholders: ['min_value_where'],unknown placeholders: ['min_value_where'],yes
+drafts.jsonl,2,lt_total_impurities,1,rejected,rejected,"unknown placeholders: ['max_value_where', 'min_value_where']","unknown placeholders: ['max_value_where', 'min_value_where']",yes
+drafts.jsonl,3,lt_impurity_a,1,rejected,rejected,"unknown placeholders: ['max_value_where', 'min_value_where']","unknown placeholders: ['max_value_where', 'min_value_where']",yes
+drafts.jsonl,4,lt_dissolution,1,rejected,rejected,number written as a word,number written as a word,yes
+drafts.jsonl,5,lt_dissolution,2,rejected,rejected,number written as a word,number written as a word,yes
+drafts.jsonl,6,lt_dissolution,3,rejected,rejected,names the test only in part and runs it into the storage condition; write it in full: 'Dissolution at 30 minutes',names the test only in part and runs it into the storage condition; write it in full: 'Dissolution at 30 minutes',yes
+drafts.jsonl,7,lt_water,1,rejected,rejected,"unknown placeholders: ['max_value_where', 'min_value_where']","unknown placeholders: ['max_value_where', 'min_value_where']",yes
+drafts.jsonl,8,acc_total_impurities,1,rejected,rejected,"unknown placeholders: ['max_value_where', 'min_value_where']","unknown placeholders: ['max_value_where', 'min_value_where']",yes
+drafts.jsonl,9,acc_assay,1,rejected,rejected,"repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N' | unknown placeholders: ['min_value_where']","repeats a time point after [[initial_range]]/[[final_range]], which already end in 'at Month N' | unknown placeholders: ['min_value_where']",yes
+drafts.jsonl,10,acc_impurity_b_oos,1,rejected,rejected,unknown placeholders: ['max_value_where'],unknown placeholders: ['max_value_where'],yes
+drafts.jsonl,11,acc_impurity_b_oos,2,rejected,rejected,unknown placeholders: ['max_value_where'],unknown placeholders: ['max_value_where'],yes
