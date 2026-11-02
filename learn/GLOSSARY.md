@@ -124,3 +124,6 @@ false green = a check that says "all fine" when it really could not look.
 double entry = two people type the same data separately and code compares them
 append-only = a table where rows can be added but never changed or deleted
 boundary = the exact edge of a range, where "included or not" matters (1 g)
+port = copy working code to a new place and adjust it, without rewriting its logic
+mutant = a paragraph with one deliberate mistake, used to see if the checker notices
+kill rate = the share of mutants (wrong paragraphs) the checker rejects
