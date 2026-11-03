@@ -1,0 +1,70 @@
+== BRAIN STATUS 2026-11-03 08:20 ==
+TASK: T-042 started 08:04 allowed=['tools/writer_run.py', 'tools/audit_p54.py', 'tests/test_audit_p54.py', 'evidence/**', 'learn/**', 'STATE.md']
+GIT: branch main | 0 commit(s) since task start
+  128631f T-041: P.5.4 batch analyses writer + validator
+  5fefb35 T-040: replay round-3 drafts through ported validator
+  bc60dae T-039: engine LLM client + structured outputs
+  11e3347 T-038: port validator from writer_test
+  26809d1 T-037: Q3B threshold table, double entry
+CHANGED since task start: 145 file(s)
+  M STATE.md
+  ? evidence/T-042/audit.csv
+  ? evidence/T-042/blind.csv
+  ? evidence/T-042/blind_key.csv
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/drafts.jsonl
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/results.jsonl
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w000_dissolution_av.md
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w001_impurity_o.md
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w002_impurity_l.md
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w003_impurities_total.md
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w004_resodual_solvent.md
+  ? evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w005_dissolution_av.md
+  ... +133 more
+ACTIVITY (last 10 of 1375):
+  08:06:14 Write tests/test_audit_p54.py
+  08:06:20 Bash python -m unittest tests.test_audit_p54 2>&1 | tail -30; tail -2 evidence/T-042/run_console.txt
+  08:06:24 Bash cat evidence/T-042/run_console.txt | tail -5; ls evidence/T-042/run/* 2>&1 | head; tasklist | grep -i pyt
+  08:06:26 Bash wc -l evidence/T-042/run/*/results.jsonl; ls evidence/T-042/run/*/sections | wc -l
+  08:08:30 Bash tail -3 learn/GLOSSARY.md; sleep 120; wc -l evidence/T-042/run/*/results.jsonl
+  08:17:36 Bash for i in $(seq 1 18); do n=$(wc -l < evidence/T-042/run/p54_ollama_gemma4-e4b/results.jsonl); [ "$n" -ge 
+  08:20:06 Bash for i in $(seq 1 18); do n=$(wc -l < evidence/T-042/run/p54_ollama_gemma4-e4b/results.jsonl); [ "$n" -ge 
+  08:20:12 Bash python tools/audit_p54.py --run evidence/T-042/run/p54_ollama_gemma4-e4b --out evidence/T-042; echo EXIT 
+  08:20:23 Bash python - <<'E' ? p='tools/audit_p54.py' ? s=open(p,encoding='utf-8').read() ? s=s.replace('rows, rules, e
+  08:20:27 Bash sed -n 1,12p STATE.md | cut -c1-220; cat learn/LEARN_T-041.md | head -12
+FLAGS: 141
+  ! changed with no logged action: STATE.md
+  ! changed with no logged action: evidence/T-042/audit.csv
+  ! changed with no logged action: evidence/T-042/blind.csv
+  ! changed with no logged action: evidence/T-042/blind_key.csv
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/drafts.jsonl
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/results.jsonl
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w000_dissolution_av.md
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w001_impurity_o.md
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w002_impurity_l.md
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w003_impurities_total.md
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w004_resodual_solvent.md
+  ! changed with no logged action: evidence/T-042/run/p54_ollama_gemma4-e4b/sections/w005_dissolution_av.md
+EXIT 0  (449.3s)  $ "C:\Users\asus\AppData\Local\Programs\Python\Python312\python.exe" -m unittest discover tests
+    q12 HIT  Q1E  What significance level is used in the tests for batch similarity of s
+    q13 HIT  Q1E  How is the shelf life estimated from where the confidence limit meets 
+    q14 HIT  Q1E  What approach applies when the data show little or no change over time
+    q15 HIT  Q1E  What role do accelerated condition results play in deciding on extrapo
+    q16 HIT  Q3B_R2  Above what level must a degradation product be reported?
+    q17 HIT  Q3B_R2  Above what level must the structure of a degradation product be identi
+    q18 HIT  Q3B_R2  Above what level must the biological safety of a degradation product b
+    q19 HIT  Q3B_R2  Do impurities that come from excipients need to be reported?
+    q20 HIT  Q3B_R2  Is there a flowchart for identifying and qualifying a degradation prod
+    q21 HIT  Q3B_R2  Which kinds of impurities, such as contaminants, are outside the scope
+    q22 MISS Q6A  Which tests apply to all new drug substances and drug products?
+    q23 HIT  Q6A  When should a specification control the solid-state form of a drug sub
+    q24 HIT  Q6A  What is a specification made of?
+    q25 HIT  Q6A  When can a test be done only on selected batches instead of every batc
+    q26 HIT  Q6A  When can process data replace end-product sterility testing?
+    q27 HIT  Q6A  Which release test applies to solid oral dosage forms to check drug re
+    q28 HIT  Q6A  What extra tests apply to drug substances with a single enantiomer?
+    q29 MISS M4Q_R1  In which CTD section does drug substance stability go?
+    q30 HIT  M4Q_R1  Where are the excipients of the drug product controlled in the CTD?
+  recall@5 fts=0.700 vector=0.900 hybrid=0.867 rerank=0.933 (30 questions); rerank 0.05 s per query
+  Ran 495 tests in 442.872s
+  OK
+STATE.md head: 2026-11-03 ? T-042 (C3.4b) done (real-Gemma audit of the P.5.4 writer) | `python tools/writer_run.py --kind p54 --audit 130 --backend ollama -- | `tools/audit_p54.py` re-reads each accepted section against the table 

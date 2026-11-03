@@ -136,3 +136,5 @@ planted error = a mistake added on purpose to prove a check can fail
 quarantined = a value the gate refused to store, kept aside with its reason
 mean = the average: sum of the values divided by how many there are
 tie = two or more batches that share the same lowest (or highest) value
+false reject = good text that the checker refused by mistake
+blind sheet = a list of answers to judge without seeing the checker verdict
