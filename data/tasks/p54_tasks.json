@@ -1,0 +1,143 @@
+{
+ "note": "Lek P.5.4 tasks: 12 batches each (ids sorted by number). The last task includes batch 60, quarantined for the impurity columns.",
+ "tasks": [
+  {
+   "task_id": "p54_dissolution",
+   "section": "3.2.P.5.4",
+   "product": "Lek tablets",
+   "attribute": "Dissolution",
+   "column": "dissolution_av",
+   "unit": "%",
+   "decimals": 2,
+   "batches": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+   ]
+  },
+  {
+   "task_id": "p54_impurity_o",
+   "section": "3.2.P.5.4",
+   "product": "Lek tablets",
+   "attribute": "Impurity O",
+   "column": "impurity_o",
+   "unit": "%",
+   "decimals": 2,
+   "batches": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+   ]
+  },
+  {
+   "task_id": "p54_impurity_l",
+   "section": "3.2.P.5.4",
+   "product": "Lek tablets",
+   "attribute": "Impurity L",
+   "column": "impurity_l",
+   "unit": "%",
+   "decimals": 2,
+   "batches": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+   ]
+  },
+  {
+   "task_id": "p54_total_impurities",
+   "section": "3.2.P.5.4",
+   "product": "Lek tablets",
+   "attribute": "Total impurities",
+   "column": "impurities_total",
+   "unit": "%",
+   "decimals": 2,
+   "batches": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+   ]
+  },
+  {
+   "task_id": "p54_residual_solvent",
+   "section": "3.2.P.5.4",
+   "product": "Lek tablets",
+   "attribute": "Residual solvent",
+   "column": "resodual_solvent",
+   "unit": "%",
+   "decimals": 2,
+   "batches": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+   ]
+  },
+  {
+   "task_id": "p54_total_impurities_quarantine",
+   "section": "3.2.P.5.4",
+   "product": "Lek tablets",
+   "attribute": "Total impurities",
+   "column": "impurities_total",
+   "unit": "%",
+   "decimals": 2,
+   "batches": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "60"
+   ]
+  }
+ ]
+}

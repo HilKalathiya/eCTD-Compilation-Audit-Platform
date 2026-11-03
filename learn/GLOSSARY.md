@@ -132,3 +132,7 @@ schema = the written description of the shape a JSON answer must have
 verbatim = word for word, exactly as written in the source
 replay = run saved inputs again through new code to see if the answers match
 verdict = the checker's answer for one draft: accepted or rejected, with the reasons
+planted error = a mistake added on purpose to prove a check can fail
+quarantined = a value the gate refused to store, kept aside with its reason
+mean = the average: sum of the values divided by how many there are
+tie = two or more batches that share the same lowest (or highest) value

@@ -1,4 +1,5 @@
 """Replays saved model drafts through the frozen validator and the ported one, and checks they agree."""
+import argparse
 import csv
 import importlib.util
 import json
@@ -118,7 +119,18 @@ def summary(results):
     return f"{len(results)} drafts, {same} same, {len(results) - same} different"
 
 
+def build_parser():
+    return argparse.ArgumentParser(
+        description="Replay saved model drafts through the frozen validator and the ported one; exit 0 only if every verdict "
+                    "and problem list is the same. Default drafts: the round-3 audit and drafts.jsonl in "
+                    "writer_test/outputs/ollama_gemma4-e4b.")
+
+
 def main(argv=None, files=None, frozen=None, port=None, tasks=None, out=None):
+    parser = build_parser()
+    parser.add_argument("--out", default=None, help=f"CSV file to write (default: {DEFAULT_OUT})")
+    args = parser.parse_args([] if argv is None else argv)  # never read sys.argv unless main() is called with it
+    out = out or args.out
     try:
         rows = load_drafts(files or DEFAULT_FILES)
         if not rows:
@@ -139,4 +151,4 @@ def main(argv=None, files=None, frozen=None, port=None, tasks=None, out=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))
