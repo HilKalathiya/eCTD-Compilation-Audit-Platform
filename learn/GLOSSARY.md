@@ -144,3 +144,6 @@ NMT / NLT = not more than / not less than (the two kinds of spec limit)
 declared limit = a limit typed in by the author with no public source
 timeout = how long we wait before giving up
 silent port = a port that accepts a connection but never answers (this caused the hang)
+basis = what a spec limit rests on (a published source, or just declared by the author)
+assumption = a value we chose ourselves (like a 40 mg daily dose), not one a source gave
+planted error = a mistake added on purpose to check that the checker notices it

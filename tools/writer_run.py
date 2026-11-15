@@ -5,6 +5,7 @@
     python tools/writer_run.py --backend openai --model <name> --base-url http://localhost:8080/v1
     python tools/writer_run.py --kind p54 --backend mock --out <folder>     # 3.2.P.5.4 batch analyses on Lek facts
     python tools/writer_run.py --kind p54 --audit 130 --backend ollama --out <folder>   # N real Lek windows (T-042)
+    python tools/writer_run.py --kind p56 --backend mock --out <folder>     # 3.2.P.5.6 justification per spec attribute (T-046)
 """
 AUDIT_SEED = 42
 WINDOW = 12
@@ -44,8 +45,43 @@ from ectd_engine.writer.llm import MockClient, OllamaClient, OpenAIClient  # noq
 from ectd_engine.writer.loop import MAX_DRAFTS, run_task, write_section  # noqa: E402
 
 
+def run_p56(args, client):
+    """3.2.P.5.6 justification paragraphs for the 5 real Lek attributes; numbers and quotes are re-read live, never trusted from the file."""
+    from ectd_engine.specs import load, p56
+    from ectd_engine.writer.spec_facts import resolve_quote, task_from_justification
+    from ectd_engine.writer.spec_loop import run_spec_task, write_spec_section
+    store = LoaderStore()
+    spec = load.load()
+    live = {str(spec.mdd.value): {r.attribute: j for r, j in zip(spec.rows, p56.compute(spec, store))}}
+    with open(args.data or str(ROOT / "data" / "tasks" / "p56_tasks.json"), encoding="utf-8") as f:
+        tasks = json.load(f)["tasks"]
+    if args.tasks:
+        wanted = set(args.tasks.split(","))
+        tasks = [t for t in tasks if t["task_id"] in wanted]
+    out = Path(args.out) / f"p56_{args.backend}_{args.model}".replace(":", "-").replace("/", "-")
+    (out / "sections").mkdir(parents=True, exist_ok=True)
+    accepted, t0 = 0, time.time()
+    with open(out / "drafts.jsonl", "w", encoding="utf-8") as log:
+        for task in tasks:
+            task = resolve_quote(task, live)
+            res = run_spec_task(client, task, max_drafts=args.max_drafts)
+            for d in res["drafts"]:
+                log.write(json.dumps({"task_id": task["task_id"], **d}, ensure_ascii=False) + "\n")
+            if res["accepted"]:
+                accepted += 1
+                (out / "sections" / f"{task['task_id']}.md").write_text(write_spec_section(task, res), encoding="utf-8")
+                print(f"{task['task_id']}: ACCEPTED after {len(res['drafts'])} draft(s)")
+            else:
+                print(f"{task['task_id']}: REJECTED after {len(res['drafts'])} draft(s): {'; '.join(res['drafts'][-1]['problems'])}")
+    print(f"\n{accepted}/{len(tasks)} accepted ({time.time() - t0:.0f} s). Saved in {out}")
+    return 0 if accepted == len(tasks) else 1
+
+
 def make_client(args):
     if args.backend == "mock":
+        if args.kind == "p56":
+            from ectd_engine.writer.spec_loop import SpecMockClient
+            return SpecMockClient()
         return BatchMockClient() if args.kind == "p54" else MockClient()
     if args.backend == "openai":
         return OpenAIClient(args.model, args.base_url or "http://localhost:8080/v1", args.num_predict)
@@ -55,8 +91,8 @@ def make_client(args):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--kind", choices=["p83", "p54"], default="p83",
-                    help="p83 = stability paragraphs (default); p54 = batch analyses on Lek facts")
+    ap.add_argument("--kind", choices=["p83", "p54", "p56"], default="p83",
+                    help="p83 = stability paragraphs (default); p54 = batch analyses on Lek facts; p56 = spec justification")
     ap.add_argument("--backend", choices=["ollama", "openai", "mock"], default="ollama")
     ap.add_argument("--model", default="gemma4:e4b")
     ap.add_argument("--base-url", default=None)
@@ -73,6 +109,10 @@ def main(argv=None):
                     help="folder for accepted sections and drafts.jsonl")
     args = ap.parse_args(argv)
 
+    if args.kind == "p56":
+        if args.audit:
+            ap.error("--audit works only with --kind p54")
+        return run_p56(args, make_client(args))
     data = args.data or str(ROOT / "data" / "tasks" / "p54_tasks.json" if args.kind == "p54"
                             else ROOT / "writer_test" / "data" / "tasks.json")
     if args.audit and args.kind != "p54":

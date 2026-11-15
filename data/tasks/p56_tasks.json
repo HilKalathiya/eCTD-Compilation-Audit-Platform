@@ -1,0 +1,27 @@
+{
+ "note": "Lek P.5.6 tasks. 'tasks' = the 5 real attributes (numbers frozen from the live p56 result; the runner refuses a task whose numbers differ from live). 'synthetic' = planted copies for tests only: n_outside > 0 (planted, in memory) and other assumed doses (5 mg, 500 mg).",
+ "tasks": [
+  {"task_id": "p56_dissolution", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Dissolution", "column": "dissolution_av",
+   "limit_kind": "NLT", "limit": "80", "unit": "%", "basis": "declared", "n": 1005, "min": "82.5", "max": "102.67", "n_outside": 0},
+  {"task_id": "p56_impurity_o", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Impurity O", "column": "impurity_o",
+   "limit_kind": "NMT", "limit": "0.5", "unit": "%", "basis": "q3b_qualification", "mdd": "40", "n": 985, "min": "0", "max": "0.16", "n_outside": 0},
+  {"task_id": "p56_impurity_l", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Impurity L", "column": "impurity_l",
+   "limit_kind": "NMT", "limit": "0.5", "unit": "%", "basis": "q3b_qualification", "mdd": "40", "n": 985, "min": "0.05", "max": "0.2", "n_outside": 0},
+  {"task_id": "p56_total_impurities", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Total impurities", "column": "impurities_total",
+   "limit_kind": "NMT", "limit": "1.0", "unit": "%", "basis": "declared", "n": 985, "min": "0.05", "max": "0.6", "n_outside": 0},
+  {"task_id": "p56_residual_solvent", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Residual solvent", "column": "resodual_solvent",
+   "limit_kind": "NMT", "limit": "0.5", "unit": "%", "basis": "declared", "n": 1005, "min": "0", "max": "0.24", "n_outside": 0}
+ ],
+ "synthetic": [
+  {"task_id": "syn_impurity_o_outside", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Impurity O", "column": "impurity_o",
+   "limit_kind": "NMT", "limit": "0.5", "unit": "%", "basis": "q3b_qualification", "mdd": "40", "n": 985, "min": "0", "max": "0.16", "n_outside": 3},
+  {"task_id": "syn_dissolution_outside", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Dissolution", "column": "dissolution_av",
+   "limit_kind": "NLT", "limit": "80", "unit": "%", "basis": "declared", "n": 1005, "min": "82.5", "max": "102.67", "n_outside": 2},
+  {"task_id": "syn_impurity_l_mdd5", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Impurity L", "column": "impurity_l",
+   "limit_kind": "NMT", "limit": "1.0", "unit": "%", "basis": "q3b_qualification", "mdd": "5", "n": 985, "min": "0.05", "max": "0.2", "n_outside": 0},
+  {"task_id": "syn_impurity_o_mdd500_outside", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Impurity O", "column": "impurity_o",
+   "limit_kind": "NMT", "limit": "0.2", "unit": "%", "basis": "q3b_qualification", "mdd": "500", "n": 985, "min": "0", "max": "0.16", "n_outside": 1},
+  {"task_id": "syn_total_outside", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Total impurities", "column": "impurities_total",
+   "limit_kind": "NMT", "limit": "1.0", "unit": "%", "basis": "declared", "n": 985, "min": "0.05", "max": "0.6", "n_outside": 1}
+ ]
+}

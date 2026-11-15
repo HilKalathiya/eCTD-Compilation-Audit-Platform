@@ -1,5 +1,11 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-15 — T-046 (C3.5b-1) done (P.5.6 justification writer + spec validator, mock only)
+- `writer/spec_{facts,prompt,loop}.py`, `validator/spec.py` (own word lists; declared limit = no source wording; q3b = `[[mdd]]` + "assumed" in the same sentence; compliance wording only if n_outside = 0; safety/"qualified" always rejected; Q3B quote only from `[[q3b_quote]]`; `verify_render` re-reads the finished text, incl. the exact Q3B name). `data/tasks/p56_tasks.json`: 5 real + 5 planted variants. `python tools/writer_run.py --kind p56 --backend mock` -> 5/5. Runner re-reads live numbers and quotes; a stale task file is refused.
+- `tests/test_mutation_spec.py`: 28 draft kinds + 5 rendered-text kinds, 610 tasks: caught 9816/9816; correct accepted 610/610 (+ re-read 610/610, 9/9 paraphrases); hand-written wrong 12/12. `tests/test_spec_writer.py`: 20 tests.
+- Re-read found a real gap during the work (a changed "Q3B" inside the basis wording passed); fixed.
+- Full suite: 542 tests OK (833 s) on rerun. First run: 1 error, not identified (output cut); did not repeat.
+
 ## 2026-11-15 — T-045 (FIX) done (every Postgres/Neo4j connect in the engine is timed, 5 s)
 - `db/postgres.connect` (connect_timeout=5) and `db/graph.connect` (Neo4j timeouts 5 s) now raise `store.DatabaseDown` with the start command; they reuse `CONNECT_TIMEOUT`/`DatabaseDown` from `facts/store.py`. T-044 gap closed. `tests/test_db_down.py`: 4 more planted tests (closed + silent port each).
 - Full suite: EXIT 0, 516 tests, 541 s, FLAGS none. `facts_graph.connect` keeps its own copy of the Neo4j logic (outside this card).
