@@ -1,5 +1,9 @@
 """Writes accepted facts into Neo4j (only the gate calls this) and reads them back as plain text."""
+from neo4j import GraphDatabase
+
 from ectd_engine.db import graph
+from ectd_engine.db.config import load_env
+from ectd_engine.facts.store import CONNECT_TIMEOUT, DatabaseDown
 
 FIELDS = ("fact_id", "value_text", "unit", "batch", "test", "condition", "month",
           "lineage", "definition", "doc_id", "doc_version", "locator")
@@ -33,6 +37,28 @@ def fact_to_props(fact):
              "definition": fact.definition, "doc_id": s.doc_id, "doc_version": s.doc_version, "locator": s.locator}
     graph.check_props(props)
     return props
+
+
+def connect(env=None):
+    """Open Neo4j like db.graph.connect, but give up after 5 s with a clear DatabaseDown error."""
+    env = env or load_env()
+    uri = env.get("NEO4J_URI", "bolt://localhost:7687")
+    driver = GraphDatabase.driver(
+        uri,
+        auth=(env.get("NEO4J_USER", "neo4j"), env["NEO4J_PASSWORD"]),
+        connection_timeout=CONNECT_TIMEOUT,
+        connection_acquisition_timeout=CONNECT_TIMEOUT,
+        max_transaction_retry_time=CONNECT_TIMEOUT,
+    )
+    try:
+        driver.verify_connectivity()
+    except Exception as e:
+        driver.close()
+        raise DatabaseDown(
+            f"Neo4j is not reachable at {uri} (waited {CONNECT_TIMEOUT}s). "
+            f"Start it with: docker compose --profile graph up -d. Detail: {str(e).strip()[:200]}"
+        ) from e
+    return driver
 
 
 def put_fact(session, fact):

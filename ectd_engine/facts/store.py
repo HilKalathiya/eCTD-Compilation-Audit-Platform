@@ -7,16 +7,32 @@ from ectd_engine.db.config import load_env
 from ectd_engine.facts.schema import Fact, SourcePointer
 
 
+CONNECT_TIMEOUT = 5  # seconds to wait for the database before giving up
+
+
+class DatabaseDown(RuntimeError):
+    """A database service could not be reached in time; the message names it and how to start it."""
+
+
 def connect_app(env=None):
     """Connect as ectd_app, the login that may read facts and call the gate but never write directly."""
     env = env or load_env()
-    return psycopg.connect(
-        host=env.get("POSTGRES_HOST", "localhost"),
-        port=int(env.get("POSTGRES_PORT", "5432")),
-        user=env["APP_DB_USER"],
-        password=env["APP_DB_PASSWORD"],
-        dbname=env.get("POSTGRES_DB", "ectd"),
-    )
+    host = env.get("POSTGRES_HOST", "localhost")
+    port = int(env.get("POSTGRES_PORT", "5432"))
+    try:
+        return psycopg.connect(
+            host=host,
+            port=port,
+            user=env["APP_DB_USER"],
+            password=env["APP_DB_PASSWORD"],
+            dbname=env.get("POSTGRES_DB", "ectd"),
+            connect_timeout=CONNECT_TIMEOUT,
+        )
+    except psycopg.OperationalError as e:
+        raise DatabaseDown(
+            f"Postgres is not reachable at {host}:{port} (waited {CONNECT_TIMEOUT}s). "
+            f"Start it with: docker compose --profile db up -d. Detail: {str(e).strip()[:200]}"
+        ) from e
 
 
 def put(conn, fact):

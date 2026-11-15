@@ -142,3 +142,5 @@ MDD = maximum daily dose, the most drug a patient takes in one day
 TDI = total daily intake, the most of an impurity a patient may take in one day
 NMT / NLT = not more than / not less than (the two kinds of spec limit)
 declared limit = a limit typed in by the author with no public source
+timeout = how long we wait before giving up
+silent port = a port that accepts a connection but never answers (this caused the hang)

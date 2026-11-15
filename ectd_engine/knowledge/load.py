@@ -86,9 +86,19 @@ def main(argv=None):
     print("\n".join(summary(by_doc)))
     if args.dry_run:
         return
+    import os
+    os.environ.setdefault("PGCONNECT_TIMEOUT", "5")  # libpq gives up after 5 s instead of hanging
     from ectd_engine.db import migrate, postgres
-    migrate.migrate()
-    conn = postgres.connect()
+    try:
+        migrate.migrate()
+        conn = postgres.connect()
+    except Exception as e:
+        if type(e).__name__ != "OperationalError":
+            raise
+        raise SystemExit(
+            "Postgres is not reachable (waited 5s). "
+            f"Start it with: docker compose --profile db up -d. Detail: {str(e).strip()[:200]}"
+        ) from e
     try:
         n = sum(store(conn, cs) for cs in by_doc.values())
     finally:

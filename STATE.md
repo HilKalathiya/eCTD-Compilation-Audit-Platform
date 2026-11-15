@@ -1,6 +1,11 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
-## 2026-11-15 — T-043 (C3.5a) PARTIAL (Lek spec facts + P.5.1 table + P.5.6 justification facts, no model)
+## 2026-11-15 — T-044 (FIX) done (suite finishes again; a stopped database fails fast and loud)
+- Cause: Docker Desktop was stopped, so every Postgres connect waited ~260 s (tests.test_graph alone: 260.0 s; after start: 4.2 s). Neo4j is a separate profile (`graph`), it was also stopped.
+- `store.connect_app` (Postgres connect_timeout=5) and new `facts_graph.connect` (Neo4j timeouts 5 s) raise `store.DatabaseDown` naming the service + the start command; `knowledge/load.py` sets PGCONNECT_TIMEOUT=5 and exits with a clear message. `tests/test_db_down.py` (4 planted tests: closed port and silent port, each < 15 s).
+- Full suite: EXIT 0, 512 tests, 479 s, FLAGS none (T-043 PARTIAL -> done). Gap: `db/postgres.py` and `db/graph.py` (used by most tests) still have no timeout; they were outside this card.
+
+## 2026-11-15 — T-043 (C3.5a) done (suite green, see T-044) (Lek spec facts + P.5.1 table + P.5.6 justification facts, no model)
 - Open: `watch.py status --tests` hit its limit twice (900 s, then 1500 s, EXIT 124); FLAGS: none. The 13 new tests pass alone (0.05 s). Whether the full suite passes is not shown; slow modules are being timed.
 - `ectd_engine/specs/`: `load.py` (spec CSV -> gated facts `SPEC-LEK-<attr>` + `ASSUMPTION-MDD` = 40 mg; q3b rows computed by `q3b.threshold("qualification", 40)` = 0.5% (rule Q3B_R2@2006-06-02:qualification:2, page 11), typed value in a q3b row or a source claim in a declared row = refused; declared rows get lineage unknown and DECLARED definition), `p51.py` (P.5.1 table by code; missing fact = refuse and name it), `p56.py` (basis, Q3B quote re-verified on the PDF with page, n/min/max/outside per attribute via `stats.basic.conforms`).
 - Real Lek (accepted batches): n 985-1005, outside limit 0 for all 5 attributes. `python -m ectd_engine.specs.p56` prints it all.
