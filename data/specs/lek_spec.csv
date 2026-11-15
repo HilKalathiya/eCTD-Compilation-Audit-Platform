@@ -1,0 +1,6 @@
+attribute,limit_kind,value,unit,basis,basis_note
+impurity_o,NMT,,%,q3b_qualification,computed by code from Q3B at assumed MDD
+impurity_l,NMT,,%,q3b_qualification,computed by code from Q3B at assumed MDD
+impurities_total,NMT,1.0,%,declared,declared for demo; no public source
+dissolution_av,NLT,80,%,declared,declared for demo; no public source
+resodual_solvent,NMT,0.5,%,declared,declared for demo; no public source
