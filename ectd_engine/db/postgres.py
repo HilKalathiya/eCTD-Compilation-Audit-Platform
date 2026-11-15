@@ -2,19 +2,30 @@
 import psycopg
 
 from ectd_engine.db.config import load_env
+from ectd_engine.facts.store import CONNECT_TIMEOUT, DatabaseDown
 
 FLOAT_TYPES = ("real", "double precision")
 
 
 def connect(env=None):
+    """Connect as the admin login; give up after 5 s with a clear DatabaseDown error."""
     env = env or load_env()
-    conn = psycopg.connect(
-        host=env.get("POSTGRES_HOST", "localhost"),
-        port=int(env.get("POSTGRES_PORT", "5432")),
-        user=env["POSTGRES_USER"],
-        password=env["POSTGRES_PASSWORD"],
-        dbname=env.get("POSTGRES_DB", "ectd"),
-    )
+    host = env.get("POSTGRES_HOST", "localhost")
+    port = int(env.get("POSTGRES_PORT", "5432"))
+    try:
+        conn = psycopg.connect(
+            host=host,
+            port=port,
+            user=env["POSTGRES_USER"],
+            password=env["POSTGRES_PASSWORD"],
+            dbname=env.get("POSTGRES_DB", "ectd"),
+            connect_timeout=CONNECT_TIMEOUT,
+        )
+    except psycopg.OperationalError as e:
+        raise DatabaseDown(
+            f"Postgres is not reachable at {host}:{port} (waited {CONNECT_TIMEOUT}s). "
+            f"Start it with: docker compose --profile db up -d. Detail: {str(e).strip()[:200]}"
+        ) from e
     conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
     conn.commit()
     return conn

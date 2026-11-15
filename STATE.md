@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-15 — T-045 (FIX) done (every Postgres/Neo4j connect in the engine is timed, 5 s)
+- `db/postgres.connect` (connect_timeout=5) and `db/graph.connect` (Neo4j timeouts 5 s) now raise `store.DatabaseDown` with the start command; they reuse `CONNECT_TIMEOUT`/`DatabaseDown` from `facts/store.py`. T-044 gap closed. `tests/test_db_down.py`: 4 more planted tests (closed + silent port each).
+- Full suite: EXIT 0, 516 tests, 541 s, FLAGS none. `facts_graph.connect` keeps its own copy of the Neo4j logic (outside this card).
+
 ## 2026-11-15 — T-044 (FIX) done (suite finishes again; a stopped database fails fast and loud)
 - Cause: Docker Desktop was stopped, so every Postgres connect waited ~260 s (tests.test_graph alone: 260.0 s; after start: 4.2 s). Neo4j is a separate profile (`graph`), it was also stopped.
 - `store.connect_app` (Postgres connect_timeout=5) and new `facts_graph.connect` (Neo4j timeouts 5 s) raise `store.DatabaseDown` naming the service + the start command; `knowledge/load.py` sets PGCONNECT_TIMEOUT=5 and exits with a clear message. `tests/test_db_down.py` (4 planted tests: closed port and silent port, each < 15 s).
