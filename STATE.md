@@ -1,5 +1,12 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-15 — T-043 (C3.5a) PARTIAL (Lek spec facts + P.5.1 table + P.5.6 justification facts, no model)
+- Open: `watch.py status --tests` hit its limit twice (900 s, then 1500 s, EXIT 124); FLAGS: none. The 13 new tests pass alone (0.05 s). Whether the full suite passes is not shown; slow modules are being timed.
+- `ectd_engine/specs/`: `load.py` (spec CSV -> gated facts `SPEC-LEK-<attr>` + `ASSUMPTION-MDD` = 40 mg; q3b rows computed by `q3b.threshold("qualification", 40)` = 0.5% (rule Q3B_R2@2006-06-02:qualification:2, page 11), typed value in a q3b row or a source claim in a declared row = refused; declared rows get lineage unknown and DECLARED definition), `p51.py` (P.5.1 table by code; missing fact = refuse and name it), `p56.py` (basis, Q3B quote re-verified on the PDF with page, n/min/max/outside per attribute via `stats.basic.conforms`).
+- Real Lek (accepted batches): n 985-1005, outside limit 0 for all 5 attributes. `python -m ectd_engine.specs.p56` prints it all.
+- `tests/test_specs.py` 13 tests incl. planted: MDD 40->5 mg changes rule and limit, typed q3b value, declared claiming Q3B, altered quote, missing fact, batch outside limit.
+- ChemR (`kerendia/215341Orig1s000ChemR.pdf`): limits are hidden by "(b)(4)" (107 marks; page 28 reads "NLT  % (Q) in  min"); no numeric spec limit visible on any page.
+
 ## 2026-11-03 — T-042 (C3.4b) done (real-Gemma audit of the P.5.4 writer)
 - `python tools/writer_run.py --kind p54 --audit 130 --backend ollama --model gemma4:e4b --out evidence/T-042/run`: 130 fixed-seed windows of 12 real Lek batches (seed 42, 26 per attribute, 52 with a quarantined batch). Result: 130/130 accepted (127 on draft 1, 3 on draft 3 or 2; 135 drafts in all, 850 s). No final rejects, so no false-reject rate from final drafts; 5 retried drafts all hit one rule ("exclusion wording applied to [[n_batches]]", sentence "...analyzed, with [[n_excluded]]... quarantined"). Brain decides if that rule is too broad.
 - `tools/audit_p54.py` re-reads each accepted section against the table rebuilt from the stored facts: wrong = 0 of 130. Files in `evidence/T-042/`: audit.csv, summary.md, blind.csv (25 rows, Hil fills `hil_label` right/wrong), blind_key.csv. `python tools/audit_p54.py --score --run <run folder> --out evidence/T-042` compares Hil's labels (empty/odd label = error, exit 2).
