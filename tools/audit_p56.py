@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import random
+import re
 import sys
 from collections import Counter
 from decimal import Decimal
@@ -18,9 +19,9 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from audit_p54 import AuditError, LABELS, bad_sentence, load_run, rule_of  # noqa: E402  (shared logic, not copied)
 from ectd_engine.validator.spec import verify_render  # noqa: E402
-from ectd_engine.writer.batch_facts import count_text, fact_id  # noqa: E402
+from ectd_engine.writer.batch_facts import fact_id  # noqa: E402
 from ectd_engine.writer.facts import with_unit  # noqa: E402
-from ectd_engine.writer.spec_facts import BASIS_TEXT, DECLARED, KIND_TEXT, Q3B, quote_text  # noqa: E402
+from ectd_engine.writer.spec_facts import BASIS_TEXT, DECLARED, KIND_TEXT, Q3B, digit_count, narrowed, quote_text  # noqa: E402
 
 BLIND_SEED = 7
 N_REAL = 22
@@ -46,7 +47,7 @@ def expected_task(task, get_fact, known_batches, j, mdd):
                min=str(min(values)), max=str(max(values)), n_outside=sum(1 for v in values if not basic.conforms(v, lo, hi)))
     if j.basis == Q3B:
         exp.update(mdd=str(mdd), q3b_quote=j.quote, q3b_page=str(j.page), q3b_version=j.doc_version)
-    return exp
+    return narrowed(exp)  # the finished text shows only the dose row, so the re-read must expect only that row
 
 
 def reread(task, result, exp):
@@ -98,7 +99,8 @@ def plant(kind, text, exp):
     elif kind == PLANTED[1]:
         bad = text.replace(BASIS_TEXT[DECLARED], "the ICH Q3B(R2) qualification threshold", 1)
     else:
-        bad = text.replace(count_text(exp["n"]), count_text(exp["n"] + 1), 1)
+        # counts are written as digits since T-050 ("9 batches"); "\b" so "1 batch" is not found inside "11 batches"
+        bad = re.sub(rf"\b{re.escape(digit_count(exp['n']))}\b", digit_count(exp["n"] + 1), text, count=1)
     if bad == text or not verify_render(bad, exp):
         raise AuditError(f"{exp['task_id']}: the planted error '{kind}' was not made or is not caught by the re-read")
     return bad

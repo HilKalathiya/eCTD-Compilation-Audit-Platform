@@ -11,6 +11,7 @@ from ectd_engine.validator import spec as sv
 from ectd_engine.writer import spec_facts as sf
 from ectd_engine.writer.spec_loop import SpecMockClient, mock_text, run_spec_task, write_spec_section
 from ectd_engine.writer.spec_prompt import build_messages
+from ectd_engine.writer.spec_prose import PROSE_RULES, prose_problems
 from tests.test_mutation_spec import FILE, fixed_tasks, live_data
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -198,18 +199,10 @@ class SpecWriterTests(unittest.TestCase):
         self.assertIn("which is [[basis]].", text)
 
     # ---- T-049: prose and quote fixes
-    NUMBER_WORDS = "one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty"
-    NEW_PROSE = {  # T-050: one named rule each; evidence/T-050/rerender.py greps rendered text with these
-        "upon": re.compile(r"\bupon\b", re.I),
-        "number word as a count": re.compile(rf"\b(?:{NUMBER_WORDS})\b", re.I),
-        "1 of N ... were": re.compile(r"\b1 of \d+ results were\b"),
-        "N>1 of M ... was": re.compile(r"\b(?:[2-9]|\d{2,}) of \d+ results was\b"),
-    }
-    OLD_PROSE = re.compile(r"batches? of\b|resting on declared|set declared|batches? results|�|â€|Âµ|^[a-z]|\. [a-z]")
+    NEW_PROSE = {k: v for k, v in PROSE_RULES.items() if k in ("upon", "number word as a count", "1 of N ... were", "N>1 of M ... was")}
 
-    def prose_hits(self, text):
-        hits = self.OLD_PROSE.findall(text)
-        return hits + [name for name, rx in self.NEW_PROSE.items() if rx.search(text)]
+    def prose_hits(self, text):  # one source of truth: ectd_engine/writer/spec_prose.py
+        return prose_problems(text)
 
     def render_new(self, task, text):
         facts, _, _ = sf.compute_spec_facts(task)
@@ -266,6 +259,45 @@ class SpecWriterTests(unittest.TestCase):
         t, facts, _, _ = self.ctx("p56_impurity_o")  # the Q3B wording is left alone
         out = sf.render_paragraph("It is [[limit_kind]] [[limit]], resting on [[basis]].", facts, t["basis"])
         self.assertIn("resting on the ICH Q3B(R2)", out)
+
+    def test_loop_rejects_a_draft_that_passes_the_validator_but_breaks_a_prose_rule(self):  # T-051 planted bad draft
+        good = mock_text(sf.compute_spec_facts(self.by_id["p56_dissolution"])[1])
+        bad = good[0].lower() + good[1:]  # same placeholders and facts, but the finished paragraph starts in lower case
+
+        class Client:
+            def __init__(self):
+                self.n = 0
+
+            def chat(self, messages, temperature, seed, context=None, schema=None):
+                self.n += 1
+                return {"text": bad if self.n == 1 else good, "seconds": 0, "output_tokens": 9}
+        t, facts, flags, required = self.ctx("p56_dissolution")
+        self.assertEqual(sv.validate(bad, facts, flags, required), [])  # the validator alone would accept it
+        res = run_spec_task(Client(), t)
+        self.assertEqual(res["drafts"][0]["problems"], ["prose:starts lower-case"])
+        self.assertTrue(res["accepted"])
+        self.assertEqual(len(res["drafts"]), 2)
+
+    def test_prose_gate_never_accepts_a_prose_error(self):  # planted: a model that always breaks a rule is never accepted
+        good = mock_text(sf.compute_spec_facts(self.by_id["p56_dissolution"])[1])
+
+        class Always:
+            def chat(self, messages, temperature, seed, context=None, schema=None):
+                return {"text": good[0].lower() + good[1:], "seconds": 0, "output_tokens": 9}
+        res = run_spec_task(Always(), self.by_id["p56_dissolution"])
+        self.assertFalse(res["accepted"])
+        self.assertTrue(all(d["problems"] == ["prose:starts lower-case"] for d in res["drafts"]))
+
+    def test_prose_rules_live_in_one_place_and_every_rule_can_fail(self):
+        planted = {"batches of": "17 batches of 25", "resting on declared": "resting on declared by", "set declared": "set declared by",
+                   "batches results": "28 batches results", "U+FFFD": "bad � char", "mojibake": "â€œ",
+                   "starts lower-case": "the limit", "lower-case after full stop": "It is. the next",
+                   "upon": "resting upon x", "number word as a count": "Twelve of 22", "1 of N ... were": "1 of 24 results were",
+                   "N>1 of M ... was": "2 of 24 results was"}
+        self.assertEqual(set(planted), set(PROSE_RULES))
+        for name, sentence in planted.items():
+            self.assertIn(name, prose_problems(sentence), name)
+        self.assertEqual(prose_problems("Results for 9 batches ranged from 1% to 2%. 1 of 9 results was outside the limit."), [])
 
     def test_each_new_prose_rule_can_fail(self):  # planted: every rule must flag a sentence that breaks it
         planted = {"upon": "The limit is x, resting upon the basis.",

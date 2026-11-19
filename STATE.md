@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-19 — T-051 done (prose rules are a gate on live output; audit count tamper uses digits)
+- `ectd_engine/writer/spec_prose.py`: `PROSE_RULES` (12 named rules) + `prose_problems`, the one source for the loop, tests and evidence. `spec_loop.py`: after render, any hit rejects the draft with "prose:<rule>" (planted bad draft test). Validator untouched.
+- `tools/audit_p56.py`: count tamper now writes digits ("9 batches" -> "10 batches"; whole-word match); `expected_task` expects only the dose-row quote (T-049 would have made the re-read flag every real Q3B paragraph). Tests: every tamper kind made and caught for n = 1, 2, 9, 12, 60.
+- 150 re-rendered paragraphs: 0 prose rejects, 0 re-read problems (`evidence/T-051/hits.txt`).
+
 ## 2026-11-19 — T-050 (FIX for T-049) done (digit counts, verb agreement, any basis lead-in repaired)
 - `spec_facts.py`: `render_paragraph` now rewrites ANY words between `[[limit]]` and `[[basis]]` of a declared limit to ", which is [[basis]]" (w128 and s012 "resting upon" fixed); counts are always digits ("Results for 9 batches", "2 of 9 results"); "1 of 24 results was", "2 of 24 results were". Validator untouched.
 - Tests: new prose rules (upon, number word as a count, 1 of N were, N>1 of M was) each with a planted test; 150 re-rendered paragraphs: 0 hits per rule (`evidence/T-050/hits.txt`, `rendered.md`).

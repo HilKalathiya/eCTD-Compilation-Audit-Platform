@@ -2,6 +2,7 @@
 from ectd_engine.validator.spec import validate, verify_render
 from ectd_engine.writer.spec_facts import compute_spec_facts, narrowed, render_paragraph, render_support
 from ectd_engine.writer.spec_prompt import build_messages
+from ectd_engine.writer.spec_prose import prose_problems
 
 MAX_DRAFTS = 4
 
@@ -23,8 +24,9 @@ def run_spec_task(client, task, max_drafts=MAX_DRAFTS, temperature=0.2, retry_te
         else:
             problems = validate(text, facts, flags, required)
             if not problems:
-                problems = ["re-read of finished text: " + p
-                            for p in verify_render(render_paragraph(text, facts, task["basis"]), task)]
+                finished = render_paragraph(text, facts, task["basis"])
+                problems = ["re-read of finished text: " + p for p in verify_render(finished, task)]
+                problems += ["prose:" + name for name in prose_problems(finished)]  # T-051: the prose rules gate live output
         drafts.append({"draft": i + 1, "text": text, "passed": not problems, "problems": problems,
                        "seconds": reply.get("seconds", 0), "output_tokens": reply.get("output_tokens", 0)})
         if not problems:

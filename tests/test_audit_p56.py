@@ -17,6 +17,7 @@ import audit_p56 as ap  # noqa: E402
 import writer_run as wr  # noqa: E402
 from ectd_engine.loaders import lek  # noqa: E402
 from ectd_engine.validator.spec import verify_render  # noqa: E402
+from ectd_engine.writer.spec_facts import compute_spec_facts, render_paragraph  # noqa: E402
 from ectd_engine.writer.spec_loop import SpecMockClient, run_spec_task  # noqa: E402
 from tests.test_batch_writer import make_store  # noqa: E402
 
@@ -165,6 +166,37 @@ class BlindSheetTests(unittest.TestCase):
         exp = self.expect(next(t for t in self.tasks.values() if t["basis"] == "q3b_qualification"))
         with self.assertRaises(ap.AuditError):
             ap.plant(ap.PLANTED[0], "Nothing to change here.", exp)
+
+    def test_every_tamper_kind_is_made_and_caught_for_small_and_large_counts(self):  # T-051: counts are digits ("9 batches")
+        base = next(t for t in self.tasks.values() if t["basis"] == "declared" and not t["n_outside"])
+        for n in (1, 2, 9, 12, 60):
+            task = dict(base, n=n)
+            facts = compute_spec_facts(task)[0]
+            text = render_paragraph("The acceptance criterion for X is [[limit_kind]] [[limit]], which is [[basis]]. Results for [[n_batches]] "
+                                    "ranged from [[min_value]] to [[max_value]]. No result was outside the limit.", facts, task["basis"])
+            self.assertEqual(verify_render(text, task), [], n)
+            for kind in ap.PLANTED:
+                bad = ap.plant(kind, text, task)
+                self.assertNotEqual(bad, text, (kind, n))
+                self.assertTrue(verify_render(bad, task), (kind, n))
+        tampered = ap.plant(ap.PLANTED[2], text, task)
+        self.assertIn("61 batches", tampered)
+        self.assertNotIn("60 batches", tampered)
+
+    def test_count_tamper_on_an_old_word_count_is_refused(self):  # planted: a paragraph that still spells the count out is not tampered silently
+        task = next(t for t in self.tasks.values() if t["basis"] == "declared")
+        words = "Results for nine batches ranged widely."
+        with self.assertRaises(ap.AuditError):
+            ap.plant(ap.PLANTED[2], words, dict(task, n=9))
+
+    def test_expected_task_asks_for_only_the_dose_row(self):
+        get, known, live = build()
+        row = "10 mg - 100 mg 0.5% or 200 µg TDI, whichever is lower"
+        j = live[COL_Q]
+        j.quote = "Qualification Thresholds Maximum Daily Dose1 Threshold2,3 < 10 mg 1.0% or 50 µg TDI, whichever is lower " + row
+        task = next(t for t in wr.make_p56_windows(get, known, live, MDD, 4) if t["basis"] == "q3b_qualification")
+        exp = ap.expected_task(task, get, known, j, MDD)
+        self.assertEqual(exp["q3b_quote"], row)
 
     def test_missing_labels_give_a_clear_error(self):
         with self.assertRaises(ap.AuditError) as cm:

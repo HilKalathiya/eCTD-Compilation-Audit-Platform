@@ -1,0 +1,14 @@
+150 paragraphs -> E:\E\Project\evidence\T-051\rendered.md
+0 rejects by the prose gate or the re-read of 150
+    0 hits  batches of
+    0 hits  resting on declared
+    0 hits  set declared
+    0 hits  batches results
+    0 hits  U+FFFD
+    0 hits  mojibake
+    0 hits  starts lower-case
+    0 hits  lower-case after full stop
+    0 hits  upon
+    0 hits  number word as a count
+    0 hits  1 of N ... were
+    0 hits  N>1 of M ... was
