@@ -1,0 +1,9 @@
+150 paragraphs -> E:\E\Project\evidence\T-050\rendered.md
+    0 hits  old rules (batches of, resting on declared, set declared, batches results, U+FFFD, mojibake, case)
+    0 hits  upon
+    0 hits  number word as a count
+    0 hits  1 of N ... were
+    0 hits  N>1 of M ... was
+    0 paragraphs contain 'resting'
+    0 paragraphs contain 'relying'
+    0 paragraphs contain 'set declared'

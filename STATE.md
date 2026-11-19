@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-19 — T-050 (FIX for T-049) done (digit counts, verb agreement, any basis lead-in repaired)
+- `spec_facts.py`: `render_paragraph` now rewrites ANY words between `[[limit]]` and `[[basis]]` of a declared limit to ", which is [[basis]]" (w128 and s012 "resting upon" fixed); counts are always digits ("Results for 9 batches", "2 of 9 results"); "1 of 24 results was", "2 of 24 results were". Validator untouched.
+- Tests: new prose rules (upon, number word as a count, 1 of N were, N>1 of M was) each with a planted test; 150 re-rendered paragraphs: 0 hits per rule (`evidence/T-050/hits.txt`, `rendered.md`).
+- Open: `tools/audit_p56.py` (blind-sheet planting) still replaces `count_text(n)` (words) in rendered text; with digit counts that step can no longer find small counts. Needs its own card.
+
 ## 2026-11-19 — T-049 (FIX C3.5 prose) done (grammar + one-row Q3B quote; Hil's findings are tests)
 - T-048 blind score: 3/3 planted caught, 22/22 agree, SCORE PASS (commit 00e0ab4).
 - `spec_facts.py`: `render_paragraph` (counts read "17 of 25 results", declared basis reads ", which is ..."), `q3b_row_quote`/`narrow_quote` (quote = only the dose-band row, re-verified with `cite.verify`, page kept); `check_task` rejects any other quote. Prompt rule 4 words the basis. Validator untouched. Evidence: `evidence/T-049/rendered.md` (150 re-rendered paragraphs, no model).

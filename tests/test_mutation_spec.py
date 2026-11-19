@@ -17,8 +17,8 @@ from pathlib import Path
 from ectd_engine.specs import load, p56
 from ectd_engine.validator import spec as sv
 from ectd_engine.validator.spec import render, validate, verify_render
-from ectd_engine.writer.batch_facts import LoaderStore, count_text
-from ectd_engine.writer.spec_facts import compute_spec_facts, q3b_row_quote, quote_text, resolve_quote
+from ectd_engine.writer.batch_facts import LoaderStore
+from ectd_engine.writer.spec_facts import compute_spec_facts, digit_count, q3b_row_quote, quote_text, resolve_quote
 
 ROOT = Path(__file__).resolve().parent.parent
 FILE = json.loads((ROOT / "data" / "tasks" / "p56_tasks.json").read_text(encoding="utf-8"))
@@ -346,9 +346,9 @@ def t_quote(r, c, rng):
 
 def t_count(r, c, rng):
     t = c["task"]
-    v = count_text(t["n"])
+    v = digit_count(t["n"])
     other = rng.choice([k for k in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 99, 500) if k not in (t["n"], t["n_outside"])])
-    return r.replace(v, count_text(other), 1)
+    return r.replace(v, digit_count(other), 1)
 
 
 TAMPERS = [("digit changed in a rendered value", t_digit), ("limit direction flipped", t_direction),

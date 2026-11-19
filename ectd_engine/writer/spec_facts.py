@@ -8,7 +8,7 @@ from ectd_engine.knowledge import cite
 from ectd_engine.loaders import lek
 from ectd_engine.rules import q3b
 from ectd_engine.validator.spec import render
-from ectd_engine.writer.batch_facts import LEK_TESTS, NUMBER_WORDS, count_text
+from ectd_engine.writer.batch_facts import LEK_TESTS
 from ectd_engine.writer.facts import TEST_REGISTRY, with_unit
 
 Q3B, DECLARED = "q3b_qualification", "declared"
@@ -81,20 +81,29 @@ def narrow_quote(task):
     return dict(task, q3b_quote=row)
 
 
+def digit_count(n):
+    """A count of batches, always in digits ("1 batch", "9 batches")."""
+    return f"{n} {'batch' if n == 1 else 'batches'}"
+
+
 def bare_text(n):
-    """A count with no noun ("two", "17"), for sentences like "17 of 25 results"."""
-    return NUMBER_WORDS.get(n, str(n))
+    """A count with no noun, always digits, for sentences like "17 of 25 results"."""
+    return str(n)
+
+
+# Anything between the limit and [[basis]] (a verb or preposition: "resting upon", "relying on", "set", ...).
+BASIS_LEAD = re.compile(r"(?<=\[\[limit\]\])(?:,\s*|\s+)[A-Za-z ]*?\s*\[\[basis\]\]")
+OUTSIDE_RESULTS = re.compile(r"\[\[n_outside\]\] of \[\[n_batches\]\] results (?:was|were)")
 
 
 def render_paragraph(text, facts, basis=None):
-    """The validator's render, plus two wording repairs made by code: in "X of Y results" the counts lose "batches",
-    and a declared basis never follows "resting on" or "set" (it reads ", which is ...")."""
-    text = text.replace("[[n_outside]] of [[n_batches]] results", "[[n_outside_bare]] of [[n_batches_bare]] results")
-    facts = {k: dict(v) for k, v in facts.items()}
-    if "n_outside" in facts and "bare" in facts["n_outside"] and re.search(r"(?:^|[.!?]\s)\[\[n_outside_bare\]\]", text):
-        facts["n_outside"]["bare"] = facts["n_outside"]["bare"].capitalize()  # a count that opens a sentence
+    """The validator's render, plus wording repairs made by code: a declared basis always reads ", which is [[basis]]"
+    (whatever verb the model put before it); "X of Y results" uses digits and the right verb ("1 ... was", "2 ... were")."""
     if basis == DECLARED:
-        text = re.sub(r"(?:,\s*)?\b(?:resting on|rests on|set at|set|based on)\s+\[\[basis\]\]", ", which is [[basis]]", text)
+        text = BASIS_LEAD.sub(", which is [[basis]]", text)
+    n_out = facts["n_outside"]["bare"] if "n_outside" in facts else None
+    verb = "was" if n_out == "1" else "were"
+    text = OUTSIDE_RESULTS.sub(f"[[n_outside_bare]] of [[n_batches_bare]] results {verb}", text)
     extra = {f"{k}_bare": {"value": v["bare"]} for k, v in facts.items() if "bare" in v}
     return render(text, {**facts, **extra})
 
@@ -151,7 +160,7 @@ def compute_spec_facts(task):
         "limit_kind": (KIND_TEXT[task["limit_kind"]], "direction of the limit", set()),
         "limit": (with_unit(task["limit"], unit), "the acceptance limit", set()),
         "basis": (BASIS_TEXT[task["basis"]], "what the limit rests on", set()),
-        "n_batches": (count_text(task["n"]), "number of batches with a result", set()),
+        "n_batches": (digit_count(task["n"]), "number of batches with a result", set()),
         "min_value": (with_unit(task["min"], unit), "lowest result", {"min"}),
         "max_value": (with_unit(task["max"], unit), "highest result", {"max"}),
     }
@@ -159,7 +168,7 @@ def compute_spec_facts(task):
         spec["mdd"] = (f"{task['mdd']} mg", "maximum daily dose; an ASSUMPTION, not a source value", set())
         spec["q3b_quote"] = (quote_text(task), "the Q3B text and page the limit comes from", set())
     if task["n_outside"]:
-        spec["n_outside"] = (count_text(task["n_outside"]), "number of batches with a result outside the limit", set())
+        spec["n_outside"] = (digit_count(task["n_outside"]), "number of batches with a result outside the limit", set())
     facts = {k: {"value": v, "label": label, "roles": roles} for k, (v, label, roles) in spec.items()}
     facts["n_batches"]["bare"] = bare_text(task["n"])
     if task["n_outside"]:

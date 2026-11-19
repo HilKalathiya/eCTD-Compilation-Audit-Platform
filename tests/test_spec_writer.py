@@ -57,7 +57,7 @@ class SpecWriterTests(unittest.TestCase):
         self.assertNotIn("mdd", facts)
         self.assertNotIn("q3b_quote", facts)
         _, facts, _, required = self.ctx("syn_dissolution_outside")
-        self.assertEqual(facts["n_outside"]["value"], "two batches")
+        self.assertEqual(facts["n_outside"]["value"], "2 batches")
         self.assertIn("n_outside", required)
 
     def test_malformed_tasks_fail_loudly(self):
@@ -198,10 +198,18 @@ class SpecWriterTests(unittest.TestCase):
         self.assertIn("which is [[basis]].", text)
 
     # ---- T-049: prose and quote fixes
-    BAD_PROSE = re.compile(r"batches? of\b|resting on declared|set declared|batches? results|�|â€|Âµ|^[a-z]|\. [a-z]")
+    NUMBER_WORDS = "one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty"
+    NEW_PROSE = {  # T-050: one named rule each; evidence/T-050/rerender.py greps rendered text with these
+        "upon": re.compile(r"\bupon\b", re.I),
+        "number word as a count": re.compile(rf"\b(?:{NUMBER_WORDS})\b", re.I),
+        "1 of N ... were": re.compile(r"\b1 of \d+ results were\b"),
+        "N>1 of M ... was": re.compile(r"\b(?:[2-9]|\d{2,}) of \d+ results was\b"),
+    }
+    OLD_PROSE = re.compile(r"batches? of\b|resting on declared|set declared|batches? results|�|â€|Âµ|^[a-z]|\. [a-z]")
 
     def prose_hits(self, text):
-        return self.BAD_PROSE.findall(text)
+        hits = self.OLD_PROSE.findall(text)
+        return hits + [name for name, rx in self.NEW_PROSE.items() if rx.search(text)]
 
     def render_new(self, task, text):
         facts, _, _ = sf.compute_spec_facts(task)
@@ -223,7 +231,54 @@ class SpecWriterTests(unittest.TestCase):
         self.assertEqual(self.prose_hits(out), [])
         self.assertEqual(sv.verify_render(out, task), [])
         small = self.render_new(dict(task, n=9, n_outside=2), text)
-        self.assertTrue(small.endswith("Two of nine results were outside the limit."), small)
+        self.assertTrue(small.endswith("2 of 9 results were outside the limit."), small)
+        self.assertIn("Results for 9 batches ranged", small)
+        self.assertEqual(self.prose_hits(small), [])
+
+    def test_agreement_one_was_many_were_whatever_the_model_wrote(self):
+        task = dict(self.by_id["syn_dissolution_outside"], n=24, n_outside=1)
+        for verb in ("was", "were"):
+            text = ("The acceptance criterion for Dissolution is [[limit_kind]] [[limit]], which is [[basis]]. Results for [[n_batches]] "
+                     f"ranged from [[min_value]] to [[max_value]]. [[n_outside]] of [[n_batches]] results {verb} outside the limit.")
+            self.assertTrue(self.render_new(task, text).endswith("1 of 24 results was outside the limit."))
+            self.assertTrue(self.render_new(dict(task, n_outside=2), text).endswith("2 of 24 results were outside the limit."))
+            self.assertTrue(self.render_new(dict(task, n_outside=12), text).endswith("12 of 24 results were outside the limit."))
+
+    def test_s003_reads_one_of_24_results_was(self):  # the T-048 synthetic window s003, rendered whole
+        task = dict(self.by_id["syn_dissolution_outside"], n=24, n_outside=1)
+        text = ("The acceptance criterion for Dissolution is [[limit_kind]] [[limit]], set [[basis]]. Results for [[n_batches]] ranged "
+                "from [[min_value]] to [[max_value]]. [[n_outside]] of [[n_batches]] results were outside the limit.")
+        out = self.render_new(task, text)
+        self.assertIn(", which is declared by the author", out)
+        self.assertTrue(out.endswith("Results for 24 batches ranged from " + sf.with_unit(task["min"], task["unit"]) + " to "
+                                     + sf.with_unit(task["max"], task["unit"]) + ". 1 of 24 results was outside the limit."), out)
+        self.assertEqual(self.prose_hits(out), [])
+
+    def test_basis_repair_replaces_any_lead_in_words(self):  # named cases: w128 (resting upon), s012 (resting upon), s003 (set)
+        for name, lead in [("w128", "resting upon"), ("s012", "resting upon"), ("s003", "set"), ("x", "relying on"),
+                           ("y", "grounded in"), ("z", "as determined by"), ("ok", "which is")]:
+            tid = "syn_dissolution_outside" if name in ("s012", "s003") else "p56_dissolution"
+            t, facts, _, _ = self.ctx(tid)
+            text = f"The acceptance criterion for X is [[limit_kind]] [[limit]], {lead} [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit."
+            out = sf.render_paragraph(text, facts, t["basis"])
+            self.assertIn(", which is declared by the author for this demonstration, with no public source.", out, name)
+            self.assertNotIn(lead.replace("which is", "~~"), out, name)
+        t, facts, _, _ = self.ctx("p56_impurity_o")  # the Q3B wording is left alone
+        out = sf.render_paragraph("It is [[limit_kind]] [[limit]], resting on [[basis]].", facts, t["basis"])
+        self.assertIn("resting on the ICH Q3B(R2)", out)
+
+    def test_each_new_prose_rule_can_fail(self):  # planted: every rule must flag a sentence that breaks it
+        planted = {"upon": "The limit is x, resting upon the basis.",
+                   "number word as a count": "Results for nine batches ranged widely.",
+                   "1 of N ... were": "1 of 24 results were outside the limit.",
+                   "N>1 of M ... was": "2 of 24 results was outside the limit."}
+        self.assertEqual(set(planted), set(self.NEW_PROSE))
+        for name, sentence in planted.items():
+            self.assertIn(name, self.prose_hits(sentence), name)
+        for name in ("Twelve of 22 results were outside the limit.", "two of 9 results were outside the limit."):
+            self.assertIn("number word as a count", self.prose_hits(name), name)
+        for ok in ("1 of 24 results was outside the limit.", "2 of 24 results were outside the limit.", "No result was outside the limit."):
+            self.assertEqual(self.prose_hits(ok), [], ok)
 
     def test_the_grammar_check_can_fail(self):  # planted: the old T-048 wording must be caught by the check itself
         self.assertTrue(self.prose_hits("Results were 17 batches of 25 batches results outside the limit."))
