@@ -8,6 +8,7 @@ import fitz
 from ectd_engine.db import postgres
 from ectd_engine.knowledge import chunk as ch
 from ectd_engine.knowledge import load
+from tests import chunk_cache, fast_localhost  # noqa: F401  (T-052: one shared chunking; "localhost" -> IPv4 only)
 from tests.test_migrate import require_database
 
 Q3B_ROWS = {  # table_id -> every row of the Q3B(R2) Attachment 1 table (page 11), exactly as printed

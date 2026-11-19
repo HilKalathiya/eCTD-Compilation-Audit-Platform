@@ -11,6 +11,7 @@ from unittest import mock
 from ectd_engine.db import migrate, postgres
 from ectd_engine.gate import gate
 from ectd_engine.knowledge import embed, load, rerank, search
+from tests import chunk_cache, fast_localhost, warm_models  # noqa: F401  (T-052: shared chunking; "localhost" -> IPv4 only; torch import in the background)
 from tests.test_gate import cand, run
 from tests.test_migrate import require_database
 

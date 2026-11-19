@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-19 — T-052 done (suite 556 s -> 266 s, same 581 tests, same assertions)
+- `tools/test_times.py` (per-test seconds CSV). Setup-only helpers in `tests/`: `fast_localhost` (localhost -> IPv4; saved ~2 s per Ollama connection), `chunk_cache` (PDFs chunked once per run), `warm_models` (torch import in a background thread); `test_watch.py` builds its template repo once. Table: `evidence/T-052/changes.md`; `before.csv`/`after.csv`.
+- Not reducible here: 3 demo runs (~140 s, engine DB writes) and 6 db_down timeouts (5 s each, they test the timeout).
+
 ## 2026-11-19 — T-051 done (prose rules are a gate on live output; audit count tamper uses digits)
 - `ectd_engine/writer/spec_prose.py`: `PROSE_RULES` (12 named rules) + `prose_problems`, the one source for the loop, tests and evidence. `spec_loop.py`: after render, any hit rejects the draft with "prose:<rule>" (planted bad draft test). Validator untouched.
 - `tools/audit_p56.py`: count tamper now writes digits ("9 batches" -> "10 batches"; whole-word match); `expected_task` expects only the dose-row quote (T-049 would have made the re-read flag every real Q3B paragraph). Tests: every tamper kind made and caught for n = 1, 2, 9, 12, 60.

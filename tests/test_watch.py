@@ -56,15 +56,30 @@ def build_repo(root, run=subprocess.run, pause=0.3):
 
 
 class WatchFlagTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        """T-052: build the starting repo (3 files, one commit, `watch task` recorded) ONCE; every test gets its own copy of it."""
+        cls._template = tempfile.TemporaryDirectory()
+        root = Path(cls._template.name)
+        for rel, text in (("writer_test/README.md", "frozen readme\n"), ("ectd_engine/facts/a.py", '"""a."""\nX = 1\n'),
+                          ("tests/test_a.py", TEST_A)):
+            p = root / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(text, encoding="utf-8", newline="\n")
+        build_repo(root)
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(root))
+        run_retry([sys.executable, str(WATCH), "task", "X", "ectd_engine/**", "tests/**"], env=env, capture_output=True,
+                  text=True, timeout=60)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._template.cleanup()
+
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self._tmp.cleanup)
         self.root = Path(self._tmp.name)
-        self.write("writer_test/README.md", "frozen readme\n")
-        self.write("ectd_engine/facts/a.py", '"""a."""\nX = 1\n')
-        self.write("tests/test_a.py", TEST_A)
-        build_repo(self.root)
-        self.watch("task", "X", "ectd_engine/**", "tests/**")
+        shutil.copytree(self._template.name, self.root, dirs_exist_ok=True)
 
     def write(self, rel, text):
         p = self.root / rel
