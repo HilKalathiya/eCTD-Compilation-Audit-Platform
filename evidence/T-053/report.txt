@@ -1,0 +1,7 @@
+numbers 3589
+placements 3589
+data-src in html 3589
+sections written 540
+missing 0
+rejected sections 0
+RESULT numbers == placements

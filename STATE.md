@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-20 — T-053 done (C3.6a: code decides the P.5 content; every number has a placement)
+- `ectd_engine/render/`: `plan.py` (CONTENT_PLAN for P.5.4 + P.5.6, required fact keys per section), `numbers.py` (one number-finder + 3 exempt kinds: guideline/section names, batch ids in text, batch-id table cell), `html.py` (build, placements, gates "missing:<key>" and "unplaced:<text>"). `tools/render_doc.py --out evidence/T-053/` -> P5.html, placements.jsonl, report.txt.
+- Real run: 3589 numbers = 3589 placements = 3589 data-src, 540 sections, missing 0. Inputs: T-042 (P.5.4, 130 accepted) and T-048 (P.5.6, 150 incl. 21 synthetic). Placement ids are fact keys (limit, q3b_quote ...) or LEK-<batch>-<column> for table cells. `tests/test_render.py`: 23 tests incl. planted gates.
+
 ## 2026-11-19 — T-052 done (suite 556 s -> 266 s, same 581 tests, same assertions)
 - `tools/test_times.py` (per-test seconds CSV). Setup-only helpers in `tests/`: `fast_localhost` (localhost -> IPv4; saved ~2 s per Ollama connection), `chunk_cache` (PDFs chunked once per run), `warm_models` (torch import in a background thread); `test_watch.py` builds its template repo once. Table: `evidence/T-052/changes.md`; `before.csv`/`after.csv`.
 - Not reducible here: 3 demo runs (~140 s, engine DB writes) and 6 db_down timeouts (5 s each, they test the timeout).

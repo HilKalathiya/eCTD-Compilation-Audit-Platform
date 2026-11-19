@@ -153,3 +153,5 @@ synthetic window = a test case made up on purpose so some results fall outside t
 replay = running old drafts through a new checker to see what it would say
 regression test = a test that keeps an old mistake from coming back
 bare number = a number with no noun after it (17, not 17 batches)
+placement = a record saying which fact one number in the output came from
+exempt token = a number-like thing (such as a batch id) allowed on an explicit list without a fact
