@@ -171,6 +171,47 @@ class SpecWriterTests(unittest.TestCase):
         self.assertEqual(len(res["drafts"]), 4)
         self.assertIsNone(res["rendered"])
 
+    # ---- T-048: the outside-count sentence is required
+    def test_outside_sentence_is_required_when_none_outside(self):
+        task = next(t for t in self.tasks if not t["n_outside"])
+        good = mock_text(sf.compute_spec_facts(task)[1])
+        self.assertEqual(self.check(task["task_id"], good), [])
+        bad = good.replace(" No result was outside the limit.", " All results were within the limit.")
+        self.assertNotEqual(bad, good)  # planted: the sentence is swapped for a compliance claim
+        self.assertTrue(any("outside-count sentence" in p for p in self.check(task["task_id"], bad)))
+
+    def test_outside_sentence_is_required_when_some_outside(self):
+        task = next(t for t in self.tasks if t["n_outside"])
+        good = mock_text(sf.compute_spec_facts(task)[1])
+        self.assertEqual(self.check(task["task_id"], good), [])
+        bad = good.replace("[[n_outside]] had results outside the limit.", "The count was [[n_outside]].")
+        self.assertNotEqual(bad, good)  # planted: [[n_outside]] is there but nothing says the results were outside
+        self.assertEqual([p for p in self.check(task["task_id"], bad) if "outside-count" in p].__len__(), 1)
+
+    def test_prompt_asks_for_exactly_three_sentences_and_shows_both_patterns(self):
+        t, facts, flags, _ = self.ctx("p56_dissolution")
+        text = " ".join(m["content"] for m in build_messages(t, facts, flags))
+        self.assertIn("exactly 3 sentences", text)
+        self.assertIn("[[n_outside]] of [[n_batches]] results were outside the limit.", text)
+        self.assertIn("set at [[basis]] for an assumed maximum daily dose of [[mdd]]", text)
+        self.assertIn("which is [[basis]].", text)
+
+    def test_synthetic_windows_all_have_batches_outside_and_are_marked(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("writer_run", ROOT / "tools" / "writer_run.py")
+        wr = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(wr)
+        store = wr.LoaderStore()
+        from ectd_engine.specs import load, p56
+        sp = load.load()
+        live = {r.attribute: j for r, j in zip(sp.rows, p56.compute(sp, store))}
+        syn = wr.make_synthetic_p56_windows(store.get, store.known_batches, live, 6)
+        self.assertEqual(len(syn), 6)
+        for t in syn:
+            self.assertTrue(t["synthetic"])
+            self.assertEqual(t["basis"], "declared")
+            self.assertGreaterEqual(t["n_outside"], 1)
+
     def test_runner_accepts_all_five_with_the_mock_model(self):
         with tempfile.TemporaryDirectory() as d:
             p = subprocess.run([sys.executable, str(ROOT / "tools" / "writer_run.py"), "--kind", "p56", "--backend", "mock", "--out", d],

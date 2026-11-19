@@ -59,6 +59,31 @@ def make_p56_windows(get_fact, known, live, mdd, count, seed=AUDIT_SEED, low=8, 
     return out
 
 
+def make_synthetic_p56_windows(get_fact, known, live, count, seed=AUDIT_SEED):
+    """SYNTHETIC windows with batches outside the limit (the real Lek data has none). Declared-basis attributes only.
+
+    Each is a real window whose limit is moved onto one of its own results, so 1 or more results fall outside. The numbers
+    still come from the stored facts; only the limit is made up, and every task is marked "synthetic": true."""
+    from ectd_engine.stats import basic
+    declared = {c: j for c, j in live.items() if j.basis == "declared"}
+    rng = random.Random(seed + 1)
+    out = []
+    for t in make_p56_windows(get_fact, known, declared, None, count, seed + 1):
+        vals = sorted(get_fact(fact_id(b, t["column"])).value for b in t["batches"] if get_fact(fact_id(b, t["column"])) is not None)
+        nmt = t["limit_kind"] == "NMT"
+        for pos in rng.sample(range(len(vals)), len(vals)):
+            lim = vals[pos]
+            lo, hi = (None, lim) if nmt else (lim, None)
+            n_out = sum(1 for v in vals if not basic.conforms(v, lo, hi))
+            if n_out:
+                break
+        else:
+            continue
+        t.update(task_id="s" + t["task_id"][1:], limit=str(lim), n_outside=n_out, synthetic=True)
+        out.append(t)
+    return out
+
+
 import argparse
 import json
 import random
@@ -95,25 +120,39 @@ def run_p56(args, client):
         if args.tasks:
             wanted = set(args.tasks.split(","))
             tasks = [t for t in tasks if t["task_id"] in wanted]
-    accepted, t0 = 0, time.time()
-    with open(out / "drafts.jsonl", "w", encoding="utf-8") as log, open(out / "results.jsonl", "w", encoding="utf-8") as results:
-        for task in tasks:
-            if not args.audit:
-                task = resolve_quote(task, live)
-            res = run_spec_task(client, task, max_drafts=args.max_drafts)
-            for d in res["drafts"]:
-                log.write(json.dumps({"task_id": task["task_id"], **d}, ensure_ascii=False) + "\n")
-            results.write(json.dumps({"task_id": task["task_id"], "accepted": res["accepted"], "rendered": res["rendered"],
-                                      "flags": {"n_excluded": task.get("n_excluded", 0)}, "drafts": res["drafts"]},
-                                     ensure_ascii=False) + "\n")
-            results.flush()
-            if res["accepted"]:
-                accepted += 1
-                (out / "sections" / f"{task['task_id']}.md").write_text(write_spec_section(task, res), encoding="utf-8")
-                print(f"{task['task_id']}: ACCEPTED after {len(res['drafts'])} draft(s)")
-            else:
-                print(f"{task['task_id']}: REJECTED after {len(res['drafts'])} draft(s): {'; '.join(res['drafts'][-1]['problems'])}")
+    def run_set(tasks, folder):
+        """Write every task of one set into `folder` (drafts, results, sections); return how many were accepted."""
+        accepted = 0
+        (folder / "sections").mkdir(parents=True, exist_ok=True)
+        with open(folder / "drafts.jsonl", "w", encoding="utf-8") as log, open(folder / "results.jsonl", "w", encoding="utf-8") as results:
+            for task in tasks:
+                if not args.audit:
+                    task = resolve_quote(task, live)
+                res = run_spec_task(client, task, max_drafts=args.max_drafts)
+                for d in res["drafts"]:
+                    log.write(json.dumps({"task_id": task["task_id"], **d}, ensure_ascii=False) + "\n")
+                results.write(json.dumps({"task_id": task["task_id"], "accepted": res["accepted"], "rendered": res["rendered"],
+                                          "flags": {"n_excluded": task.get("n_excluded", 0)}, "drafts": res["drafts"]},
+                                         ensure_ascii=False) + "\n")
+                results.flush()
+                if res["accepted"]:
+                    accepted += 1
+                    (folder / "sections" / f"{task['task_id']}.md").write_text(write_spec_section(task, res), encoding="utf-8")
+                    print(f"{task['task_id']}: ACCEPTED after {len(res['drafts'])} draft(s)")
+                else:
+                    print(f"{task['task_id']}: REJECTED after {len(res['drafts'])} draft(s): {'; '.join(res['drafts'][-1]['problems'])}")
+        return accepted
+
+    t0 = time.time()
+    accepted = run_set(tasks, out)
     print(f"\n{accepted}/{len(tasks)} accepted ({time.time() - t0:.0f} s). Saved in {out}")
+    if args.audit and args.synthetic:  # kept in a sub-folder so the real-window audit never mixes them in
+        syn = make_synthetic_p56_windows(store.get, store.known_batches, live[str(spec.mdd.value)], args.synthetic, args.seed)
+        sdir = out / "synthetic"
+        sdir.mkdir(parents=True, exist_ok=True)
+        (sdir / "tasks.json").write_text(json.dumps({"seed": args.seed, "synthetic": True, "tasks": syn}, indent=1), encoding="utf-8")
+        s_acc = run_set(syn, sdir)
+        print(f"\nSYNTHETIC (n_outside > 0): {s_acc}/{len(syn)} accepted. Saved in {sdir}")
     return 0 if (accepted == len(tasks) or args.audit) else 1
 
 
@@ -143,6 +182,8 @@ def main(argv=None):
     ap.add_argument("--tasks", default=None, help="comma-separated task ids (default: all)")
     ap.add_argument("--audit", type=int, default=0, metavar="N",
                     help="p54/p56: use N fixed-seed windows of real Lek batches instead of the task file entries")
+    ap.add_argument("--synthetic", type=int, default=0, metavar="N",
+                    help="p56 with --audit: also N SYNTHETIC windows with batches outside the limit (kept in a synthetic/ sub-folder)")
     ap.add_argument("--seed", type=int, default=AUDIT_SEED, help="seed for --audit windows")
     ap.add_argument("--data", default=None, help="tasks file (default depends on --kind)")
     ap.add_argument("--out", default=str(ROOT / "outputs" / "writer_run"),

@@ -149,3 +149,5 @@ assumption = a value we chose ourselves (like a 40 mg daily dose), not one a sou
 planted error = a mistake added on purpose to check that the checker notices it
 planted row = a wrong row added on purpose to see if a checker notices it
 window = a random group of batches used for one test paragraph
+synthetic window = a test case made up on purpose so some results fall outside the limit
+replay = running old drafts through a new checker to see what it would say

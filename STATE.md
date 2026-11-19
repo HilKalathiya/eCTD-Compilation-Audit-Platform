@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-19 — T-048 (FIX C3.5b) done (exact 3-sentence prompt, required outside-count sentence, Gemma audit)
+- `spec_prompt.py`: "exactly 3 sentences" (limit+basis, range, outside count) with one example per basis. `validator/spec.py`: ONE new rule `outside_statement_problems` (no sentence saying how many were outside -> reject); nothing removed or relaxed; 3-6 range stays. Mutation kind `omit_outside_statement` caught 100%; T-047's 520 drafts replayed: 0 accepted.
+- Gemma audit (`writer_run.py --kind p56 --audit 130 --synthetic 26`): real 129/130 accepted, re-read wrong 0; synthetic (n_outside>0, declared attributes, own limit) 21/26, wrong 0. Synthetic windows live in `run/.../synthetic/`, so blind.csv (25 rows, 3 planted) is from real windows only. Details: `evidence/T-048/SUMMARY.md`.
+- Open: Hil must label blind.csv, then `audit_p56.py --score`. Wording "2 batches of 7 batches results" reads badly (card's exact sentence + count_text).
+
 ## 2026-11-19 — T-047 (C3.5b-2) PARTIAL (tools + tests done; real-Gemma audit accepted 0/130, brain must decide)
 - `python tools/writer_run.py --kind p56 --audit 130 --backend ollama --model gemma4:e4b --out evidence/T-047/run`: 130 fixed-seed windows (8-30 real Lek batches each, 5 attributes in turn, some with quarantined batches). Result: 0/130 accepted, 4 drafts each (2773 s). Every final draft broke one rule: "needs 3-6 sentences, got 2" (2 also: "declared limit written like a sourced one"). Cause: when n_outside = 0 the model writes 2 sentences (copies the declared example); the validator needs >= 3 and the prompt only says "you may" add the no-result-outside sentence. Fix belongs in `validator/spec.py` or `spec_prompt.py` (not touched, per card).
 - Re-read of accepted = n/a (none accepted). `tools/audit_p56.py` stops with "no accepted declared-basis paragraph" and writes no blind sheet, so blind.csv / Hil's score are NOT done. Files: `evidence/T-047/audit.csv`, run folder (tasks.json, results.jsonl, drafts.jsonl).

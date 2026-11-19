@@ -106,6 +106,15 @@ def outside_problems(text, flags):
     return problems
 
 
+def outside_statement_problems(text, flags):
+    """The paragraph must say how many results were outside the limit (T-048): the count sentence, or 'no result was outside'."""
+    if flags["n_outside"]:
+        ok = any("[[n_outside]]" in s and NEGATIVE.search(PH.sub(" ", s)) for s in sentences(text))
+        return [] if ok else ["missing outside-count sentence: say in one sentence with [[n_outside]] that results were outside the limit"]
+    ok = NEGATED.search(PH.sub(" ", text))
+    return [] if ok else ["missing outside-count sentence: say that no result was outside the limit"]
+
+
 def validate(text, facts, flags, required):
     """Return a list of violations; an empty list means the draft passes."""
     problems = []
@@ -149,6 +158,7 @@ def validate(text, facts, flags, required):
     if QUOTE_PHRASES.search(bare_words):
         problems.append(f"typed quote fragment ('{QUOTE_PHRASES.search(bare_words).group(0)}')")
     problems += outside_problems(text, flags)
+    problems += outside_statement_problems(text, flags)
     no_dose = re.sub(r"maximum daily dose", "daily dose", text, flags=re.I)  # "maximum" here is not a result word
     problems += role_problems(no_dose, facts) + mean_range_problems(no_dose)
 

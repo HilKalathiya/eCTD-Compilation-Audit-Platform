@@ -95,7 +95,7 @@ def oracle(flags, rng):
         out = rng.choice(["[[n_outside]] had results outside the limit.", "Results for [[n_outside]] were outside the limit.",
                           "The limit was exceeded by results for [[n_outside]]."])
     else:
-        out = rng.choice(["No result was outside the limit.", "All results were within the limit.", "No result exceeded the limit."])
+        out = rng.choice(["No result was outside the limit.", "No result exceeded the limit."])
     parts = head + res + [out]
     return " ".join(parts)
 
@@ -177,6 +177,15 @@ def m_failure_without_count(t, c):
 
 def m_invented_failure(t, c):
     return None if c["flags"]["n_outside"] else _add(t, c["rng"].choice(FAILURE_SENTENCES))
+
+
+def m_omit_outside_statement(t, c):
+    """T-048: the last sentence (the outside-count sentence) is dropped, or, with batches outside, replaced by one that
+    names [[n_outside]] but never says the results were outside the limit."""
+    cut = t[:t.rfind(". ", 0, len(t) - 1) + 1]
+    if c["flags"]["n_outside"] and c["rng"].random() < 0.5:
+        return cut + " The count was [[n_outside]]."
+    return cut
 
 
 def m_safety(t, c):
@@ -262,6 +271,7 @@ MUTATIONS = [
     ("deny_failure_with_outside", ("denies a failure",), m_deny_failure, False),
     ("failure_without_n_outside", ("failure wording without",), m_failure_without_count, False),
     ("invented_failure (none outside)", ("invented failure",), m_invented_failure, False),
+    ("omit_outside_statement", ("outside-count sentence",), m_omit_outside_statement, False),
     ("safety_claim", ("safety or qualification",), m_safety, False),
     ("limit_kind_flip (NMT/NLT typed)", ("limit direction",), m_limit_kind_flip, False),
     ("limit_kind_paired_with_result", ("limit direction",), m_kind_paired_wrong, False),
@@ -346,12 +356,12 @@ TAMPERS = [("digit changed in a rendered value", t_digit), ("limit direction fli
 
 # Correct paragraphs in other words (index into fixed_tasks(): 0-4 real tasks, 5-9 planted variants). All must pass.
 LEGIT = [
-    (0, "For Dissolution, the limit is [[limit_kind]] [[limit]]. This limit is [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. All results were within the limit."),
+    (0, "For Dissolution, the limit is [[limit_kind]] [[limit]]. This limit is [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit."),
     (0, "Dissolution has an acceptance criterion of [[limit_kind]] [[limit]], which is [[basis]]. The lowest result across [[n_batches]] was [[min_value]] and the highest result was [[max_value]]. No result was outside the limit."),
-    (1, "The acceptance criterion for Impurity O is [[limit_kind]] [[limit]]. It follows [[basis]] and assumes a maximum daily dose of [[mdd]]; the text reads [[q3b_quote]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. All results were within the limit."),
+    (1, "The acceptance criterion for Impurity O is [[limit_kind]] [[limit]]. It follows [[basis]] and assumes a maximum daily dose of [[mdd]]; the text reads [[q3b_quote]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit."),
     (2, "For Impurity L the limit is [[limit_kind]] [[limit]], taken at [[basis]] using an assumed maximum daily dose of [[mdd]]. The quoted text is [[q3b_quote]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result exceeded the limit."),
     (3, "Total impurities are limited by [[limit_kind]] [[limit]], and this limit is [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit."),
-    (4, "The acceptance criterion for Residual solvent is [[limit_kind]] [[limit]]. It is [[basis]]. The results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. All results were within the limit."),
+    (4, "The acceptance criterion for Residual solvent is [[limit_kind]] [[limit]]. It is [[basis]]. The results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit."),
     (5, "The acceptance criterion for Impurity O is [[limit_kind]] [[limit]], set at [[basis]] for an assumed maximum daily dose of [[mdd]]: [[q3b_quote]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. [[n_outside]] had results outside the limit."),
     (6, "For Dissolution, the limit is [[limit_kind]] [[limit]], which is [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. Results for [[n_outside]] were below the limit."),
     (7, "The limit for Impurity L is [[limit_kind]] [[limit]], which is [[basis]]. Assuming a maximum daily dose of [[mdd]], the text is [[q3b_quote]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit."),
@@ -371,6 +381,7 @@ HAND_WRONG = [
     (3, "The limit for Total impurities is [[limit]] at most. It is [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit.", "direction typed in words"),
     (2, "The acceptance criterion for Impurity L is [[limit_kind]] [[limit]], set at [[basis]] for an assumed maximum daily dose of [[mdd]]: [[q3b_quote]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. All results were above the limit.", "invented failure"),
     (4, "The acceptance criterion for Residual solvent is [[limit_kind]] [[limit]], which is [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. The product is suitable for patients.", "suitability claim"),
+    (3, "The limit for Total impurities is [[limit_kind]] [[limit]], which is [[basis]]. Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. All results were within the limit.", "no outside-count sentence (T-048)"),
 ]
 
 
