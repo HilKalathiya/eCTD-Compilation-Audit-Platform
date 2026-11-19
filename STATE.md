@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-19 — T-049 (FIX C3.5 prose) done (grammar + one-row Q3B quote; Hil's findings are tests)
+- T-048 blind score: 3/3 planted caught, 22/22 agree, SCORE PASS (commit 00e0ab4).
+- `spec_facts.py`: `render_paragraph` (counts read "17 of 25 results", declared basis reads ", which is ..."), `q3b_row_quote`/`narrow_quote` (quote = only the dose-band row, re-verified with `cite.verify`, page kept); `check_task` rejects any other quote. Prompt rule 4 words the basis. Validator untouched. Evidence: `evidence/T-049/rendered.md` (150 re-rendered paragraphs, no model).
+- Tests: B11/B16/B17/B25 regression tests, planted wrong-band quote, 150-paragraph re-render check; mutation test still 100%.
+
 ## 2026-11-19 — T-048 (FIX C3.5b) done (exact 3-sentence prompt, required outside-count sentence, Gemma audit)
 - `spec_prompt.py`: "exactly 3 sentences" (limit+basis, range, outside count) with one example per basis. `validator/spec.py`: ONE new rule `outside_statement_problems` (no sentence saying how many were outside -> reject); nothing removed or relaxed; 3-6 range stays. Mutation kind `omit_outside_statement` caught 100%; T-047's 520 drafts replayed: 0 accepted.
 - Gemma audit (`writer_run.py --kind p56 --audit 130 --synthetic 26`): real 129/130 accepted, re-read wrong 0; synthetic (n_outside>0, declared attributes, own limit) 21/26, wrong 0. Synthetic windows live in `run/.../synthetic/`, so blind.csv (25 rows, 3 planted) is from real windows only. Details: `evidence/T-048/SUMMARY.md`.

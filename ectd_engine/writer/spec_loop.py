@@ -1,6 +1,6 @@
 """The writing loop for the P.5.6 justification paragraph: ask, check, retry up to 4 times, render; plus a fake model for tests."""
-from ectd_engine.validator.spec import render, validate, verify_render
-from ectd_engine.writer.spec_facts import compute_spec_facts, render_support
+from ectd_engine.validator.spec import validate, verify_render
+from ectd_engine.writer.spec_facts import compute_spec_facts, narrowed, render_paragraph, render_support
 from ectd_engine.writer.spec_prompt import build_messages
 
 MAX_DRAFTS = 4
@@ -11,6 +11,7 @@ def run_spec_task(client, task, max_drafts=MAX_DRAFTS, temperature=0.2, retry_te
 
     accepted is True only if one draft passed the validator AND the re-read of the finished text against the raw task."""
     facts, flags, required = compute_spec_facts(task)
+    task = narrowed(task)  # the re-read below must see the same one-row quote that was written
     messages = build_messages(task, facts, flags)
     drafts, rendered = [], None
     for i in range(max_drafts):
@@ -22,11 +23,12 @@ def run_spec_task(client, task, max_drafts=MAX_DRAFTS, temperature=0.2, retry_te
         else:
             problems = validate(text, facts, flags, required)
             if not problems:
-                problems = ["re-read of finished text: " + p for p in verify_render(render(text, facts), task)]
+                problems = ["re-read of finished text: " + p
+                            for p in verify_render(render_paragraph(text, facts, task["basis"]), task)]
         drafts.append({"draft": i + 1, "text": text, "passed": not problems, "problems": problems,
                        "seconds": reply.get("seconds", 0), "output_tokens": reply.get("output_tokens", 0)})
         if not problems:
-            rendered = render(text, facts)
+            rendered = render_paragraph(text, facts, task["basis"])
             break
     return {"task_id": task["task_id"], "accepted": rendered is not None, "rendered": rendered,
             "drafts": drafts, "facts": facts, "flags": flags, "task": task}

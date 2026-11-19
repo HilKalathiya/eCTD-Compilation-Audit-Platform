@@ -1,5 +1,6 @@
 """Tests for the P.5.6 spec-justification writer: facts, quote handling, each validator rule (with a planted error), the loop, the runner."""
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -48,7 +49,7 @@ class SpecWriterTests(unittest.TestCase):
         self.assertEqual(facts["limit"]["value"], "0.5%")
         self.assertEqual(facts["mdd"]["value"], "40 mg")
         self.assertEqual(facts["n_batches"]["value"], "985 batches")
-        self.assertTrue(facts["q3b_quote"]["value"].startswith("“Qualification Thresholds"))
+        self.assertTrue(facts["q3b_quote"]["value"].startswith("“10 mg - 100 mg"))  # T-049: only the dose row
         self.assertNotIn("n_outside", facts)
         self.assertEqual(required, ["limit_kind", "limit", "basis", "n_batches", "min_value", "max_value", "mdd", "q3b_quote"])
         _, facts, _, required = self.ctx("p56_dissolution")
@@ -143,7 +144,7 @@ class SpecWriterTests(unittest.TestCase):
     def test_prompt_never_shows_the_quote(self):
         t, facts, flags, _ = self.ctx("p56_impurity_o")
         user = build_messages(t, facts, flags)[-1]["content"]
-        self.assertNotIn("Qualification Thresholds", user)
+        self.assertNotIn("10 mg - 100 mg", user)
         self.assertIn("[[mdd]]", user)
 
     def test_mock_text_is_correct_for_every_task(self):
@@ -195,6 +196,104 @@ class SpecWriterTests(unittest.TestCase):
         self.assertIn("[[n_outside]] of [[n_batches]] results were outside the limit.", text)
         self.assertIn("set at [[basis]] for an assumed maximum daily dose of [[mdd]]", text)
         self.assertIn("which is [[basis]].", text)
+
+    # ---- T-049: prose and quote fixes
+    BAD_PROSE = re.compile(r"batches? of\b|resting on declared|set declared|batches? results|�|â€|Âµ|^[a-z]|\. [a-z]")
+
+    def prose_hits(self, text):
+        return self.BAD_PROSE.findall(text)
+
+    def render_new(self, task, text):
+        facts, _, _ = sf.compute_spec_facts(task)
+        return sf.render_paragraph(text, facts, task["basis"])
+
+    def old_style(self, tid, basis_words):
+        t = self.by_id[tid]
+        _, facts, _, _ = self.ctx(tid)
+        return t, facts, ("The acceptance criterion for X is [[limit_kind]] [[limit]], " + basis_words +
+                          " Results for [[n_batches]] ranged from [[min_value]] to [[max_value]]. No result was outside the limit.")
+
+    def test_outside_sentence_uses_bare_numbers(self):
+        task = dict(self.by_id["syn_dissolution_outside"], n=25, n_outside=17)
+        text = ("The acceptance criterion for Dissolution is [[limit_kind]] [[limit]], which is [[basis]]. Results for [[n_batches]] "
+                "ranged from [[min_value]] to [[max_value]]. [[n_outside]] of [[n_batches]] results were outside the limit.")
+        out = self.render_new(task, text)
+        self.assertIn("Results for 25 batches ranged", out)
+        self.assertTrue(out.endswith("17 of 25 results were outside the limit."), out)
+        self.assertEqual(self.prose_hits(out), [])
+        self.assertEqual(sv.verify_render(out, task), [])
+        small = self.render_new(dict(task, n=9, n_outside=2), text)
+        self.assertTrue(small.endswith("Two of nine results were outside the limit."), small)
+
+    def test_the_grammar_check_can_fail(self):  # planted: the old T-048 wording must be caught by the check itself
+        self.assertTrue(self.prose_hits("Results were 17 batches of 25 batches results outside the limit."))
+        self.assertTrue(self.prose_hits("The limit is x, resting on declared by the author."))
+        self.assertTrue(self.prose_hits("sources â€œQualification"))
+        self.assertTrue(self.prose_hits("text �"))
+
+    def check_regression(self, blind_id, tid, words, expect):
+        t, facts, text = self.old_style(tid, words)
+        out = sf.render_paragraph(text, facts, t["basis"])
+        self.assertIn(expect, out, blind_id)
+        self.assertEqual(self.prose_hits(out), [], blind_id)
+
+    def test_hil_B11_residual_solvent_resting_on_declared(self):
+        self.check_regression("B11", "syn_dissolution_outside", "resting on [[basis]].",
+                              "which is declared by the author for this demonstration, with no public source.")
+
+    def test_hil_B16_total_impurities_resting_on_declared(self):
+        self.check_regression("B16", "syn_dissolution_outside", "resting on [[basis]].",
+                              "which is declared by the author")
+
+    def test_hil_B17_total_impurities_resting_on_declared(self):
+        self.check_regression("B17", "p56_dissolution", "resting on [[basis]].", "which is declared by the author")
+
+    def test_hil_B25_dissolution_set_declared(self):
+        self.check_regression("B25", "p56_dissolution", "set [[basis]].", "which is declared by the author")
+
+    def test_q3b_basis_keeps_its_wording(self):
+        t, facts, text = self.old_style("p56_impurity_o", "resting on [[basis]].")
+        self.assertIn("resting on the ICH Q3B(R2) qualification threshold.", sf.render_paragraph(text, facts, t["basis"]))
+
+    def test_quote_is_only_the_dose_row_with_micro_sign(self):
+        t, facts, _, _ = self.ctx("p56_impurity_o")
+        q = t["q3b_quote"]
+        self.assertTrue(q.startswith("10 mg - 100 mg 0.5% or 200 µg TDI"), q)
+        self.assertNotIn("< 10 mg", q)
+        self.assertNotIn("Qualification Thresholds", q)
+        self.assertEqual(t["q3b_page"], "11")
+        self.assertIn(q, facts["q3b_quote"]["value"])
+        self.assertEqual(sv.verify_render(sv.render(self.GOOD_Q, facts), t), [])
+
+    def test_quote_row_from_the_wrong_band_is_rejected(self):  # planted: the <10 mg row quoted for a 40 mg dose
+        t = self.by_id["p56_impurity_o"]
+        wrong = sf.q3b_row_quote("5")
+        self.assertIn("< 10 mg", wrong)
+        with self.assertRaisesRegex(ValueError, "one row whose dose band"):
+            sf.compute_spec_facts(dict(t, q3b_quote=wrong))
+        full = "Qualification Thresholds Maximum Daily Dose1 Threshold2,3 " + wrong + " " + sf.q3b_row_quote("40")
+        facts = sf.compute_spec_facts(dict(t, q3b_quote=full))[0]  # the older long quote is cut down to the one row
+        self.assertNotIn("< 10 mg", facts["q3b_quote"]["value"])
+        self.assertIn("10 mg - 100 mg", facts["q3b_quote"]["value"])
+        with self.assertRaisesRegex(ValueError, "not inside"):
+            sf.q3b_row_quote("40", wrong)
+        self.assertEqual(sf.q3b_row_quote("500").split()[0], ">100")
+
+    def test_every_t048_accepted_paragraph_rerenders_cleanly(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("rerender_t049", ROOT / "evidence" / "T-049" / "rerender.py")
+        rr = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(rr)
+        items = rr.rerender_all(live_data())
+        self.assertEqual(len(items), 150)
+        for tid, task, para in items:
+            self.assertEqual(self.prose_hits(para), [], (tid, para))
+            self.assertEqual(sv.verify_render(para, task), [], tid)
+            if task["basis"] == "q3b_qualification":
+                self.assertIn("10 mg - 100 mg", para, tid)
+                self.assertNotIn("< 10 mg", para, tid)
+                self.assertNotIn("Qualification Thresholds", para, tid)
+            self.assertNotIn("resting on declared", para, tid)
 
     def test_synthetic_windows_all_have_batches_outside_and_are_marked(self):
         import importlib.util

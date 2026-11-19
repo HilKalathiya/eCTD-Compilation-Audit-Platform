@@ -18,7 +18,7 @@ from ectd_engine.specs import load, p56
 from ectd_engine.validator import spec as sv
 from ectd_engine.validator.spec import render, validate, verify_render
 from ectd_engine.writer.batch_facts import LoaderStore, count_text
-from ectd_engine.writer.spec_facts import compute_spec_facts, quote_text, resolve_quote
+from ectd_engine.writer.spec_facts import compute_spec_facts, q3b_row_quote, quote_text, resolve_quote
 
 ROOT = Path(__file__).resolve().parent.parent
 FILE = json.loads((ROOT / "data" / "tasks" / "p56_tasks.json").read_text(encoding="utf-8"))
@@ -56,7 +56,7 @@ def random_task(rng, i):
             "n": n, "min": f"{lo // 100}.{lo % 100:02d}", "max": f"{hi // 100}.{hi % 100:02d}",
             "n_outside": 0 if rng.random() < 0.5 else rng.randint(1, min(n, 20))}
     if q3b:
-        task.update({"mdd": mdd, "q3b_quote": j.quote, "q3b_page": str(j.page), "q3b_version": j.doc_version})
+        task.update({"mdd": mdd, "q3b_quote": q3b_row_quote(mdd), "q3b_page": str(j.page), "q3b_version": j.doc_version})
     return task
 
 
@@ -67,7 +67,7 @@ def flip(task):
         t["basis"] = "declared"
     else:
         j = live_data()["40"]["impurity_o"]
-        t.update({"basis": "q3b_qualification", "mdd": "40", "q3b_quote": j.quote, "q3b_page": str(j.page),
+        t.update({"basis": "q3b_qualification", "mdd": "40", "q3b_quote": q3b_row_quote("40"), "q3b_page": str(j.page),
                   "q3b_version": j.doc_version})
     return t
 

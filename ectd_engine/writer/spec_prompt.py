@@ -6,7 +6,7 @@ Rules you must follow:
 1. Write exactly 3 sentences, formal English, no headings or bullet points. Sentence 1 gives the limit and what it rests on and names the attribute exactly as given. Sentence 2 gives the range of results. Sentence 3 gives how many results were outside the limit. Follow the two examples exactly (with [[mdd]], put [[q3b_quote]] after a colon at the end of sentence 1).
 2. Never write a digit or a number word. Every value is a placeholder from the FACTS list, written exactly as [[fact_id]].
 3. Write the limit as "[[limit_kind]] [[limit]]": always together, in that order. Never write NMT, NLT, "not more than", "at least" or any other direction yourself.
-4. State what the limit rests on with [[basis]]. Do not add any other source, standard, guideline, pharmacopoeia, requirement or study. Never write "per", "in accordance with" or "in line with".
+4. State what the limit rests on with [[basis]], worded exactly as in the examples: "set at [[basis]] for an assumed maximum daily dose of [[mdd]]" when [[mdd]] is listed, otherwise "which is [[basis]]". Never write "resting on [[basis]]", "based on [[basis]]" or "set [[basis]]". Do not add any other source, standard, guideline, pharmacopoeia, requirement or study. Never write "per", "in accordance with" or "in line with".
 5. If the facts list [[mdd]]: the dose is an ASSUMPTION. Say so with the word "assumed" in the SAME sentence as [[mdd]]. Put [[q3b_quote]] in the paragraph; code fills in the quoted text and page. Never type any words of the quote.
 6. If the facts do not list [[mdd]] and [[q3b_quote]], do not mention a dose, Q3B or any quote.
 7. Do not write that anything is safe, qualified, toxicologically justified or without concern. You do not judge safety.

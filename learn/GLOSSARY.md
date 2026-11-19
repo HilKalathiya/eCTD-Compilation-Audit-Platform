@@ -151,3 +151,5 @@ planted row = a wrong row added on purpose to see if a checker notices it
 window = a random group of batches used for one test paragraph
 synthetic window = a test case made up on purpose so some results fall outside the limit
 replay = running old drafts through a new checker to see what it would say
+regression test = a test that keeps an old mistake from coming back
+bare number = a number with no noun after it (17, not 17 batches)

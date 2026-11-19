@@ -1,8 +1,14 @@
 """Computes every value for a 3.2.P.5.6 justification paragraph (limit, direction, basis, assumed dose, batch support, Q3B quote) from facts."""
+import re
+import unicodedata
 from decimal import Decimal, InvalidOperation
+from functools import lru_cache
 
+from ectd_engine.knowledge import cite
 from ectd_engine.loaders import lek
-from ectd_engine.writer.batch_facts import LEK_TESTS, count_text
+from ectd_engine.rules import q3b
+from ectd_engine.validator.spec import render
+from ectd_engine.writer.batch_facts import LEK_TESTS, NUMBER_WORDS, count_text
 from ectd_engine.writer.facts import TEST_REGISTRY, with_unit
 
 Q3B, DECLARED = "q3b_qualification", "declared"
@@ -15,9 +21,87 @@ TASK_KEYS = ("task_id", "section", "product", "attribute", "column", "limit_kind
 QUOTE_KEYS = ("q3b_quote", "q3b_page", "q3b_version")
 
 
+def q3b_row_quote(mdd, full_quote=None):
+    """Only the printed qualification row whose dose band holds this dose (text as the PDF prints it, micro sign kept).
+
+    If full_quote (the longer cited text, heading and earlier rows included) is given, the row must be inside it."""
+    dose = Decimal(mdd)
+    for r in q3b.read_entry(q3b.ENTRY_A):
+        if r["kind"] != "qualification":
+            continue
+        low, low_incl, high, high_incl = q3b.parse_dose(r["max_daily_dose"])
+        if (low is None or dose > low or (low_incl and dose == low)) and (high is None or dose < high or (high_incl and dose == high)):
+            row = q3b.printed_row(r)
+            if full_quote is None:
+                return row
+            # Compare in Unicode-normal form (micro sign and Greek mu are the same letter) but hand back the cited text itself.
+            nf, nr = unicodedata.normalize("NFKC", full_quote), unicodedata.normalize("NFKC", row)
+            at = nf.find(nr)
+            if at < 0 or len(nf) != len(full_quote):
+                raise ValueError(f"the Q3B row for {mdd} mg ({row!r}) is not inside the cited text")
+            return full_quote[at:at + len(nr)]
+    raise ValueError(f"no qualification row holds {mdd} mg")
+
+
+def row_of(task):
+    """The one row to show for this task: the row of its dose band, cut out of the task's cited text.
+
+    A quote that shows a table row of ANOTHER dose band (and not this dose's row) is refused. Text with no table row
+    in it at all is left as it is; the live path (resolve_quote -> narrow_quote) is stricter and demands the row."""
+    quote = task["q3b_quote"]
+    try:
+        return q3b_row_quote(task["mdd"], quote)
+    except ValueError:
+        norm = unicodedata.normalize("NFKC", quote)
+        others = [q3b.printed_row(r) for r in q3b.read_entry(q3b.ENTRY_A) if r["kind"] == "qualification"]
+        if any(unicodedata.normalize("NFKC", o) in norm for o in others):
+            raise
+        return quote
+
+
+def narrowed(task):
+    """The task with only the dose row as its quote (no PDF access; use narrow_quote to also re-verify on the PDF)."""
+    return dict(task, q3b_quote=row_of(task)) if task.get("basis") == Q3B else task
+
+
+@lru_cache(maxsize=None)
+def _verified_row(page, row):
+    """Prove the one row is word for word on that page of the PDF (cached; the PDF is opened once per row)."""
+    return cite.verify(q3b.DOC_ID, int(page), row)
+
+
+def narrow_quote(task):
+    """The task with its Q3B quote cut down to the one row for its dose, re-verified on the PDF page (page and version kept)."""
+    if task.get("basis") != Q3B:
+        return task
+    row = q3b_row_quote(task["mdd"], task["q3b_quote"])  # strict: the dose row must really be in the cited text
+    c = _verified_row(str(task["q3b_page"]), row)
+    if c.version != task["q3b_version"]:
+        raise ValueError(f"task {task['task_id']}: document version {c.version!r} != {task['q3b_version']!r}")
+    return dict(task, q3b_quote=row)
+
+
+def bare_text(n):
+    """A count with no noun ("two", "17"), for sentences like "17 of 25 results"."""
+    return NUMBER_WORDS.get(n, str(n))
+
+
+def render_paragraph(text, facts, basis=None):
+    """The validator's render, plus two wording repairs made by code: in "X of Y results" the counts lose "batches",
+    and a declared basis never follows "resting on" or "set" (it reads ", which is ...")."""
+    text = text.replace("[[n_outside]] of [[n_batches]] results", "[[n_outside_bare]] of [[n_batches_bare]] results")
+    facts = {k: dict(v) for k, v in facts.items()}
+    if "n_outside" in facts and "bare" in facts["n_outside"] and re.search(r"(?:^|[.!?]\s)\[\[n_outside_bare\]\]", text):
+        facts["n_outside"]["bare"] = facts["n_outside"]["bare"].capitalize()  # a count that opens a sentence
+    if basis == DECLARED:
+        text = re.sub(r"(?:,\s*)?\b(?:resting on|rests on|set at|set|based on)\s+\[\[basis\]\]", ", which is [[basis]]", text)
+    extra = {f"{k}_bare": {"value": v["bare"]} for k, v in facts.items() if "bare" in v}
+    return render(text, {**facts, **extra})
+
+
 def quote_text(task):
     """The Q3B quote exactly as the PDF check returned it, with its page and document version. Written by code only."""
-    return f"“{task['q3b_quote']}” ({DOC_NAME}, {task['q3b_version']}, page {task['q3b_page']})"
+    return f"“{row_of(task)}” ({DOC_NAME}, {task['q3b_version']}, page {task['q3b_page']})"
 
 
 def check_task(task):
@@ -51,6 +135,10 @@ def check_task(task):
                 raise ValueError(f"task {tid}: mdd must be above 0")
         except InvalidOperation:
             raise ValueError(f"task {tid}: mdd must be a decimal number written as text") from None
+        try:
+            row_of(task)
+        except ValueError as e:
+            raise ValueError(f"task {tid}: the Q3B quote must hold the one row whose dose band holds {task['mdd']} mg ({e})") from None
     elif has_q:
         raise ValueError(f"task {tid}: a declared task must not carry mdd or a Q3B quote ({', '.join(has_q)})")
 
@@ -73,13 +161,16 @@ def compute_spec_facts(task):
     if task["n_outside"]:
         spec["n_outside"] = (count_text(task["n_outside"]), "number of batches with a result outside the limit", set())
     facts = {k: {"value": v, "label": label, "roles": roles} for k, (v, label, roles) in spec.items()}
+    facts["n_batches"]["bare"] = bare_text(task["n"])
+    if task["n_outside"]:
+        facts["n_outside"]["bare"] = bare_text(task["n_outside"])
     required = ["limit_kind", "limit", "basis", "n_batches", "min_value", "max_value"]
     required += ["mdd", "q3b_quote"] if q3b else []
     required += ["n_outside"] if task["n_outside"] else []
     flags = {
         "attribute": task["attribute"], "registry": sorted(set(LEK_TESTS) | set(TEST_REGISTRY)),
         "basis": task["basis"], "limit_kind": task["limit_kind"], "n_outside": task["n_outside"],
-        "quote": task["q3b_quote"] if q3b else "", "required": required,
+        "quote": row_of(task) if q3b else "", "required": required,
     }
     return facts, flags, required
 
@@ -109,6 +200,7 @@ def resolve_quote(task, live, planted=False):
             raise ValueError(f"task {task['task_id']}: {key} is {task[key]!r} but the live data says {want[key]!r}")
     if task["basis"] == Q3B:
         out["q3b_quote"], out["q3b_page"], out["q3b_version"] = j.quote, str(j.page), j.doc_version
+        out = narrow_quote(out)
     return out
 
 
