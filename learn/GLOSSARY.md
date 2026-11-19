@@ -147,3 +147,5 @@ silent port = a port that accepts a connection but never answers (this caused th
 basis = what a spec limit rests on (a published source, or just declared by the author)
 assumption = a value we chose ourselves (like a 40 mg daily dose), not one a source gave
 planted error = a mistake added on purpose to check that the checker notices it
+planted row = a wrong row added on purpose to see if a checker notices it
+window = a random group of batches used for one test paragraph

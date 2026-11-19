@@ -6,6 +6,7 @@
     python tools/writer_run.py --kind p54 --backend mock --out <folder>     # 3.2.P.5.4 batch analyses on Lek facts
     python tools/writer_run.py --kind p54 --audit 130 --backend ollama --out <folder>   # N real Lek windows (T-042)
     python tools/writer_run.py --kind p56 --backend mock --out <folder>     # 3.2.P.5.6 justification per spec attribute (T-046)
+    python tools/writer_run.py --kind p56 --audit 130 --backend ollama --out <folder>   # N real Lek subsets (T-047)
 """
 AUDIT_SEED = 42
 WINDOW = 12
@@ -27,6 +28,36 @@ def make_windows(store, count, seed=AUDIT_SEED, size=WINDOW):
                     "attribute": lek.COLUMNS[col][0], "column": col, "unit": "%", "decimals": 2,
                     "batches": sorted(ids, key=id_key)})
     return out
+
+def make_p56_windows(get_fact, known, live, mdd, count, seed=AUDIT_SEED, low=8, high=30):
+    """Fixed-seed P.5.6 windows: the attributes in turn, each over a random subset of real Lek batches.
+
+    live: {column: Justification} (limit, basis, quote come from it). If some batches have no fact for the column
+    (quarantined), 2 of 3 windows hold 1-3 of them; they are left out of n/min/max/outside. Numbers are computed here
+    from the stored facts with the same rule as p56 (value rounded to the limit's decimals, then compared)."""
+    from ectd_engine.stats import basic
+    rng = random.Random(seed)
+    cols = list(live)
+    out = []
+    for i in range(count):
+        col = cols[i % len(cols)]
+        j = live[col]
+        have = sorted((b for b in known if get_fact(fact_id(b, col)) is not None), key=id_key)
+        gone = sorted((b for b in known if get_fact(fact_id(b, col)) is None), key=id_key)
+        k = rng.randint(1, min(3, len(gone))) if (gone and rng.randrange(3) != 0) else 0
+        ids = sorted(rng.sample(gone, k) + rng.sample(have, min(rng.randint(low, high), len(have)) - k), key=id_key)
+        values = [get_fact(fact_id(b, col)).value for b in ids if get_fact(fact_id(b, col)) is not None]
+        lo, hi = (None, j.limit) if j.limit_kind == "NMT" else (j.limit, None)
+        task = {"task_id": f"w{i:03d}_{col}", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": j.test,
+                "column": col, "limit_kind": j.limit_kind, "limit": str(j.limit), "unit": j.unit, "basis": j.basis,
+                "n": len(values), "min": str(min(values)), "max": str(max(values)),
+                "n_outside": sum(1 for v in values if not basic.conforms(v, lo, hi)),
+                "batches": ids, "n_excluded": len(ids) - len(values)}
+        if j.basis == "q3b_qualification":
+            task.update(mdd=str(mdd), q3b_quote=j.quote, q3b_page=str(j.page), q3b_version=j.doc_version)
+        out.append(task)
+    return out
+
 
 import argparse
 import json
@@ -53,20 +84,29 @@ def run_p56(args, client):
     store = LoaderStore()
     spec = load.load()
     live = {str(spec.mdd.value): {r.attribute: j for r, j in zip(spec.rows, p56.compute(spec, store))}}
-    with open(args.data or str(ROOT / "data" / "tasks" / "p56_tasks.json"), encoding="utf-8") as f:
-        tasks = json.load(f)["tasks"]
-    if args.tasks:
-        wanted = set(args.tasks.split(","))
-        tasks = [t for t in tasks if t["task_id"] in wanted]
     out = Path(args.out) / f"p56_{args.backend}_{args.model}".replace(":", "-").replace("/", "-")
     (out / "sections").mkdir(parents=True, exist_ok=True)
+    if args.audit:  # N subsets of real batches; their numbers are computed here, so the live-file check does not apply
+        tasks = make_p56_windows(store.get, store.known_batches, live[str(spec.mdd.value)], spec.mdd.value, args.audit, args.seed)
+        (out / "tasks.json").write_text(json.dumps({"seed": args.seed, "tasks": tasks}, indent=1), encoding="utf-8")
+    else:
+        with open(args.data or str(ROOT / "data" / "tasks" / "p56_tasks.json"), encoding="utf-8") as f:
+            tasks = json.load(f)["tasks"]
+        if args.tasks:
+            wanted = set(args.tasks.split(","))
+            tasks = [t for t in tasks if t["task_id"] in wanted]
     accepted, t0 = 0, time.time()
-    with open(out / "drafts.jsonl", "w", encoding="utf-8") as log:
+    with open(out / "drafts.jsonl", "w", encoding="utf-8") as log, open(out / "results.jsonl", "w", encoding="utf-8") as results:
         for task in tasks:
-            task = resolve_quote(task, live)
+            if not args.audit:
+                task = resolve_quote(task, live)
             res = run_spec_task(client, task, max_drafts=args.max_drafts)
             for d in res["drafts"]:
                 log.write(json.dumps({"task_id": task["task_id"], **d}, ensure_ascii=False) + "\n")
+            results.write(json.dumps({"task_id": task["task_id"], "accepted": res["accepted"], "rendered": res["rendered"],
+                                      "flags": {"n_excluded": task.get("n_excluded", 0)}, "drafts": res["drafts"]},
+                                     ensure_ascii=False) + "\n")
+            results.flush()
             if res["accepted"]:
                 accepted += 1
                 (out / "sections" / f"{task['task_id']}.md").write_text(write_spec_section(task, res), encoding="utf-8")
@@ -74,7 +114,7 @@ def run_p56(args, client):
             else:
                 print(f"{task['task_id']}: REJECTED after {len(res['drafts'])} draft(s): {'; '.join(res['drafts'][-1]['problems'])}")
     print(f"\n{accepted}/{len(tasks)} accepted ({time.time() - t0:.0f} s). Saved in {out}")
-    return 0 if accepted == len(tasks) else 1
+    return 0 if (accepted == len(tasks) or args.audit) else 1
 
 
 def make_client(args):
@@ -102,7 +142,7 @@ def main(argv=None):
     ap.add_argument("--think", choices=["off", "on"], default="off")
     ap.add_argument("--tasks", default=None, help="comma-separated task ids (default: all)")
     ap.add_argument("--audit", type=int, default=0, metavar="N",
-                    help="p54 only: use N fixed-seed windows of real Lek batches instead of the 6 task file entries")
+                    help="p54/p56: use N fixed-seed windows of real Lek batches instead of the task file entries")
     ap.add_argument("--seed", type=int, default=AUDIT_SEED, help="seed for --audit windows")
     ap.add_argument("--data", default=None, help="tasks file (default depends on --kind)")
     ap.add_argument("--out", default=str(ROOT / "outputs" / "writer_run"),
@@ -110,13 +150,11 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     if args.kind == "p56":
-        if args.audit:
-            ap.error("--audit works only with --kind p54")
         return run_p56(args, make_client(args))
     data = args.data or str(ROOT / "data" / "tasks" / "p54_tasks.json" if args.kind == "p54"
                             else ROOT / "writer_test" / "data" / "tasks.json")
     if args.audit and args.kind != "p54":
-        ap.error("--audit works only with --kind p54")
+        ap.error("--audit works only with --kind p54 or p56")
     store = LoaderStore() if args.kind == "p54" else None  # Lek facts as the real loader stores them
     if args.audit:
         tasks = make_windows(store, args.audit, args.seed)

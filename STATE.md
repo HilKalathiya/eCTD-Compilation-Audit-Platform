@@ -1,5 +1,11 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-19 — T-047 (C3.5b-2) PARTIAL (tools + tests done; real-Gemma audit accepted 0/130, brain must decide)
+- `python tools/writer_run.py --kind p56 --audit 130 --backend ollama --model gemma4:e4b --out evidence/T-047/run`: 130 fixed-seed windows (8-30 real Lek batches each, 5 attributes in turn, some with quarantined batches). Result: 0/130 accepted, 4 drafts each (2773 s). Every final draft broke one rule: "needs 3-6 sentences, got 2" (2 also: "declared limit written like a sourced one"). Cause: when n_outside = 0 the model writes 2 sentences (copies the declared example); the validator needs >= 3 and the prompt only says "you may" add the no-result-outside sentence. Fix belongs in `validator/spec.py` or `spec_prompt.py` (not touched, per card).
+- Re-read of accepted = n/a (none accepted). `tools/audit_p56.py` stops with "no accepted declared-basis paragraph" and writes no blind sheet, so blind.csv / Hil's score are NOT done. Files: `evidence/T-047/audit.csv`, run folder (tasks.json, results.jsonl, drafts.jsonl).
+- `tools/writer_run.py --kind p56 --audit N` added; `tools/audit_p56.py` (re-read from stored facts, blind sheet 22 real + 3 planted wrong, `--score` PASS only if Hil catches all 3 and agrees on the 22); 15 mock tests in `tests/test_audit_p56.py`.
+- Full suite: 557 tests OK (519 s). FLAGS: only the unlogged run files.
+
 ## 2026-11-15 — T-046 (C3.5b-1) done (P.5.6 justification writer + spec validator, mock only)
 - `writer/spec_{facts,prompt,loop}.py`, `validator/spec.py` (own word lists; declared limit = no source wording; q3b = `[[mdd]]` + "assumed" in the same sentence; compliance wording only if n_outside = 0; safety/"qualified" always rejected; Q3B quote only from `[[q3b_quote]]`; `verify_render` re-reads the finished text, incl. the exact Q3B name). `data/tasks/p56_tasks.json`: 5 real + 5 planted variants. `python tools/writer_run.py --kind p56 --backend mock` -> 5/5. Runner re-reads live numbers and quotes; a stale task file is refused.
 - `tests/test_mutation_spec.py`: 28 draft kinds + 5 rendered-text kinds, 610 tasks: caught 9816/9816; correct accepted 610/610 (+ re-read 610/610, 9/9 paraphrases); hand-written wrong 12/12. `tests/test_spec_writer.py`: 20 tests.
