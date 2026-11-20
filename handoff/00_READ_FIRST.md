@@ -1,3 +1,5 @@
+> **Snapshot from 28 Oct 2026, kept for history.** The "Honest status" below is out of date: the engine has since been built (fact store, gate, statistics, writer, renderer, re-read). For the current status, see the [README](../README.md) and [STATE.md](../STATE.md).
+
 # READ FIRST — migration to the new Claude Project (brain) + Claude Code (hands)
 
 Everything done so far is in this folder. Nothing is lost; the heavy material is in `archive\` and is never loaded unless needed.
