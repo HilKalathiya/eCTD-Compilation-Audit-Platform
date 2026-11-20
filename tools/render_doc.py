@@ -74,10 +74,10 @@ def build_all():
 
 def report_text(report):
     lines = [f"numbers {report['numbers']}", f"placements {report['placements']}", f"data-src in html {report['data_src']}",
-             f"sections written {report['sections']}", f"missing {report['missing']}",
+             f"sections written {report['sections']}", f"uncovered {report['uncovered']}", f"missing {report['missing']}",
              f"rejected sections {len(report['rejected'])}"]
     lines += [f"  {r.part}/{r.task_id}/{r.name}: {r.reason}" for r in report["rejected"]]
-    ok = report["numbers"] == report["placements"] == report["data_src"]
+    ok = report["numbers"] == report["placements"] == report["data_src"] and report["uncovered"] == 0
     lines.append("RESULT " + ("numbers == placements" if ok else "MISMATCH"))
     return "\n".join(lines) + "\n"
 
@@ -93,7 +93,7 @@ def main(argv=None):
     text = report_text(report)
     (out / "report.txt").write_text(text, encoding="utf-8")
     print(text, end="")
-    return 0 if report["numbers"] == report["placements"] == report["data_src"] and not report["rejected"] else 1
+    return 0 if report["numbers"] == report["placements"] == report["data_src"] and not report["rejected"] and not report["uncovered"] else 1
 
 
 if __name__ == "__main__":

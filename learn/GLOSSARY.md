@@ -155,3 +155,5 @@ regression test = a test that keeps an old mistake from coming back
 bare number = a number with no noun after it (17, not 17 batches)
 placement = a record saying which fact one number in the output came from
 exempt token = a number-like thing (such as a batch id) allowed on an explicit list without a fact
+uncovered digit = a digit in the final text that is in no number span and no exempt span
+ordinal = a counting word such as first, second, third

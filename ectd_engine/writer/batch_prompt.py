@@ -18,7 +18,7 @@ EXAMPLE_USER = """ATTRIBUTE: Impurity L
 UNIT: %
 EXCLUDED BATCHES: none
 FACTS:
-- [[n_batches]]: number of batches with a result = twelve batches
+- [[n_batches]]: number of batches with a result = 12 batches
 - [[min_value]]: lowest result, with its batch(es) = 0.05% (Batch 7) [roles: min]
 - [[max_value]]: highest result, with its batch(es) = 0.20% (Batches 3 and 9) [roles: max]
 - [[value_range]]: range of the results, lowest to highest = 0.05–0.20% [roles: range]
@@ -33,8 +33,8 @@ EXAMPLE_USER_EXCLUDED = """ATTRIBUTE: Total impurities
 UNIT: %
 EXCLUDED BATCHES: yes, quarantined
 FACTS:
-- [[n_batches]]: number of batches with a result = eleven batches
-- [[n_excluded]]: number of batches excluded because their result is quarantined = one batch
+- [[n_batches]]: number of batches with a result = 11 batches
+- [[n_excluded]]: number of batches excluded because their result is quarantined = 1 batch
 - [[excluded_batches]]: the excluded (quarantined) batches = Batch 60
 - [[min_value]]: lowest result, with its batch(es) = 0.09% (Batch 3) [roles: min]
 - [[max_value]]: highest result, with its batch(es) = 0.36% (Batches 9 and 11) [roles: max]

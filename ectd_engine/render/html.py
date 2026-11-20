@@ -3,7 +3,7 @@ import html as htmllib
 import re
 from dataclasses import dataclass, field
 
-from ectd_engine.render.numbers import NUMBER, find_numbers
+from ectd_engine.render.numbers import NUMBER, find_numbers, uncovered_digits
 from ectd_engine.render.plan import CONTENT_PLAN, conditions, parts, required_keys
 from ectd_engine.validator.validator import render as plain_render
 from ectd_engine.writer.batch_facts import fact_id
@@ -99,6 +99,8 @@ def check_paragraph(p):
             problems.append(f"unplaced:{tx}")
     if len(placed) != len(set(placed)):
         problems.append("badplacement:two placements for one number")
+    covered = [(pl["offset"], pl["offset"] + len(pl["text"])) for pl in p.placements]
+    problems += uncovered_digits(p.text, covered, p.batch_ids, p.table_row)   # second check: every digit, whatever the number regex says
     return problems
 
 
@@ -209,10 +211,35 @@ def placement_records(sec):
 
 def visible_numbers(doc, batch_ids):
     """Numbers a reader of the finished HTML would see (batch-id table cells and the exempt names left out)."""
-    body = re.sub(r'<td class="id">.*?</td>', "", doc, flags=re.S)
+    ids = set(batch_ids)
+
+    def id_cell(m):   # a first cell is exempt only if it really is a listed batch id
+        return "" if htmllib.unescape(re.sub(r"<[^>]+>", "", m.group(1))).strip() in ids else m.group(1)
+
+    body = re.sub(r'<td class="id">(.*?)</td>', id_cell, doc, flags=re.S)
     body = re.sub(r"</?span[^>]*>", "", body)
     body = htmllib.unescape(re.sub(r"<[^>]+>", "\n", body))
     return find_numbers(body, batch_ids)
+
+
+def uncovered_in_html(doc, batch_ids):
+    """Second check on the finished HTML: ["uncovered:<context>"] for every digit in a text node that is not inside a
+    number span (class n) and not exempt. Does not use the number regex."""
+    ids, out, in_span, in_id = set(batch_ids), [], 0, False
+    for tok in re.split(r"(<[^>]+>)", doc):
+        if tok.startswith("<"):
+            if re.match(r'<span class="n"', tok):
+                in_span += 1
+            elif tok.startswith("</span") and in_span:
+                in_span -= 1
+            elif tok.startswith('<td class="id"'):
+                in_id = True
+            elif tok.startswith("</td"):
+                in_id = False
+        elif tok and not in_span:
+            text = htmllib.unescape(tok)
+            out += uncovered_digits(text, [], ids, table_first_cell=in_id)
+    return out
 
 
 def build_document(tasks):
@@ -242,6 +269,8 @@ def build_document(tasks):
            + "".join(body) + "</body></html>")
     n_numbers = len(visible_numbers(doc, batch_ids))
     n_marked = doc.count('data-src="')
+    uncovered = uncovered_in_html(doc, batch_ids)
     report = {"numbers": n_numbers, "placements": len(records), "data_src": n_marked, "sections": n_sections,
+              "uncovered": len(uncovered), "uncovered_list": uncovered,
               "rejected": rejected, "missing": sum(1 for r in rejected if r.reason.startswith("missing:"))}
     return doc, records, report

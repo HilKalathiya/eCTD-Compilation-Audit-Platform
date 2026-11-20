@@ -7,8 +7,8 @@ from pathlib import Path
 
 from ectd_engine.render import plan
 from ectd_engine.render.html import (Paragraph, Rejected, Section, build_document, build_p54, build_p56, check_section,
-                                     make_paragraph, visible_numbers)
-from ectd_engine.render.numbers import EXEMPT_KINDS, exempt_spans, find_numbers
+                                     make_paragraph, uncovered_in_html, visible_numbers)
+from ectd_engine.render.numbers import EXEMPT_KINDS, exempt_spans, find_numbers, uncovered_digits
 from ectd_engine.writer.spec_facts import compute_spec_facts
 
 TASK56 = {"task_id": "t1", "section": "3.2.P.5.6", "product": "Lek tablets", "attribute": "Dissolution",
@@ -76,6 +76,23 @@ class NumberFinderTests(unittest.TestCase):
         self.assertEqual([t for _, t in find_numbers("26\t97.33", {"28"}, table_first_cell=True)], ["26", "97.33"])
 
 
+class WiderFinderTests(unittest.TestCase):
+    def test_finds_ordinals_fractions_leading_dot_and_thousands(self):
+        self.assertEqual([t for _, t in find_numbers("the first and twentieth, ½ ¼ ¾")],
+                         ["first", "twentieth", "½", "¼", "¾"])
+        self.assertEqual([t for _, t in find_numbers("lost .5% of 1,000 and 12,345.6")], [".5", "1,000", "12,345.6"])
+
+    def test_ordinal_inside_another_word_is_not_a_number(self):
+        self.assertEqual(find_numbers("secondary and firstly"), [])
+
+    def test_second_check_sees_digits_without_the_number_regex(self):
+        self.assertEqual(uncovered_digits("lost 7 of it", []), ["uncovered:lost 7 of it"])
+        self.assertEqual(uncovered_digits("lost 7 of it", [(5, 6)]), [])
+        self.assertEqual(uncovered_digits("in 3.2.P.5.4 and Batch 26", [], {"26"}), [])
+        self.assertTrue(uncovered_digits("Batch 27", [], {"26"}))
+        self.assertEqual(uncovered_digits("no digits, only first and ½", []), [])
+
+
 class BuildTests(unittest.TestCase):
     def build56(self, facts=None, flags=None, text=TEXT56):
         f, fl = facts56()
@@ -122,6 +139,34 @@ class BuildTests(unittest.TestCase):
         (r,) = self.build56(text=TEXT56 + " Loss was 0.7%.")
         self.assertIsInstance(r, Rejected)
         self.assertEqual(r.reason, "unplaced:0.7")
+
+    def test_gate_b_five_planted_hiding_places_are_each_caught(self):
+        for extra, reason, digit in ((" Loss was .5%.", "unplaced:", True), (" Loss was 1,000 units.", "unplaced:", True),
+                                     (" Loss was ½ of it.", "unplaced:", False), (" The first batch failed.", "unplaced:first", False)):
+            with self.subTest(extra=extra):
+                (r,) = self.build56(text=TEXT56 + extra)
+                self.assertIsInstance(r, Rejected)
+                self.assertTrue(r.reason.startswith(reason), r.reason)
+                self.assertEqual(any(p.startswith("uncovered:") for p in r.problems), digit)
+
+    def test_gate_b_digit_in_a_table_id_cell_not_on_the_batch_list_is_caught(self):
+        facts, flags, _, table = facts54()
+        bad = copy.deepcopy(table)
+        bad["rows"][0] = ("99", bad["rows"][0][1])        # 99 is not one of the task's batches
+        secs = build_p54(TASK54, facts, flags, bad, TEXT54)
+        self.assertIsInstance(secs[1], Rejected)
+        self.assertTrue(any(p.startswith("uncovered:99") for p in secs[1].problems), secs[1].problems)
+
+    def test_second_check_catches_digits_even_if_the_number_regex_were_blind(self):
+        from unittest import mock
+        import ectd_engine.render.html as h
+        (sec,) = self.build56()
+        bad = copy.deepcopy(sec)
+        bad.paragraphs[0].text += " Loss was 0.7%."
+        with mock.patch.object(h, "find_numbers", lambda *a, **k: []):
+            problems = h.check_section(bad)
+        self.assertFalse(any(p.startswith("unplaced:") for p in problems))
+        self.assertTrue(any(p.startswith("uncovered:") for p in problems))
 
     def test_gate_b_planted_placement_with_no_number_is_caught(self):
         (sec,) = self.build56()
@@ -187,6 +232,20 @@ class DocumentTests(unittest.TestCase):
         self.assertEqual(len(visible_numbers(bad, {"26", "105"})), report["numbers"] + 1)
         self.assertEqual(len(visible_numbers(doc, {"26", "105"})), report["numbers"])
 
+    def test_planted_digits_in_the_html_are_uncovered_but_real_ones_are_not(self):
+        doc, _, report = self.doc()
+        self.assertEqual(report["uncovered"], 0)
+        bad = doc.replace("</body>", "<p>About .5% and 1,000.</p></body>")
+        self.assertTrue(uncovered_in_html(bad, {"26", "105"}))
+        self.assertEqual(uncovered_in_html(doc, {"26", "105"}), [])
+
+    def test_html_id_cell_not_on_the_batch_list_is_caught(self):
+        doc, _, report = self.doc()
+        bad = doc.replace('<td class="id">26</td>', '<td class="id">99</td>')
+        self.assertNotEqual(bad, doc)
+        self.assertEqual(len(visible_numbers(bad, {"26", "105"})), report["numbers"] + 1)
+        self.assertTrue(any(u.startswith("uncovered:99") for u in uncovered_in_html(bad, {"26", "105"})))
+
     def test_a_rejected_section_is_left_out_and_listed(self):
         f, fl = facts56()
         del f["limit"]
@@ -207,6 +266,9 @@ class ToolTests(unittest.TestCase):
             self.assertEqual(files, {"P5.html", "placements.jsonl", "report.txt"})
             report = (Path(tmp) / "report.txt").read_text(encoding="utf-8")
             self.assertIn("missing 0", report)
+            self.assertIn("uncovered 0", report)
+            html_text = (Path(tmp) / "P5.html").read_text(encoding="utf-8")
+            self.assertNotRegex(html_text, r"(?i)\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve) batch")
             self.assertIn("numbers == placements", report)
             rows = [json.loads(x) for x in (Path(tmp) / "placements.jsonl").read_text(encoding="utf-8").splitlines()]
             self.assertTrue(rows)

@@ -45,7 +45,7 @@ GOOD_EX = GOOD + " Results for [[n_excluded]], [[excluded_batches]], were quaran
 class FactsTests(unittest.TestCase):
     def test_counts_extremes_ties_and_mean(self):
         facts, flags, required, table = compute({"1": "0.30", "2": "0.10", "3": "0.10", "4": "0.20"})
-        self.assertEqual(facts["n_batches"]["value"], "four batches")
+        self.assertEqual(facts["n_batches"]["value"], "4 batches")
         self.assertEqual(facts["min_value"]["value"], "0.10% (Batches 2 and 3)")
         self.assertEqual(facts["max_value"]["value"], "0.30% (Batch 1)")
         self.assertEqual(facts["value_range"]["value"], "0.10–0.30%")
@@ -63,9 +63,9 @@ class FactsTests(unittest.TestCase):
 
     def test_excluded_batches_become_facts(self):
         facts, flags, required, table = compute({"1": "0.10", "2": None, "3": "0.20", "4": None})
-        self.assertEqual(facts["n_excluded"]["value"], "two batches")
+        self.assertEqual(facts["n_excluded"]["value"], "2 batches")
         self.assertEqual(facts["excluded_batches"]["value"], "Batches 2 and 4")
-        self.assertEqual(facts["n_batches"]["value"], "two batches")
+        self.assertEqual(facts["n_batches"]["value"], "2 batches")
         self.assertIn("n_excluded", required)
         self.assertEqual(flags["excluded"], ["2", "4"])
         self.assertEqual(facts["mean_value"]["value"], "0.15%")  # excluded batches are not in the mean
@@ -129,7 +129,7 @@ class TableTests(unittest.TestCase):
     def test_opening_sentence_is_code_text(self):
         facts = compute({"1": "0.10", "2": None})[0]
         s = opening_sentence(make_task(["1", "2"]), facts)
-        self.assertIn("one batch", s)
+        self.assertIn("1 batch", s)
         self.assertIn("Batch 2", s)
 
 
@@ -217,7 +217,7 @@ class ValidatorTests(unittest.TestCase):
         self.assertEqual(bv.verify_render(rendered, self.table), [])
         self.assertTrue(bv.verify_render(rendered.replace("0.30%", "0.31%"), self.table))
         self.assertTrue(bv.verify_render(rendered.replace("(Batch 2)", "(Batch 3)"), self.table))
-        self.assertTrue(bv.verify_render(rendered.replace("three batches", "four batches"), self.table))
+        self.assertTrue(bv.verify_render(rendered.replace("3 batches", "4 batches"), self.table))
         self.assertTrue(bv.verify_render(rendered.replace("0.20%", "0.21%"), self.table))  # the mean
         ex = bv.render(GOOD_EX, self.facts_ex)
         self.assertTrue(bv.verify_render(ex.replace("Batch 3", "Batch 2"), self.table_ex))

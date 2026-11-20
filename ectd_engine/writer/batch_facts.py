@@ -4,7 +4,7 @@ from decimal import Decimal
 from ectd_engine.facts.schema import Fact, SourcePointer
 from ectd_engine.loaders import lek
 from ectd_engine.stats import basic
-from ectd_engine.writer.facts import NUMBER_WORDS, TEST_REGISTRY, with_unit
+from ectd_engine.writer.facts import NUMBER_WORDS, TEST_REGISTRY, with_unit  # noqa: F401  (spec_facts imports NUMBER_WORDS from here)
 
 EXCLUDED_CELL = "excluded (quarantined)"
 LEK_TESTS = [test for test, _ in lek.COLUMNS.values()]
@@ -37,7 +37,8 @@ def ids_text(ids):
 
 
 def count_text(n):
-    return f"{NUMBER_WORDS.get(n, str(n))} {'batch' if n == 1 else 'batches'}"
+    """A count as digits ("12 batches"), the same style as P.5.6."""
+    return f"{n} {'batch' if n == 1 else 'batches'}"
 
 
 def check_task(task):

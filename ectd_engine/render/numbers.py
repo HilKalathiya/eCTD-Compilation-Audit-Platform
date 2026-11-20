@@ -3,7 +3,13 @@ import re
 
 from ectd_engine.validator.validator import ALLOWED_TOKENS, NUMBER_WORDS
 
-NUMBER = re.compile(r"\d+(?:\.\d+)?|" + NUMBER_WORDS.pattern, re.I)
+ORDINALS = re.compile(
+    r"\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|"
+    r"fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth)\b", re.I)
+FRACTION_CHARS = "½¼¾"   # the characters for one half, one quarter, three quarters
+# digits with thousands commas ("1,000"), plain digits and decimals, a leading-dot decimal (".5"), then words and fractions
+NUMBER = re.compile(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?|\.\d+|" + NUMBER_WORDS.pattern + "|" + ORDINALS.pattern
+                    + "|[" + FRACTION_CHARS + "]", re.I)
 BATCH_RUN = re.compile(r"\bBatch(?:es)?\s+([\w-]+(?:(?:,\s*|\s+and\s+)[\w-]+)*)")
 ID_TOKEN = re.compile(r"[\w-]+")
 
@@ -30,3 +36,15 @@ def find_numbers(text, batch_ids=(), table_first_cell=False):
     skip = exempt_spans(text, set(batch_ids), table_first_cell)
     return [(m.start(), m.group(0)) for m in NUMBER.finditer(text)
             if not any(s <= m.start() and m.end() <= e for s, e, _ in skip)]
+
+
+def uncovered_digits(text, covered, batch_ids=(), table_first_cell=False):
+    """Second check, not using NUMBER: ["uncovered:<context>"] for every digit that sits in no covered span and no exempt span.
+
+    covered = [(start, end)] placement spans (or [] when the whole text is checked on its own)."""
+    skip = [(s, e) for s, e, _ in exempt_spans(text, set(batch_ids), table_first_cell)] + list(covered)
+    out = []
+    for i, ch in enumerate(text):
+        if ch.isdigit() and not any(s <= i < e for s, e in skip):
+            out.append("uncovered:" + text[max(0, i - 12):i + 13].replace("\t", " ").replace("\n", " "))
+    return out
