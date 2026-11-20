@@ -83,16 +83,20 @@ class DocxTests(unittest.TestCase):
         self.assertTrue(any(x.startswith("numbers!=placements") for x in rep["problems"]))
 
     def test_planted_digits_the_number_finder_misses_are_caught(self):
-        self.edit(lambda doc: doc.add_paragraph("Lost 1e5 units in 2nd step."))
+        # the finder reads "5" but not the superscript two, so only the second (digit by digit) check can see it
+        self.edit(lambda doc: doc.add_paragraph("Lost 5² units."))
         rep = reread(self.path, self.built)
-        self.assertEqual(rep["problems"], ["numbers!=placements: 14 in file, 11 placed", "text differs from what was written"])
+        self.assertEqual(rep["uncovered"], 1)
+        self.assertEqual([x for x in rep["problems"] if x.startswith("uncovered:")], ["uncovered:Lost 5² units."])
 
     def test_planted_batch_id_not_on_the_list_is_caught(self):
-        self.edit(lambda doc: setattr(doc.tables[0].rows[1].cells[0].paragraphs[0].runs[0], "text", "99"))
+        # a listed batch id (26) in text is exempt: only the text change shows, no number problem
+        self.edit(lambda doc: doc.add_paragraph("Batch 26 was retested."))
+        self.assertEqual(reread(self.path, self.built)["problems"], ["text differs from what was written"])
+        # an id that is not on the list (99) is a number nobody placed
+        self.edit(lambda doc: doc.paragraphs[-1].runs[0].__setattr__("text", "Batch 99 was retested."))
         self.assertEqual(reread(self.path, self.built)["problems"],
-                         ["numbers!=placements: 12 in file, 11 placed",
-                          "changed number #1: file has '99', placement says '97.33'",
-                          "text differs from what was written"])
+                         ["numbers!=placements: 12 in file, 11 placed", "text differs from what was written"])
 
     def test_a_rejected_section_is_left_out_and_counted(self):
         f, fl = facts56()

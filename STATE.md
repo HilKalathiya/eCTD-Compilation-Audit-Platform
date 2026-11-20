@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-20 — T-058 done (C3.7 claim check hardening)
+- `review/entail.py`: new claim words (pass, below/above/exceeds limit, OOS, no issues/concerns, suitable, robust, range). Quoted text is skipped ONLY if it exactly equals a stored Q3B row (`stored_quotes()`); other quotes are checked. New rule: "range from X to Y" / "within the range X–Y" / "range of X" must equal placed min_value / max_value.
+- Real run `evidence/T-058/`: numbers 3589 == placements, 0 flags (the 4 "within the range" false alarms are gone). Tests: 20/20 OVERCLAIMS flagged, 5/5 true not flagged; 2 docx tests now prove `uncovered:` and unlisted-batch-id reasons. "passed" is never backed by a rule.
+
 ## 2026-11-20 — T-057 done (C3.7 claim flags + independent re-read)
 - `review/entail.py`: each sentence with a claim word must match a fact rule (e.g. "No result was outside" needs n_outside == 0); else reviewer flag `unsupported:<phrase>` (no auto-reject). `tools/reread_export.py`: zip+ElementTree reader of P5.docx, numbers vs placements.jsonl from disk, entail on every paragraph.
 - Real run `evidence/T-057/`: numbers 3589 == placements 3589, uncovered 0, 4 flags (all "within the range", residual solvent P.5.4) in `flags.csv` for Hil. Planted: "No new signals", "All results complied" with n_outside>0 -> flagged; true claim not. 2 weak docx tests now assert exact reasons.
