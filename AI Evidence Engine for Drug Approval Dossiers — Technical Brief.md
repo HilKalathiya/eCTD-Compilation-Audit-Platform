@@ -1,3 +1,5 @@
+> **Design document.** This brief describes the full target system. Some parts are built and tested, and others (the audit ledger, Part 11 e-signatures, the review UI, OCR and orchestration) are designed only. See "Built and tested vs only designed" in the [README](README.md).
+
 # AI Evidence Engine for Drug Approval Dossiers — Technical Brief
 
 Oct 14, 2026 · @hil
