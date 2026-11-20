@@ -41,7 +41,13 @@ def live_data():
 
 def build_all():
     """Every task of both parts, built and checked. Returns (html, placements, report)."""
-    from ectd_engine.render.html import build_document, build_p54, build_p56
+    from ectd_engine.render.html import build_document
+    return build_document(build_items())
+
+
+def build_items():
+    """The checked sections of every task of both parts (the one input of the HTML and the Word writer)."""
+    from ectd_engine.render.html import build_p54, build_p56
     from ectd_engine.writer.batch_facts import compute_batch_facts
     from ectd_engine.writer.spec_facts import compute_spec_facts, q3b_row_quote
     live, store = live_data()
@@ -69,31 +75,52 @@ def build_all():
             facts, flags, _ = compute_spec_facts(task)
             items.append({"part": "3.2.P.5.6", "task_id": task["task_id"], "attribute": task["attribute"],
                           "batch_ids": [], "sections": build_p56(task, facts, flags, text)})
-    return build_document(items)
+    return items
 
 
-def report_text(report):
-    lines = [f"numbers {report['numbers']}", f"placements {report['placements']}", f"data-src in html {report['data_src']}",
+def docx_ok(rep):
+    return not rep["problems"] and rep["numbers"] == rep["placements"] and rep["uncovered"] == 0
+
+
+def report_text(report, docx_report=None):
+    lines = ["== HTML ==", f"numbers {report['numbers']}", f"placements {report['placements']}", f"data-src in html {report['data_src']}",
              f"sections written {report['sections']}", f"uncovered {report['uncovered']}", f"missing {report['missing']}",
              f"rejected sections {len(report['rejected'])}"]
     lines += [f"  {r.part}/{r.task_id}/{r.name}: {r.reason}" for r in report["rejected"]]
     ok = report["numbers"] == report["placements"] == report["data_src"] and report["uncovered"] == 0
-    lines.append("RESULT " + ("numbers == placements" if ok else "MISMATCH"))
+    lines.append("RESULT html " + ("numbers == placements" if ok else "MISMATCH"))
+    if docx_report is not None:
+        d = docx_report
+        lines += ["== DOCX (re-read from the saved file) ==", f"numbers {d['numbers']}", f"placements {d['placements']}",
+                  f"sections written {d['sections']}", f"uncovered {d['uncovered']}", f"missing {d['missing']}",
+                  f"rejected sections {len(d['rejected'])}"]
+        lines += [f"  problem: {p}" for p in d["problems"]]
+        lines.append("RESULT docx " + ("numbers == placements" if docx_ok(d) else "MISMATCH"))
     return "\n".join(lines) + "\n"
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", required=True, help="folder for P5.html, placements.jsonl, report.txt")
-    out = Path(ap.parse_args(argv).out)
+    ap.add_argument("--docx", action="store_true", help="also write P5.docx and re-read the saved file")
+    args = ap.parse_args(argv)
+    out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    doc, records, report = build_all()
+    from ectd_engine.render.html import build_document
+    items = build_items()
+    doc, records, report = build_document(items)
     (out / "P5.html").write_text(doc, encoding="utf-8")
     (out / "placements.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records), encoding="utf-8")
-    text = report_text(report)
+    drep = None
+    if args.docx:
+        from ectd_engine.render.docx import build_docx, reread
+        built = build_docx(items, out / "P5.docx")
+        drep = reread(out / "P5.docx", built)
+    text = report_text(report, drep)
     (out / "report.txt").write_text(text, encoding="utf-8")
     print(text, end="")
-    return 0 if report["numbers"] == report["placements"] == report["data_src"] and not report["rejected"] and not report["uncovered"] else 1
+    html_ok = report["numbers"] == report["placements"] == report["data_src"] and not report["rejected"] and not report["uncovered"]
+    return 0 if html_ok and (drep is None or docx_ok(drep)) else 1
 
 
 if __name__ == "__main__":

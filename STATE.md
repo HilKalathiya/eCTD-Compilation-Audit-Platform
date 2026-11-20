@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-20 — T-056 done (C3.6b Word output)
+- `render/docx.py`: P5.docx from the same plan/placements as the HTML via shared `html.walk()`; `reread()` opens the SAVED file and checks numbers == placements, digits uncovered, text units. `tools/render_doc.py --docx`; python-docx==1.2.0 pinned.
+- Real run `evidence/T-056/`: html 3589 = 3589, docx 3589 = 3589, uncovered 0, missing 0. Planted docx edits caught: changed number, deleted row, bare 0.7%.
+
 ## 2026-11-20 — T-055 PARTIAL (flaky test hunt)
 - `watch.py status --tests` now names each failing test + last traceback line; log hook now reports on stderr if it cannot write. Planted tests added in `tests/test_watch.py`.
 - Flaky: `test_broken_input_writes_a_logerror_line` failed 1 of 5 full runs (0 log lines); cause NOT proven (hidden write error vs child died at start). Not reproduced in 540 single-test tries; runs 6-10 killed (low memory). Test now shows hook exit/stderr if it fails again. Details `evidence/T-055/summary.md`.

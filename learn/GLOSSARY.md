@@ -159,3 +159,5 @@ uncovered digit = a digit in the final text that is in no number span and no exe
 ordinal = a counting word such as first, second, third
 flaky test = a test that passes or fails at random without code changes
 stderr = the channel where a program prints its error messages
+re-read check = open the saved file again and check what is really inside
+planted error = a mistake added on purpose to prove a check can fail

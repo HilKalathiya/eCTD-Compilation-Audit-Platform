@@ -242,29 +242,49 @@ def uncovered_in_html(doc, batch_ids):
     return out
 
 
+TITLE = "3.2.P.5 Control of drug product"
+
+
+def walk(tasks):
+    """The one reading order for every output format (HTML and Word). Yields events the plan decides:
+    ("part", part, title) ("task", task, None) ("section", Section, None) ("rejected", Rejected, None)
+    ("end_task", None, None) ("end_part", None, None). tasks = [{"part", "task_id", "attribute", "batch_ids", "sections"}]."""
+    for part in parts():
+        yield "part", part, CONTENT_PLAN[part]["title"]
+        order = [s["name"] for s in CONTENT_PLAN[part]["sections"]]
+        for t in (x for x in tasks if x["part"] == part):
+            yield "task", t, None
+            by_name = {s.name: s for s in t["sections"]}
+            for name in order:
+                s = by_name.get(name)
+                if isinstance(s, Section):
+                    yield "section", s, None
+                elif s is not None:
+                    yield "rejected", s, None
+            yield "end_task", None, None
+        yield "end_part", None, None
+
+
 def build_document(tasks):
     """tasks: [{"part", "task_id", "attribute", "batch_ids", "sections": [Section | Rejected]}] in any order.
 
     Returns (html, placements, report). The plan decides the order of parts and sections; rejected sections are left out."""
     body, records, rejected, batch_ids, n_sections = [], [], [], set(), 0
-    body.append("<h1>3.2.P.5 Control of drug product</h1>")
-    for part in parts():
-        body.append(f'<section data-part="{part}"><h2>{part} {CONTENT_PLAN[part]["title"]}</h2>')
-        order = [s["name"] for s in CONTENT_PLAN[part]["sections"]]
-        for t in (x for x in tasks if x["part"] == part):
-            batch_ids |= set(t.get("batch_ids", ()))
-            by_name = {s.name: s for s in t["sections"]}
-            body.append(f'<section data-task="{htmllib.escape(t["task_id"], quote=True)}"><h3>{htmllib.escape(t["attribute"])}</h3>')
-            for name in order:
-                s = by_name.get(name)
-                if isinstance(s, Section):
-                    body.append(section_html(s))
-                    records += placement_records(s)
-                    n_sections += 1
-                elif s is not None:
-                    rejected.append(s)
+    body.append(f"<h1>{TITLE}</h1>")
+    for kind, a, b in walk(tasks):
+        if kind == "part":
+            body.append(f'<section data-part="{a}"><h2>{a} {b}</h2>')
+        elif kind == "task":
+            batch_ids |= set(a.get("batch_ids", ()))
+            body.append(f'<section data-task="{htmllib.escape(a["task_id"], quote=True)}"><h3>{htmllib.escape(a["attribute"])}</h3>')
+        elif kind == "section":
+            body.append(section_html(a))
+            records += placement_records(a)
+            n_sections += 1
+        elif kind == "rejected":
+            rejected.append(a)
+        else:
             body.append("</section>")
-        body.append("</section>")
     doc = ('<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>3.2.P.5</title></head><body>'
            + "".join(body) + "</body></html>")
     n_numbers = len(visible_numbers(doc, batch_ids))
