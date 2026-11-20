@@ -125,8 +125,8 @@ def cmd_log():
         try:
             reason = f"{type(e).__name__}: {e}".encode("ascii", "replace").decode("ascii")
             _append_log(f"LOGERROR {str(tool).encode('ascii', 'replace').decode('ascii')} {reason[:200]}")
-        except Exception:
-            pass
+        except Exception as e2:  # even the error line could not be written: say so on stderr, never vanish silently
+            print(f"watch log: could not write the activity log: {type(e2).__name__}: {e2}", file=sys.stderr)
     return 0
 
 
@@ -172,6 +172,22 @@ def split_timeout(args):
     return rest, secs
 
 
+def failing_tests(text):
+    """Find every 'FAIL:'/'ERROR:' block in unittest output -> [(test name, last line of its traceback)]."""
+    found, cur, last = [], None, ""
+    for ln in text.splitlines():
+        m = re.match(r"(?:FAIL|ERROR): (.+)", ln)
+        if m or re.match(r"={20,}$", ln) or re.match(r"Ran \d+ tests? in ", ln):
+            if cur:
+                found.append((cur, last))
+            cur, last = (m.group(1).strip() if m else None), ""
+        elif cur and ln.strip() and not re.match(r"-{20,}$", ln):
+            last = ln.strip()
+    if cur:
+        found.append((cur, last))
+    return found
+
+
 def cmd_run(args):
     args, timeout = split_timeout(args)
     if not args:
@@ -203,6 +219,8 @@ def cmd_run(args):
     for ln in (ran[-1:] + verdict[-1:]):
         if ln not in tail:
             out("  " + ln[:160])
+    for name, last in failing_tests(text or ""):
+        out(f"  FAILING TEST: {name}  ->  {last[:120]}")
     return 0
 
 

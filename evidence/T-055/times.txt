@@ -1,0 +1,5 @@
+run1 exit=0 secs=338
+run2 exit=0 secs=297
+run3 exit=0 secs=320
+run4 exit=1 secs=322
+run5 exit=0 secs=314

@@ -197,6 +197,33 @@ class WatchFlagTests(unittest.TestCase):
         self.assertRegex(out, r"Ran \d+ tests? in ")
         self.assertIn("FAILED", out)
 
+    def test_failing_test_names_are_printed(self):
+        # planted: one test fails, one errors -> watch must name both, with the last traceback line
+        self.write("tests/test_names.py", "import unittest\n\n\nclass N(unittest.TestCase):\n"
+                   "    def test_bad_assert(self):\n        self.fail('planted-fail')\n"
+                   "    def test_bad_error(self):\n        raise ValueError('planted-error')\n")
+        out = self.watch("status", "--tests")
+        self.assertIn("FAILING TEST: test_bad_assert", out)
+        self.assertIn("AssertionError: planted-fail", out)
+        self.assertIn("FAILING TEST: test_bad_error", out)
+        self.assertIn("ValueError: planted-error", out)
+
+    def test_failing_tests_parser_on_fake_output(self):
+        fake = ("======================================================================\n"
+                "ERROR: test_x (mod.C.test_x)\n----------------------------------------------------------------------\n"
+                "Traceback (most recent call last):\n  File \"a.py\", line 1\nKeyError: 'k'\n\n"
+                "======================================================================\n"
+                "FAIL: test_y (mod.C.test_y)\n----------------------------------------------------------------------\n"
+                "AssertionError: 1 != 2\n\n"
+                "----------------------------------------------------------------------\nRan 2 tests in 0.1s\n\nFAILED\n")
+        sys.path.insert(0, str(WATCH.parent))
+        try:
+            import watch
+            got = watch.failing_tests(fake)
+        finally:
+            sys.path.remove(str(WATCH.parent))
+        self.assertEqual(got, [("test_x (mod.C.test_x)", "KeyError: 'k'"), ("test_y (mod.C.test_y)", "AssertionError: 1 != 2")])
+
     def dirty_a(self):
         self.append("ectd_engine/facts/a.py", "Z = 2\n")
         self.append("tests/test_a.py", "\n    def test_two(self):\n        self.assertEqual(2, 2)\n")
@@ -221,7 +248,8 @@ class WatchFlagTests(unittest.TestCase):
 
     def run_hook(self, raw):
         env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
-        subprocess.run([sys.executable, str(WATCH), "log"], input=raw, env=env, timeout=60)
+        r = subprocess.run([sys.executable, str(WATCH), "log"], input=raw, env=env, timeout=60, capture_output=True)
+        self.hook_result = f"hook exit={r.returncode} stderr={r.stderr.decode('utf-8', 'replace').strip()!r}"  # shown if a test fails
         p = self.root / ".brain" / "activity.log"
         return p.read_text(encoding="utf-8").splitlines() if p.exists() else []
 
@@ -244,9 +272,19 @@ class WatchFlagTests(unittest.TestCase):
 
     def test_broken_input_writes_a_logerror_line(self):
         lines = self.run_hook(b"{this is not json")
-        self.assertEqual(len(lines), 1)
+        self.assertEqual(len(lines), 1, self.hook_result)
         self.assertIn(" LOGERROR ", lines[0])
         self.assertIn("JSONDecodeError", lines[0])
+
+    def test_unwritable_log_is_announced_on_stderr(self):
+        # planted: `.brain` is a plain file, so the log can never be written -> the hook must say so on stderr
+        shutil.rmtree(self.root / ".brain", ignore_errors=True)
+        (self.root / ".brain").write_text("not a folder", encoding="utf-8")
+        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        r = subprocess.run([sys.executable, str(WATCH), "log"], input=b"{this is not json", env=env, timeout=60,
+                           capture_output=True)
+        self.assertEqual(r.returncode, 0)
+        self.assertIn("could not write the activity log", r.stderr.decode("utf-8", "replace"))
 
     def test_copy_item_destination_is_write_evidence(self):
         self.dirty_a()

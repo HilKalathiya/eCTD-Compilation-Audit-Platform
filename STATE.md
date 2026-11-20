@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-20 — T-055 PARTIAL (flaky test hunt)
+- `watch.py status --tests` now names each failing test + last traceback line; log hook now reports on stderr if it cannot write. Planted tests added in `tests/test_watch.py`.
+- Flaky: `test_broken_input_writes_a_logerror_line` failed 1 of 5 full runs (0 log lines); cause NOT proven (hidden write error vs child died at start). Not reproduced in 540 single-test tries; runs 6-10 killed (low memory). Test now shows hook exit/stderr if it fails again. Details `evidence/T-055/summary.md`.
+
 ## 2026-11-20 — T-054 done (C3.6a hardening: second digit check; one count style, digits)
 - `render/numbers.py`: finder now also sees ordinals first..twentieth, ½ ¼ ¾, ".5", "1,000"; `uncovered_digits` = second check with no number regex (every digit must be in a placement or exempt span, else "uncovered:<context>"). `render/html.py`: used per paragraph (rejects) and on the finished HTML (`uncovered_in_html`); an id cell is exempt only if it is on the batch list. `batch_facts.count_text` now gives digits ("12 batches"), prompt examples too; 4 batch-writer tests updated (listed in learn/LEARN_T-054.md).
 - Real run `evidence/T-054/`: 3589 numbers = 3589 placements = 3589 data-src, uncovered 0, missing 0, 0 number-word counts in P5.html. `tools/render_doc.py` (scope added by Hil's OK) prints the uncovered line and fails on it.

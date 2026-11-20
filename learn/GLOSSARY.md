@@ -157,3 +157,5 @@ placement = a record saying which fact one number in the output came from
 exempt token = a number-like thing (such as a batch id) allowed on an explicit list without a fact
 uncovered digit = a digit in the final text that is in no number span and no exempt span
 ordinal = a counting word such as first, second, third
+flaky test = a test that passes or fails at random without code changes
+stderr = the channel where a program prints its error messages

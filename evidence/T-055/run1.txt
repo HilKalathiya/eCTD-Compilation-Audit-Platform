@@ -1,0 +1,71 @@
+......................................................................................MuPDF error: format error: No default Layer config
+
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+MuPDF error: format error: No default Layer config
+
+...........................................................................................................................................................................citations verified 30 of 30
+MuPDF error: format error: No default Layer config
+
+....................................................................................................................................................C:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\jit\_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+  line 25.08 months vs bound 24.38 months ({'spec_min': Decimal('95')})
+
+  line 34.79 months vs bound 32.76 months ({'spec_max': Decimal('0.40')})
+numbers 3589
+placements 3589
+data-src in html 3589
+sections written 540
+uncovered 0
+missing 0
+rejected sections 0
+RESULT numbers == placements
+REPLAY ERROR: draft file has no drafts: C:\Users\asus\AppData\Local\Temp\tmptdb1rriy\empty.jsonl
+REPLAY ERROR: draft file missing: C:\Users\asus\AppData\Local\Temp\tmpxzvscps7\nope.jsonl
+DIFFERENT a.jsonl:1 lt_assay draft 1: frozen=rejected "missing required facts: ['spec', 'min_value'] | needs 2-5 sentences, got 1 | wording contradicts the computed trend (decreasing)" port=accepted ''
+3 drafts, 2 same, 1 different
+  from a.jsonl: 2 drafts
+  from b.jsonl: 1 drafts
+3 drafts, 3 same, 0 different
+  from a.jsonl: 2 drafts
+  from b.jsonl: 1 drafts
+REPLAY ERROR: a.jsonl line 1: unknown task_id zzz
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  28%|##7       | 56/202 [00:00<00:00, 558.78it/s]Loading weights:  55%|#####5    | 112/202 [00:00<00:00, 538.10it/s]Loading weights:  82%|########2 | 166/202 [00:00<00:00, 490.75it/s]Loading weights: 100%|##########| 202/202 [00:00<00:00, 423.00it/s]
+.................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 614 tests in 329.112s
+
+OK
+planted reversed reranker recall@5=0.400 vector=0.900
+rerank per question:
+  q01 HIT  Q1A_R2  How many primary batches are needed for formal stability studies of a 
+  q02 HIT  Q1A_R2  What are the stability storage conditions for products intended to be 
+  q03 HIT  Q1A_R2  When is testing at the intermediate storage condition needed?
+  q04 HIT  Q1A_R2  What is defined as a significant change for a drug product?
+  q05 HIT  Q1A_R2  What is stress testing of the drug substance meant to show?
+  q06 HIT  Q1A_R2  How often should samples be tested during long-term stability studies?
+  q07 HIT  Q1A_R2  Which guideline covers light exposure (photostability) testing?
+  q08 HIT  Q1A_R2  Which packaging should the stability batches be stored in?
+  q09 HIT  Q1A_R2  How should water loss be evaluated for products in semi-permeable cont
+  q10 HIT  Q1E  When may a retest period or shelf life be extrapolated beyond the peri
+  q11 HIT  Q1E  How do you decide whether data from several batches can be combined in
+  q12 HIT  Q1E  What significance level is used in the tests for batch similarity of s
+  q13 HIT  Q1E  How is the shelf life estimated from where the confidence limit meets 
+  q14 HIT  Q1E  What approach applies when the data show little or no change over time
+  q15 HIT  Q1E  What role do accelerated condition results play in deciding on extrapo
+  q16 HIT  Q3B_R2  Above what level must a degradation product be reported?
+  q17 HIT  Q3B_R2  Above what level must the structure of a degradation product be identi
+  q18 HIT  Q3B_R2  Above what level must the biological safety of a degradation product b
+  q19 HIT  Q3B_R2  Do impurities that come from excipients need to be reported?
+  q20 HIT  Q3B_R2  Is there a flowchart for identifying and qualifying a degradation prod
+  q21 HIT  Q3B_R2  Which kinds of impurities, such as contaminants, are outside the scope
+  q22 MISS Q6A  Which tests apply to all new drug substances and drug products?
+  q23 HIT  Q6A  When should a specification control the solid-state form of a drug sub
+  q24 HIT  Q6A  What is a specification made of?
+  q25 HIT  Q6A  When can a test be done only on selected batches instead of every batc
+  q26 HIT  Q6A  When can process data replace end-product sterility testing?
+  q27 HIT  Q6A  Which release test applies to solid oral dosage forms to check drug re
+  q28 HIT  Q6A  What extra tests apply to drug substances with a single enantiomer?
+  q29 MISS M4Q_R1  In which CTD section does drug substance stability go?
+  q30 HIT  M4Q_R1  Where are the excipients of the drug product controlled in the CTD?
+recall@5 fts=0.700 vector=0.900 hybrid=0.867 rerank=0.933 (30 questions); rerank 0.02 s per query
