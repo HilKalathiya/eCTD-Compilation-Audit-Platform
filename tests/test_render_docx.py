@@ -85,11 +85,14 @@ class DocxTests(unittest.TestCase):
     def test_planted_digits_the_number_finder_misses_are_caught(self):
         self.edit(lambda doc: doc.add_paragraph("Lost 1e5 units in 2nd step."))
         rep = reread(self.path, self.built)
-        self.assertTrue(rep["problems"])
+        self.assertEqual(rep["problems"], ["numbers!=placements: 14 in file, 11 placed", "text differs from what was written"])
 
     def test_planted_batch_id_not_on_the_list_is_caught(self):
         self.edit(lambda doc: setattr(doc.tables[0].rows[1].cells[0].paragraphs[0].runs[0], "text", "99"))
-        self.assertTrue(reread(self.path, self.built)["problems"])
+        self.assertEqual(reread(self.path, self.built)["problems"],
+                         ["numbers!=placements: 12 in file, 11 placed",
+                          "changed number #1: file has '99', placement says '97.33'",
+                          "text differs from what was written"])
 
     def test_a_rejected_section_is_left_out_and_counted(self):
         f, fl = facts56()

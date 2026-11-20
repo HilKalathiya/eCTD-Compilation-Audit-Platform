@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-20 — T-057 done (C3.7 claim flags + independent re-read)
+- `review/entail.py`: each sentence with a claim word must match a fact rule (e.g. "No result was outside" needs n_outside == 0); else reviewer flag `unsupported:<phrase>` (no auto-reject). `tools/reread_export.py`: zip+ElementTree reader of P5.docx, numbers vs placements.jsonl from disk, entail on every paragraph.
+- Real run `evidence/T-057/`: numbers 3589 == placements 3589, uncovered 0, 4 flags (all "within the range", residual solvent P.5.4) in `flags.csv` for Hil. Planted: "No new signals", "All results complied" with n_outside>0 -> flagged; true claim not. 2 weak docx tests now assert exact reasons.
+
 ## 2026-11-20 — T-056 done (C3.6b Word output)
 - `render/docx.py`: P5.docx from the same plan/placements as the HTML via shared `html.walk()`; `reread()` opens the SAVED file and checks numbers == placements, digits uncovered, text units. `tools/render_doc.py --docx`; python-docx==1.2.0 pinned.
 - Real run `evidence/T-056/`: html 3589 = 3589, docx 3589 = 3589, uncovered 0, missing 0. Planted docx edits caught: changed number, deleted row, bare 0.7%.

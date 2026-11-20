@@ -161,3 +161,6 @@ flaky test = a test that passes or fails at random without code changes
 stderr = the channel where a program prints its error messages
 re-read check = open the saved file again and check what is really inside
 planted error = a mistake added on purpose to prove a check can fail
+entailment = checking whether a sentence is really backed by a fact
+claim word = a word that asserts something (complies, within, stable, no trend)
+reviewer flag = a note for a human to look at; it does not reject the text
