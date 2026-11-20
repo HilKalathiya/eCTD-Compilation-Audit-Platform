@@ -8,3 +8,4 @@ __pycache__/
 .env
 .claude/settings.backup.json
 .cache/
+ectd_project_resume_brief.md
