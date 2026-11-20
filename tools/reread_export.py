@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from ectd_engine.render.numbers import find_numbers, uncovered_digits  # noqa: E402
+from ectd_engine.render.numbers import BATCH_RUN, ID_TOKEN, find_numbers, uncovered_digits  # noqa: E402
 from ectd_engine.review.entail import entail  # noqa: E402
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
@@ -37,7 +37,9 @@ def read_units(docx_path):
     units = []
     for el in body:
         if el.tag == W + "p":
-            units.append(("p", _par_text(el)))
+            style = el.find(W + "pPr/" + W + "pStyle")
+            is_head = style is not None and style.get(W + "val", "").startswith(("Heading", "Title"))
+            units.append(("h" if is_head else "p", _par_text(el)))
         elif el.tag == W + "tbl":
             for tr in el.findall(W + "tr"):
                 cells = ["\n".join(_par_text(p) for p in tc.findall(W + "p")) for tc in tr.findall(W + "tc")]
@@ -82,15 +84,23 @@ def facts_for(text, placed):
 def reread(docx_path, placements, batch_ids):
     """Returns a report dict: number counts, problems, and one row per entailment flag."""
     units = read_units(docx_path)
-    found, uncovered, flags, pos = [], [], [], 0
+    found, uncovered, flags, pos, unknown, attribute = [], [], [], 0, [], ""
     for i, (kind, text) in enumerate(units):
+        if kind == "h" and not text.startswith("3.2.P"):
+            attribute = text   # the attribute heading: the sentences under it must be about this attribute
         data_row = kind == "row" and text != HEAD
+        for run in BATCH_RUN.finditer(text):   # every id after "Batch"/"Batches" must be on the list of the task files
+            unknown += [f"unknown batch id:{t.group(0)}" for t in ID_TOKEN.finditer(run.group(1))
+                        if t.group(0) != "and" and any(c.isdigit() for c in t.group(0)) and t.group(0) not in batch_ids]
+        if data_row and text.split("\t", 1)[0] not in batch_ids:
+            unknown.append(f"unknown batch id:{text.split(chr(9), 1)[0]}")
         nums = find_numbers(text, batch_ids, data_row)
         uncovered += uncovered_digits(text, [(o, o + len(t)) for o, t in nums], batch_ids, data_row)
         placed = placements[pos:pos + len(nums)]
         pos += len(nums)
         found += [t for _, t in nums]
-        for flag in entail(text, facts_for(text, placed)):
+        facts = dict(facts_for(text, placed), attribute=attribute)
+        for flag in entail(text, facts, kind=kind):
             flags.append({"unit": i, "section": placed[0]["section"] if placed else "", "flag": flag, "text": text})
     placed_text = [r["text"] for r in placements]
     problems = []
@@ -100,7 +110,7 @@ def reread(docx_path, placements, batch_ids):
         if a != b:
             problems.append(f"changed number #{i}: file has {a!r}, placement says {b!r}")
             break
-    problems += uncovered
+    problems += uncovered + unknown
     return {"numbers": len(found), "placements": len(placed_text), "uncovered": len(uncovered), "paragraphs": len(units),
             "flags": flags, "problems": problems}
 

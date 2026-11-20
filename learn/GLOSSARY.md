@@ -166,3 +166,5 @@ claim word = a word that asserts something (complies, within, stable, no trend)
 reviewer flag = a note for a human to look at; it does not reject the text
 overclaim = a sentence that says more than the facts show
 exact match = the same text, character for character
+shape = an allowed sentence form with blanks for the numbers
+allow-list = only the listed things pass; everything else is flagged

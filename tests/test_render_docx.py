@@ -98,6 +98,17 @@ class DocxTests(unittest.TestCase):
         self.assertEqual(reread(self.path, self.built)["problems"],
                          ["numbers!=placements: 12 in file, 11 placed", "text differs from what was written"])
 
+    def test_the_second_reader_names_an_unknown_batch_id(self):
+        from tools import reread_export
+        listed, placed = self.built["batch_ids"], self.built["records"]
+        self.assertEqual(reread_export.reread(self.path, placed, listed)["problems"], [])
+        self.edit(lambda doc: doc.add_paragraph("Batch 26 was retested."))          # listed id: fine
+        self.assertEqual(reread_export.reread(self.path, placed, listed)["problems"], [])
+        self.edit(lambda doc: doc.paragraphs[-1].runs[0].__setattr__("text", "Batch 99 was retested."))
+        self.assertIn("unknown batch id:99", reread_export.reread(self.path, placed, listed)["problems"])
+        self.edit(lambda doc: setattr(doc.tables[0].rows[1].cells[0].paragraphs[0].runs[0], "text", "77"))
+        self.assertIn("unknown batch id:77", reread_export.reread(self.path, placed, listed)["problems"])
+
     def test_a_rejected_section_is_left_out_and_counted(self):
         f, fl = facts56()
         del f["limit"]

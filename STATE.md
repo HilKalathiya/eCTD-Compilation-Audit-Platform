@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-20 — T-059 done (sentence shapes gate)
+- `review/shapes.py`: SENTENCE_SHAPES = every sentence form the writer makes (P.5.4 opening/range/mean/highest-lowest/excluded, P.5.6 criterion declared + Q3B quote, outside count), each with a fact check. `entail()`: no shape -> `unrecognised:<40 chars>` (+ `claim:<word>` label); shape but facts disagree -> `unsupported:<shape>`. Headings and table rows are gated too. When the attribute (heading) is known, the sentence must name it.
+- `tools/reread_export.py`: new reason `unknown batch id:<id>` (text and table cells); reads headings separately. Real run `evidence/T-059/`: numbers 3589 == placements, unrecognised 0, flags 0. Excluded-batch table row (`id / excluded (quarantined) / -`) added as a row shape (writer form).
+
 ## 2026-11-20 — T-058 done (C3.7 claim check hardening)
 - `review/entail.py`: new claim words (pass, below/above/exceeds limit, OOS, no issues/concerns, suitable, robust, range). Quoted text is skipped ONLY if it exactly equals a stored Q3B row (`stored_quotes()`); other quotes are checked. New rule: "range from X to Y" / "within the range X–Y" / "range of X" must equal placed min_value / max_value.
 - Real run `evidence/T-058/`: numbers 3589 == placements, 0 flags (the 4 "within the range" false alarms are gone). Tests: 20/20 OVERCLAIMS flagged, 5/5 true not flagged; 2 docx tests now prove `uncovered:` and unlisted-batch-id reasons. "passed" is never backed by a rule.
