@@ -15,12 +15,55 @@ This is a **portfolio and design project on public data**. It is not a validated
 
 ## What it does today
 
+```mermaid
+flowchart TD
+    SRC[("<b>Public sources</b><br/>lab CSV · FDA PDF · label XML · ICH")]
+
+    subgraph S1["① Collect facts"]
+        LOAD["<b>Loaders</b><br/>keep a pointer to each source"]
+        GATE{{"<b>Write gate</b><br/>unit · range · agreement"}}
+        QUAR["Quarantine<br/>with a reason"]
+        STORE[("<b>Fact store</b><br/>PostgreSQL + Neo4j")]
+        LOAD --> GATE
+        GATE -- fails --> QUAR
+        GATE -- passes --> STORE
+    end
+
+    subgraph S2["② Compute and write"]
+        STATS["<b>Stats tools</b><br/>exact Decimal · ICH Q1E"]
+        LLM["<b>Local LLM</b><br/>words + #91;#91;placeholders#93;#93;<br/>never numbers"]
+        VAL{{"<b>Validators</b><br/>right fact, right place?"}}
+        LLM --> VAL
+        VAL -- retry --> LLM
+    end
+
+    subgraph S3["③ Render and re-check"]
+        REND["<b>Renderer</b><br/>code inserts every number"]
+        REREAD["<b>Independent re-read</b><br/>every digit matched to a fact"]
+        REND --> REREAD
+    end
+
+    OUT(["<b>P.5 section</b> in HTML + Word<br/>3,589 / 3,589 numbers traced"])
+
+    SRC --> LOAD
+    STORE <-- "results saved as facts" --> STATS
+    STORE -- "facts by ID" --> LLM
+    VAL -- accepted --> REND
+    REREAD --> OUT
+
+    classDef model fill:#fff1db,stroke:#d9892b,stroke-width:2px,color:#000
+    classDef code fill:#e6f0fb,stroke:#3d7cc4,color:#000
+    classDef data fill:#e5f4e8,stroke:#3f8f4f,color:#000
+    classDef bad fill:#fbe7e7,stroke:#c94f4c,color:#000
+    classDef stage fill:#fafafa,stroke:#c8c8c8,color:#333
+    class LLM model
+    class LOAD,GATE,STATS,VAL,REND,REREAD code
+    class SRC,STORE,OUT data
+    class QUAR bad
+    class S1,S2,S3 stage
 ```
-Public sources -> Loaders -> Write gate -> Fact store -> Stats tools -> Writer (LLM) -> Validators -> Renderer -> Re-read + claim check
-(lab CSV, FDA     (keep a    (units, ranges,  (PostgreSQL   (exact Decimal, (prose with      (code checks  (HTML + Word,  (every digit and
- PDF, label XML,   source     agreement,       + Neo4j,      ICH Q1E shelf   [[placeholders]], each draft)   code inserts   sentence checked
- ICH guidelines)   pointer)   quarantine)      same gate)    life, OOT)      no numbers)                    the numbers)   from the saved file)
-```
+
+**Orange** is the only step where the language model works. **Blue** steps are plain code with tests. **Green** is data.
 
 It currently writes Module 3 section **3.2.P.5** (control of drug product): batch analyses (P.5.4), and specifications and their justification (P.5.1 and P.5.6).
 
