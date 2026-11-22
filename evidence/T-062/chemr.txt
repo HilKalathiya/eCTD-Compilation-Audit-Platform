@@ -1,0 +1,1305 @@
+CENTER FOR DRUG EVALUATION AND
+           RESEARCH
+
+       APPLICATION NUMBER:
+
+        215341Orig1s000
+
+
+ PRODUCT QUALITY REVIEW(S)
+                           QUALITY ASSESSMENT
+
+
+NDA 215341: Kerendia (Finerenone) Tablets
+
+                       Integrated Quality Review
+                        Recommendation: Approval
+ Product Name                 Kerendia (finerenone) tablets, for oral use
+                                                                                     (b) (4)
+ Indication                   To
+                                                           (b) (4)                (b) (4)
+                              reduce the risk of                   cardiovascular
+                              and hospitalization for heart failure in adult patients
+                              with chronic kidney disease (CKD) and type 2 diabetes
+ Strength                     10 and 20 mg
+ Dosage Form                  Oral Tablets
+ Rx/OTC Dispensed             Rx
+ Applicant                    Bayer HealthCare LLC
+ Submissions (s)              NDA 215341 and all the submitted C M C
+ Reviewed                     amendments
+
+                               Quality Review Team
+
+         Discipline                 Reviewer                   Branch/Division
+      Drug Substance              Zhengfu Wang           OPQ/ONDP/DNDAPI/NDB3
+       Drug Product               Ali Mohamadi          OPQ/ONDP/DNDPIII/NDPB5
+    Process and Facility              Ke Ren             OPQ/OPMA/DPMAII/PMB6
+     Biopharmaceutics                 Jing Li                OPQ/ONDP/DB/BB3
+ Application Technical Lead       Mohan Sapru           OPQ/ONDP/DNDPIII/NDPB5
+
+RBPM: Grafton Adams (OPQ/OPRO/DRBPMI/RBPMB2)
+
+   Related/Supporting Documents:
+     Document             Application Number                          Description
+         NA                       NA                                     NA
+
+CONSULTS: None
+
+
+
+
+1|Page        NDA 215341: Kerendia (Finerenone) Tablets
+                             QUALITY ASSESSMENT
+
+
+                              Executive Summary
+I. Recommendations
+
+   A. Recommendation and Conclusion on Approvability
+
+       From the Chemistry, Manufacturing and Controls (CMC)/quality perspective,
+       NDA 215341 (Kerendia (Finerenone) Tablets), is recommended for approval.
+       Based on the stability data submitted to date, the expiry dating period for
+       Kerendia (finerenone) tablets shall be 36 months from the date of manufacture,
+       when stored at controlled room temperature (USP) of 20°C to 25°C (68°F to
+       77°F) in the purposed commercial packaging. Excursions are permitted from
+       15°C to 30°C (59°F to 86°F).
+
+   B. Recommendation on Post-Marketing Commitments (PMCs), Agreements,
+      and/or Risk Management Steps, if Applicable
+
+       N/A
+
+II. Quality Assessment Summary
+
+   1. Background: The Applicant has sought U.S. marketing approval for Kerendia
+   (finerenone) tablets, for oral use, under the provisions of Section 505(b)(1) of the
+   Federal Food and Cosmetic (FDC) Act. Finerenone (BAY 94-8862) is a nonsteroidal,
+   selective antagonist of the mineralocorticoid receptor (MR) that is claimed to
+   attenuate inflammation and fibrosis mediated by MR overactivation. The MR is
+   expressed in the kidneys, heart and blood vessels. The proposed starting dose is 10
+   mg or 20 mg, based on eGFR. Dose adjustment during the course of treatment is
+   based on eGFR and serum potassium levels. The maximum daily dose of Kerendia is
+   20 mg.
+
+   2. Drug Substance (Finerenone): The drug substance is practically insoluble in
+                (b) (4)                                                       (b) (4)
+   water.               drug substance is used for product manufacturing. The
+                                                                                             (b) (4)
+
+
+
+
+   specified impurities in the drug substance are controlled below ICH Q3A
+   qualification threshold. The potential genotoxic impurities are adequately controlled.
+        (b) (4)                                                       (b)
+                is controlled with a specification limit of NMT (4) ppm; there is no risk of
+                           (b) (4)
+                                   in this process. The fate and purge studies to track potential
+   impurities are adequate. The designation of starting materials is adequately justified.
+   The drug substance specification includes testing of all critical qualities (CQAs),
+   including assay and purity, enantiomeric purity, particle size distribution and residual
+   solvents. Regarding potential elemental impurities, the manufactured batches have
+   been monitored per ICH Q3D, option 1 criteria; none of the Class 1, 2A, 2B and
+
+2|Page         NDA 215341: Kerendia (Finerenone) Tablets
+                                QUALITY ASSESSMENT
+                                                                    (b) (4)
+  Class 3 elemental impurities have been found above % of permitted daily exposure
+  thresholds levels. Non-compendial methods are adequately validated. The stability
+                      (b) (4)
+  data support a              retest period.
+
+  3. Drug Product (Finerenone Tablets)
+
+  3.1. Product Design, and Release Specification:
+                                                                                             (b) (4)
+  Finerenone is formulated as immediate-release tablets with                                         film
+  coating, for oral once daily administration, in the dose strengths of 10 mg and 20 mg.
+                                                                                                      (b) (4)
+  All excipients are USP-NF except the film-coating agent,                                                    .
+  Enantiomeric purity is not affected by the drug product manufacturing process or
+  product storage. The product release specification involves adequate testing of all the
+  product critical quality attributes (CQAs). The non-compendial methods are
+                                                                                              (b) (4)
+  validated. Specifically, the degradation product,                                                        is
+                                                                                 (b) (4)
+  controlled by product specification with an acceptance limit of NMT                    %, which is
+  within ICH Q3B identification threshold for a maximum daily dose of 20 mg. No
+         (b) (4)
+                 is used to manufacture the drug product, and the Applicant has provided a risk
+                                                                                                      (b) (4)
+  assessment study to demonstrate that                                                                        ,
+  originating from the drug substance and excipients, stay within ICH Q3C thresholds
+                                                                                                       (b) (4)
+  levels. Regarding elemental impurities, the elemental impurities
+    (b) (4)
+             stay within their permitted daily exposure thresholds, as specified in ICH Q3D.
+                                                                                            (b) (4)
+  Hence, omission of release testing of the product batches for                                        and
+  elemental impurities is justified. The drug product is to be presented in high-density
+                                                     (b) (4)
+  polyethylene (HDP) bottle with a                           closure and aluminum seal. Based on
+  the information provided, the proposed container closure system is adequate for the
+  intended use.
+                                                                                                          (b) (4)
+  3.2. Manufacturing:
+                                                                                                           (b) (4)
+
+
+
+
+           Three registration batches of each strength have been manufactured using the
+        (b) (4)
+
+
+  proposed commercial process. The identified critical process parameters and in-
+  process controls are adequate. Overall, the product manufacturing is well-controlled.
+
+  3.3. Microbiological Aspects: The drug product batches are adequately tested on
+  release for microbial purity, which involves testing for total aerobic microbial count,
+  combined yeast/mold count and Escherichia coli.
+
+  3.4. Biopharmaceutics Aspects:
+
+  The Biopharmaceutics review focused on evaluating a) the dissolution method and
+  acceptance criterion for quality control of the proposed product, and b) the bridging
+  of the formulations, used throughout development, and the proposed commercial
+  product.
+
+3|Page            NDA 215341: Kerendia (Finerenone) Tablets
+                            QUALITY ASSESSMENT
+
+   Dissolution Method and Acceptance criterion: The proposed dissolution method is
+   adequate. Specifically, to further mitigate the risk and to enhance the discriminating
+   ability of the method, the Applicant tightened the acceptance criterion as per FDA
+                          (b)
+   recommendation (Q= (4) % in 15 min). The tightened acceptance criterion together
+   with the proposed dissolution method are able to reject the batches manufactured with
+                                                                        (b)
+   drug substance having out-of-specification particle size (i.e., D90= (4) μm).
+                                                                               (b) (4)
+   Formulation Bridging: There is a minor difference                                   between
+   the proposed commercial formulation and the phase III formulation manufactured in
+   commercial scale. Bridging between the two formulations is adequately supported by
+   the dissolution data, which indicate that all batches are conforming to the regulatory
+   specifications. The Applicant provided comparative dissolution data for the clinical
+   batches and the commercial batches, which further support the bridging.
+
+   3.5. Stability, Storage Conditions and Expiration Date: Based on stability studies,
+   the Applicant has demonstrated product stability for a period of 36 months at long-
+   term storage conditions (25°C /60% RH and 30 °C/75 % RH) and for 6 months at
+   accelerated storage conditions (40°C/75%RH), when stored in the commercial
+   container closure system. The product stability data support: a) an expiry dating
+   period of 36 months when stored at controlled room temperature (USP) of 20°C to
+   25°C (68°F to 77°F) in the purposed commercial packaging, and b) excursions from
+   15°C to 30°C (59°F to 86°F).
+
+
+III. Assessment of Manufacturing Facilities: Regarding the listed manufacturing and
+    testing facilities, there are no outstanding deficiencies and are deemed acceptable.
+    Specifically, the drug product and drug substance manufacturing and testing facilities
+    have been approved based on inspection history and manufacturing experience of the
+    concerned facilities.
+
+
+1V. Overall Control Strategies: From the quality perspective, the proposed control
+   strategies are adequate to ensure consistent product quality with regard to identity,
+   strength, purity, and stability.
+
+
+V. Environmental Assessment
+
+The Applicant has claimed categorical exclusion under 21 CFR Part 25.31(b), which is
+acceptable.
+
+
+VI. Product Quality Labeling Recommendations
+
+The product quality recommendations are included in the latest version of labeling,
+including the Prescription Information.
+
+
+
+4|Page         NDA 215341: Kerendia (Finerenone) Tablets
+                                QUALITY ASSESSMENT
+
+VII. Life Cycle Knowledge Information
+
+                                   Final Risk Assessment
+
+                  NDA 215341: Kerendia (Finerenone) Tablets
+Attribute/       Factors        Initial Risk      Risk Mitigation                   Final Risk   Lifecycle
+CQA             Impacting        Ranking             Approach                       Evaluation   Considerations
+                  CQAs                                                                           / Comments
+
+Assay,         Formulation        Low         The product CQAs                     Acceptable   .
+Stability      Container          (L)         such as
+                closure                        identification, assay,
+               Impurity                       and impurity levels,
+                exceeding                      are controlled by
+               specification                   appropriate release
+               Process                        specification using
+                parameters                     validated analytical
+               Scale/                         methods.
+                equipment/                     Product stability has
+                site                           been demonstrated
+                                               for a period of 36
+                                               months when stored
+                                               at 20°C to 25°C in
+                                               the commercial
+                                               packaging.
+                                                                          (b) (4)
+Solid state    Formulation     Moderate                                            Acceptable   N/A
+Polymorph      Raw              (M)
+ic form)        materials
+               Process
+                parameters
+               Scale/
+                equipment/
+                site
+
+
+
+
+Content        Formulation     Moderate       Particle size (b) (4)                Acceptable   Any proposed
+Uniformity     Particle size    (M)                            (b) (4)
+                                                                                                 changes to
+               Segregation                                                                      formulation,
+               Raw                            controlled by release                             manufacturing, or
+                materials                      specification.                                    the control
+               Process                        Product content                                   strategy will need
+                parameters                     uniformity is tested                              to be evaluated for
+               Scale/                         on release.                                       possible impact
+                equipment/                                                                       on content
+                site                                                                             uniformity.
+
+
+
+
+5|Page          NDA 215341: Kerendia (Finerenone) Tablets
+                                 QUALITY ASSESSMENT
+   Attribute/       Factors      Initial Risk      Risk Mitigation         Final Risk   Lifecycle
+   CQA             Impacting      Ranking             Approach             Evaluation   Considerations
+                     CQAs                                                               / Comments
+
+   Poor           Formulation      Low         The manufacturing          Acceptable
+   Adhesion       Process          (L)         process       (b) (4)
+
+   Related         parameters                   controls are
+   Delaminati     Scale/equip                  adequate     (b) (4)
+
+   on (for         ment/site
+                                                               (b) (4)
+
+   multilayere
+   d tablets
+
+   Dissolution    Formulation   Moderate       Dissolution                Acceptable
+                  Raw            (M)           monitored on
+                   materials                    release. The
+                  Process                      dissolution method
+                   parameters                   has adequate
+                  Scale/equip                  discriminating
+                   ment/site                    ability towards
+                  API sources                  critical attributes.
+                                                                 (b) (4)
+   Microbial      Formulation      Low                                    Acceptable
+   limits         Raw              (L)
+                                                     (b) (4)
+                   materials                             The drug
+                  Process                      product tested on
+                   parameters                   release for microbial
+                   Scale/equip                  purity.
+                   ment/site
+
+
+      OVERALL ASSESSMENT AND SIGNATURES: EXECUTIVE SUMMARY
+
+    From the Chemistry, Manufacturing and Controls (CMC)/quality perspective, NDA
+    215341 is recommended for approval. Based on the stability data submitted to date,
+    the expiry dating period for Kerendia (finerenone) tablets shall be 36 months from the
+    date of manufacture, when stored at controlled room temperature (USP) of 20°C to
+    25°C (68°F to 77°F) in the purposed commercial packaging. Excursions are
+    permitted from 15°C to 30°C (59°F to 86°F).
+
+    Mohan Sapru, M.S., Ph.D.
+    Application Technical Lead (ATL)
+    CMC Lead; Division of Cardiology and Nephrology
+    CDER/OPQ/ONDP/DNDPIII/NDPB5
+
+
+
+
+75 Page(s) have been Withheld in Full as B4 (CCI/TS) immediately following this page
+
+
+
+  6|Page           NDA 215341: Kerendia (Finerenone) Tablets
+                  CHAPTER IV: LABELING
+                  IQA NDA Assessment Guide Reference
+
+1.0 PRESCRIBING INFORMATION
+
+Assessment of Product Quality Related Aspects of the Prescribing
+Information: Adequate
+
+ 1.1 HIGHLIGHTS OF PRESCRIBING INFORMATION
+                              Information Provided
+             Item                                    Assessor’s Comments
+                                   in the NDA
+Product Title in Highlights
+Proprietary name                   KERENDIA              Adequate
+Established name(s)                finerenone            Adequate
+Route(s) of administration         Oral                  Adequate
+Dosage Forms and Strengths Heading in Highlights
+Summary of the dosage               Tablet, 10 mg or     Adequate
+form(s) and strength(s)            20 mg
+in metric system.
+Assess if the tablet is            N/A                   N/A
+scored. If product meets
+guidelines and criteria for a
+scored tablet, state
+“functionally scored”
+For injectable drug                N/A                   N/A
+products for parental
+administration, use
+appropriate package type
+term (e.g., single-dose,
+multiple-dose, single-
+patient-use). Other
+package terms include
+pharmacy bulk package
+and imaging bulk package.
+
+
+
+
+ OPQ-XOPQ-TEM-0001v06            Page 1         Effective Date: February 1, 2019
+1.2 FULL PRESCRIBING INFORMATION
+1.2.1 Section 2 (DOSAGE AND ADMINISTRATION)
+                             Information Provided
+            Item                                    Assessor’s Comments
+                                  in the NDA
+DOSAGE AND ADMINISTRATION section
+Special instructions for     N/A                  N/A
+product preparation (e.g.,
+reconstitution and resulting
+concentration, dilution,
+compatible diluents,
+storage conditions needed
+to maintain the stability of
+the reconstituted or diluted
+product)
+
+
+1.2.2 Section 3 (DOSAGE FORMS AND STRENGTHS)
+
+
+
+
+OPQ-XOPQ-TEM-0001v06            Page 2        Effective Date: February 1, 2019
+                                         Information
+                 Item                      Provided          Assessor’s Comments
+                                          in the NDA
+DOSAGE FORMS AND STRENGTHS section
+Available dosage form(s)            Tablet                  Adequate
+Strength(s) in metric system        10 mg and 20 mg         Adequate
+If the active ingredient is a salt,  N/A                    N/A
+apply the USP Salt Policy per FDA
+Guidance
+A description of the identifying    10 mg tablet: pink,     Adequate
+characteristics of the dosage       oblong tablet with
+forms, including shape, color,      “FI” on one side of
+coating, scoring, and imprinting    tablet, “10” on the
+                                    other side of tablet.
+
+                                      20 mg tablet:
+                                      yellow, oblong
+                                      tablet with “FI” on
+                                      one side of tablet,
+                                      “20” on the other
+                                      side of tablet.
+Assess if the tablet is scored. If     N/A                  N/A
+product meets guidelines and
+criteria for a scored tablet, state
+“functionally scored”
+For injectable drug products for      N/A                   N/A
+parental administration, use
+appropriate labeling term (e.g.,
+single-dose, multiple-dose, single-
+patient-use). Other package type
+terms include pharmacy bulk
+package and imaging bulk
+package.
+
+
+
+
+ OPQ-XOPQ-TEM-0001v06                  Page 3           Effective Date: February 1, 2019
+1.2.3 Section 11 (DESCRIPTION)
+
+
+
+
+                  APPEARS THIS WAY ON ORIGINAL
+
+
+
+
+OPQ-XOPQ-TEM-0001v06             Page 4     Effective Date: February 1, 2019
+                                Information Provided
+            Item                                                 Assessor’s Comments
+                                     in the NDA
+DESCRIPTION section
+Proprietary and established Kerendia and finerenone            Adequate
+name(s)
+Dosage form(s) and route(s) Tablet and Oral                    Adequate
+of administration
+If the active ingredient is a  N/A                             N/A
+salt, apply the USP Salt
+Policy and include the
+equivalency statement per
+FDA Guidance.
+List names of all inactive     The inactive ingredients       Adequate
+ingredients. Use USP/NF        of Kerendia are lactose
+names. Avoid Brand names. monohydrate, cellulose
+                               microcrystalline,
+                               croscarmellose sodium,
+                               hypromellose,
+                               magnesium stearate,
+                               and sodium lauryl
+                               sulfate. The film coating
+                               contains hypromellose,
+                               titanium dioxide and talc,
+                               in addition to ferric oxide
+                               red (10 mg) or ferric
+                               oxide yellow (20 mg) .
+For parenteral injectable       N/A                           N/A
+dosage forms, include the
+name and quantities of all
+inactive ingredients. For
+ingredients added to adjust
+the pH or make isotonic,
+include the name and
+statement of effect.
+If alcohol is present, must     N/A                           N/A
+provide the amount of
+alcohol in terms of percent
+volume of absolute alcohol
+Statement of being sterile (if N/A                            N/A
+applicable)
+Pharmacological/                None                          We let the clinical
+therapeutic                                                   pharmacology team know to
+class                                                         include the pharmacological
+                                                              class
+
+
+  OPQ-XOPQ-TEM-0001v06                  Page 5               Effective Date: February 1, 2019
+Chemical name, structural       Finerenone’s chemical Adequate
+formula, molecular weight      name is (4S)-4-(4-cyano-
+                               2- methoxyphenyl)-5-
+                               ethoxy-2,8-dimethyl-1,4-
+                               dihydro-1,6-
+                               naphthyridine-3-
+                               carboxamide. The
+                               molecular formula is
+                               C21H22N4O3 and the
+                               molecular weight is
+                               378.43 g/mol. The
+                               structural formula is:
+
+
+
+
+If radioactive, statement of   N/A                   N/A
+important nuclear
+characteristics.
+Other important chemical or    N/A                   N/A
+physical properties (such as
+pKa or pH)
+
+
+
+       Section 11 (DESCRIPTION) Continued
+                           Information Provided
+            Item                                        Assessor’s Comments
+                                in the NDA
+For oral prescription drug N/A                       N/A
+products, include gluten
+statement if applicable
+Remove statements that     N/A                       N/A
+may be misleading or
+promotional (e.g.,
+“synthesized and developed
+by Drug Company X,”
+
+  OPQ-XOPQ-TEM-0001v06               Page 6         Effective Date: February 1, 2019
+“structurally unique
+molecular entity”
+
+
+1.2.4 Section 16 (HOW SUPPLIED/STORAGE AND HANDLING)
+
+
+
+
+                       APPEARS THIS WAY ON ORIGINAL
+
+
+
+
+ OPQ-XOPQ-TEM-0001v06            Page 7       Effective Date: February 1, 2019
+                                Information Provided
+            Item                                           Assessor’s Comments
+                                       in the NDA
+HOW SUPPLIED/STORAGE AND HANDLING section
+Available dosage form(s)       Tablet                    Adequate
+Strength(s) in metric system 10 mg and 20 mg             Adequate
+Available units (e.g., bottles  Bottle of 30 and 90      Adequate
+of 100 tablets)                counts
+Identification of dosage       Kerendia is available as Adequate
+forms, e.g., shape, color,     a film-coated tablet in
+coating, scoring, imprinting, two strengths. The 10
+NDC number                     mg is a pink oblong
+                               tablet with “FI” on one
+                               side of tablet and “10”
+                               on the other side of
+                               tablet. The 20 mg tablet
+                               is a yellow oblong tablet
+                               with “FI” on one side of
+                               tablet and “20” on the
+                               other side of tablet
+
+                                30 counts, 0 mg, NDC
+                                50419-540-01
+                                90 counts, 10 mg, NDC
+                                50419-540-02
+                                30 counts, 20 mg, NDC
+                                50419-541-01
+                                90 counts, 20 mg, NDC
+                                50419-541-02
+Assess if the tablet is scored. N/A                      N/A
+If product meets guidelines
+and criteria for a scored
+tablet, state “functionally
+scored”
+For injectable drug products N/A                         N/A
+for parental administration,
+use appropriate package
+type term (e.g., single-dose,
+multiple-dose, single-patient-
+use). Other package terms
+include pharmacy bulk
+package and imaging bulk
+package.
+
+
+
+
+  OPQ-XOPQ-TEM-0001v06               Page 8             Effective Date: February 1, 2019
+         Section 16 (HOW SUPPLIED/STORAGE AND HANDLING) (Continued)
+                              Information Provided
+              Item                                     Assessor’s Comments
+                                    in the NDA
+Special handling about the    N/A                    N/A
+supplied product (e.g.,
+protect from light,
+refrigerate). If there is a
+statement to “Dispense in
+original container,” provide
+reason why (e.g. to protect
+from light or moisture, to
+maintain stability, etc.)
+If the product contains a     N/A                    N/A
+desiccant, ensure the size
+and shape differ from the
+dosage form and desiccant
+has a warning such as “Do
+not eat.”
+Storage conditions. Where     Store at controlled    Adequate
+applicable, use USP           room temperature
+storage range rather than     (USP) 20°C to 25°C
+storage at a single           (68°F to 77°F).
+temperature.                  Excursions are
+                              permitted from 15°C to
+                              30°C (59°F to 86°F)
+Latex: If product does not    N/A                    N/A
+contain latex and
+manufacturing of product
+and container did not
+include use of natural
+rubber latex or synthetic
+derivatives of natural rubber
+latex, state: “Not made with
+natural rubber latex. Avoid
+statements such as “latex-
+free.”
+Include information about     N/A                    N/A
+child-resistant packaging
+
+
+
+
+ OPQ-XOPQ-TEM-0001v06            Page 9         Effective Date: February 1, 2019
+  1.2.5 Other Sections of Labeling
+
+    1.2.6 Manufacturing Information After Section 17 (for drug products)
+                                Information Provided
+              Item                                       Assessor’s Comments
+                                     in the NDA
+Manufacturing Information After Section 17
+Name and location of           None                   The Applicant needs to
+business (street address,                             include manufacturing
+city, state and zip code) of                          information.
+the manufacturer, distributor,
+and/or packer
+
+ 2.0 PATIENT LABELING
+
+ Assessment of Product Quality Related Aspects of Patient Labeling (e.g.,
+ Medication Guide, Patient Information, Instructions for Use): None
+
+ Any deficiencies should be listed at the end in the “ITEMS FOR
+ ADDITIONAL ASSESSMENT.”
+
+ 3.0 CARTON AND CONTAINER LABELING
+
+ 3.1 Container Label
+                                                                                (b) (4)
+
+
+
+
+  OPQ-XOPQ-TEM-0001v06             Page 10           Effective Date: February 1, 2019
+
+ 3 Page(s) of Draft Labeling have been Withheld in Full as B4 (CCI/TS) immediately
+                                 following this page
+                                                                        Assessor’s
+          Item               Information Provided in the NDA        Comments about
+                                                                     Carton Labeling
+Proprietary name,                                                  We let the DMEPA
+established name, and                                              team know that the
+dosage form (font size                                             size of established
+and prominence                                                     name appears
+                                                                   smaller than the
+                                                                   half size of
+                                                                   proprietary name.
+Dosage strength           10 mg and 20 mg                          Adequate
+Route of administration Oral                                       Adequate
+If the active ingredient   N/A                                     N/A
+is a salt, include the
+equivalency statement
+per FDA Guidance
+Net contents (e.g. tablet 30 and 90 counts                         Adequate
+count)
+“Rx only” displayed on Rx only                                     Adequate
+the principal display
+NDC number                Present. See the container and carton    Adequate
+                          labels
+Lot number and            Present. See the container and carton    Adequate
+expiration date           labels.
+                          No expiration date
+Storage conditions. If                                             Store at controlled
+applicable, include a                                              room temperature
+space on the carton                                                (USP) 20°C to 25°C
+labeling for the user to                                           (68°F to 77°F).
+write the new BUD.                                                 Excursions are
+                                                                   permitted from
+                                                                   15°C to 30°C (59°F
+                                                                   to 86°F)
+For injectable drug        N/A                                     N/A
+products for parental
+administration, use
+appropriate package
+type term (e.g., single-
+dose, multiple-dose,
+single-patient-use)
+
+
+
+
+OPQ-XOPQ-TEM-0001v06                Page 14          Effective Date: February 1, 2019
+Other package terms        N/A                                       N/A
+include pharmacy bulk
+package and imaging
+bulk package which
+require “Not for direct
+infusion” statement.
+If alcohol is present,     N/A                                       N/A
+must provide the
+amount of alcohol in
+terms of percent
+volume of absolute
+alcohol
+Bar code                   Present. See the container and carton     Adequate
+                           labels
+
+                                                                       Assessor’s
+                                 Information Provided in the
+            Item                                                     Comments about
+                                            NDA
+                                                                     Carton Labeling
+Name of                                                            Adequate
+manufacturer/distributor
+
+
+
+Medication Guide (if           N/A                                 N/A
+applicable)
+No text on Ferrule and Cap N/A                                     N/A
+overseal
+When a drug product differs N/A                                    N/A
+from the relevant USP
+standard of strength,
+quality, or purity, as
+determined by the
+application of the tests,
+procedures, and
+acceptance criteria set forth
+in the relevant
+compendium, its difference
+shall be plainly stated on its
+label.
+And others, if space is        N/A                                 N/A
+available
+
+
+
+
+OPQ-XOPQ-TEM-0001v06                 Page 15          Effective Date: February 1, 2019
+ Assessment of Carton and Container Labeling: Adequate
+
+
+
+
+ITEMS FOR ADDITIONAL ASSESSMENT
+ None
+
+
+Overall Assessment and Recommendation:
+ Adequate
+
+
+Primary Labeling Assessor Name and Date:
+
+Ali Mohamadi, Ph.D.; 3/31/2021
+
+Secondary Assessor Name and Date (and Secondary Summary, as needed):
+
+
+
+
+OPQ-XOPQ-TEM-0001v06             Page 16       Effective Date: February 1, 2019
+David                 Digitally signed by David Claffey
+Claffey               Date: 3/31/2021 04:07:32PM
+                      GUID: 508da71e00029e20b201195abff380c2
+
+Ali                   Digitally signed by Ali Mohamadi
+Mohamadi              Date: 3/31/2021 03:16:30PM
+                      GUID: 508da6ea0002750ec7c6cb7cfc37f10e
+
+
+
+
+39 Page(s) have been Withheld in Full as B4 (CCI/TS) immediately following this
+                                    page
+                                QUALITY ASSESSMENT
+
+                                  BIOPHARMACEUTICS
+
+Product Background:
+
+NDA: 215341
+
+Drug Product Name / Strength: Kerendia (Finerenone film-coated Tablets) / 10mg, 20mg
+
+Route of Administration: Oral
+
+Applicant Name: Bayer
+
+Review Summary:
+
+The submission is seeking approval of Finerenone Tablets through 505 (b)(1) pathway, for the
+treatment of patients with chronic kidney disease and type 2 diabetes. Finerenone (BAY 94-
+8862) is a nonsteroidal mineralocorticoid receptor (MR) antagonist. The proposed starting dose
+is 10 mg or 20 mg, based on eGFR. The maximum daily dose of Kerendia is 20 mg.
+
+Finerenone is formulated as immediate-release tablets with            (b) (4) film coating for oral
+
+administration. The efficacy and safety of the proposed drug product was rested in a pivotal
+phase 3 randomized trial.
+
+This Biopharmaceutics review is focused on the evaluation of data supporting: 1) the proposed
+dissolution method and acceptance criteria, and 2) the bridging of the formulations used
+throughout development and the proposed commercial product. Based on the review of the
+provided information/data, the Division of Biopharmaceutics has the following assessment,
+conclusions and recommendations:
+
+Dissolution Method and Acceptance criterion: The proposed dissolution method is found
+acceptable. To further mitigate the risk and to enhance the discriminating ability of the method,
+the Applicant tightened the acceptance criterion as per FDA recommendation. The tightened
+acceptance criterion together with the proposed dissolution method are able to reject the batches
+manufactured with drug substance having out-of-specification particle size (i.e., D90= (b)(4)
+                                                                                              µm).
+
+Formulation Bridging: There is a minor difference                        (b) (4) between the
+
+proposed commercial formulation and the phase III formulation manufactured in commercial
+scale. Bridging between the two formulations are adequately supported by the dissolution data
+showing all batches conforming to the regulatory specifications. The Applicant provided
+comparative dissolution data for the clinical batches and the commercial batches, which further
+supported bridging.
+
+Conclusions and Recommendations:
+                             QUALITY ASSESSMENT
+
+From a Biopharmaceutics perspective, NDA 215341 for Finerenone film-coated Tablets, 10 mg
+and 20 mg, are recommended for APPROVAL.
+
+The FDA approved dissolution method and acceptance criterion are summarized in the following
+Table:
+
+              FDA Approved Dissolution Method and Acceptance Criterion
+   for Quality Control (Finished Product Batch Release and Stability Testing) of Finerenone
+                            Film-Coated Tablets, 10mg and 20mg
+   Apparatus                          USP Apparatus II
+   Paddle Speed                       75 rpm
+   Volume                             900 mL
+   Medium                             10 mg: Acetate buffer pH 4.5
+                                      20 mg: Acetate buffer pH 4.5 + 0.1% Tween 20
+   Temperature                        37±0.5 oC
+   Acceptance Criterion               Q (b) (4) % in 15 min
+                                    QUALITY ASSESSMENT
+
+                         BIOPHARMACEUTICS ASSESSMENT
+
+1.       List Submissions being reviewed:
+
+    Sequence #          Submission                                  Date
+    0001                Original NDA                                11/09/2020
+    0002                Response to IR                              11/30/2020
+    0008                Response to OPQ IR                          01/05/2021
+    0015                Response to OPQ IR                          03/05/2021
+
+
+Highlight Key Outstanding Issues from Last Cycle: None. First review cycle.
+
+Concise Description Outstanding Issues Remaining: None. The NDA is ADEQUATE from a
+Biopharmaceutics perspective.
+
+
+2.       BCS Designation
+
+No BCS designation request was submitted.
+
+Solubility: low, as per BCS definition.
+
+The crystalline drug substance Finerenone exists in only one modification, and is soluble
+to sparingly soluble at acidic pH (pH 1 and pH 2) and practically insoluble at pH 4.5 and
+neutral pH in aqueous media. The solubility data in difference media are shown in Table 1.
+
+            Table 1. Solubility of Finerenone in different media (pH, buffer salt and surfactant-level)
+
+
+
+
+Permeability: The Applicant claimed the permeability of finerenone is high. As per the
+proposed package insert1, “Finerenone is completely absorbed after oral administration.
+                             (b) (4) (Cmax)   (b) (4) between 0.5 and 1.25 hours after                    (b) (4)
+                                                                                                           (b) (4)
+
+
+
+
+1
+  Proposed Package Insert. \\CDSESUB1\evsprod\nda215341\0001\m1\us\114-labeling\draft\labeling\draft-
+labeling-text-06nov2020.doc
+                                 QUALITY ASSESSMENT
+
+
+3.      Dissolution Method and Acceptance Criterion:
+
+(1)     Dissolution method development 2.
+                                                                                                        (b) (4)
+
+
+
+
+2
+ Dissolution method development report. \\CDSESUB1\evsprod\nda215341\0001\m3\32-body-data\32p-drug-
+prod\finerenone-coated-tablet-bayer\32p5-contr-drug-prod\32p53-val-analyt-proc\validation-analytical-
+procedures-9.pdf
+                                 QUALITY ASSESSMENT
+                                                                                                         (b) (4)
+
+
+
+
+(2)     Discriminating Ability of the Method
+
+API Particle Size:
+
+Finerenone tablets batches of all 3 dosages were manufactured with API both within (D90 (b) (4)
+          (b) (4) ) and outside the proposed particle size specification (D90 > (b) (4) ). Dissolution
+                                        QUALITY ASSESSMENT
+
+results in acetate buffer pH 4.5 are shown for the 5 mg and 10 mg tablets, and for the 20 mg
+tablets, dissolution data in acetate buffer + 0.1 % Tween 20 were collected.3
+Tablets manufactured with API with particle sizes of D90 of                      (b) (4) show similar
+
+
+dissolution profiles, while particle sizes of              (b) (4) lead to a slightly slower dissolution
+
+
+behavior. When using an API with a particle size of D90 of (b) (4) for the manufacture of
+Finerenone tablets, dissolution is significantly decreased with values of only around(b) (4) % at (b) (4)
+min. The influence of particle size of the API on the dissolution behavior of Finerenone tablets is
+similar for all 3 dosages.
+
+                        5 mg tablets                                                    10 mg tablets
+
+
+
+
+                                                    (b) (4)                                                     (b) (4)
+
+
+
+
+    Figure 4: Discriminating ability of the dissolution method against different particle size of the API (acetate buffer
+                                                      pH 4.5, 75 rpm)
+
+
+
+
+                                                                                       (b) (4)
+
+
+
+
+    Figure 5: Discriminating ability of the dissolution method against different particle size of the API (acetate buffer
+                                    pH 4.5 + 0.1 % Tween 20, 75 rpm, 20 mg tablets)
+
+              (b) (4)
+
+
+
+
+3
+    Excerpted from Figure 10, 11, and 12 of the method development report.
+                                     QUALITY ASSESSMENT
+
+The dissolution profiles of the drug product                                        (b) (4) were compared.
+
+
+As expected, disintegration of tablets                                  (b) (4) is significantly delayed
+
+
+and consequently there is a lag time in dissolution. This effect is only small for the 5 mg tablet,
+due to the lower drug load, but more severe for the higher dosages of 10 mg and 20 mg.
+
+Other parameters:
+The                 (b) (4) , API concentration, and accelerated stability conditions were found to
+
+
+have no significant impact on dissolution.
+
+Robustness:
+The method is robust to the changes in temperature (37±2 oC), rotation speed (75±5 rpm), pH
+(4.5±0.2), and degassed or not degassed medium.4
+
+
+Reviewer’s Assessment:
+
+The solubility of the drug substance is pH-dependent and considered low as per BCS guidance.
+The Applicant proposed to use pH 4.5 buffer as dissolution medium for 10 mg strength, and add
+0.1% Tween in the medium for the 20 mg strength.
+The proposed dissolution method together with the initially proposed acceptance criterion (NLT
+ (b) % (Q) in (b) min) are not able to reject the batches manufactured with out-of-specification
+ (4)          (4)
+PSD specifically for 20mg strength. However, since the particle size of the API is controlled by
+                                    (b) (4) drug substance with D90 ≤
+                                                                      (4)μm, manufacturing of DP
+                                                                      (b)
+the specification of the
+batches with slower dissolution behavior is prevented. In addition, as per FDA recommendation
+based on the data obtained for the phase III batches, the Applicant tightened the dissolution
+acceptance criterion to Q= (b) (4)
+                                   % in 15 min, as discussed in the later section. The tightened
+acceptance criterion together with the proposed dissolution method helps to mitigate the risk and
+to enhance the discriminating ability of the method. Overall, the proposed dissolution method is
+found acceptable.
+
+(3)        Dissolution Acceptance Criterion:
+
+
+
+
+4
+    Page 26 to 34 of the method development report.
+                                     QUALITY ASSESSMENT
+
+The dissolution profiles of three batches used for clinical phase III trials and of three primary
+stability batches that were manufactured in pilot scale are presented. Both the 20 mg strength5
+and 10 mg strength6 showed very rapid (>85% in 15 min) dissolution.
+
+In response to FDA’s IR dated 12/10/2020, the Applicant further provided the dissolution data
+for the phase III batches that were manufactured in the commercial scale7. The tablets of both 10
+and 20 mg strengths exhibited rapid dissolution with more than (b)
+                                                               (4)
+                                                                   % released in 15 min.
+            10 mg- batch # KM602JF / BXA7PZX                      20 mg-batch # KM602A1 /BXA7R8P
+
+
+
+
+              Figure 6. Representative Dissolution Profiles of Phase III Batches in Commercial Scale
+
+Reviewer’s Assessment:
+                                                                               (b)       (b)
+The Applicant initially proposed an acceptance criterion of “Q= (4)% in (4)min”. Based on the
+data provided, especially the data for the phase III batches manufactured in commercial scale,
+                                             (b) (4)
+the acceptance criterion was revised to “Q= % in 15 min”, as per FDA’s recommendation
+conveyed in the IR letter dated 02/18/2021. The revised acceptance criterion is acceptable.
+
+4.       Bridging of Formulations
+
+The clinical trials used two types of tablets (so called ‘Phase I-IIa’ and ‘Phase IIb-III’
+formulation8) with similar qualitative composition of cores and manufacturing processes, but
+different shape, size and weight. A retrospective and pooled analysis, to be evaluated by OCP
+review team, compared finerenone AUC and Cmax after dose-normalization in clinical
+
+5
+  Dissolution data for 20 mg batches used in Phase III trial and the stability batches manufactured in pilot scale.
+\\CDSESUB1\evsprod\nda215341\0001\m3\32-body-data\32p-drug-prod\finerenone-coated-tablet-bayer\32p2-
+pharm-dev\pharmaceutical-development-dissolution-profiles-p22020222854.pdf
+6
+  Dissolution data for 10 mg batches used in Phase III trial and the stability batches manufactured in pilot scale.
+\\CDSESUB1\evsprod\nda215341\0001\m3\32-body-data\32p-drug-prod\finerenone-coated-tablet-bayer\32p2-
+pharm-dev\pharmaceutical-development-dissolution-profiles-p22020222852.pdf
+7
+  Dissolution data for batches used in phase III trials and manufactured in commercial scale.
+\\CDSESUB1\evsprod\nda215341\0008\m3\32-body-data\32p-drug-prod\finerenone-coated-tablet-bayer\32p2-
+pharm-dev\pharmaceutical-development-dissolution-profiles-p22020229451.pdf
+8
+  See Appendix 3 for the composition of the formulations.
+                                        QUALITY ASSESSMENT
+
+pharmacological studies, and the Applicant considered equivalent finerenone exposure,
+independent of the type of tablet applied (Module 5.3.5.3, Report PH-41449, Table 14.4/20)9.
+
+The batches used for phase IIb-III clinical trials were manufactured in both pilot scale                            (b) (4)
+
+
+and commercial scale                     (b) (4) . Both core composition and                                (b) (4)
+
+          (b) (4) are identical between the clinical Phase IIb-III formulation and proposed commercial
+
+
+products whereas differences exist                                                                                    (b) (4)
+
+ (b) (4) . The changes introduced                                                                                   (b) (4)
+                                                                                (b)
+                                                          (b) (4) are less than (4)%. As per SUPAC-IR, the change (b)
+                                                                                                                          (4)
+                 (b) (4) is considered Level-1 composition change, and no additional in vitro or in vivo
+
+
+bridging data is needed, except that the commercial drug product is expected to meet the drug
+product dissolution specifications. Furthermore, the Applicant provided comparative dissolution
+profiles of the clinical batches and the commercial product which supported similarity (Figure 7).
+
+
+
+
+    Figure 7.10 Comparison of dissolution profiles of finerenone film-coated tablets manufactured in commercial scale
+                (clinical samples         (b) (4) and commercial product           (b) (4) mean values of n=6
+
+
+
+The stability/registration batches have exactly the same composition as the proposed commercial
+product except for              (b) (4) . The manufacturing scale is also different, with the stability
+
+
+batches in pilot scale       (b) (4) and there is a 6.25X scale-up for commercial batches             (b) (4) ).
+
+
+The minor difference                (b) (4) and Level-1 scale change does not require additional bridging
+
+
+data. In addition, the acceptance criterion was set primarily based on the data for the phase III
+batches.
+
+
+
+
+9
+  From page 368 of \\CDSESUB1\evsprod\nda215341\0001\m5\53-clin-stud-rep\535-rep-effic-safety-stud\ckd-
+and-t2d\5353-rep-analys-data-more-one-stud\20921\20921-study-report.pdf
+10
+   From Page 13 of \\CDSESUB1\evsprod\nda215341\0001\m2\27-clin-sum\summary-biopharm.pdf
+                                    QUALITY ASSESSMENT
+
+It is noted that Bayer and the FDA had a Type C meeting on 12 Dec 2017 to explore the (b) (4)
+         (b) (4) manufacturing process for finerenone11. However, at the time of this NDA, Bayer is
+
+
+not considering implementing the                                   (b) (4) process. Therefore all the phase III
+
+
+clinical batches, stability batches, and the proposed commercial batches were manufactured(b) (4)
+               (b) (4) . There is no difference in manufacturing process among different formulations, (b)
+                                                                                                             (4)
+                                        (b) (4) .
+
+
+
+Reviewer’s Assessment:
+
+There is no difference in scale and process between some of the formulations tested in phase 3
+                                                                                       (b) (4)
+clinical trial and the proposed commercial formulation, and the difference in
+formulation is Level 1 change based on SUPAC-IR. The bridging is supported by all batches
+conforming to the regulatory specifications, and the comparative dissolution data.
+
+
+
+5.      Biowaiver Request
+
+No Biowaiver request was submitted, nor needed. Both the 10 mg and 20 mg strengths tablets
+manufactured in commercial scale were used in the pivotal phase III efficacy and safety trials.
+
+
+
+6.      List of Deficiencies: None.
+
+
+
+
+Primary Biopharmaceutics Reviewer Name: Jing Li, Ph.D.
+
+Secondary Reviewer Name (and Secondary Summary, as needed): Poonam Delvadia, Ph.D.
+
+
+
+
+11
+  Meeting minutes dated 01/12/2018.
+https://darrts.fda.gov/darrts/faces/ViewDocument?documentId=090140af80478487& afrRedirect=23998124053
+78049
+                                    QUALITY ASSESSMENT
+
+        APPENDIX 1. Biopharmaceutics IR #1 (dated 12/10/2020) and The Applicant’s Response
+
+Biopharmaceutics IR #1 Dated 12/10/202012:
+
+It is noted that on Page 6 of “Pharmaceutical Development-Drug Product (P.2.2.01-01)”, you stated
+“Finerenone coated tablets for Phase III clinical trials were manufactured in pilot scale and in commercial
+scale”. However, the information of the Phase III batches manufactured at the commercial scale cannot be
+located in the NDA. Provide the batch information and the complete multi-point dissolution profile data
+(individual, mean, CV%, profile) for the Phase III batches manufactured at the commercial scale.
+
+
+
+The Applicant’s Response Received on 01/05/2021:
+
+\\CDSESUB1\evsprod\nda215341\0008\m1\us\12-cover-letters\response-to-fda-request-for-
+information.pdf Page 6.
+
+
+
+
+12
+     \\CDSESUB1\evsprod\nda215341\0008\m1\us\12-cover-letters\fda-request-for-information.pdf
+                                    QUALITY ASSESSMENT
+
+        APPENDIX 2. Biopharmaceutics IR #2 (dated 02/18/2021)13 and the Applicant’s Response
+
+Biopharmaceutics IR #2 Dated 02/18/2021:
+
+Based on the dissolution data you provided for the batches that were used in phase III clinical trial, we
+                                                                                  (b)
+recommend that you implement the dissolution acceptance criterion of “Q= (4)% in 15 min” for both the
+10 mg and 20 mg of Finerenone tablets. Update your drug product release and stability specifications
+accordingly. Note that setting of the dissolution acceptance criterion is based on stage 2 testing (n=12),
+and therefore sometimes stage 2 testing and occasional stage 3 testing may be needed.
+Also note that the tightened acceptance criterion together with your proposed dissolution methods
+improve the discriminating ability of the test; specifically, it will be able to reject the batches
+manufactured with drug substance having D90 of (b)   (4)
+                                                         µm, which could not be rejected by your currently
+proposed dissolution method and acceptance criterion.
+
+
+
+The Applicant’s Response Dated 03/05/2021:
+
+\\CDSESUB1\evsprod\nda215341\0015\m1\us\12-cover-letters\response-to-information-request.pdf Page
+11.
+
+
+
+
+13
+     \\CDSESUB1\evsprod\nda215341\0015\m1\us\12-cover-letters\information-request-18feb2021.pdf
+                                     QUALITY ASSESSMENT
+
+                                  APPENDIX 3. Drug Product Composition14
+
+Composition of the Phase IIb/III formulation.
+                                                                                      (b) (4)
+                        (b) (4)
+
+
+
+
+             (b) (4)
+
+
+
+
+             (b) (4)
+
+
+
+
+Composition of the Proposed commercial formulation*
+
+                       (b) (4)
+                                                                                (b) (4)
+
+
+             (b) (4)
+
+
+
+
+              (b) (4)
+
+
+
+
+              (b) (4)
+              (b) (4)
+
+
+
+
+       * The Applicant is seeking approval only for 10mg and 20mg strengths
+
+14
+  Excerpted from Table 20 and 21 of the PDR. \\CDSESUB1\evsprod\nda215341\0001\m3\32-body-data\32p-
+drug-prod\finerenone-coated-tablet-bayer\32p2-pharm-dev\pharmaceutical-development-drug-product-
+p2201022238913-finer.pdf
+Jing       Digitally signed by Jing Li
+Li         Date: 3/29/2021 02:51:51PM
+           GUID: 508da7420002bb05ac913303b23c39bb
+
+Poonam     Digitally signed by Poonam Delvadia
+Delvadia   Date: 3/29/2021 02:58:03PM
+           GUID: 5388edae000671a12787e2fcf4cde1bb
+Mohan   Digitally signed by Mohan Sapru
+Sapru   Date: 5/14/2021 04:25:47PM
+        GUID: 504f821600000ec6d20b59d2b68eb3d2
+
