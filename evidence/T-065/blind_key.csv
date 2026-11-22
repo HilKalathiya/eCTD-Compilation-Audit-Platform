@@ -1,0 +1,26 @@
+﻿row_id,task_id,set,truth,planted_change,reread_flags,original_paragraph
+R01,demo_Humid-25C-75-RH_Hardness,held-out,right,,,
+R02,demo_Cyclic-10C-to-40C_Related-substance-B,held-out,wrong,outside count 2 written as 3,"numbers in the text ['0.10', '0.43', '3', '7', '7'] differ from the recount ['0.10', '0.43', '2', '7', '7']","In illustrative demonstration data, Related substance B at Cyclic -10C to 40C ranged from 0.10 to 0.43 over 7 time points. In illustrative demonstration data, Related substance B at Cyclic -10C to 40C had 2 of its 7 results outside the limit."
+R03,demo_Refrigerated-5C_Water-content,held-out,right,,,
+R04,demo_Cyclic-10C-to-40C_Water-content,held-out,right,,,
+R05,demo_Refrigerated-5C_Related-substance-B,held-out,right,,,
+R06,demo_Intermediate-30C-65-RH_Content-uniformity,held-out,right,,,
+R07,demo_25C-60-RH_Assay,tuning (T-064),right,,,
+R08,demo_Humid-25C-75-RH_Water-content,held-out,right,,,
+R09,demo_30C-75-RH_Assay,tuning (T-064),right,,,
+R10,demo_Intermediate-30C-65-RH_Water-content,held-out,right,,,
+R11,demo_Humid-25C-75-RH_Content-uniformity,held-out,right,,,
+R12,demo_Humid-25C-75-RH_Related-substance-B,held-out,right,,,
+R13,demo_Intermediate-30C-65-RH_Hardness,held-out,right,,,
+R14,demo_Stress-50C-ambient-RH_Related-substance-B,held-out,right,,,
+R15,demo_Cyclic-10C-to-40C_Hardness,held-out,wrong,highest result 100 written as 103,"numbers in the text ['7', '7', '84', '103'] differ from the recount ['7', '7', '84', '100']","In illustrative demonstration data, Hardness at Cyclic -10C to 40C ranged from 84 to 100 over 7 time points. In illustrative demonstration data, Hardness at Cyclic -10C to 40C had none of its 7 results outside the limit."
+R16,demo_Refrigerated-5C_Hardness,held-out,right,,,
+R17,demo_25C-60-RH_Degradation-product,tuning (T-064),right,,,
+R18,demo_30C-75-RH_Degradation-product,tuning (T-064),right,,,
+R19,demo_25C-60-RH_Dissolution-15-min,tuning (T-064),right,,,
+R20,demo_Stress-50C-ambient-RH_Hardness,held-out,right,,,
+R21,demo_Intermediate-30C-65-RH_Related-substance-B,held-out,right,,,
+R22,demo_Stress-50C-ambient-RH_Water-content,held-out,right,,,
+R23,demo_Cyclic-10C-to-40C_Content-uniformity,held-out,wrong,none outside written as 1 outside,"outside-the-limit sentence does not match the recount; numbers in the text ['1', '7', '7', '92.2', '102.0'] differ from the recount ['7', '7', '92.2', '102.0']","In illustrative demonstration data, Content uniformity at Cyclic -10C to 40C ranged from 92.2 to 102.0 over 7 time points. In illustrative demonstration data, Content uniformity at Cyclic -10C to 40C had none of its 7 results outside the limit."
+R24,demo_Refrigerated-5C_Content-uniformity,held-out,right,,,
+R25,demo_Stress-50C-ambient-RH_Content-uniformity,held-out,right,,,

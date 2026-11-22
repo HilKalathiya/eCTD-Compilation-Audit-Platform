@@ -8,7 +8,8 @@
     python tools/writer_run.py --kind p56 --backend mock --out <folder>     # 3.2.P.5.6 justification per spec attribute (T-046)
     python tools/writer_run.py --kind p56 --audit 130 --backend ollama --out <folder>   # N real Lek subsets (T-047)
     python tools/writer_run.py --kind p83 --backend mock --out <folder>     # 3.2.P.8.3 stability: public paragraph + one per condition x attribute (T-064)
-    (the old 8-section stability test of writer_test is now --kind p83old, still the default)
+    python tools/writer_run.py --kind p83 --heldout --data evidence/T-065/heldout.csv --backend mock --out <new folder>   # 20 held-out tasks (T-065)
+    (the old 8-section stability test of writer_test is --kind p83_8task, still the default; a --out folder that already holds a p83 run is refused)
 """
 AUDIT_SEED = 42
 WINDOW = 12
@@ -162,8 +163,10 @@ def run_p83(args, client):
     """3.2.P.8.3: one task for the public paragraph and one per condition x attribute; fixed temperature and seed; folder = --out."""
     from ectd_engine.stability.runner import run_p83 as run_all
     meta = {"backend": args.backend, "model": args.model, "think": args.think, "num_ctx": args.num_ctx, "num_predict": args.num_predict}
+    meta.update(heldout=args.heldout, data=args.data)
+    kw = {"csv_path": args.data} if args.data else {}
     summary = run_all(client, args.out, max_drafts=args.max_drafts, seed=args.seed, temperature=args.temperature,
-                      only=args.tasks.split(",") if args.tasks else None, meta=meta)
+                      only=args.tasks.split(",") if args.tasks else None, meta=meta, heldout=args.heldout, **kw)
     return 0 if (summary["accepted"] == summary["tasks"] and not summary["wrong_accepted"]) else 1
 
 
@@ -184,9 +187,11 @@ def make_client(args):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--kind", choices=["p83", "p83old", "p54", "p56"], default="p83old",
-                    help="p83old = old 8-section stability test (default); p83 = P.8.3 stability writer (T-064); "
+    ap.add_argument("--kind", choices=["p83", "p83_8task", "p54", "p56"], default="p83_8task",
+                    help="p83_8task = old 8-section stability test (default); p83 = P.8.3 stability writer (T-064); "
                          "p54 = batch analyses on Lek facts; p56 = spec justification")
+    ap.add_argument("--heldout", action="store_true",
+                    help="p83 only: the --data file is the synthetic held-out CSV (T-065); outside-limit demo rows are allowed, the public task is left out")
     ap.add_argument("--temperature", type=float, default=0.0, help="p83 only: sampling temperature (default 0)")
     ap.add_argument("--backend", choices=["ollama", "openai", "mock"], default="ollama")
     ap.add_argument("--model", default="gemma4:e4b")

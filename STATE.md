@@ -1,5 +1,11 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-22 — T-065 done (C3.8 close-out: P.8.3 held-out run + blind sheet)
+- Held-out set (`ectd_engine/stability/heldout.py`, seed 65, all DEMO): 20 new groups (5 new conditions x 4 new attributes), 8 with results outside the limit; prompt frozen. Gemma (gemma4:e4b, temp 0, seed 42): direct 20/20 accepted, 0 retries used, 0 wrong accepted (CSV recount); skill 20/20, same verdicts, draft text identical (`evidence/T-065/{direct,skill}/run1`, `compare.md`).
+- Retry test (`stability/plant.py`, `evidence/T-065/retry/run1`): 3 planted bad first drafts (typed digit, missing label, invented conclusion), all rejected; Gemma fixed all 3 from the feedback (2, 2 and 3 drafts).
+- Blind sheet `evidence/T-065/blind.csv` (22 right + 3 planted wrong, shuffled) + `blind_key.csv`; 17 right are held-out, 5 topped up from the T-064 tuning run (held-out gave only 20 and 3 became the wrong ones). Hil labels it next.
+- New opt-in `heldout=True` in facts.check_rows (allows the synthetic source and outside-limit rows); default stays strict, tested. Runner refuses an existing run folder. Kind `p83old` renamed `p83_8task` (still the default). SKILL.md fixed to 6 public rows, tied to the CSV by a test.
+
 ## 2026-11-22 — T-064 done (C3.8c P.8.3 writer + Agent Skill)
 - Gemma (gemma4:e4b, temp 0, seed 42) wrote P.8.3: 10/10 tasks accepted (1 public + 9 condition x attribute), 0 wrong accepted by an independent CSV recount (`ectd_engine/stability/reread.py`). Code: `stability/{prompt,loop,runner,compare}.py`; `tools/writer_run.py --kind p83` (old 8-section test renamed `--kind p83old`, still the default). Retry sends the rejected draft + problems back. First run rejected the public task (model put the demo label on a public sentence); fixed the prompt wording, no check loosened.
 - Skill `skills/p83-stability/` (SKILL.md + scripts/run.py, same entry point). `evidence/T-064/{direct,skill,compare.md}`: 10/10 same verdicts, draft text identical; compare tested to fail on a planted change.

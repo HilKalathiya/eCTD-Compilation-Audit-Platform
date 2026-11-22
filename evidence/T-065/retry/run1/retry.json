@@ -1,0 +1,45 @@
+[
+ {
+  "task_id": "demo_Cyclic-10C-to-40C_Related-substance-B",
+  "planted_error": "typed_digit",
+  "planted_draft": "In illustrative demonstration data, [[attribute]] at [[condition]] ranged from 2.5 to [[max]] over [[n]] time points. In illustrative demonstration data, [[attribute]] at [[condition]] had [[n_outside]] of its [[n]] results outside the limit.",
+  "planted_problems": [
+   "sentence 1: writes a digit; use a [[placeholder]] for every value",
+   "missing placeholder [[min]]"
+  ],
+  "planted_was_rejected": true,
+  "drafts_used": 2,
+  "accepted": true,
+  "fixed_by_model": true,
+  "final_text": "In illustrative demonstration data, Related substance B at Cyclic -10C to 40C ranged from 0.10 to 0.43 over 7 time points. In illustrative demonstration data, Related substance B at Cyclic -10C to 40C had 2 of its 7 results outside the limit.",
+  "reread_problems": []
+ },
+ {
+  "task_id": "demo_Cyclic-10C-to-40C_Water-content",
+  "planted_error": "no_label",
+  "planted_draft": "In illustrative demonstration data, [[attribute]] at [[condition]] ranged from [[min]] to [[max]] over [[n]] time points. [[attribute]] at [[condition]] had [[n_outside]] of its [[n]] results outside the limit.",
+  "planted_problems": [
+   "sentence 2: demo_unlabelled: demo_some_outside:missing 'illustrative demonstration data'; use the sentence forms from the examples"
+  ],
+  "planted_was_rejected": true,
+  "drafts_used": 2,
+  "accepted": true,
+  "fixed_by_model": true,
+  "final_text": "In illustrative demonstration data, Water content at Cyclic -10C to 40C ranged from 1.0 to 3.6 over 7 time points. In illustrative demonstration data, Water content at Cyclic -10C to 40C had 2 of its 7 results outside the limit.",
+  "reread_problems": []
+ },
+ {
+  "task_id": "demo_Cyclic-10C-to-40C_Content-uniformity",
+  "planted_error": "invented_conclusion",
+  "planted_draft": "In illustrative demonstration data, [[attribute]] at [[condition]] ranged from [[min]] to [[max]] over [[n]] time points. In illustrative demonstration data, [[attribute]] at [[condition]] had none of its [[n]] results outside the limit. The product is stable and no significant change was observed.",
+  "planted_problems": [
+   "sentence 3: unrecognised: no_shape; copy the matching example sentence exactly, with no words added before or after it"
+  ],
+  "planted_was_rejected": true,
+  "drafts_used": 3,
+  "accepted": true,
+  "fixed_by_model": true,
+  "final_text": "In illustrative demonstration data, Content uniformity at Cyclic -10C to 40C ranged from 92.2 to 102.0 over 7 time points. In illustrative demonstration data, Content uniformity at Cyclic -10C to 40C had none of its 7 results outside the limit.",
+  "reread_problems": []
+ }
+]

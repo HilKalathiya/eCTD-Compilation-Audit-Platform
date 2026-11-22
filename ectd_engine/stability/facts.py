@@ -10,6 +10,8 @@ COLUMNS = ["condition", "month", "attribute", "value", "unit", "limit", "source"
 
 PUBLIC_SOURCE = re.compile(r"^FDA ChemR 215341 p\.(\d+)$")
 DEMO_SOURCE = re.compile(r"^DEMO: redacted \(b\)\(4\) in ChemR p\.(\d+)$")
+# Held-out test data (T-065) is made up by code and never comes from the FDA review. It is only accepted when a caller asks for heldout=True.
+HELDOUT_SOURCE = re.compile(r"^DEMO: synthetic held-out set T-065$")
 # The only things the FDA review says in public (shelf life, storage, how long each condition ran).
 # Any other attribute (assay, impurity, dissolution...) is hidden in the review, so it can only be DEMO.
 PUBLIC_ATTRIBUTES = {"study_duration_demonstrated", "expiry_period_proposed", "excursion_permitted_low", "excursion_permitted_high"}
@@ -70,25 +72,28 @@ def is_outside(value, limit):
     return (low is not None and value < low) or (high is not None and value > high)
 
 
-def source_kind(source):
-    """'public', 'demo' or None (anything else is not an allowed source)."""
+def source_kind(source, heldout=False):
+    """'public', 'demo' or None (anything else is not an allowed source). heldout=True also allows the synthetic held-out source."""
     source = (source or "").strip()
     if PUBLIC_SOURCE.match(source):
         return "public"
-    if DEMO_SOURCE.match(source):
+    if DEMO_SOURCE.match(source) or (heldout and HELDOUT_SOURCE.match(source)):
         return "demo"
     return None
 
 
-def check_rows(rows):
-    """Return a list of problems ('<code>:line N'); an empty list means the data is clean."""
+def check_rows(rows, heldout=False):
+    """Return a list of problems ('<code>:line N'); an empty list means the data is clean.
+
+    heldout=True (T-065 only): the synthetic held-out source is allowed and demo results may fall outside their limit
+    (the held-out set needs some). Every other check stays on. The default is the strict check."""
     problems = []
     for row in rows:
         at = "line %s" % row.get("_line", "?")
         if not (row.get("source") or "").strip():
             problems.append("no_source:" + at)
             continue
-        kind = source_kind(row["source"])
+        kind = source_kind(row["source"], heldout)
         if kind is None:
             problems.append("bad_source:" + at)
             continue
@@ -106,12 +111,12 @@ def check_rows(rows):
             continue
         if kind == "demo" and limit is None:
             problems.append("demo_no_limit:" + at)
-        if kind == "demo" and is_outside(value, limit):
+        if kind == "demo" and not heldout and is_outside(value, limit):
             problems.append("demo_outside_limit:" + at)
     return problems
 
 
-def compute_facts(rows):
+def compute_facts(rows, heldout=False):
     """Group rows by (condition, attribute) and compute n, months, min, max, last, n_outside, n_demo."""
     groups = {}
     for row in rows:
@@ -121,7 +126,7 @@ def compute_facts(rows):
         grp = sorted(grp, key=lambda r: int(r["month"]))
         values = [Decimal(r["value"]) for r in grp]
         outside = sum(1 for r, v in zip(grp, values) if is_outside(v, parse_limit(r["limit"])))
-        demo = sum(1 for r in grp if source_kind(r["source"]) == "demo")
+        demo = sum(1 for r in grp if source_kind(r["source"], heldout) == "demo")
         facts[(cond, attr)] = Fact(
             condition=cond, attribute=attr, n=len(grp),
             months=tuple(int(r["month"]) for r in grp),
@@ -137,9 +142,9 @@ def count_sources(rows):
     return kinds.count("public"), kinds.count("demo")
 
 
-def p83_facts(rows):
+def p83_facts(rows, heldout=False):
     """Facts the P.8.3 paragraph may use: 'public' (shelf life, storage, excursions, study length) and 'demo' (per condition x attribute)."""
-    f = compute_facts(rows)
+    f = compute_facts(rows, heldout)
     crt = [c for (c, a) in f if a == "expiry_period_proposed"]
     m = re.match(r"^(\d+)-(\d+)C CRT$", crt[0]) if crt else None
     public = {

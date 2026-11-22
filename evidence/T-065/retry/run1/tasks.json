@@ -1,0 +1,135 @@
+{
+ "seed": 42,
+ "temperature": 0.0,
+ "meta": {
+  "retry_test": true,
+  "planted": {
+   "demo_Cyclic-10C-to-40C_Related-substance-B": "typed_digit",
+   "demo_Cyclic-10C-to-40C_Water-content": "no_label",
+   "demo_Cyclic-10C-to-40C_Content-uniformity": "invented_conclusion"
+  }
+ },
+ "tasks": [
+  {
+   "task_id": "demo_Cyclic-10C-to-40C_Content-uniformity",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Content uniformity"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cyclic -10C to 40C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "92.2"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "102.0"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "7"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Cyclic -10C to 40C",
+    "Content uniformity"
+   ]
+  },
+  {
+   "task_id": "demo_Cyclic-10C-to-40C_Related-substance-B",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Related substance B"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cyclic -10C to 40C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.10"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.43"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "7"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Cyclic -10C to 40C",
+    "Related substance B"
+   ]
+  },
+  {
+   "task_id": "demo_Cyclic-10C-to-40C_Water-content",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Water content"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cyclic -10C to 40C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "1.0"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "3.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "7"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Cyclic -10C to 40C",
+    "Water content"
+   ]
+  }
+ ]
+}

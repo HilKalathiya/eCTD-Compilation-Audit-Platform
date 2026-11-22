@@ -1,6 +1,7 @@
 """Tests the p83-stability Agent Skill: well formed, same entry point as the direct run, and the compare tool catches a planted verdict change."""
 import importlib.util
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -8,7 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from ectd_engine.stability import compare as C
+from ectd_engine.stability import compare as C, facts as F
 
 ROOT = Path(__file__).resolve().parent.parent
 SKILL = ROOT / "skills" / "p83-stability"
@@ -27,6 +28,35 @@ class SkillFile(unittest.TestCase):
         self.assertIn("description:", head)
         for word in ("When to use", "Inputs", "Steps"):
             self.assertIn(word, text)
+
+
+def skill_counts(text):
+    """(public rows, DEMO rows) as the SKILL.md text states them, or None if the sentence is missing."""
+    m = re.search(r"(\d+) public rows, (\d+) DEMO rows", text)
+    return (int(m.group(1)), int(m.group(2))) if m else None
+
+
+class SkillMatchesData(unittest.TestCase):
+    def test_skill_md_row_counts_match_the_csv(self):
+        rows = F.load_rows()
+        self.assertEqual(skill_counts((SKILL / "SKILL.md").read_text(encoding="utf-8")), F.count_sources(rows))
+        self.assertEqual(F.count_sources(rows)[0], 6)
+
+    def test_planted_wrong_count_is_caught(self):
+        text = (SKILL / "SKILL.md").read_text(encoding="utf-8").replace("6 public rows", "4 public rows")
+        self.assertNotEqual(skill_counts(text), F.count_sources(F.load_rows()))
+
+
+class KindNames(unittest.TestCase):
+    def test_old_name_is_gone_and_new_name_is_the_default(self):
+        spec = importlib.util.spec_from_file_location("writer_run_kinds", ROOT / "tools" / "writer_run.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        with self.assertRaises(SystemExit):
+            mod.main(["--kind", "p83old", "--backend", "mock", "--out", tempfile.gettempdir()])
+        text = (ROOT / "tools" / "writer_run.py").read_text(encoding="utf-8")
+        self.assertIn('choices=["p83", "p83_8task", "p54", "p56"], default="p83_8task"', text)
+        self.assertNotIn("p83old", text)
 
 
 class SameEntryPoint(unittest.TestCase):

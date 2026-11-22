@@ -123,7 +123,8 @@ def run_task(client, task, max_drafts=MAX_DRAFTS, temperature=0.0, seed=SEED):
         text = reply["text"]
         problems, ok_text = draft_problems(text, task)
         drafts.append({"draft": i + 1, "text": text, "passed": not problems, "problems": problems,
-                       "seconds": reply.get("seconds", 0), "output_tokens": reply.get("output_tokens", 0)})
+                       "seconds": reply.get("seconds", 0), "output_tokens": reply.get("output_tokens", 0),
+                       **({"planted": True} if reply.get("planted") else {})})
         if not problems:
             rendered = ok_text
             break

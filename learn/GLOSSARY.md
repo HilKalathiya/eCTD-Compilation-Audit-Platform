@@ -180,3 +180,6 @@ Agent Skill = a folder with a SKILL.md that tells an AI agent when and how to ru
 entry point = the one function every route (direct or skill) goes through, so results match
 retry feedback = sending a rejected draft and its problems back to the model so it can fix them
 re-read = a second, separate recount of the numbers straight from the data
+held-out = test data kept away from tuning, so it shows how the writer does on new cases
+planted error = a mistake added on purpose to prove a check can catch it
+blind sheet = a list to judge where the correct answers are hidden in a separate key

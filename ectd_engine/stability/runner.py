@@ -7,27 +7,34 @@ from ectd_engine.stability import loop, reread
 
 
 def run_p83(client, out_dir, csv_path=F.DEFAULT_CSV, max_drafts=loop.MAX_DRAFTS, seed=loop.SEED, temperature=0.0,
-            only=None, meta=None, log=print):
+            only=None, meta=None, log=print, heldout=False):
     """Write all P.8.3 tasks. Files in out_dir: tasks.json, drafts.jsonl, results.jsonl, sections/, summary.json.
 
-    Returns the summary: counts, wrong_accepted (accepted but the CSV recount disagrees), seed, temperature."""
+    heldout=True (T-065): the data is the synthetic held-out CSV (outside-limit rows allowed) and the public task is left out.
+    A folder that already holds results is refused, so an earlier run is never overwritten.
+    Returns the summary: counts, retries_used, wrong_accepted (accepted but the CSV recount disagrees), seed, temperature."""
     out = Path(out_dir)
+    if (out / "results.jsonl").exists():
+        raise FileExistsError("%s already holds a run; use a new folder (runs are never overwritten)" % out)
     (out / "sections").mkdir(parents=True, exist_ok=True)
     rows = F.load_rows(csv_path)
-    problems = F.check_rows(rows)
+    problems = F.check_rows(rows, heldout)
     if problems:
         raise ValueError("stability data is not clean: " + "; ".join(problems[:5]))
-    tasks = loop.make_tasks(F.p83_facts(rows))
+    tasks = loop.make_tasks(F.p83_facts(rows, heldout))
+    if heldout:
+        tasks = [t for t in tasks if t["kind"] != "public"]
     if only:
         tasks = [t for t in tasks if t["task_id"] in set(only)]
     raw = reread.read_rows(csv_path)
     (out / "tasks.json").write_text(json.dumps({"seed": seed, "temperature": temperature, "meta": meta or {},
                                                 "tasks": [loop.task_view(t) for t in tasks]}, indent=1, ensure_ascii=False), encoding="utf-8")
-    accepted, wrong, rejected_ids = 0, [], []
+    accepted, wrong, rejected_ids, retries = 0, [], [], 0
     with open(out / "drafts.jsonl", "w", encoding="utf-8") as dlog, open(out / "results.jsonl", "w", encoding="utf-8") as rlog:
         for t in tasks:
             res = loop.run_task(client, t, max_drafts, temperature, seed)
             bad = reread.reread(res["rendered"], t, raw) if res["accepted"] else []
+            retries += len(res["drafts"]) - 1
             for d in res["drafts"]:
                 dlog.write(json.dumps({"task_id": t["task_id"], **d}, ensure_ascii=False) + "\n")
             rlog.write(json.dumps({"task_id": t["task_id"], "accepted": res["accepted"], "rendered": res["rendered"],
@@ -41,8 +48,8 @@ def run_p83(client, out_dir, csv_path=F.DEFAULT_CSV, max_drafts=loop.MAX_DRAFTS,
             else:
                 rejected_ids.append(t["task_id"])
                 log("%s: REJECTED after %d draft(s): %s" % (t["task_id"], len(res["drafts"]), "; ".join(res["drafts"][-1]["problems"])))
-    summary = {"tasks": len(tasks), "accepted": accepted, "rejected": rejected_ids, "wrong_accepted": wrong,
+    summary = {"tasks": len(tasks), "accepted": accepted, "rejected": rejected_ids, "retries_used": retries, "wrong_accepted": wrong,
                "seed": seed, "temperature": temperature, "max_drafts": max_drafts, "meta": meta or {}}
     (out / "summary.json").write_text(json.dumps(summary, indent=1, ensure_ascii=False), encoding="utf-8")
-    log("\n%d/%d accepted, %d wrong accepted. Saved in %s" % (accepted, len(tasks), len(wrong), out))
+    log("\n%d/%d accepted, %d retries used, %d wrong accepted. Saved in %s" % (accepted, len(tasks), retries, len(wrong), out))
     return summary

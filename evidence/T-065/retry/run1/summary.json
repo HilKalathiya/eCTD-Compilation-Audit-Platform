@@ -1,0 +1,18 @@
+{
+ "tasks": 3,
+ "accepted": 3,
+ "rejected": [],
+ "retries_used": 4,
+ "wrong_accepted": [],
+ "seed": 42,
+ "temperature": 0.0,
+ "max_drafts": 4,
+ "meta": {
+  "retry_test": true,
+  "planted": {
+   "demo_Cyclic-10C-to-40C_Related-substance-B": "typed_digit",
+   "demo_Cyclic-10C-to-40C_Water-content": "no_label",
+   "demo_Cyclic-10C-to-40C_Content-uniformity": "invented_conclusion"
+  }
+ }
+}

@@ -1,0 +1,795 @@
+{
+ "seed": 42,
+ "temperature": 0.0,
+ "meta": {
+  "backend": "ollama",
+  "model": "gemma4:e4b",
+  "think": "off",
+  "num_ctx": 4096,
+  "num_predict": 600,
+  "heldout": true,
+  "data": "evidence/T-065/heldout.csv"
+ },
+ "tasks": [
+  {
+   "task_id": "demo_Cyclic-10C-to-40C_Content-uniformity",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Content uniformity"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cyclic -10C to 40C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "92.2"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "102.0"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "7"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Cyclic -10C to 40C",
+    "Content uniformity"
+   ]
+  },
+  {
+   "task_id": "demo_Cyclic-10C-to-40C_Hardness",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Hardness"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cyclic -10C to 40C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "84"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "100"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "7"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Cyclic -10C to 40C",
+    "Hardness"
+   ]
+  },
+  {
+   "task_id": "demo_Cyclic-10C-to-40C_Related-substance-B",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Related substance B"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cyclic -10C to 40C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.10"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.43"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "7"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Cyclic -10C to 40C",
+    "Related substance B"
+   ]
+  },
+  {
+   "task_id": "demo_Cyclic-10C-to-40C_Water-content",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Water content"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cyclic -10C to 40C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "1.0"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "3.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "7"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Cyclic -10C to 40C",
+    "Water content"
+   ]
+  },
+  {
+   "task_id": "demo_Humid-25C-75-RH_Content-uniformity",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Content uniformity"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Humid 25C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "86.1"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "114.4"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "6"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Humid 25C/75%RH",
+    "Content uniformity"
+   ]
+  },
+  {
+   "task_id": "demo_Humid-25C-75-RH_Hardness",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Hardness"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Humid 25C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "71"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "100"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "6"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "1"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Humid 25C/75%RH",
+    "Hardness"
+   ]
+  },
+  {
+   "task_id": "demo_Humid-25C-75-RH_Related-substance-B",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Related substance B"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Humid 25C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.14"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.42"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "6"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "3"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Humid 25C/75%RH",
+    "Related substance B"
+   ]
+  },
+  {
+   "task_id": "demo_Humid-25C-75-RH_Water-content",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Water content"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Humid 25C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "1.0"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "2.0"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "6"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Humid 25C/75%RH",
+    "Water content"
+   ]
+  },
+  {
+   "task_id": "demo_Intermediate-30C-65-RH_Content-uniformity",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Content uniformity"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Intermediate 30C/65%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "92.2"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "112.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "1"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Intermediate 30C/65%RH",
+    "Content uniformity"
+   ]
+  },
+  {
+   "task_id": "demo_Intermediate-30C-65-RH_Hardness",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Hardness"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Intermediate 30C/65%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "89"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "100"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Intermediate 30C/65%RH",
+    "Hardness"
+   ]
+  },
+  {
+   "task_id": "demo_Intermediate-30C-65-RH_Related-substance-B",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Related substance B"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Intermediate 30C/65%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.06"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.27"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Intermediate 30C/65%RH",
+    "Related substance B"
+   ]
+  },
+  {
+   "task_id": "demo_Intermediate-30C-65-RH_Water-content",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Water content"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Intermediate 30C/65%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.9"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "2.7"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Intermediate 30C/65%RH",
+    "Water content"
+   ]
+  },
+  {
+   "task_id": "demo_Refrigerated-5C_Content-uniformity",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Content uniformity"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Refrigerated 5C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "93.1"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "105.5"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Refrigerated 5C",
+    "Content uniformity"
+   ]
+  },
+  {
+   "task_id": "demo_Refrigerated-5C_Hardness",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Hardness"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Refrigerated 5C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "84"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "99"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Refrigerated 5C",
+    "Hardness"
+   ]
+  },
+  {
+   "task_id": "demo_Refrigerated-5C_Related-substance-B",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Related substance B"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Refrigerated 5C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.11"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.27"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Refrigerated 5C",
+    "Related substance B"
+   ]
+  },
+  {
+   "task_id": "demo_Refrigerated-5C_Water-content",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Water content"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Refrigerated 5C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "1.6"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "2.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Refrigerated 5C",
+    "Water content"
+   ]
+  },
+  {
+   "task_id": "demo_Stress-50C-ambient-RH_Content-uniformity",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Content uniformity"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Stress 50C/ambient RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "92.1"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "107.3"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Stress 50C/ambient RH",
+    "Content uniformity"
+   ]
+  },
+  {
+   "task_id": "demo_Stress-50C-ambient-RH_Hardness",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Hardness"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Stress 50C/ambient RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "77"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "92"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "1"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Stress 50C/ambient RH",
+    "Hardness"
+   ]
+  },
+  {
+   "task_id": "demo_Stress-50C-ambient-RH_Related-substance-B",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Related substance B"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Stress 50C/ambient RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.11"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.23"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Stress 50C/ambient RH",
+    "Related substance B"
+   ]
+  },
+  {
+   "task_id": "demo_Stress-50C-ambient-RH_Water-content",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Water content"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Stress 50C/ambient RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "2.3"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "4.1"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "3"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Stress 50C/ambient RH",
+    "Water content"
+   ]
+  }
+ ]
+}

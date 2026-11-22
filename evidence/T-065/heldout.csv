@@ -1,0 +1,115 @@
+condition,month,attribute,value,unit,limit,source
+25C/60%RH,36,study_duration_demonstrated,36,months,,FDA ChemR 215341 p.5
+30C/75%RH,36,study_duration_demonstrated,36,months,,FDA ChemR 215341 p.5
+40C/75%RH,6,study_duration_demonstrated,6,months,,FDA ChemR 215341 p.5
+20-25C CRT,36,expiry_period_proposed,36,months,,FDA ChemR 215341 p.3
+15-30C excursion,0,excursion_permitted_low,15,C,,FDA ChemR 215341 p.3
+15-30C excursion,0,excursion_permitted_high,30,C,,FDA ChemR 215341 p.3
+Refrigerated 5C,0,Water content,2.0,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,3,Water content,2.3,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,6,Water content,1.6,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,9,Water content,2.6,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,12,Water content,1.9,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,0,Hardness,89,N,NLT 80,DEMO: synthetic held-out set T-065
+Refrigerated 5C,3,Hardness,84,N,NLT 80,DEMO: synthetic held-out set T-065
+Refrigerated 5C,6,Hardness,99,N,NLT 80,DEMO: synthetic held-out set T-065
+Refrigerated 5C,9,Hardness,96,N,NLT 80,DEMO: synthetic held-out set T-065
+Refrigerated 5C,12,Hardness,90,N,NLT 80,DEMO: synthetic held-out set T-065
+Refrigerated 5C,0,Related substance B,0.11,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Refrigerated 5C,3,Related substance B,0.25,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Refrigerated 5C,6,Related substance B,0.20,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Refrigerated 5C,9,Related substance B,0.24,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Refrigerated 5C,12,Related substance B,0.27,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Refrigerated 5C,0,Content uniformity,93.1,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,3,Content uniformity,98.5,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,6,Content uniformity,94.8,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,9,Content uniformity,96.0,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Refrigerated 5C,12,Content uniformity,105.5,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,0,Water content,1.0,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,1,Water content,2.7,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,2,Water content,0.9,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,3,Water content,1.0,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,6,Water content,1.7,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,0,Hardness,93,N,NLT 80,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,1,Hardness,100,N,NLT 80,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,2,Hardness,93,N,NLT 80,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,3,Hardness,89,N,NLT 80,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,6,Hardness,89,N,NLT 80,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,0,Related substance B,0.17,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,1,Related substance B,0.19,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,2,Related substance B,0.20,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,3,Related substance B,0.06,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,6,Related substance B,0.27,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,0,Content uniformity,112.6,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,1,Content uniformity,100.1,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,2,Content uniformity,98.9,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,3,Content uniformity,92.2,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Intermediate 30C/65%RH,6,Content uniformity,96.4,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,0,Water content,3.4,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,1,Water content,4.1,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,2,Water content,2.3,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,3,Water content,3.8,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,0,Hardness,92,N,NLT 80,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,1,Hardness,89,N,NLT 80,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,2,Hardness,89,N,NLT 80,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,3,Hardness,77,N,NLT 80,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,0,Related substance B,0.16,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,1,Related substance B,0.11,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,2,Related substance B,0.16,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,3,Related substance B,0.23,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,0,Content uniformity,107.3,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,1,Content uniformity,92.1,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,2,Content uniformity,99.7,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Stress 50C/ambient RH,3,Content uniformity,93.6,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,0,Water content,1.4,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,3,Water content,1.5,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,6,Water content,2.0,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,9,Water content,1.1,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,12,Water content,1.0,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,18,Water content,1.0,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,0,Hardness,95,N,NLT 80,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,3,Hardness,100,N,NLT 80,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,6,Hardness,71,N,NLT 80,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,9,Hardness,99,N,NLT 80,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,12,Hardness,84,N,NLT 80,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,18,Hardness,100,N,NLT 80,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,0,Related substance B,0.20,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,3,Related substance B,0.42,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,6,Related substance B,0.14,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,9,Related substance B,0.37,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,12,Related substance B,0.34,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,18,Related substance B,0.24,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,0,Content uniformity,92.5,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,3,Content uniformity,94.3,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,6,Content uniformity,96.6,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,9,Content uniformity,105.2,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,12,Content uniformity,114.4,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Humid 25C/75%RH,18,Content uniformity,86.1,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,0,Water content,1.2,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,1,Water content,1.0,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,2,Water content,1.4,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,3,Water content,2.7,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,4,Water content,1.5,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,5,Water content,3.6,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,6,Water content,3.4,%,NMT 3.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,0,Hardness,95,N,NLT 80,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,1,Hardness,86,N,NLT 80,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,2,Hardness,98,N,NLT 80,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,3,Hardness,90,N,NLT 80,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,4,Hardness,84,N,NLT 80,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,5,Hardness,100,N,NLT 80,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,6,Hardness,99,N,NLT 80,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,0,Related substance B,0.12,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,1,Related substance B,0.40,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,2,Related substance B,0.43,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,3,Related substance B,0.13,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,4,Related substance B,0.13,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,5,Related substance B,0.10,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,6,Related substance B,0.12,%,NMT 0.30,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,0,Content uniformity,100.6,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,1,Content uniformity,92.2,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,2,Content uniformity,99.5,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,3,Content uniformity,101.1,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,4,Content uniformity,99.1,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,5,Content uniformity,96.1,%,90.0-110.0,DEMO: synthetic held-out set T-065
+Cyclic -10C to 40C,6,Content uniformity,102.0,%,90.0-110.0,DEMO: synthetic held-out set T-065
