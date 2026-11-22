@@ -1,0 +1,25 @@
+unit,section,flag,text
+0,,"unrecognised:Quality overall summary, drug product","Quality overall summary, drug product"
+1,,unrecognised:2.3.P.5 Control of drug product,2.3.P.5 Control of drug product
+2,,"unrecognised:In illustrative demonstration data, the ","In illustrative demonstration data, the drug product specification lists these tests and acceptance criteria."
+3,,unrecognised:Test Acceptance criterion,Test	Acceptance criterion
+4,2.3.P.5/spec_table/spec_table,unrecognised:Dissolution NLT 80%,Dissolution	NLT 80%
+5,2.3.P.5/spec_table/spec_table,unrecognised:Impurity O NMT 0.5%,Impurity O	NMT 0.5%
+6,2.3.P.5/spec_table/spec_table,unrecognised:Impurity L NMT 0.5%,Impurity L	NMT 0.5%
+7,2.3.P.5/spec_table/spec_table,unrecognised:Total impurities NMT 1.0%,Total impurities	NMT 1.0%
+8,2.3.P.5/spec_table/spec_table,unrecognised:Residual solvent NMT 0.5%,Residual solvent	NMT 0.5%
+9,,unrecognised:2.3.P.8 Stability,2.3.P.8 Stability
+9,,claim:stability,2.3.P.8 Stability
+10,2.3.P.8/public/public,unrecognised:The proposed shelf life is 36 months whe,The proposed shelf life is 36 months when stored at 20°C to 25°C. Excursions are permitted from 15°C to 30°C. Stability was demonstrated for 36 months at long-term conditions and 6 months at accelerated conditions.
+10,2.3.P.8/public/public,unrecognised:Excursions are permitted from 15°C to 30,The proposed shelf life is 36 months when stored at 20°C to 25°C. Excursions are permitted from 15°C to 30°C. Stability was demonstrated for 36 months at long-term conditions and 6 months at accelerated conditions.
+10,2.3.P.8/public/public,unrecognised:Stability was demonstrated for 36 months,The proposed shelf life is 36 months when stored at 20°C to 25°C. Excursions are permitted from 15°C to 30°C. Stability was demonstrated for 36 months at long-term conditions and 6 months at accelerated conditions.
+10,2.3.P.8/public/public,claim:stability,The proposed shelf life is 36 months when stored at 20°C to 25°C. Excursions are permitted from 15°C to 30°C. Stability was demonstrated for 36 months at long-term conditions and 6 months at accelerated conditions.
+11,2.3.P.8/25C/60%RH|Assay/results,"unrecognised:In illustrative demonstration data, Assa","In illustrative demonstration data, Assay under long-term conditions ranged from 99.28% label claim to 100.00% label claim."
+12,2.3.P.8/25C/60%RH|Degradation product/results,"unrecognised:In illustrative demonstration data, Degr","In illustrative demonstration data, Degradation product under long-term conditions ranged from 0.050% area to 0.122% area."
+13,2.3.P.8/25C/60%RH|Dissolution (15 min)/results,"unrecognised:In illustrative demonstration data, Diss","In illustrative demonstration data, Dissolution under long-term conditions ranged from 94.92% dissolved to 96.00% dissolved."
+14,2.3.P.8/30C/75%RH|Assay/results,"unrecognised:In illustrative demonstration data, Assa","In illustrative demonstration data, Assay under intermediate conditions ranged from 98.92% label claim to 100.00% label claim."
+15,2.3.P.8/30C/75%RH|Degradation product/results,"unrecognised:In illustrative demonstration data, Degr","In illustrative demonstration data, Degradation product under intermediate conditions ranged from 0.050% area to 0.194% area."
+16,2.3.P.8/30C/75%RH|Dissolution (15 min)/results,"unrecognised:In illustrative demonstration data, Diss","In illustrative demonstration data, Dissolution under intermediate conditions ranged from 94.20% dissolved to 96.00% dissolved."
+17,2.3.P.8/40C/75%RH|Assay/results,"unrecognised:In illustrative demonstration data, Assa","In illustrative demonstration data, Assay under accelerated conditions ranged from 99.40% label claim to 100.00% label claim."
+18,2.3.P.8/40C/75%RH|Degradation product/results,"unrecognised:In illustrative demonstration data, Degr","In illustrative demonstration data, Degradation product under accelerated conditions ranged from 0.050% area to 0.170% area."
+19,2.3.P.8/40C/75%RH|Dissolution (15 min)/results,"unrecognised:In illustrative demonstration data, Diss","In illustrative demonstration data, Dissolution under accelerated conditions ranged from 95.10% dissolved to 96.00% dissolved."

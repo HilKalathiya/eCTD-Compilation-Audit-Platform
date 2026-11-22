@@ -201,6 +201,7 @@ def old_sheet_texts(old_dir):
 
 def write(path, rows):
     """CSV with a byte-order mark so Excel shows the degree signs."""
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8-sig") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()

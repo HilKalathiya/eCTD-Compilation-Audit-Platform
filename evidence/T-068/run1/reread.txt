@@ -1,0 +1,13 @@
+== reread_export.reread on M23.docx (plan=None) ==
+text units 20
+numbers 30
+placements 30
+uncovered 0
+reviewer flags 24 (see reread_flags.csv)
+  problem: unknown batch id:Test
+  problem: unknown batch id:Dissolution
+  problem: unknown batch id:Impurity O
+  problem: unknown batch id:Impurity L
+  problem: unknown batch id:Total impurities
+  problem: unknown batch id:Residual solvent
+RESULT see problems
