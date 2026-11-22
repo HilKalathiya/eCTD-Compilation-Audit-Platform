@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-23 — T-061 STOPPED at step 2 (stability data inventory)
+- `evidence/T-061/inventory.md`: Laboratory.csv has no stability columns; Kerendia SPL XMLs have 0 "stability" hits; ICH Q1A/Q1E/M4Q are guideline text only. The FDA Chemistry Review PDF (the one product-specific source) was NOT checked: reading `data/public/` was blocked. No code written.
+- Open: confirm whether the chem review holds real stability tables (D14 says none exist); else choose another public source or a labelled synthetic set.
+
 ## 2026-11-22 — T-060 done (exact heading + row checks)
 - `review/layout.py`: `check_headings` (each heading must equal the planned one at its position, else `heading:<text>`; missing/extra too) and `check_row` (batch on THIS task's list, unit = task unit, value = the row's own placement id/section/text, excluded row has no number, else `row:<id>`). `tools/reread_export.py` builds the plan from the task files on disk (`plan_from_disk`) and applies both.
 - Real run `evidence/T-060/`: numbers 3589 == placements, 0 flags. Planted in `tests/test_entail.py`: unplanned heading, two real headings swapped, two row values swapped, wrong batch/unit/sentence in a cell, excluded row not on the list. No tests removed or renamed.
