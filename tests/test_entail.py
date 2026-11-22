@@ -180,5 +180,77 @@ class RereadToolTests(unittest.TestCase):
         self.assertEqual([f["flag"] for f in rep["flags"]], ["unsupported:attr_n+ranged"])
 
 
+TITLE = "3.2.P.5 Control of drug product"
+PLAN = {"title": TITLE, "tasks": [
+    {"part": "3.2.P.5.4", "task_id": "b1", "attribute": "Dissolution", "column": "dissolution_av", "unit": "%",
+     "batches": ["26", "105", "327"]},
+    {"part": "3.2.P.5.4", "task_id": "b2", "attribute": "Impurity O", "column": "impurity_o", "unit": "%", "batches": ["26"]},
+]}
+PLACED = [{"id": "LEK-26-dissolution_av", "section": "3.2.P.5.4/b1/table", "text": "97.33"},
+          {"id": "LEK-105-dissolution_av", "section": "3.2.P.5.4/b1/table", "text": "92.33"}]
+IDS = {"26", "105", "327"}
+
+
+class ExactHeadingAndRowTests(unittest.TestCase):
+    """Headings and table cells must equal what the plan / task files / placements say; nothing else can sit there."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.path = Path(self._tmp.name) / "P5.docx"
+        self.heads = [(TITLE, 1), ("3.2.P.5.4 Batch analyses", 2), ("Dissolution", 3), ("__TABLE__", 0), ("Impurity O", 3),
+                      ("3.2.P.5.6 Justification of specification", 2)]
+        self.rows = [["Batch", "Value", "Unit"], ["26", "97.33", "%"], ["105", "92.33", "%"], ["327", "excluded (quarantined)", "-"]]
+
+    def build(self, heads=None, rows=None):
+        doc = Document()
+        for text, level in heads or self.heads:
+            if text == "__TABLE__":
+                table = doc.add_table(rows=0, cols=3)
+                for r in rows or self.rows:
+                    for cell, t in zip(table.add_row().cells, r):
+                        cell.text = t
+            else:
+                doc.add_heading(text, level=level)
+        doc.save(str(self.path))
+        return reread_export.reread(self.path, PLACED, IDS, PLAN)
+
+    def flags(self, rep, prefix):
+        return [f["flag"] for f in rep["flags"] if f["flag"].startswith(prefix)]
+
+    def test_the_real_headings_and_rows_pass(self):
+        rep = self.build()
+        self.assertEqual((rep["flags"], rep["problems"]), ([], []))
+
+    def test_planted_heading_nobody_planned_is_flagged(self):
+        heads = [("Overall Quality Is Assured", l) if t == "Dissolution" else (t, l) for t, l in self.heads]
+        self.assertEqual(self.flags(self.build(heads), "heading:"), ["heading:Overall Quality Is Assured"])
+
+    def test_planted_heading_swapped_with_another_real_heading_is_flagged(self):
+        swap = {"Dissolution": "Impurity O", "Impurity O": "Dissolution"}
+        heads = [(swap.get(t, t), l) for t, l in self.heads]
+        self.assertEqual(self.flags(self.build(heads), "heading:"), ["heading:Impurity O", "heading:Dissolution"])
+
+    def test_missing_and_extra_headings_are_flagged(self):
+        self.assertEqual(self.flags(self.build(self.heads[:-1]), "heading:"), ["heading:missing 3.2.P.5.6 Justification of specification"])
+        self.assertEqual(self.flags(self.build(self.heads + [("Overall Quality Is Assured", 3)]), "heading:"),
+                         ["heading:Overall Quality Is Assured"])
+
+    def test_planted_two_table_values_swapped_between_rows_are_flagged(self):
+        rows = [self.rows[0], ["26", "92.33", "%"], ["105", "97.33", "%"], self.rows[3]]
+        self.assertEqual(self.flags(self.build(rows=rows), "row:"), ["row:26", "row:105"])
+
+    def test_other_table_cheats_are_flagged(self):
+        for bad, who in ((["99", "97.33", "%"], "row:99"), (["26", "97.33", "mg"], "row:26"),
+                         (["26", "All results complied.", "%"], "row:26"), (["105", "97.33", "%"], "row:105")):
+            with self.subTest(row=bad):
+                rows = [self.rows[0], bad, self.rows[2], self.rows[3]]
+                self.assertIn(who, self.flags(self.build(rows=rows), "row:"))
+
+    def test_an_excluded_row_must_be_on_the_list_and_carry_no_number(self):
+        rows = self.rows[:3] + [["328", "excluded (quarantined)", "-"]]
+        self.assertEqual(self.flags(self.build(rows=rows), "row:"), ["row:328"])
+
+
 if __name__ == "__main__":
     unittest.main()

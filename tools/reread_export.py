@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 
 from ectd_engine.render.numbers import BATCH_RUN, ID_TOKEN, find_numbers, uncovered_digits  # noqa: E402
 from ectd_engine.review.entail import entail  # noqa: E402
+from ectd_engine.review.layout import check_headings, check_row, expected_headings  # noqa: E402
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 HEAD = "Batch\tValue\tUnit"
@@ -81,13 +82,37 @@ def facts_for(text, placed):
     return facts
 
 
-def reread(docx_path, placements, batch_ids):
-    """Returns a report dict: number counts, problems, and one row per entailment flag."""
+def plan_from_disk():
+    """What the document must contain, read from the task files and the content plan: {"title", "tasks": [{"part", "task_id",
+    "attribute", "column", "unit", "batches"}]} in the order the writer used (P.5.4 tasks, then P.5.6 tasks)."""
+    from ectd_engine.render.html import TITLE
+    from tools.render_doc import RUN54, RUN56, accepted_text, load_jsonl, tasks_of
+    tasks = []
+    for part, folders in (("3.2.P.5.4", (RUN54,)), ("3.2.P.5.6", (RUN56, RUN56 / "synthetic"))):
+        for folder in folders:
+            by_id = tasks_of(folder)
+            for res in load_jsonl(folder / "results.jsonl"):
+                if accepted_text(res) is None:
+                    continue
+                t = by_id[res["task_id"]]
+                tasks.append({"part": part, "task_id": t["task_id"], "attribute": t["attribute"], "column": t["column"],
+                              "unit": t.get("unit", "%"), "batches": list(t.get("batches", ()))})
+    return {"title": TITLE, "tasks": tasks}
+
+
+def reread(docx_path, placements, batch_ids, plan=None):
+    """Returns a report dict: number counts, problems, and one row per flag.
+    With a plan (see plan_from_disk) every heading must equal the planned one at its position ("heading:<text>") and every
+    table row must match its own task and placement ("row:<batch id>")."""
     units = read_units(docx_path)
     found, uncovered, flags, pos, unknown, attribute = [], [], [], 0, [], ""
+    headings, n_tasks = [], 0
     for i, (kind, text) in enumerate(units):
+        if kind == "h":
+            headings.append(text)
         if kind == "h" and not text.startswith("3.2.P"):
             attribute = text   # the attribute heading: the sentences under it must be about this attribute
+            n_tasks += 1
         data_row = kind == "row" and text != HEAD
         for run in BATCH_RUN.finditer(text):   # every id after "Batch"/"Batches" must be on the list of the task files
             unknown += [f"unknown batch id:{t.group(0)}" for t in ID_TOKEN.finditer(run.group(1))
@@ -100,8 +125,19 @@ def reread(docx_path, placements, batch_ids):
         pos += len(nums)
         found += [t for _, t in nums]
         facts = dict(facts_for(text, placed), attribute=attribute)
+        section = placed[0]["section"] if placed else ""
+        if plan and kind == "h":
+            continue   # headings are checked as a whole list below
+        if plan and data_row:
+            task = plan["tasks"][n_tasks - 1] if 0 < n_tasks <= len(plan["tasks"]) else None
+            for flag in check_row(text.split("\t"), placed[0] if placed else None, task):
+                flags.append({"unit": i, "section": section, "flag": flag, "text": text})
+            continue
         for flag in entail(text, facts, kind=kind):
-            flags.append({"unit": i, "section": placed[0]["section"] if placed else "", "flag": flag, "text": text})
+            flags.append({"unit": i, "section": section, "flag": flag, "text": text})
+    if plan:
+        flags += [{"unit": "", "section": "", "flag": f, "text": ""}
+                  for f in check_headings(headings, expected_headings(plan["title"], plan["tasks"]))]
     placed_text = [r["text"] for r in placements]
     problems = []
     if len(found) != len(placed_text):
@@ -122,7 +158,7 @@ def main(argv=None):
     args = ap.parse_args(argv)
     src, out = Path(args.folder), Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    rep = reread(src / "P5.docx", read_placements(src / "placements.jsonl"), batch_ids_from_disk())
+    rep = reread(src / "P5.docx", read_placements(src / "placements.jsonl"), batch_ids_from_disk(), plan_from_disk())
     with open(out / "flags.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["unit", "section", "flag", "text"])
         w.writeheader()

@@ -168,3 +168,4 @@ overclaim = a sentence that says more than the facts show
 exact match = the same text, character for character
 shape = an allowed sentence form with blanks for the numbers
 allow-list = only the listed things pass; everything else is flagged
+position check = comparing each item to what is expected at that place in the document

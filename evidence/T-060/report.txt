@@ -1,0 +1,7 @@
+== DOCX re-read (zip + ElementTree, placements read from disk) ==
+text units 2383
+numbers 3589
+placements 3589
+uncovered 0
+reviewer flags 0 (see flags.csv)
+RESULT docx numbers == placements

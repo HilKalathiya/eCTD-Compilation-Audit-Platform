@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-22 — T-060 done (exact heading + row checks)
+- `review/layout.py`: `check_headings` (each heading must equal the planned one at its position, else `heading:<text>`; missing/extra too) and `check_row` (batch on THIS task's list, unit = task unit, value = the row's own placement id/section/text, excluded row has no number, else `row:<id>`). `tools/reread_export.py` builds the plan from the task files on disk (`plan_from_disk`) and applies both.
+- Real run `evidence/T-060/`: numbers 3589 == placements, 0 flags. Planted in `tests/test_entail.py`: unplanned heading, two real headings swapped, two row values swapped, wrong batch/unit/sentence in a cell, excluded row not on the list. No tests removed or renamed.
+
 ## 2026-11-20 — T-059 done (sentence shapes gate)
 - `review/shapes.py`: SENTENCE_SHAPES = every sentence form the writer makes (P.5.4 opening/range/mean/highest-lowest/excluded, P.5.6 criterion declared + Q3B quote, outside count), each with a fact check. `entail()`: no shape -> `unrecognised:<40 chars>` (+ `claim:<word>` label); shape but facts disagree -> `unsupported:<shape>`. Headings and table rows are gated too. When the attribute (heading) is known, the sentence must name it.
 - `tools/reread_export.py`: new reason `unknown batch id:<id>` (text and table cells); reads headings separately. Real run `evidence/T-059/`: numbers 3589 == placements, unrecognised 0, flags 0. Excluded-batch table row (`id / excluded (quarantined) / -`) added as a row shape (writer form).
