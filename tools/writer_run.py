@@ -7,6 +7,8 @@
     python tools/writer_run.py --kind p54 --audit 130 --backend ollama --out <folder>   # N real Lek windows (T-042)
     python tools/writer_run.py --kind p56 --backend mock --out <folder>     # 3.2.P.5.6 justification per spec attribute (T-046)
     python tools/writer_run.py --kind p56 --audit 130 --backend ollama --out <folder>   # N real Lek subsets (T-047)
+    python tools/writer_run.py --kind p83 --backend mock --out <folder>     # 3.2.P.8.3 stability: public paragraph + one per condition x attribute (T-064)
+    (the old 8-section stability test of writer_test is now --kind p83old, still the default)
 """
 AUDIT_SEED = 42
 WINDOW = 12
@@ -156,8 +158,20 @@ def run_p56(args, client):
     return 0 if (accepted == len(tasks) or args.audit) else 1
 
 
+def run_p83(args, client):
+    """3.2.P.8.3: one task for the public paragraph and one per condition x attribute; fixed temperature and seed; folder = --out."""
+    from ectd_engine.stability.runner import run_p83 as run_all
+    meta = {"backend": args.backend, "model": args.model, "think": args.think, "num_ctx": args.num_ctx, "num_predict": args.num_predict}
+    summary = run_all(client, args.out, max_drafts=args.max_drafts, seed=args.seed, temperature=args.temperature,
+                      only=args.tasks.split(",") if args.tasks else None, meta=meta)
+    return 0 if (summary["accepted"] == summary["tasks"] and not summary["wrong_accepted"]) else 1
+
+
 def make_client(args):
     if args.backend == "mock":
+        if args.kind == "p83":
+            from ectd_engine.stability.loop import StabilityMockClient
+            return StabilityMockClient()
         if args.kind == "p56":
             from ectd_engine.writer.spec_loop import SpecMockClient
             return SpecMockClient()
@@ -170,8 +184,10 @@ def make_client(args):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--kind", choices=["p83", "p54", "p56"], default="p83",
-                    help="p83 = stability paragraphs (default); p54 = batch analyses on Lek facts; p56 = spec justification")
+    ap.add_argument("--kind", choices=["p83", "p83old", "p54", "p56"], default="p83old",
+                    help="p83old = old 8-section stability test (default); p83 = P.8.3 stability writer (T-064); "
+                         "p54 = batch analyses on Lek facts; p56 = spec justification")
+    ap.add_argument("--temperature", type=float, default=0.0, help="p83 only: sampling temperature (default 0)")
     ap.add_argument("--backend", choices=["ollama", "openai", "mock"], default="ollama")
     ap.add_argument("--model", default="gemma4:e4b")
     ap.add_argument("--base-url", default=None)
@@ -190,6 +206,8 @@ def main(argv=None):
                     help="folder for accepted sections and drafts.jsonl")
     args = ap.parse_args(argv)
 
+    if args.kind == "p83":
+        return run_p83(args, make_client(args))
     if args.kind == "p56":
         return run_p56(args, make_client(args))
     data = args.data or str(ROOT / "data" / "tasks" / "p54_tasks.json" if args.kind == "p54"

@@ -1,5 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-22 — T-064 done (C3.8c P.8.3 writer + Agent Skill)
+- Gemma (gemma4:e4b, temp 0, seed 42) wrote P.8.3: 10/10 tasks accepted (1 public + 9 condition x attribute), 0 wrong accepted by an independent CSV recount (`ectd_engine/stability/reread.py`). Code: `stability/{prompt,loop,runner,compare}.py`; `tools/writer_run.py --kind p83` (old 8-section test renamed `--kind p83old`, still the default). Retry sends the rejected draft + problems back. First run rejected the public task (model put the demo label on a public sentence); fixed the prompt wording, no check loosened.
+- Skill `skills/p83-stability/` (SKILL.md + scripts/run.py, same entry point). `evidence/T-064/{direct,skill,compare.md}`: 10/10 same verdicts, draft text identical; compare tested to fail on a planted change.
+
 ## 2026-11-22 — T-063 done (C3.8b stability checks)
 - Double entry 4/4 match (`evidence/T-063/double_entry.md`); added public excursion 15-30C (2 rows, p.3) -> 6 public + 60 DEMO rows. Verbatim quotes in `evidence/T-063/extract.md` (T-062 copy left untouched), tested. `ectd_engine/validator/stability.py` (P.8.3 shapes, facts-equal, demo label), `ectd_engine/stability/mock_writer.py`; 8 planted errors rejected. Next: model writer for P.8.3 (not started).
 

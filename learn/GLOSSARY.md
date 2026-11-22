@@ -176,3 +176,7 @@ redacted = blacked out by FDA because it is a trade secret
 allowlist = a list of the only things that are permitted
 mutation test = plant one error on purpose to see if the check catches it
 verbatim = word for word, exactly as printed
+Agent Skill = a folder with a SKILL.md that tells an AI agent when and how to run a job
+entry point = the one function every route (direct or skill) goes through, so results match
+retry feedback = sending a rejected draft and its problems back to the model so it can fix them
+re-read = a second, separate recount of the numbers straight from the data

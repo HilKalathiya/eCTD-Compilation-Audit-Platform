@@ -1,0 +1,389 @@
+{
+ "seed": 42,
+ "temperature": 0.0,
+ "meta": {
+  "backend": "ollama",
+  "model": "gemma4:e4b",
+  "think": "off",
+  "num_ctx": 4096,
+  "num_predict": 600
+ },
+ "tasks": [
+  {
+   "task_id": "p83_public",
+   "kind": "public",
+   "slots": {
+    "shelf_life_months": {
+     "label": "proposed shelf life in months",
+     "value": "36"
+    },
+    "storage_low": {
+     "label": "lowest storage temperature",
+     "value": "20°C"
+    },
+    "storage_high": {
+     "label": "highest storage temperature",
+     "value": "25°C"
+    },
+    "excursion_low": {
+     "label": "lowest permitted excursion temperature",
+     "value": "15°C"
+    },
+    "excursion_high": {
+     "label": "highest permitted excursion temperature",
+     "value": "30°C"
+    },
+    "long_term_months": {
+     "label": "months studied at long-term conditions",
+     "value": "36"
+    },
+    "accel_months": {
+     "label": "months studied at accelerated conditions",
+     "value": "6"
+    }
+   },
+   "required": [
+    "shelf_life_months",
+    "storage_low",
+    "storage_high",
+    "excursion_low",
+    "excursion_high",
+    "long_term_months",
+    "accel_months"
+   ]
+  },
+  {
+   "task_id": "demo_25C-60-RH_Assay",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Assay"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "25C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "99.28"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "100.00"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "8"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "25C/60%RH",
+    "Assay"
+   ]
+  },
+  {
+   "task_id": "demo_25C-60-RH_Degradation-product",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Degradation product"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "25C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.050"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.122"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "8"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "25C/60%RH",
+    "Degradation product"
+   ]
+  },
+  {
+   "task_id": "demo_25C-60-RH_Dissolution-15-min",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Dissolution (15 min)"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "25C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "94.92"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "96.00"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "8"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "25C/60%RH",
+    "Dissolution (15 min)"
+   ]
+  },
+  {
+   "task_id": "demo_30C-75-RH_Assay",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Assay"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "30C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "98.92"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "100.00"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "8"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "30C/75%RH",
+    "Assay"
+   ]
+  },
+  {
+   "task_id": "demo_30C-75-RH_Degradation-product",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Degradation product"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "30C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.050"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.194"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "8"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "30C/75%RH",
+    "Degradation product"
+   ]
+  },
+  {
+   "task_id": "demo_30C-75-RH_Dissolution-15-min",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Dissolution (15 min)"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "30C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "94.20"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "96.00"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "8"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "30C/75%RH",
+    "Dissolution (15 min)"
+   ]
+  },
+  {
+   "task_id": "demo_40C-75-RH_Assay",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Assay"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "40C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "99.40"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "100.00"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "40C/75%RH",
+    "Assay"
+   ]
+  },
+  {
+   "task_id": "demo_40C-75-RH_Degradation-product",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Degradation product"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "40C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.050"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.170"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "40C/75%RH",
+    "Degradation product"
+   ]
+  },
+  {
+   "task_id": "demo_40C-75-RH_Dissolution-15-min",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Dissolution (15 min)"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "40C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "95.10"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "96.00"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "40C/75%RH",
+    "Dissolution (15 min)"
+   ]
+  }
+ ]
+}
