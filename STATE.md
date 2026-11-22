@@ -1,5 +1,10 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-22 — T-066 done (C3.8 blind re-check)
+- `tools/score_blind.py` scores a blind sheet (planted caught x/3, right agreed y/22); refuses an empty verdict column unless `--verdict-col` is given; 7 tests in `tests/test_score_blind.py`.
+- T-065 scored honestly (`evidence/T-065/score.md`, read from `hil_note`, blind.csv untouched): **2/3 planted caught, 22/22 agreed, R15 missed** (highest 100 written as 103). Not a clean 3/3.
+- Fresh sheet `evidence/T-066/blind.csv` (+ `blind_key.csv`): 25 new rows, verdict is column 2; 3 planted (R06 wrong max, R20 wrong min, R15 wrong outside count), all flagged by the re-read. Pool: 20 code-drafted paragraphs (no model) from new seed-66 data `heldout66.csv` + 5 unused T-064 model paragraphs; none of the T-065 paragraph texts reused (same condition/attribute names, different values). Built by `blind.py --fresh-csv` (new `wrong_min`, `build_fresh`; old `build` unchanged). Hil labels it next.
+
 ## 2026-11-22 — T-065 done (C3.8 close-out: P.8.3 held-out run + blind sheet)
 - Held-out set (`ectd_engine/stability/heldout.py`, seed 65, all DEMO): 20 new groups (5 new conditions x 4 new attributes), 8 with results outside the limit; prompt frozen. Gemma (gemma4:e4b, temp 0, seed 42): direct 20/20 accepted, 0 retries used, 0 wrong accepted (CSV recount); skill 20/20, same verdicts, draft text identical (`evidence/T-065/{direct,skill}/run1`, `compare.md`).
 - Retry test (`stability/plant.py`, `evidence/T-065/retry/run1`): 3 planted bad first drafts (typed digit, missing label, invented conclusion), all rejected; Gemma fixed all 3 from the feedback (2, 2 and 3 drafts).

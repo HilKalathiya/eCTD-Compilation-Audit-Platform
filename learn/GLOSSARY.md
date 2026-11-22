@@ -183,3 +183,5 @@ re-read = a second, separate recount of the numbers straight from the data
 held-out = test data kept away from tuning, so it shows how the writer does on new cases
 planted error = a mistake added on purpose to prove a check can catch it
 blind sheet = a list to judge where the correct answers are hidden in a separate key
+verdict = your right/wrong answer for one row of a blind sheet
+refuse = stop with a message instead of guessing

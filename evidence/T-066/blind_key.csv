@@ -1,0 +1,26 @@
+﻿row_id,task_id,set,truth,planted_change,reread_flags,original_paragraph
+R01,demo_Refrigerated-5C_Hardness,"code-drafted, seed 66",right,,,
+R02,demo_Humid-25C-75-RH_Water-content,"code-drafted, seed 66",right,,,
+R03,demo_Refrigerated-5C_Water-content,"code-drafted, seed 66",right,,,
+R04,demo_Cyclic-10C-to-40C_Related-substance-B,"code-drafted, seed 66",right,,,
+R05,demo_Stress-50C-ambient-RH_Water-content,"code-drafted, seed 66",right,,,
+R06,demo_Cyclic-10C-to-40C_Content-uniformity,"code-drafted, seed 66",wrong,highest result 105.3 written as 105.6,"numbers in the text ['7', '7', '92.5', '105.6'] differ from the recount ['7', '7', '92.5', '105.3']","In illustrative demonstration data, Content uniformity at Cyclic -10C to 40C ranged from 92.5 to 105.3 over 7 time points. In illustrative demonstration data, Content uniformity at Cyclic -10C to 40C had none of its 7 results outside the limit."
+R07,demo_40C-75-RH_Degradation-product,"model, T-064 unused",right,,,
+R08,demo_Intermediate-30C-65-RH_Hardness,"code-drafted, seed 66",right,,,
+R09,demo_Refrigerated-5C_Related-substance-B,"code-drafted, seed 66",right,,,
+R10,demo_Intermediate-30C-65-RH_Content-uniformity,"code-drafted, seed 66",right,,,
+R11,demo_Cyclic-10C-to-40C_Water-content,"code-drafted, seed 66",right,,,
+R12,demo_40C-75-RH_Dissolution-15-min,"model, T-064 unused",right,,,
+R13,demo_40C-75-RH_Assay,"model, T-064 unused",right,,,
+R14,p83_public,"model, T-064 unused",right,,,
+R15,demo_Humid-25C-75-RH_Content-uniformity,"code-drafted, seed 66",wrong,outside count 2 written as 3,"numbers in the text ['3', '6', '6', '85.9', '106.5'] differ from the recount ['2', '6', '6', '85.9', '106.5']","In illustrative demonstration data, Content uniformity at Humid 25C/75%RH ranged from 85.9 to 106.5 over 6 time points. In illustrative demonstration data, Content uniformity at Humid 25C/75%RH had 2 of its 6 results outside the limit."
+R16,demo_Stress-50C-ambient-RH_Related-substance-B,"code-drafted, seed 66",right,,,
+R17,demo_Humid-25C-75-RH_Related-substance-B,"code-drafted, seed 66",right,,,
+R18,demo_30C-75-RH_Dissolution-15-min,"model, T-064 unused",right,,,
+R19,demo_Intermediate-30C-65-RH_Water-content,"code-drafted, seed 66",right,,,
+R20,demo_Cyclic-10C-to-40C_Hardness,"code-drafted, seed 66",wrong,lowest result 87 written as 84,"numbers in the text ['7', '7', '84', '100'] differ from the recount ['7', '7', '87', '100']","In illustrative demonstration data, Hardness at Cyclic -10C to 40C ranged from 87 to 100 over 7 time points. In illustrative demonstration data, Hardness at Cyclic -10C to 40C had none of its 7 results outside the limit."
+R21,demo_Stress-50C-ambient-RH_Hardness,"code-drafted, seed 66",right,,,
+R22,demo_Intermediate-30C-65-RH_Related-substance-B,"code-drafted, seed 66",right,,,
+R23,demo_Stress-50C-ambient-RH_Content-uniformity,"code-drafted, seed 66",right,,,
+R24,demo_Refrigerated-5C_Content-uniformity,"code-drafted, seed 66",right,,,
+R25,demo_Humid-25C-75-RH_Hardness,"code-drafted, seed 66",right,,,
