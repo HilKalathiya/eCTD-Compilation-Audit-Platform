@@ -12,7 +12,7 @@ PUBLIC_SOURCE = re.compile(r"^FDA ChemR 215341 p\.(\d+)$")
 DEMO_SOURCE = re.compile(r"^DEMO: redacted \(b\)\(4\) in ChemR p\.(\d+)$")
 # The only things the FDA review says in public (shelf life, storage, how long each condition ran).
 # Any other attribute (assay, impurity, dissolution...) is hidden in the review, so it can only be DEMO.
-PUBLIC_ATTRIBUTES = {"study_duration_demonstrated", "expiry_period_proposed"}
+PUBLIC_ATTRIBUTES = {"study_duration_demonstrated", "expiry_period_proposed", "excursion_permitted_low", "excursion_permitted_high"}
 
 _NUM = r"(\d+(?:\.\d+)?)"
 _RANGE = re.compile(r"^" + _NUM + r"-" + _NUM + r"$")
@@ -135,3 +135,21 @@ def count_sources(rows):
     """(n_public_rows, n_demo_rows)."""
     kinds = [source_kind(r["source"]) for r in rows]
     return kinds.count("public"), kinds.count("demo")
+
+
+def p83_facts(rows):
+    """Facts the P.8.3 paragraph may use: 'public' (shelf life, storage, excursions, study length) and 'demo' (per condition x attribute)."""
+    f = compute_facts(rows)
+    crt = [c for (c, a) in f if a == "expiry_period_proposed"]
+    m = re.match(r"^(\d+)-(\d+)C CRT$", crt[0]) if crt else None
+    public = {
+        "shelf_life_months": f[(crt[0], "expiry_period_proposed")].last,
+        "storage_low": Decimal(m.group(1)),
+        "storage_high": Decimal(m.group(2)),
+        "excursion_low": f[("15-30C excursion", "excursion_permitted_low")].last,
+        "excursion_high": f[("15-30C excursion", "excursion_permitted_high")].last,
+        "long_term_months": f[("25C/60%RH", "study_duration_demonstrated")].last,
+        "accel_months": f[("40C/75%RH", "study_duration_demonstrated")].last,
+    }
+    demo = {k: v for k, v in f.items() if v.n_demo > 0}
+    return {"public": public, "demo": demo}

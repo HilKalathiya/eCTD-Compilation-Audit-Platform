@@ -1,5 +1,8 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
+## 2026-11-22 — T-063 done (C3.8b stability checks)
+- Double entry 4/4 match (`evidence/T-063/double_entry.md`); added public excursion 15-30C (2 rows, p.3) -> 6 public + 60 DEMO rows. Verbatim quotes in `evidence/T-063/extract.md` (T-062 copy left untouched), tested. `ectd_engine/validator/stability.py` (P.8.3 shapes, facts-equal, demo label), `ectd_engine/stability/mock_writer.py`; 8 planted errors rejected. Next: model writer for P.8.3 (not started).
+
 ## 2026-11-22 — T-062 done (stability facts: 4 public rows + 60 DEMO rows)
 - ChemR 215341 (`evidence/T-062/extract.md`) gives only shelf life 36 months, storage 20-25C, studies of 36/36/6 months at 25C/60, 30C/75, 40C/75. All results/time points/limits are redacted (75 pages withheld, p.7). `data/stability/finerenone_stability.csv`: 4 public rows, 60 DEMO rows (rule in `learn/LEARN_T-062.md`). `ectd_engine/stability/facts.py` + `tests/test_stability_facts.py` (16 tests, planted errors caught).
 

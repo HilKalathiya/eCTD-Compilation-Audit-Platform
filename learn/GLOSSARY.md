@@ -173,3 +173,6 @@ inventory = a checked list of what each file holds
 time point = one test date in a stability study (e.g. month 6)
 demo row = a made-up data row whose source says DEMO, never passed off as real
 redacted = blacked out by FDA because it is a trade secret
+allowlist = a list of the only things that are permitted
+mutation test = plant one error on purpose to see if the check catches it
+verbatim = word for word, exactly as printed

@@ -63,3 +63,5 @@ condition,month,attribute,value,unit,limit,source
 40C/75%RH,1,Dissolution (15 min),95.85,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
 40C/75%RH,3,Dissolution (15 min),95.55,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
 40C/75%RH,6,Dissolution (15 min),95.10,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+15-30C excursion,0,excursion_permitted_low,15,C,,FDA ChemR 215341 p.3
+15-30C excursion,0,excursion_permitted_high,30,C,,FDA ChemR 215341 p.3

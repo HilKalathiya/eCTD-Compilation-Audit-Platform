@@ -89,7 +89,7 @@ class RealCsv(unittest.TestCase):
         self.assertEqual(facts.check_rows(self.rows), [])
 
     def test_public_and_demo_counts(self):
-        self.assertEqual(facts.count_sources(self.rows), (4, 60))
+        self.assertEqual(facts.count_sources(self.rows), (6, 60))
 
     def test_hand_checked_real_facts(self):
         all_facts = facts.compute_facts(self.rows)
