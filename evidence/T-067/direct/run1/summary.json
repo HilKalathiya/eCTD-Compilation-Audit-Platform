@@ -1,0 +1,19 @@
+{
+ "tasks": 25,
+ "accepted": 25,
+ "rejected": [],
+ "retries_used": 0,
+ "wrong_accepted": [],
+ "seed": 42,
+ "temperature": 0.0,
+ "max_drafts": 4,
+ "meta": {
+  "backend": "ollama",
+  "model": "gemma4:e4b",
+  "think": "off",
+  "num_ctx": 4096,
+  "num_predict": 600,
+  "heldout": true,
+  "data": "evidence/T-067/heldout.csv"
+ }
+}

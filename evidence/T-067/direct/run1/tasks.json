@@ -1,0 +1,990 @@
+{
+ "seed": 42,
+ "temperature": 0.0,
+ "meta": {
+  "backend": "ollama",
+  "model": "gemma4:e4b",
+  "think": "off",
+  "num_ctx": 4096,
+  "num_predict": 600,
+  "heldout": true,
+  "data": "evidence/T-067/heldout.csv"
+ },
+ "tasks": [
+  {
+   "task_id": "demo_Cool-15C_Disintegration-time",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Disintegration time"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cool 15C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "4"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "10"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Cool 15C",
+    "Disintegration time"
+   ]
+  },
+  {
+   "task_id": "demo_Cool-15C_Friability",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Friability"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cool 15C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.5"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "2.0"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "3"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Cool 15C",
+    "Friability"
+   ]
+  },
+  {
+   "task_id": "demo_Cool-15C_Loss-on-drying",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Loss on drying"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cool 15C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.6"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "1.2"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Cool 15C",
+    "Loss on drying"
+   ]
+  },
+  {
+   "task_id": "demo_Cool-15C_Residual-solvents",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Residual solvents"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cool 15C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "307"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "677"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "3"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Cool 15C",
+    "Residual solvents"
+   ]
+  },
+  {
+   "task_id": "demo_Cool-15C_Total-impurities",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Total impurities"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Cool 15C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.2"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.7"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Cool 15C",
+    "Total impurities"
+   ]
+  },
+  {
+   "task_id": "demo_Frozen-20C_Disintegration-time",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Disintegration time"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Frozen -20C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "7"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "25"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "1"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Frozen -20C",
+    "Disintegration time"
+   ]
+  },
+  {
+   "task_id": "demo_Frozen-20C_Friability",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Friability"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Frozen -20C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.4"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "1.9"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "3"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Frozen -20C",
+    "Friability"
+   ]
+  },
+  {
+   "task_id": "demo_Frozen-20C_Loss-on-drying",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Loss on drying"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Frozen -20C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.5"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "1.2"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Frozen -20C",
+    "Loss on drying"
+   ]
+  },
+  {
+   "task_id": "demo_Frozen-20C_Residual-solvents",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Residual solvents"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Frozen -20C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "131"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "337"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Frozen -20C",
+    "Residual solvents"
+   ]
+  },
+  {
+   "task_id": "demo_Frozen-20C_Total-impurities",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Total impurities"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Frozen -20C"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.2"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.7"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Frozen -20C",
+    "Total impurities"
+   ]
+  },
+  {
+   "task_id": "demo_Hot-45C-75-RH_Disintegration-time",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Disintegration time"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Hot 45C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "4"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "24"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Hot 45C/75%RH",
+    "Disintegration time"
+   ]
+  },
+  {
+   "task_id": "demo_Hot-45C-75-RH_Friability",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Friability"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Hot 45C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.1"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.3"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Hot 45C/75%RH",
+    "Friability"
+   ]
+  },
+  {
+   "task_id": "demo_Hot-45C-75-RH_Loss-on-drying",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Loss on drying"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Hot 45C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "1.0"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "1.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Hot 45C/75%RH",
+    "Loss on drying"
+   ]
+  },
+  {
+   "task_id": "demo_Hot-45C-75-RH_Residual-solvents",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Residual solvents"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Hot 45C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "109"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "320"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Hot 45C/75%RH",
+    "Residual solvents"
+   ]
+  },
+  {
+   "task_id": "demo_Hot-45C-75-RH_Total-impurities",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Total impurities"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Hot 45C/75%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.4"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "1.9"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Hot 45C/75%RH",
+    "Total impurities"
+   ]
+  },
+  {
+   "task_id": "demo_Tropical-30C-80-RH_Disintegration-time",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Disintegration time"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Tropical 30C/80%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "4"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "12"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Tropical 30C/80%RH",
+    "Disintegration time"
+   ]
+  },
+  {
+   "task_id": "demo_Tropical-30C-80-RH_Friability",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Friability"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Tropical 30C/80%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.1"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Tropical 30C/80%RH",
+    "Friability"
+   ]
+  },
+  {
+   "task_id": "demo_Tropical-30C-80-RH_Loss-on-drying",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Loss on drying"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Tropical 30C/80%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.7"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "1.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Tropical 30C/80%RH",
+    "Loss on drying"
+   ]
+  },
+  {
+   "task_id": "demo_Tropical-30C-80-RH_Residual-solvents",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Residual solvents"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Tropical 30C/80%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "98"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "683"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Tropical 30C/80%RH",
+    "Residual solvents"
+   ]
+  },
+  {
+   "task_id": "demo_Tropical-30C-80-RH_Total-impurities",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Total impurities"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Tropical 30C/80%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.3"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "1.9"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "5"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "3"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Tropical 30C/80%RH",
+    "Total impurities"
+   ]
+  },
+  {
+   "task_id": "demo_Warm-35C-60-RH_Disintegration-time",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Disintegration time"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Warm 35C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "5"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "11"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Warm 35C/60%RH",
+    "Disintegration time"
+   ]
+  },
+  {
+   "task_id": "demo_Warm-35C-60-RH_Friability",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Friability"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Warm 35C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.1"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "2.0"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "1"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Warm 35C/60%RH",
+    "Friability"
+   ]
+  },
+  {
+   "task_id": "demo_Warm-35C-60-RH_Loss-on-drying",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Loss on drying"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Warm 35C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "1.4"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "2.6"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    },
+    "n_outside": {
+     "label": "number of results outside the limit",
+     "value": "2"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n",
+    "n_outside"
+   ],
+   "key": [
+    "Warm 35C/60%RH",
+    "Loss on drying"
+   ]
+  },
+  {
+   "task_id": "demo_Warm-35C-60-RH_Residual-solvents",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Residual solvents"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Warm 35C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "268"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "404"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Warm 35C/60%RH",
+    "Residual solvents"
+   ]
+  },
+  {
+   "task_id": "demo_Warm-35C-60-RH_Total-impurities",
+   "kind": "demo",
+   "slots": {
+    "attribute": {
+     "label": "attribute name",
+     "value": "Total impurities"
+    },
+    "condition": {
+     "label": "storage condition",
+     "value": "Warm 35C/60%RH"
+    },
+    "min": {
+     "label": "lowest result",
+     "value": "0.2"
+    },
+    "max": {
+     "label": "highest result",
+     "value": "0.8"
+    },
+    "n": {
+     "label": "number of time points",
+     "value": "4"
+    }
+   },
+   "required": [
+    "attribute",
+    "condition",
+    "min",
+    "max",
+    "n"
+   ],
+   "key": [
+    "Warm 35C/60%RH",
+    "Total impurities"
+   ]
+  }
+ ]
+}

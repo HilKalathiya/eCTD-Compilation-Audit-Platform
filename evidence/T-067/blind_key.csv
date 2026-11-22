@@ -1,0 +1,26 @@
+﻿row_id,task_id,set,truth,planted_change,reread_flags,original_paragraph
+R01,demo_Frozen-20C_Residual-solvents,"model, T-067",right,,,
+R02,demo_Frozen-20C_Friability,"model, T-067",right,,,
+R03,demo_Warm-35C-60-RH_Loss-on-drying,"model, T-067",right,,,
+R04,demo_Hot-45C-75-RH_Loss-on-drying,"model, T-067",wrong,lowest result 1.0 written as 0.7,"numbers in the text ['0.7', '1.6', '4', '4'] differ from the recount ['1.0', '1.6', '4', '4']","In illustrative demonstration data, Loss on drying at Hot 45C/75%RH ranged from 1.0 to 1.6 over 4 time points. In illustrative demonstration data, Loss on drying at Hot 45C/75%RH had none of its 4 results outside the limit."
+R05,demo_Hot-45C-75-RH_Friability,"model, T-067",right,,,
+R06,demo_Warm-35C-60-RH_Friability,"model, T-067",right,,,
+R07,demo_Warm-35C-60-RH_Residual-solvents,"model, T-067",right,,,
+R08,demo_Cool-15C_Total-impurities,"model, T-067",right,,,
+R09,demo_Hot-45C-75-RH_Disintegration-time,"model, T-067",right,,,
+R10,demo_Hot-45C-75-RH_Total-impurities,"model, T-067",right,,,
+R11,demo_Frozen-20C_Loss-on-drying,"model, T-067",right,,,
+R12,demo_Frozen-20C_Disintegration-time,"model, T-067",wrong,outside count 1 written as 2,"numbers in the text ['2', '4', '4', '7', '25'] differ from the recount ['1', '4', '4', '7', '25']","In illustrative demonstration data, Disintegration time at Frozen -20C ranged from 7 to 25 over 4 time points. In illustrative demonstration data, Disintegration time at Frozen -20C had 1 of its 4 results outside the limit."
+R13,demo_Cool-15C_Loss-on-drying,"model, T-067",right,,,
+R14,demo_Tropical-30C-80-RH_Loss-on-drying,"model, T-067",right,,,
+R15,demo_Cool-15C_Disintegration-time,"model, T-067",right,,,
+R16,demo_Tropical-30C-80-RH_Residual-solvents,"model, T-067",right,,,
+R17,demo_Hot-45C-75-RH_Residual-solvents,"model, T-067",right,,,
+R18,demo_Warm-35C-60-RH_Disintegration-time,"model, T-067",right,,,
+R19,demo_Cool-15C_Residual-solvents,"model, T-067",right,,,
+R20,demo_Warm-35C-60-RH_Total-impurities,"model, T-067",right,,,
+R21,demo_Tropical-30C-80-RH_Friability,"model, T-067",wrong,highest result 0.6 written as 0.9,"numbers in the text ['0.1', '0.9', '5', '5'] differ from the recount ['0.1', '0.6', '5', '5']","In illustrative demonstration data, Friability at Tropical 30C/80%RH ranged from 0.1 to 0.6 over 5 time points. In illustrative demonstration data, Friability at Tropical 30C/80%RH had none of its 5 results outside the limit."
+R22,demo_Tropical-30C-80-RH_Disintegration-time,"model, T-067",right,,,
+R23,demo_Tropical-30C-80-RH_Total-impurities,"model, T-067",right,,,
+R24,demo_Cool-15C_Friability,"model, T-067",right,,,
+R25,demo_Frozen-20C_Total-impurities,"model, T-067",right,,,

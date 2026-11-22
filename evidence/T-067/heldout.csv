@@ -1,0 +1,112 @@
+condition,month,attribute,value,unit,limit,source
+25C/60%RH,36,study_duration_demonstrated,36,months,,FDA ChemR 215341 p.5
+30C/75%RH,36,study_duration_demonstrated,36,months,,FDA ChemR 215341 p.5
+40C/75%RH,6,study_duration_demonstrated,6,months,,FDA ChemR 215341 p.5
+20-25C CRT,36,expiry_period_proposed,36,months,,FDA ChemR 215341 p.3
+15-30C excursion,0,excursion_permitted_low,15,C,,FDA ChemR 215341 p.3
+15-30C excursion,0,excursion_permitted_high,30,C,,FDA ChemR 215341 p.3
+Frozen -20C,0,Total impurities,0.7,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,3,Total impurities,0.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,6,Total impurities,0.7,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,12,Total impurities,0.3,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,0,Loss on drying,0.9,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Frozen -20C,3,Loss on drying,0.5,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Frozen -20C,6,Loss on drying,0.7,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Frozen -20C,12,Loss on drying,1.2,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Frozen -20C,0,Disintegration time,25,min,NMT 15,DEMO: synthetic held-out set T-067
+Frozen -20C,3,Disintegration time,8,min,NMT 15,DEMO: synthetic held-out set T-067
+Frozen -20C,6,Disintegration time,7,min,NMT 15,DEMO: synthetic held-out set T-067
+Frozen -20C,12,Disintegration time,10,min,NMT 15,DEMO: synthetic held-out set T-067
+Frozen -20C,0,Friability,1.7,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,3,Friability,1.9,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,6,Friability,0.4,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,12,Friability,1.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Frozen -20C,0,Residual solvents,233,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Frozen -20C,3,Residual solvents,131,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Frozen -20C,6,Residual solvents,272,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Frozen -20C,12,Residual solvents,337,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,0,Total impurities,0.8,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,1,Total impurities,0.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,3,Total impurities,0.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,6,Total impurities,0.8,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,0,Loss on drying,2.6,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,1,Loss on drying,1.4,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,3,Loss on drying,2.6,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,6,Loss on drying,1.4,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,0,Disintegration time,7,min,NMT 15,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,1,Disintegration time,11,min,NMT 15,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,3,Disintegration time,5,min,NMT 15,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,6,Disintegration time,10,min,NMT 15,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,0,Friability,0.8,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,1,Friability,0.3,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,3,Friability,2.0,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,6,Friability,0.1,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,0,Residual solvents,404,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,1,Residual solvents,375,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,3,Residual solvents,381,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Warm 35C/60%RH,6,Residual solvents,268,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Cool 15C,0,Total impurities,0.4,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,3,Total impurities,0.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,6,Total impurities,0.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,9,Total impurities,0.7,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,0,Loss on drying,1.1,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Cool 15C,3,Loss on drying,0.6,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Cool 15C,6,Loss on drying,0.9,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Cool 15C,9,Loss on drying,1.2,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Cool 15C,0,Disintegration time,10,min,NMT 15,DEMO: synthetic held-out set T-067
+Cool 15C,3,Disintegration time,7,min,NMT 15,DEMO: synthetic held-out set T-067
+Cool 15C,6,Disintegration time,4,min,NMT 15,DEMO: synthetic held-out set T-067
+Cool 15C,9,Disintegration time,6,min,NMT 15,DEMO: synthetic held-out set T-067
+Cool 15C,0,Friability,1.3,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,3,Friability,1.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,6,Friability,0.5,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,9,Friability,2.0,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Cool 15C,0,Residual solvents,579,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Cool 15C,3,Residual solvents,307,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Cool 15C,6,Residual solvents,677,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Cool 15C,9,Residual solvents,595,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,0,Total impurities,0.3,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,3,Total impurities,0.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,6,Total impurities,1.9,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,9,Total impurities,1.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,12,Total impurities,1.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,0,Loss on drying,1.6,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,3,Loss on drying,0.8,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,6,Loss on drying,0.7,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,9,Loss on drying,0.7,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,12,Loss on drying,1.2,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,0,Disintegration time,4,min,NMT 15,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,3,Disintegration time,11,min,NMT 15,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,6,Disintegration time,12,min,NMT 15,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,9,Disintegration time,9,min,NMT 15,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,12,Disintegration time,6,min,NMT 15,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,0,Friability,0.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,3,Friability,0.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,6,Friability,0.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,9,Friability,0.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,12,Friability,0.1,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,0,Residual solvents,106,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,3,Residual solvents,682,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,6,Residual solvents,101,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,9,Residual solvents,98,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Tropical 30C/80%RH,12,Residual solvents,683,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,0,Total impurities,0.6,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,1,Total impurities,0.4,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,2,Total impurities,1.3,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,3,Total impurities,1.9,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,0,Loss on drying,1.6,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,1,Loss on drying,1.5,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,2,Loss on drying,1.0,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,3,Loss on drying,1.5,%,NMT 2.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,0,Disintegration time,12,min,NMT 15,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,1,Disintegration time,24,min,NMT 15,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,2,Disintegration time,4,min,NMT 15,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,3,Disintegration time,23,min,NMT 15,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,0,Friability,0.1,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,1,Friability,0.1,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,2,Friability,0.3,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,3,Friability,0.2,%,NMT 1.0,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,0,Residual solvents,228,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,1,Residual solvents,210,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,2,Residual solvents,320,ppm,NMT 500,DEMO: synthetic held-out set T-067
+Hot 45C/75%RH,3,Residual solvents,109,ppm,NMT 500,DEMO: synthetic held-out set T-067

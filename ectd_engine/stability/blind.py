@@ -61,7 +61,10 @@ def wrong_min(text):
     m = _RANGE.search(text)
     if not m:
         return None
-    new = str(Decimal(m.group(1)) - _step(m.group(1)) * 3)
+    new_value = Decimal(m.group(1)) - _step(m.group(1)) * 3
+    if new_value < 0:
+        return None  # a negative result would give the planted row away
+    new = str(new_value)
     return text[:m.start(1)] + new + text[m.end(1):], "lowest result %s written as %s" % (m.group(1), new)
 
 
@@ -211,8 +214,22 @@ def main(argv=None):
     ap.add_argument("--tuning-run", default="evidence/T-064/direct")
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--fresh-csv", help="build the fresh T-066 sheet: held-out data made with seed 66 (code-drafted) + unused T-064 paragraphs")
-    ap.add_argument("--old-dir", default="evidence/T-065", help="the earlier sheet whose paragraphs must not be reused")
+    ap.add_argument("--old-dir", action="append", help="an earlier sheet folder whose paragraphs must not be reused (repeatable; default T-065)")
+    ap.add_argument("--model-run", help="with --fresh-csv: use ONLY the accepted paragraphs of this model run folder (T-067); no code-drafted or old ones")
     args = ap.parse_args(argv)
+    if args.fresh_csv and args.model_run:
+        pool = load_pool(args.model_run, args.fresh_csv, "model, T-067", True)
+        random.Random(67).shuffle(pool)  # so the planted ones are not simply the first in alphabet
+        exclude = set()
+        for d in args.old_dir or ["evidence/T-065"]:
+            exclude |= old_sheet_texts(d)
+        sheet, key = build_fresh(pool, exclude, seed=67)
+        out = Path(args.out_dir)
+        write(out / "blind.csv", sheet)
+        write(out / "blind_key.csv", key)
+        print("rows %d, planted %d, model-written %d" % (len(sheet), sum(k["truth"] == "wrong" for k in key),
+                                                        sum(k["set"].startswith("model") for k in key)))
+        return 0
     if args.fresh_csv:
         pool = load_code_pool(args.fresh_csv, "code-drafted, seed %d" % FRESH_SEED)
         pool += load_pool(args.tuning_run, F.DEFAULT_CSV, "model, T-064 unused", False)

@@ -11,7 +11,7 @@ COLUMNS = ["condition", "month", "attribute", "value", "unit", "limit", "source"
 PUBLIC_SOURCE = re.compile(r"^FDA ChemR 215341 p\.(\d+)$")
 DEMO_SOURCE = re.compile(r"^DEMO: redacted \(b\)\(4\) in ChemR p\.(\d+)$")
 # Held-out test data (T-065) is made up by code and never comes from the FDA review. It is only accepted when a caller asks for heldout=True.
-HELDOUT_SOURCE = re.compile(r"^DEMO: synthetic held-out set T-065$")
+HELDOUT_SOURCE = re.compile(r"^DEMO: synthetic held-out set T-06[57]$")  # T-065 and T-067 only; any other label is refused
 # The only things the FDA review says in public (shelf life, storage, how long each condition ran).
 # Any other attribute (assay, impurity, dissolution...) is hidden in the review, so it can only be DEMO.
 PUBLIC_ATTRIBUTES = {"study_duration_demonstrated", "expiry_period_proposed", "excursion_permitted_low", "excursion_permitted_high"}
