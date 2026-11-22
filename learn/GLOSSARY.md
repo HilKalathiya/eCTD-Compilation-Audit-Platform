@@ -171,3 +171,5 @@ allow-list = only the listed things pass; everything else is flagged
 position check = comparing each item to what is expected at that place in the document
 inventory = a checked list of what each file holds
 time point = one test date in a stability study (e.g. month 6)
+demo row = a made-up data row whose source says DEMO, never passed off as real
+redacted = blacked out by FDA because it is a trade secret

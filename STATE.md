@@ -1,6 +1,9 @@
 ﻿# STATE (newest first; Claude Code keeps this <= 40 lines; Hil re-uploads it to the Claude Project after each milestone)
 
-## 2026-11-23 — T-061 STOPPED at step 2 (stability data inventory)
+## 2026-11-22 — T-062 done (stability facts: 4 public rows + 60 DEMO rows)
+- ChemR 215341 (`evidence/T-062/extract.md`) gives only shelf life 36 months, storage 20-25C, studies of 36/36/6 months at 25C/60, 30C/75, 40C/75. All results/time points/limits are redacted (75 pages withheld, p.7). `data/stability/finerenone_stability.csv`: 4 public rows, 60 DEMO rows (rule in `learn/LEARN_T-062.md`). `ectd_engine/stability/facts.py` + `tests/test_stability_facts.py` (16 tests, planted errors caught).
+
+## 2026-11-22 — T-061 STOPPED at step 2 (stability data inventory)
 - `evidence/T-061/inventory.md`: Laboratory.csv has no stability columns; Kerendia SPL XMLs have 0 "stability" hits; ICH Q1A/Q1E/M4Q are guideline text only. The FDA Chemistry Review PDF (the one product-specific source) was NOT checked: reading `data/public/` was blocked. No code written.
 - Open: confirm whether the chem review holds real stability tables (D14 says none exist); else choose another public source or a labelled synthetic set.
 
