@@ -1,0 +1,115 @@
+{
+ "tasks": 10,
+ "accepted": 8,
+ "rejected": [
+  "m23_dev_05",
+  "m23_dev_10"
+ ],
+ "wrong_but_accepted": [],
+ "drafts": 55,
+ "units": 49,
+ "retries": 6,
+ "seconds": 268,
+ "results": [
+  {
+   "task_id": "m23_dev_01",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_02",
+   "accepted": true,
+   "reason": "",
+   "drafts": 5,
+   "units": 5,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_03",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 6,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_04",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_05",
+   "accepted": false,
+   "reason": "units rejected: result:25C/60%RH|Degradation product",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23_dev_06",
+   "accepted": true,
+   "reason": "",
+   "drafts": 5,
+   "units": 5,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_07",
+   "accepted": true,
+   "reason": "",
+   "drafts": 5,
+   "units": 5,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_08",
+   "accepted": true,
+   "reason": "",
+   "drafts": 5,
+   "units": 5,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_09",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23_dev_10",
+   "accepted": false,
+   "reason": "units rejected: result:25C/60%RH|Degradation product",
+   "drafts": 8,
+   "units": 5,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  }
+ ]
+}

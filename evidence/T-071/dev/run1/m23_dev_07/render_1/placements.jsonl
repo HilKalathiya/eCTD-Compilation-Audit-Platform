@@ -1,0 +1,18 @@
+{"id": "M23-SPEC-LEK-dissolution_av", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:dissolution_av", "offset": 16, "text": "75", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_o", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_o", "offset": 15, "text": "0.2", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_l", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_l", "offset": 15, "text": "0.1", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurities_total", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurities_total", "offset": 21, "text": "2.0", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-resodual_solvent", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:resodual_solvent", "offset": 21, "text": "0.1", "label": "specification limit"}
+{"id": "M23-P8|2-25C CRT|expiry_period_proposed|36", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 27, "text": "36", "label": "shelf"}
+{"id": "M23-P8|2-25C CRT|storage_low|36", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 52, "text": "2", "label": "st_low"}
+{"id": "M23-P8|2-25C CRT|storage_high|36", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 59, "text": "25", "label": "st_high"}
+{"id": "M23-P8|10-35C excursion|excursion_permitted_low|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 95, "text": "10", "label": "ex_low"}
+{"id": "M23-P8|10-35C excursion|excursion_permitted_high|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 103, "text": "35", "label": "ex_high"}
+{"id": "M23-P8|25C/60%RH|study_duration_demonstrated|18", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 140, "text": "18", "label": "long"}
+{"id": "M23-P8|40C/75%RH|study_duration_demonstrated|6", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 178, "text": "6", "label": "accel"}
+{"id": "M23-STAT|25C/60%RH|Assay|min", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 81, "text": "98.26", "label": "lowest stored result"}
+{"id": "M23-STAT|25C/60%RH|Assay|max", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 103, "text": "100.34", "label": "highest stored result"}
+{"id": "M23-STAT|30C/75%RH|Assay|min", "section": "2.3.P.8/30C/75%RH|Assay/results", "paragraph": "results", "offset": 84, "text": "98.24", "label": "lowest stored result"}
+{"id": "M23-STAT|30C/75%RH|Assay|max", "section": "2.3.P.8/30C/75%RH|Assay/results", "paragraph": "results", "offset": 106, "text": "100.80", "label": "highest stored result"}
+{"id": "M23-STAT|30C/75%RH|Degradation product|min", "section": "2.3.P.8/30C/75%RH|Degradation product/results", "paragraph": "results", "offset": 98, "text": "0.088", "label": "lowest stored result"}
+{"id": "M23-STAT|30C/75%RH|Degradation product|max", "section": "2.3.P.8/30C/75%RH|Degradation product/results", "paragraph": "results", "offset": 113, "text": "0.246", "label": "highest stored result"}

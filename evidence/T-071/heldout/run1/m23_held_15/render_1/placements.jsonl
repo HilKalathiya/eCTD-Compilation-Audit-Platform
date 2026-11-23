@@ -1,0 +1,16 @@
+{"id": "M23-SPEC-LEK-impurity_l", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_l", "offset": 15, "text": "0.5", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurities_total", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurities_total", "offset": 21, "text": "1.0", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-resodual_solvent", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:resodual_solvent", "offset": 21, "text": "0.3", "label": "specification limit"}
+{"id": "M23-P8|15-30C CRT|expiry_period_proposed|30", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 27, "text": "30", "label": "shelf"}
+{"id": "M23-P8|15-30C CRT|storage_low|30", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 52, "text": "15", "label": "st_low"}
+{"id": "M23-P8|15-30C CRT|storage_high|30", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 60, "text": "30", "label": "st_high"}
+{"id": "M23-P8|15-40C excursion|excursion_permitted_low|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 96, "text": "15", "label": "ex_low"}
+{"id": "M23-P8|15-40C excursion|excursion_permitted_high|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 104, "text": "40", "label": "ex_high"}
+{"id": "M23-P8|25C/60%RH|study_duration_demonstrated|36", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 141, "text": "36", "label": "long"}
+{"id": "M23-P8|40C/75%RH|study_duration_demonstrated|3", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 179, "text": "3", "label": "accel"}
+{"id": "M23-STAT|25C/60%RH|Assay|min", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 81, "text": "98.59", "label": "lowest stored result"}
+{"id": "M23-STAT|25C/60%RH|Assay|max", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 103, "text": "101.16", "label": "highest stored result"}
+{"id": "M23-STAT|30C/75%RH|Dissolution (15 min)|min", "section": "2.3.P.8/30C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 90, "text": "94.83", "label": "lowest stored result"}
+{"id": "M23-STAT|30C/75%RH|Dissolution (15 min)|max", "section": "2.3.P.8/30C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 110, "text": "97.17", "label": "highest stored result"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|min", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 89, "text": "91.65", "label": "lowest stored result"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|max", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 109, "text": "97.81", "label": "highest stored result"}

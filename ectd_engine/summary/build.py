@@ -132,9 +132,9 @@ def _section_html(sec, head):
     return "".join(f'<p data-section="{sec.name}">{H._inline(p.text, p.placements)}</p>' for p in sec.paragraphs)
 
 
-def build_html(sections):
+def build_html(sections, title=TITLE):
     """(html text, placement records, rejected list)."""
-    body, records, rejected = [f"<h1>{TITLE}</h1>"], [], []
+    body, records, rejected = [f"<h1>{title}</h1>"], [], []
     for kind, a, b in walk(sections):
         if kind == "part":
             body.append(f'<section data-part="{a}"><h2>{a} {b}</h2>')
@@ -146,15 +146,15 @@ def build_html(sections):
             rejected.append(a)
         else:
             body.append("</section>")
-    doc = (f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>{TITLE}</title></head><body>'
+    doc = (f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>{title}</title></head><body>'
            + "".join(body) + "</body></html>")
     return doc, records, rejected
 
 
-def build_docx(sections, path):
+def build_docx(sections, path, title=TITLE):
     """Write the Word file from the same walk. Returns nothing; verify_docx reopens the saved file."""
     doc = Document()
-    doc.add_heading(TITLE, level=1)
+    doc.add_heading(title, level=1)
     for kind, a, b in walk(sections):
         if kind == "part":
             doc.add_heading(f"{a} {b}", level=2)
@@ -198,13 +198,15 @@ def verify_docx(path, records):
     return problems + loose
 
 
-def write_run(out_dir, facts, docx=True):
-    """Build everything and save it in a NEW folder (an existing folder is refused). Returns the report dict."""
+def write_run(out_dir, facts, docx=True, sections=None, title=TITLE):
+    """Build everything and save it in a NEW folder (an existing folder is refused). Returns the report dict.
+
+    sections = ready-made sections (the model-written 2.3 of T-071); without it the sections are built from the facts as before."""
     out = Path(out_dir)
     if out.exists():
         raise FileExistsError(f"{out} already exists; use a new run folder (runs are never overwritten)")
-    sections = build_sections(facts)
-    doc, records, rejected = build_html(sections)
+    sections = build_sections(facts) if sections is None else sections
+    doc, records, rejected = build_html(sections, title)
     out.mkdir(parents=True)
     (out / "M23.html").write_text(doc, encoding="utf-8")
     with open(out / "placements.jsonl", "w", encoding="utf-8") as fh:
@@ -215,7 +217,7 @@ def write_run(out_dir, facts, docx=True):
               "uncovered": len(uncovered), "uncovered_list": uncovered, "rejected": [(r.task_id, r.reason) for r in rejected],
               "docx_problems": []}
     if docx:
-        build_docx(sections, out / "M23.docx")
+        build_docx(sections, out / "M23.docx", title)
         report["docx_problems"] = verify_docx(out / "M23.docx", records)
     lines = [f"numbers {report['numbers']}", f"placements {report['placements']}", f"data-src spans {report['data_src']}",
              f"uncovered digits {report['uncovered']}", f"rejected sections {len(rejected)}"]

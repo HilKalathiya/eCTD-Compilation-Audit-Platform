@@ -1,0 +1,22 @@
+{
+ "tasks": 1,
+ "accepted": 1,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 11,
+ "units": 11,
+ "retries": 0,
+ "seconds": 46,
+ "results": [
+  {
+   "task_id": "m23_real",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 11,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  }
+ ]
+}

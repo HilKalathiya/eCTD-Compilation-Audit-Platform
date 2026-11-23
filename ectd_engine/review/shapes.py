@@ -184,3 +184,67 @@ def classify(sentence, facts, quotes):
     if failed:
         return "unsupported", failed[0], failed[1]
     return "unrecognised", None, {}
+
+
+# ---- Module 2.3 (T-071): a SEPARATE closed set for the 2.3 writer; the P.5 / P.8.3 set above is not touched ------------------
+# Each form is fixed text with fields. {n} = one number, {u} = the unit written right after it, {test} {attr} {cond} {kind} = a word
+# from a short list the task supplies. A rendered sentence must match one form COMPLETELY; anything else is "unrecognised".
+M23_LABEL = "In illustrative demonstration data, "
+M23_UNIT_TEXT = ("% label claim", "% area", "% dissolved", "%")          # longest first
+M23_TEMPLATES = {
+    "shelf": "The proposed shelf life is {n} months when stored at {n}°C to {n}°C.",
+    "excursion": "Excursions are permitted from {n}°C to {n}°C.",
+    "study": "Stability was demonstrated for {n} months at long-term conditions and {n} months at accelerated conditions.",
+    "spec_intro": M23_LABEL + "the drug product specification lists these tests and acceptance criteria.",
+    "spec_row": "{test}: {kind} {n}{u}",
+    "result": M23_LABEL + "{attr} under {cond} conditions ranged from {n}{u} to {n}{u}.",
+}
+_FIELD = re.compile(r"\{(n|u|test|attr|cond|kind)\}")
+
+
+@lru_cache(maxsize=None)
+def _m23_regex(name, words):
+    """Compiled full-match regex of one form; words = ((field, (allowed words...)), ...). An empty list for a field matches nothing."""
+    allowed = dict(words)
+    out, pos, count = [], 0, {}
+    text = M23_TEMPLATES[name]
+    for m in _FIELD.finditer(text):
+        out.append(re.escape(text[pos:m.start()]))
+        f = m.group(1)
+        count[f] = count.get(f, 0) + 1
+        g = f"{f}{count[f]}"
+        if f == "n":
+            out.append(r"(?P<%s>\d+(?:\.\d+)?)" % g)
+        elif f == "u":
+            out.append(r"(?P<%s>%s)" % (g, "|".join(re.escape(u) for u in M23_UNIT_TEXT)))
+        else:
+            alts = sorted(allowed.get(f, ()), key=len, reverse=True)
+            out.append(r"(?P<%s>%s)" % (g, "|".join(re.escape(a) for a in alts) if alts else r"(?!)"))
+        pos = m.end()
+    out.append(re.escape(text[pos:]))
+    return re.compile("^" + "".join(out) + "$")
+
+
+def m23_classify(sentence, names, only=None):
+    """(form name, groups) when the rendered sentence matches one 2.3 form completely, else None. names = {"test": [...], "attr": [...], ...}."""
+    words = tuple(sorted((k, tuple(v)) for k, v in names.items()))
+    for name in (only or M23_TEMPLATES):
+        m = _m23_regex(name, words).match(sentence)
+        if m:
+            return name, m.groupdict()
+    return None
+
+
+def m23_vocabulary(task_words=()):
+    """Every word a 2.3 sentence may hold: the words of the fixed forms plus the words the task supplies. The ONLY allowlist for claim words."""
+    vocab = set(re.findall(r"[A-Za-z][A-Za-z-]*", _FIELD.sub(" ", " ".join(M23_TEMPLATES.values()))))
+    for w in task_words:
+        vocab.update(re.findall(r"[A-Za-z][A-Za-z-]*", w))
+    vocab.update(("NLT", "NMT"))
+    vocab.update(w for u in M23_UNIT_TEXT for w in re.findall(r"[A-Za-z]+", u))
+    return vocab
+
+
+def m23_unknown_words(text, vocab):
+    """Words of text that are not in the allowed vocabulary (empty list = no claim beyond the forms)."""
+    return sorted({w for w in re.findall(r"[A-Za-z][A-Za-z-]*", text) if w not in vocab})

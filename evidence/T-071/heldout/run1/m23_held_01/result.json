@@ -1,0 +1,29 @@
+{
+ "accepted": true,
+ "counts": {
+  "docx": {
+   "checked": 14,
+   "failed": 0,
+   "matched": 14,
+   "uncovered": 0
+  },
+  "html": {
+   "checked": 14,
+   "failed": 0,
+   "matched": 14,
+   "uncovered": 0
+  }
+ },
+ "drafts": {
+  "public": 1,
+  "result:30C/75%RH|Assay": 1,
+  "result:30C/75%RH|Degradation product": 1,
+  "spec": 1
+ },
+ "reason": "",
+ "render": "render_1",
+ "renders": 1,
+ "set": "heldout",
+ "synthetic": true,
+ "task_id": "m23_held_01"
+}

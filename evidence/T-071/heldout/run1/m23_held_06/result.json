@@ -1,0 +1,30 @@
+{
+ "accepted": true,
+ "counts": {
+  "docx": {
+   "checked": 18,
+   "failed": 0,
+   "matched": 18,
+   "uncovered": 0
+  },
+  "html": {
+   "checked": 18,
+   "failed": 0,
+   "matched": 18,
+   "uncovered": 0
+  }
+ },
+ "drafts": {
+  "public": 1,
+  "result:25C/60%RH|Dissolution (15 min)": 1,
+  "result:30C/75%RH|Degradation product": 1,
+  "result:40C/75%RH|Degradation product": 1,
+  "spec": 1
+ },
+ "reason": "",
+ "render": "render_1",
+ "renders": 1,
+ "set": "heldout",
+ "synthetic": true,
+ "task_id": "m23_held_06"
+}
