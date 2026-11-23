@@ -228,23 +228,38 @@ def check_units(units, placements, rows, p5, p8_dir, spans=None, fmt=""):
         nums = find_numbers(text)
         found += [(i, off, tx) for off, tx in nums]
         loose += [(i, d) for d in uncovered_digits(text, [(o, o + len(t)) for o, t in nums])]
+    # Pair each number with a placement by its value (first unused one at or after the last pair, so equal values keep their
+    # order). A number no placement carries is "unplaced" and takes nothing, so it cannot shift the pairing of the others.
+    pairs, used, j = [], set(), 0
+    for _, off, tx in found:
+        idx = next((q for q in list(range(j, len(placements))) + list(range(0, j))
+                    if q not in used and placements[q]["text"] == tx), None)
+        if idx is not None:
+            used.add(idx)
+            j = idx + 1
+        pairs.append(idx)
+    span_left = {}
+    for s in (spans or []):
+        span_left[s] = span_left.get(s, 0) + 1
     out = []
     for k, (i, off, tx) in enumerate(found):
         kind, text = units[i]
         row = {"format": fmt, "number": tx, "fact_id": "", "v23": tx, "v32_graph": "", "v32_saved": "", "unit": "",
                "verdict": "FAIL", "reason": ""}
         why = []
-        pl = placements[k] if k < len(placements) else None
+        pl = placements[pairs[k]] if pairs[k] is not None else None
         if pl is None:
+            row["fact_id"] = "unplaced:" + tx
             why.append("number has no placement")
         else:
             fid = row["fact_id"] = pl["id"]
-            if pl["text"] != tx:
-                why.append(f"placement says {pl['text']!r}")
             if pl["offset"] != off:
                 why.append("placement offset differs")
-            if spans is not None and (k >= len(spans) or spans[k] != (fid, tx)):
-                why.append("html span differs from the placement")
+            if spans is not None:
+                if span_left.get((fid, tx), 0) > 0:
+                    span_left[(fid, tx)] -= 1
+                else:
+                    why.append("html span differs from the placement")
             g = _graph_fact(rows, fid)
             if g is None:
                 why.append("fact id not in the graph")
@@ -278,7 +293,9 @@ def check_units(units, placements, rows, p5, p8_dir, spans=None, fmt=""):
         row["reason"] = "; ".join(why)
         row["verdict"] = "FAIL" if why else "MATCH"
         out.append(row)
-    for k in range(len(found), len(placements)):
+    for k in range(len(placements)):
+        if k in used:
+            continue
         out.append({"format": fmt, "number": "", "fact_id": placements[k]["id"], "v23": "", "v32_graph": "", "v32_saved": "", "unit": "",
                     "verdict": "FAIL", "reason": "placement without a number in the file"})
     for i, d in loose:

@@ -5,10 +5,9 @@ its wording agrees with the facts computed in code, and it has the right shape.
 """
 import re
 
+from ectd_engine.references.registry import ALLOWED_TOKENS  # noqa: F401  (closed list; no shape grants an exemption)
+
 PLACEHOLDER = re.compile(r"\[\[([a-z_]+)\]\]")
-# Regulatory identifiers that legitimately contain digits.
-ALLOWED_TOKENS = re.compile(
-    r"\bICH\s+Q\d+[A-Z]?(\(R\d+\))?|\bQ\d+[A-Z]?(\(R\d+\))?\b|\b\d+\.\d+\.[A-Z]\.\d+(\.\d+)*\b")
 NUMBER_WORDS = re.compile(
     r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|"
     r"seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|"

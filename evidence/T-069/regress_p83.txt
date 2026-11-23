@@ -1,0 +1,6 @@
+T-064/direct: drafts 10, same verdict and problems 10, different 0
+T-064/skill: drafts 10, same verdict and problems 10, different 0
+T-065/direct/run1: drafts 20, same verdict and problems 20, different 0
+T-065/retry/run1: drafts 7, same verdict and problems 7, different 0
+T-065/skill/run1: drafts 20, same verdict and problems 20, different 0
+TOTAL drafts 67, same 67, different 0
