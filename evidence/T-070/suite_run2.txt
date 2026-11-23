@@ -1,0 +1,70 @@
+== BRAIN STATUS 2026-11-23 15:34 ==
+TASK: T-070 started 15:06 allowed=['tools/watch.py', 'tests/test_watch*.py', 'tests/conftest*.py', 'tests/__init__.py', 'ectd_engine/summary/crosscheck.py', 'tests/test_crosscheck*.py', 'ectd_engine/validator/spec.py', 'learn/LEARN_T-070.md', 'evidence/T-070/**', 'STATE.md']
+GIT: branch main | 0 commit(s) since task start
+  4914624 T-069: closed citation list (no number hides in a guideline name)
+  d02902f T-068: Module 2.3 from the graph + 2.3-vs-3.2 cross-check
+  0971361 T-067: Hil blind labels
+  04b6502 T-067: fresh model-written blind sheet
+  8ea6587 T-066: blind scorer + fresh P.8.3 sheet
+CHANGED since task start: 43 file(s)
+  M ectd_engine/summary/crosscheck.py
+  M ectd_engine/validator/spec.py
+  ? evidence/T-070/after_git_env_run1.txt
+  ? evidence/T-070/before_envreal_1.txt
+  ? evidence/T-070/before_envreal_2.txt
+  ? evidence/T-070/before_envreal_3.txt
+  ? evidence/T-070/before_git_env_run1.txt
+  ? evidence/T-070/before_live_task_run1.txt
+  ? evidence/T-070/before_parallel_1.txt
+  ? evidence/T-070/before_parallel_2.txt
+  ? evidence/T-070/before_parallel_3.txt
+  ? evidence/T-070/before_parallel_4.txt
+  ... +31 more
+ACTIVITY (last 10 of 2937):
+  15:16:13 Bash grep -n "def load_env" -A14 ectd_engine/graph/facts_graph.py; grep -rn "def load_env" ectd_engine | head 
+  15:16:16 Bash sed -n 1,30p ectd_engine/db/config.py
+  15:16:21 Edit ectd_engine/summary/crosscheck.py
+  15:16:37 Write tests/test_crosscheck_exit.py
+  15:16:58 Bash python -m unittest tests.test_crosscheck_exit tests.test_crosscheck tests.test_exempt_tokens 2>&1 | tail 
+  15:17:02 Bash ls evidence/T-070 | grep -c "^stress_[0-9]"; ls evidence/T-070/stress_done.flag 2>&1 | tail -1
+  15:25:23 Bash until [ -f evidence/T-070/stress_done.flag ]; do sleep 15; done; for f in evidence/T-070/stress_[0-9]*.tx
+  15:25:31 Write learn/LEARN_T-070.md
+  15:33:54 Bash python tools/watch.py status --tests --timeout 1200 > evidence/T-070/suite_run1.txt 2>&1; grep -n "Ran .*
+  15:34:04 Bash sed -n 30,46p evidence/T-070/suite_run1.txt | cut -c1-160
+FLAGS: 30
+  ! changed with no logged action: evidence/T-070/before_envreal_1.txt
+  ! changed with no logged action: evidence/T-070/before_envreal_2.txt
+  ! changed with no logged action: evidence/T-070/before_envreal_3.txt
+  ! changed with no logged action: evidence/T-070/before_parallel_1.txt
+  ! changed with no logged action: evidence/T-070/before_parallel_2.txt
+  ! changed with no logged action: evidence/T-070/before_parallel_3.txt
+  ! changed with no logged action: evidence/T-070/before_parallel_4.txt
+  ! changed with no logged action: evidence/T-070/before_parallel_5.txt
+  ! changed with no logged action: evidence/T-070/before_parallel_6.txt
+  ! changed with no logged action: evidence/T-070/stress_01.txt
+  ! changed with no logged action: evidence/T-070/stress_02.txt
+  ! changed with no logged action: evidence/T-070/stress_03.txt
+EXIT 0  (500.7s)  $ "C:\Users\asus\AppData\Local\Programs\Python\Python312\python.exe" -m unittest discover tests
+    q12 HIT  Q1E  What significance level is used in the tests for batch similarity of s
+    q13 HIT  Q1E  How is the shelf life estimated from where the confidence limit meets 
+    q14 HIT  Q1E  What approach applies when the data show little or no change over time
+    q15 HIT  Q1E  What role do accelerated condition results play in deciding on extrapo
+    q16 HIT  Q3B_R2  Above what level must a degradation product be reported?
+    q17 HIT  Q3B_R2  Above what level must the structure of a degradation product be identi
+    q18 HIT  Q3B_R2  Above what level must the biological safety of a degradation product b
+    q19 HIT  Q3B_R2  Do impurities that come from excipients need to be reported?
+    q20 HIT  Q3B_R2  Is there a flowchart for identifying and qualifying a degradation prod
+    q21 HIT  Q3B_R2  Which kinds of impurities, such as contaminants, are outside the scope
+    q22 MISS Q6A  Which tests apply to all new drug substances and drug products?
+    q23 HIT  Q6A  When should a specification control the solid-state form of a drug sub
+    q24 HIT  Q6A  What is a specification made of?
+    q25 HIT  Q6A  When can a test be done only on selected batches instead of every batc
+    q26 HIT  Q6A  When can process data replace end-product sterility testing?
+    q27 HIT  Q6A  Which release test applies to solid oral dosage forms to check drug re
+    q28 HIT  Q6A  What extra tests apply to drug substances with a single enantiomer?
+    q29 MISS M4Q_R1  In which CTD section does drug substance stability go?
+    q30 HIT  M4Q_R1  Where are the excipients of the drug product controlled in the CTD?
+  recall@5 fts=0.700 vector=0.900 hybrid=0.867 rerank=0.933 (30 questions); rerank 0.01 s per query
+  Ran 821 tests in 484.782s
+  OK
+STATE.md head: 2026-11-23 ? T-069 done (C3.9 hardening: a number can no longer hide i | **Hole:** the old `ALLOWED_TOKENS` regex skipped any `Qn`, `ICH Qn` or | **Callers of the shared skip (all now use the registry):** `render/num

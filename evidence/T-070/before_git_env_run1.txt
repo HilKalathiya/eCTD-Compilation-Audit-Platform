@@ -1,0 +1,157 @@
+...............FF.F.FF.FFF....FFFF..FFFFF.FF..
+======================================================================
+FAIL: test_cat_only_is_not_write_evidence (tests.test_watch.WatchFlagTests.test_cat_only_is_not_write_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 235, in test_cat_only_is_not_write_evidence
+    self.assertIn("changed with no logged action: ectd_engine/facts/a.py", self.status())
+AssertionError: 'changed with no logged action: ectd_engine/facts/a.py' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 2 file(s)\n  M ectd_engine/facts/a.py\n  M tests/test_a.py\nACTIVITY (last 10 of 2):\n  15:12:30 Edit tests/test_a.py\n  15:12:30 Bash cat ectd_engine/facts/a.py\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'ectd_engine/facts/a.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the ne\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_clean_change_raises_no_flag (tests.test_watch.WatchFlagTests.test_clean_change_raises_no_flag)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 348, in test_clean_change_raises_no_flag
+    self.assertIn("FLAGS: none", self.status())
+AssertionError: 'FLAGS: none' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 2 file(s)\n  M ectd_engine/facts/a.py\n  M tests/test_a.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'ectd_engine/facts/a.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the ne\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_copy_item_source_only_is_not_write_evidence (tests.test_watch.WatchFlagTests.test_copy_item_source_only_is_not_write_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 297, in test_copy_item_source_only_is_not_write_evidence
+    self.assertIn("no logged action: ectd_engine/facts/a.py", self.status())
+AssertionError: 'no logged action: ectd_engine/facts/a.py' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 2 file(s)\n  M ectd_engine/facts/a.py\n  M tests/test_a.py\nACTIVITY (last 10 of 2):\n  15:12:34 Edit tests/test_a.py\n  15:12:34 PowerShell Copy-Item ectd_engine/facts/a.py C:/tmp/backup.py\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'ectd_engine/facts/a.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the ne\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_engine_changed_without_test (tests.test_watch.WatchFlagTests.test_engine_changed_without_test)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 136, in test_engine_changed_without_test
+    self.assertIn("NO test file changed", self.status())
+AssertionError: 'NO test file changed' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  M ectd_engine/facts/a.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'ectd_engine/facts/a.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the ne\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_failing_test_names_are_printed (tests.test_watch.WatchFlagTests.test_failing_test_names_are_printed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 206, in test_failing_test_names_are_printed
+    self.assertIn("FAILING TEST: test_bad_assert", out)
+AssertionError: 'FAILING TEST: test_bad_assert' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? tests/test_names.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_float_used (tests.test_watch.WatchFlagTests.test_float_used)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 132, in test_float_used
+    self.assertIn("float() used", self.status())
+AssertionError: 'float() used' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? ectd_engine/facts/b.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_frozen_path_touched (tests.test_watch.WatchFlagTests.test_frozen_path_touched)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 116, in test_frozen_path_touched
+    self.assertIn("FROZEN path touched", self.status())
+AssertionError: 'FROZEN path touched' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  M writer_test/README.md\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'writer_test/README.md', LF will be replaced by CRLF the nex\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_large_file (tests.test_watch.WatchFlagTests.test_large_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 163, in test_large_file
+    self.assertIn("large file (>1 MB)", self.status())
+AssertionError: 'large file (>1 MB)' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? ectd_engine/big.bin\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_outside_task_scope (tests.test_watch.WatchFlagTests.test_outside_task_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 140, in test_outside_task_scope
+    self.assertIn("outside task scope", self.status())
+AssertionError: 'outside task scope' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? docs/x.md\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_possible_secret (tests.test_watch.WatchFlagTests.test_possible_secret)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 144, in test_possible_secret
+    self.assertIn("possible secret", self.status())
+AssertionError: 'possible secret' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? ectd_engine/facts/c.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_requirements_changed (tests.test_watch.WatchFlagTests.test_requirements_changed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 158, in test_requirements_changed
+    self.assertIn("requirements.txt changed", self.status())
+AssertionError: 'requirements.txt changed' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? requirements.txt\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_round_used (tests.test_watch.WatchFlagTests.test_round_used)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 128, in test_round_used
+    self.assertIn("round() used", self.status())
+AssertionError: 'round() used' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? ectd_engine/facts/b.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_skip_added (tests.test_watch.WatchFlagTests.test_skip_added)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 124, in test_skip_added
+    self.assertIn("skip/x" + "fail ADDED", self.status())
+AssertionError: 'skip/xfail ADDED' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  M tests/test_a.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_tests_removed (tests.test_watch.WatchFlagTests.test_tests_removed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 120, in test_tests_removed
+    self.assertIn("TESTS REMOVED", self.status())
+AssertionError: 'TESTS REMOVED' not found in "== BRAIN STATUS 2026-11-23 15:12 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  M tests/test_a.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_tests_summary_line_shown_when_output_follows_it (tests.test_watch.WatchFlagTests.test_tests_summary_line_shown_when_output_follows_it)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 197, in test_tests_summary_line_shown_when_output_follows_it
+    self.assertRegex(out, r"Ran \d+ tests? in ")
+AssertionError: Regex didn't match: 'Ran \\d+ tests? in ' not found in "== BRAIN STATUS 2026-11-23 15:13 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? tests/test_long.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_tests_timeout_is_not_ok (tests.test_watch.WatchFlagTests.test_tests_timeout_is_not_ok)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 188, in test_tests_timeout_is_not_ok
+    self.assertIn("TIMEOUT - raise --timeout", out)
+AssertionError: 'TIMEOUT - raise --timeout' not found in "== BRAIN STATUS 2026-11-23 15:13 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 1 file(s)\n  ? tests/test_slow.py\nACTIVITY: no log yet (hooks not installed? see handoff/claude_settings.template.json)\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the next time Git touches it\nfatal: unable to read 622bcb4f6a768d2f5b3340ce8b3cb63fa5eafd16\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_unlogged_writer_flagged (tests.test_watch.WatchFlagTests.test_unlogged_writer_flagged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 175, in test_unlogged_writer_flagged
+    self.assertIn("changed with no logged action: ectd_engine/facts/a.py", self.status())
+AssertionError: 'changed with no logged action: ectd_engine/facts/a.py' not found in "== BRAIN STATUS 2026-11-23 15:13 ==\nTASK: X started 15:12 allowed=['ectd_engine/**', 'tests/**']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 2 file(s)\n  M ectd_engine/facts/a.py\n  M tests/test_a.py\nACTIVITY (last 10 of 1):\n  15:13:03 Edit tests/test_a.py\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of 'ectd_engine/facts/a.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/test_a.py', LF will be replaced by CRLF the ne\nFLAGS: 1\n  ! git failed - result unknown\n"
+
+======================================================================
+FAIL: test_variable_for_another_file_is_not_write_evidence (tests.test_watch.WatchFlagTests.test_variable_for_another_file_is_not_write_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 324, in test_variable_for_another_file_is_not_write_evidence
+    self.assertIn("no logged action: ectd_engine/facts/a.py", self.status())
+AssertionError: 'no logged action: ectd_engine/facts/a.py' not found in '== BRAIN STATUS 2026-11-23 15:13 ==\nTASK: X started 15:12 allowed=[\'ectd_engine/**\', \'tests/**\']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 2 file(s)\n  M ectd_engine/facts/a.py\n  M tests/test_a.py\nACTIVITY (last 10 of 2):\n  15:13:05 Edit tests/test_a.py\n  15:13:05 Bash python -c "X=\'ectd_engine/facts/a.py\'; Y=\'other.txt\'; open(Y,\'w\').write(\'x\')"\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of \'ectd_engine/facts/a.py\', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of \'tests/test_a.py\', LF will be replaced by CRLF the ne\nFLAGS: 1\n  ! git failed - result unknown\n'
+
+======================================================================
+FAIL: test_variable_path_only_read_is_not_write_evidence (tests.test_watch.WatchFlagTests.test_variable_path_only_read_is_not_write_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\E\Project\tests\test_watch.py", line 319, in test_variable_path_only_read_is_not_write_evidence
+    self.assertIn("no logged action: ectd_engine/facts/a.py", self.status())
+AssertionError: 'no logged action: ectd_engine/facts/a.py' not found in '== BRAIN STATUS 2026-11-23 15:13 ==\nTASK: X started 15:12 allowed=[\'ectd_engine/**\', \'tests/**\']\nGIT: branch master | 0 commit(s) since task start\n  8131dca base\nCHANGED since task start: 2 file(s)\n  M ectd_engine/facts/a.py\n  M tests/test_a.py\nACTIVITY (last 10 of 2):\n  15:13:06 Edit tests/test_a.py\n  15:13:06 Bash python -c "X=\'ectd_engine/facts/a.py\'; print(open(X).read()); open(X,\'r\').close()"\nGIT ERROR: git diff --unified=0 8131dca94c52598f36ea591abfa7b1b660a1c5f8 -> exit 128: warning: in the working copy of \'ectd_engine/facts/a.py\', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of \'tests/test_a.py\', LF will be replaced by CRLF the ne\nFLAGS: 1\n  ! git failed - result unknown\n'
+
+----------------------------------------------------------------------
+Ran 46 tests in 50.550s
+
+FAILED (failures=19)

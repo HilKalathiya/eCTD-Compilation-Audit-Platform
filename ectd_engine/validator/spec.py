@@ -195,7 +195,8 @@ def verify_render(rendered, task):
         if text.count(quote) != 1:
             problems.append("the Q3B quote is missing, repeated or not exact")
         text = text.replace(quote, " ")
-    # The shared token filter below ignores every "Q<digit>" name, so check the guideline name and the basis wording here.
+    # The shared token filter below ignores only the exact citations listed in references/registry.py (whole-token match, no shape),
+    # so check the guideline name and the basis wording here.
     phrase = ("ICH Q3B(R2) qualification threshold" if task["basis"] == Q3B
               else "declared by the author for this demonstration, with no public source")
     if phrase not in text:

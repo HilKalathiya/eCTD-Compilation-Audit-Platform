@@ -19,12 +19,20 @@ KEY = "api_" + "key"
 TEST_A = "import unittest\n\n\nclass A(unittest.TestCase):\n    def test_one(self):\n        self.assertTrue(True)\n"
 
 
+def clean_env(**extra):
+    """T-070: the environment for every child process a test starts. Inherited GIT_* variables (GIT_INDEX_FILE, GIT_DIR, ...)
+    would point git in a temp repo at ANOTHER repo's index, so all of them are dropped; then `extra` is added on top."""
+    env = {k: v for k, v in os.environ.items() if not k.upper().startswith("GIT_")}
+    env.update(extra)
+    return env
+
+
 def git_retry(root, *args, run=subprocess.run, tries=3, pause=0.3):
     """Run one git command in root; if it fails, wait a moment and try again (up to `tries` times), then raise with git's message."""
     last = None
     for attempt in range(tries):
         try:  # Windows sometimes refuses to start the program at all (WinError 5): that counts as a failed try too
-            last = run([*GIT, "-C", str(root), *args], capture_output=True, text=True)
+            last = run([*GIT, "-C", str(root), *args], capture_output=True, text=True, env=clean_env())
         except OSError as e:
             last = subprocess.CompletedProcess(args, -1, "", f"{type(e).__name__}: {e}")
         if last.returncode == 0:
@@ -67,7 +75,7 @@ class WatchFlagTests(unittest.TestCase):
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(text, encoding="utf-8", newline="\n")
         build_repo(root)
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(root))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(root))
         run_retry([sys.executable, str(WATCH), "task", "X", "ectd_engine/**", "tests/**"], env=env, capture_output=True,
                   text=True, timeout=60)
 
@@ -94,9 +102,10 @@ class WatchFlagTests(unittest.TestCase):
         git_retry(self.root, *args)
 
     def watch(self, *args):
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(self.root))
         r = run_retry([sys.executable, str(WATCH), *args], env=env, capture_output=True,
                       text=True, timeout=60)
+        self.last_run = f"watch {' '.join(args)}: exit={r.returncode} stderr={(r.stderr or '').strip()[:300]!r}"
         return r.stdout
 
     def status(self):
@@ -104,6 +113,8 @@ class WatchFlagTests(unittest.TestCase):
         # but the watcher says 0, that was a git hiccup: ask again (never changes what the test asserts).
         for attempt in range(3):
             out = self.watch("status")
+            if not out.strip():  # T-070: a silent child is a broken run; say why instead of asserting on ''
+                self.fail("watch status printed nothing: " + getattr(self, "last_run", "?"))
             dirty = [ln for ln in git_retry(self.root, "status", "--porcelain").stdout.splitlines()
                      if ".brain" not in ln]
             if not dirty or "CHANGED since task start: 0 file(s)" not in out:
@@ -216,12 +227,13 @@ class WatchFlagTests(unittest.TestCase):
                 "FAIL: test_y (mod.C.test_y)\n----------------------------------------------------------------------\n"
                 "AssertionError: 1 != 2\n\n"
                 "----------------------------------------------------------------------\nRan 2 tests in 0.1s\n\nFAILED\n")
-        sys.path.insert(0, str(WATCH.parent))
-        try:
-            import watch
-            got = watch.failing_tests(fake)
-        finally:
-            sys.path.remove(str(WATCH.parent))
+        import importlib.util
+        from unittest import mock
+        with mock.patch.dict(os.environ, clean_env(CLAUDE_PROJECT_DIR=str(self.root)), clear=True):  # never resolve the real project
+            spec = importlib.util.spec_from_file_location("watch_failing_tests", WATCH)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+        got = mod.failing_tests(fake)
         self.assertEqual(got, [("test_x (mod.C.test_x)", "KeyError: 'k'"), ("test_y (mod.C.test_y)", "AssertionError: 1 != 2")])
 
     def dirty_a(self):
@@ -238,7 +250,7 @@ class WatchFlagTests(unittest.TestCase):
         self.dirty_a()
         # ~3000 chars, many lines, and non-ASCII text (a cp1252 stdin used to drop such lines silently)
         cmd = "cat > ectd_engine/facts/a.py <<'E'\n# — ⏎\n" + "x = 1\n" * 500 + "E"
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(self.root))
         hook = json.dumps({"hook_event_name": "PreToolUse", "tool_name": "Bash", "tool_input": {"command": cmd}},
                           ensure_ascii=False)  # real UTF-8 bytes, as Claude Code sends them
         subprocess.run([sys.executable, str(WATCH), "log"], input=hook.encode("utf-8"), env=env, timeout=60)
@@ -247,7 +259,7 @@ class WatchFlagTests(unittest.TestCase):
         self.assertNotIn("no logged action", self.status())
 
     def run_hook(self, raw):
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(self.root))
         r = subprocess.run([sys.executable, str(WATCH), "log"], input=raw, env=env, timeout=60, capture_output=True)
         self.hook_result = f"hook exit={r.returncode} stderr={r.stderr.decode('utf-8', 'replace').strip()!r}"  # shown if a test fails
         p = self.root / ".brain" / "activity.log"
@@ -280,7 +292,7 @@ class WatchFlagTests(unittest.TestCase):
         # planted: `.brain` is a plain file, so the log can never be written -> the hook must say so on stderr
         shutil.rmtree(self.root / ".brain", ignore_errors=True)
         (self.root / ".brain").write_text("not a folder", encoding="utf-8")
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(self.root))
         r = subprocess.run([sys.executable, str(WATCH), "log"], input=b"{this is not json", env=env, timeout=60,
                            capture_output=True)
         self.assertEqual(r.returncode, 0)
@@ -297,7 +309,7 @@ class WatchFlagTests(unittest.TestCase):
         self.assertIn("no logged action: ectd_engine/facts/a.py", self.status())
 
     def test_run_timeout_exit_code_is_124(self):
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(self.root))
         r = subprocess.run([sys.executable, str(WATCH), "run", f'"{sys.executable}" -c "import time; time.sleep(8)"',
                             "--timeout", "1"], env=env, capture_output=True, text=True, timeout=60)
         self.assertEqual(r.returncode, 124)
@@ -422,8 +434,12 @@ class GitFailureTests(unittest.TestCase):
     def load(self):
         """Load a fresh copy of tools/watch.py that looks at self.root, with no waiting between git tries."""
         import importlib.util
-        os.environ["CLAUDE_PROJECT_DIR"] = str(self.root)
-        self.addCleanup(os.environ.pop, "CLAUDE_PROJECT_DIR", None)
+        from unittest import mock
+        # T-070: patch the process environment for this test only, and put the ORIGINAL back afterwards (the old code
+        # deleted CLAUDE_PROJECT_DIR for good). Inherited GIT_* variables are dropped so git looks at self.root only.
+        patcher = mock.patch.dict(os.environ, clean_env(CLAUDE_PROJECT_DIR=str(self.root)), clear=True)
+        patcher.start()
+        self.addCleanup(patcher.stop)
         spec = importlib.util.spec_from_file_location("watch_under_test", WATCH)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
@@ -495,7 +511,7 @@ class GitFailureTests(unittest.TestCase):
         self.assertIn("M f.txt", text)
 
     def test_real_repo_clean_is_unchanged_behaviour(self):
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.root))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(self.root))
         r = run_retry([sys.executable, str(WATCH), "status"], env=env, capture_output=True, text=True, timeout=60)
         self.assertEqual(r.returncode, 0)
         self.assertIn("CHANGED since HEAD: 0 file(s)", r.stdout)
@@ -506,7 +522,7 @@ class GitFailureTests(unittest.TestCase):
         empty = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, empty, True)
         git_retry(empty, "init", "-q")
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(empty))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(empty))
         r = run_retry([sys.executable, str(WATCH), "status"], env=env, capture_output=True, text=True, timeout=60)
         self.assertEqual(r.returncode, 0)
         self.assertIn("no commits yet", r.stdout)
@@ -515,7 +531,7 @@ class GitFailureTests(unittest.TestCase):
     def test_folder_that_is_not_a_repo_is_not_an_error(self):
         plain = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, plain, True)
-        env = dict(os.environ, CLAUDE_PROJECT_DIR=str(plain), GIT_CEILING_DIRECTORIES=str(plain.parent))
+        env = clean_env(CLAUDE_PROJECT_DIR=str(plain), GIT_CEILING_DIRECTORIES=str(plain.parent))
         r = run_retry([sys.executable, str(WATCH), "status"], env=env, capture_output=True, text=True, timeout=60)
         self.assertEqual(r.returncode, 0)
         self.assertIn("no repository yet", r.stdout)

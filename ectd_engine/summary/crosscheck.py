@@ -348,12 +348,39 @@ def write_outputs(result, out_dir):
     (d / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def _fail_with_reason(reason, out_dir):
+    """Exit code 2 = the check could not run (not a mismatch). The reason goes to stderr AND to a new crosscheck_error*.txt (never overwritten)."""
+    print("crosscheck could not run: " + reason, file=sys.stderr)
+    try:
+        d = Path(out_dir)
+        d.mkdir(parents=True, exist_ok=True)
+        target, n = d / "crosscheck_error.txt", 1
+        while target.exists():
+            n += 1
+            target = d / f"crosscheck_error_{n}.txt"
+        target.write_text("crosscheck could not run (exit 2, not a mismatch)\n" + reason + "\n", encoding="utf-8")
+        print(f"reason also written to {target}", file=sys.stderr)
+    except Exception as e:  # even the error file failed: stderr above already carries the reason
+        print(f"(could not write crosscheck_error.txt: {type(e).__name__}: {e})", file=sys.stderr)
+    return 2
+
+
 def main(argv=None):
+    """0 = every number matched, 1 = at least one mismatch, 2 = the check could not run (reason printed and written)."""
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("run_dir")
     ap.add_argument("--snapshot", help="graph rows saved earlier (a json file); without it Neo4j is read now and the rows are saved")
+    ap.add_argument("--out", help="folder for crosscheck.csv, summary.md and any crosscheck_error.txt (default: the run folder)")
     args = ap.parse_args(argv)
+    try:
+        return _run_main(args)
+    except Exception as e:
+        return _fail_with_reason(f"{type(e).__name__}: {e}", args.out or args.run_dir)
+
+
+def _run_main(args):
     d = Path(args.run_dir)
+    out_dir = Path(args.out) if args.out else d
     if args.snapshot:
         rows = json.loads(Path(args.snapshot).read_text(encoding="utf-8"))
     else:
@@ -364,10 +391,12 @@ def main(argv=None):
                 rows = read_graph(s)
         finally:
             driver.close()
-        (d / "graph_snapshot.json").write_text(json.dumps(rows, indent=1, ensure_ascii=False, sort_keys=True), encoding="utf-8")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        (out_dir / "graph_snapshot.json").write_text(json.dumps(rows, indent=1, ensure_ascii=False, sort_keys=True), encoding="utf-8")
     result = run(d, rows)
-    write_outputs(result, d)
-    print((d / "summary.md").read_text(encoding="utf-8"))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    write_outputs(result, out_dir)
+    print((out_dir / "summary.md").read_text(encoding="utf-8"))
     return 0 if result["passed"] else 1
 
 
