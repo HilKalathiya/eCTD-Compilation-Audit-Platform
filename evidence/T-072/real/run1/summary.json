@@ -1,0 +1,29 @@
+{
+ "tasks": 1,
+ "accepted": 1,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 11,
+ "units": 11,
+ "retries": 0,
+ "copy": {
+  "units": 11,
+  "whole": 0,
+  "sentences": 27,
+  "sentences_copied": 1,
+  "skeleton_sentences_copied": 1
+ },
+ "seconds": 54,
+ "results": [
+  {
+   "task_id": "m23b_real",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 11,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  }
+ ]
+}

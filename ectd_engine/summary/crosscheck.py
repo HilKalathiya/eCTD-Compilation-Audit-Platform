@@ -28,9 +28,11 @@ LABEL = "In illustrative demonstration data, "
 NUM = r"\d+(?:\.\d+)?"
 # What may follow a number for each graph unit (this is a separate copy of the table on purpose).
 UNIT_AFTER = {"months": " months", "C": "°C", "%": "%", "% label claim": "% label claim", "% area": "% area",
-              "% dissolved": "% dissolved"}
+              "% dissolved": "% dissolved", "min": " min"}
 COND_WORD = {"25C/60%RH": "long-term", "30C/75%RH": "intermediate", "40C/75%RH": "accelerated"}
-ATTR_SHOWN = {"Assay": "Assay", "Degradation product": "Degradation product", "Dissolution (15 min)": "Dissolution"}
+# How each attribute may be written in the text, as a regex (the dissolution time point is optional so the T-068 text still passes;
+# when it is there it is a number of its own, checked as the "timepoint" fact).
+ATTR_RX = {"Assay": "Assay", "Degradation product": "Degradation product", "Dissolution (15 min)": rf"Dissolution(?: \(\d+ min\))?"}
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
 _READ = ("MATCH (f) WHERE (f:StabFact OR f:SpecFact) AND f.fact_id STARTS WITH $prefix RETURN properties(f) AS p")
@@ -134,6 +136,9 @@ def _graph_fact(rows, fid):
             return None
         grp = [r for r in rows.values() if r.get("family") == "stability" and r.get("kind") == "demo"
                and r["condition"] == cond and r["attribute"] == attr]
+        if grp and which == "timepoint":           # the dissolution time point is written inside the attribute name, e.g. "Dissolution (15 min)"
+            m = re.search(r"\((\d+) min\)", attr)
+            return (m.group(1), "min", {"kind": "demo", "stat": (cond, attr, which)}) if m else None
         if not grp or which not in ("min", "max"):
             return None
         pick = (min if which == "min" else max)(grp, key=lambda r: Decimal(r["value_text"]))
@@ -165,6 +170,9 @@ def _saved32(fid, meta, p5, p8_dir):
     if "stat" in meta:
         cond, attr, which = meta["stat"]
         f = p8_dir / f"demo_{_slug(cond)}_{_slug(attr)}.md"
+        if which == "timepoint":
+            m = re.search(rf"\(({NUM}) min\)", f.read_text(encoding="utf-8")) if f.exists() else None
+            return m.group(1) if m else None
         m = re.search(rf"ranged from ({NUM}) to ({NUM}) over", f.read_text(encoding="utf-8")) if f.exists() else None
         return m.group(1 if which == "min" else 2) if m else None
     if fid.startswith(PREFIX + "SPEC-LEK-"):
@@ -195,28 +203,42 @@ def _saved32(fid, meta, p5, p8_dir):
 def _context(fid, meta, unit):
     """(regex, group name): the sentence (or table row) this fact must sit in, and which group is the number. None if unknown."""
     after = re.escape(UNIT_AFTER.get(unit, "?"))
-    deg = "°C"
+    deg, n = "°C", NUM
     if "stat" in meta:
         cond, attr, which = meta["stat"]
-        if cond not in COND_WORD or attr not in ATTR_SHOWN:
+        if cond not in COND_WORD or attr not in ATTR_RX:
             return None
-        rx = (rf"^(?:{re.escape(LABEL)})?{re.escape(ATTR_SHOWN[attr])} under {COND_WORD[cond]} conditions ranged from "
-              rf"(?P<min>{NUM}){after} to (?P<max>{NUM}){after}\.$")
-        return re.compile(rx), which
+        a, c, lab = ATTR_RX[attr], COND_WORD[cond], re.escape(LABEL)
+        if which == "timepoint":
+            return [re.compile(rf"{a.split('(?:')[0]} \((?P<n>{n}) min\)")], "n"
+        # three allowed wordings of the range sentence (T-072); every one ends the whole text (\Z) and has the numbers in named places
+        rng = [rf"^(?:{lab})?{a} under {c} conditions ranged from (?P<min>{n}){after} to (?P<max>{n}){after}\.\Z",
+               rf"^(?:{lab})?[Uu]nder {c} conditions, {a} ranged from (?P<min>{n}){after} to (?P<max>{n}){after}\.\Z",
+               rf"^(?:{lab})?{a} under {c} conditions was between (?P<min>{n}){after} and (?P<max>{n}){after}\.\Z"]
+        return [re.compile(x) for x in rng], which
     if fid.startswith(PREFIX + "SPEC-LEK-"):
-        return re.compile(rf"^{re.escape(meta['test'])}\t{re.escape(meta['limit_kind'])} (?P<n>{NUM}){after}$"), "n"
+        return [re.compile(rf"^{re.escape(meta['test'])}\t{re.escape(meta['limit_kind'])} (?P<n>{n}){after}\Z")], "n"
     attr, cond = meta["attribute"], meta["condition"]
-    rx = {
-        "expiry_period_proposed": rf"The proposed shelf life is (?P<n>{NUM}) months when stored at",
-        "storage_low": rf"when stored at (?P<n>{NUM}){deg} to {NUM}{deg}",
-        "storage_high": rf"when stored at {NUM}{deg} to (?P<n>{NUM}){deg}",
-        "excursion_permitted_low": rf"Excursions are permitted from (?P<n>{NUM}){deg} to {NUM}{deg}",
-        "excursion_permitted_high": rf"Excursions are permitted from {NUM}{deg} to (?P<n>{NUM}){deg}",
+    # each fact is checked on its own small piece of the sentence (a wrong unit elsewhere must not hide behind it); two or three wordings (T-072)
+    forms = {
+        "expiry_period_proposed": [rf"The proposed shelf life is (?P<n>{n}) months when stored at",
+                                   rf"When stored at {n}{deg} to {n}{deg}, the proposed shelf life is (?P<n>{n}) months"],
+        "storage_low": [rf"[Ww]hen stored at (?P<n>{n}){deg} to {n}{deg}"],
+        "storage_high": [rf"[Ww]hen stored at {n}{deg} to (?P<n>{n}){deg}"],
+        "excursion_permitted_low": [rf"Excursions are permitted from (?P<n>{n}){deg} to {n}{deg}",
+                                    rf"Temperature excursions between (?P<n>{n}){deg} and {n}{deg} are permitted",
+                                    rf"Excursions between (?P<n>{n}){deg} and {n}{deg} are permitted",
+                                    rf"Permitted temperature excursions range from (?P<n>{n}){deg} to {n}{deg}"],
+        "excursion_permitted_high": [rf"Excursions are permitted from {n}{deg} to (?P<n>{n}){deg}",
+                                     rf"Temperature excursions between {n}{deg} and (?P<n>{n}){deg} are permitted",
+                                     rf"Excursions between {n}{deg} and (?P<n>{n}){deg} are permitted",
+                                     rf"Permitted temperature excursions range from {n}{deg} to (?P<n>{n}){deg}"],
     }.get(attr)
     if attr == "study_duration_demonstrated":
-        rx = {"25C/60%RH": rf"demonstrated for (?P<n>{NUM}) months at long-term conditions",
-              "40C/75%RH": rf"conditions and (?P<n>{NUM}) months at accelerated conditions"}.get(cond)
-    return (re.compile(rx), "n") if rx else None
+        forms = {"25C/60%RH": [rf"demonstrated for (?P<n>{n}) months at long-term conditions", rf"Stability data cover (?P<n>{n}) months at long-term conditions",
+                               rf"Long-term stability was demonstrated for (?P<n>{n}) months,"],
+                 "40C/75%RH": [rf"conditions and (?P<n>{n}) months at accelerated conditions", rf"accelerated stability for (?P<n>{n}) months"]}.get(cond)
+    return ([re.compile(x) for x in forms], "n") if forms else None
 
 
 # ---------- checking one saved file ----------
@@ -280,7 +302,7 @@ def check_units(units, placements, rows, p5, p8_dir, spans=None, fmt=""):
                 elif not text[off + len(tx):].startswith(want):
                     why.append(f"unit after the number is not {want.strip()!r}")
                 ctx = _context(fid, meta, unit)
-                m = ctx[0].search(text) if ctx else None
+                m = next((hit for hit in (rx.search(text) for rx in ctx[0]) if hit), None) if ctx else None   # the first allowed wording that fits
                 if m is None:
                     why.append("sentence is not about this fact")
                 elif m.start(ctx[1]) != off:

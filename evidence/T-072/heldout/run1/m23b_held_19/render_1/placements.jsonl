@@ -1,0 +1,24 @@
+{"id": "M23-SPEC-LEK-dissolution_av", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:dissolution_av", "offset": 16, "text": "75", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_o", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_o", "offset": 15, "text": "0.1", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_l", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_l", "offset": 15, "text": "0.2", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurities_total", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurities_total", "offset": 21, "text": "1.5", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-resodual_solvent", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:resodual_solvent", "offset": 21, "text": "0.5", "label": "specification limit"}
+{"id": "M23-P8|20-25C CRT|expiry_period_proposed|24", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 27, "text": "24", "label": "shelf"}
+{"id": "M23-P8|20-25C CRT|storage_low|24", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 52, "text": "20", "label": "st_low"}
+{"id": "M23-P8|20-25C CRT|storage_high|24", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 60, "text": "25", "label": "st_high"}
+{"id": "M23-P8|0-30C excursion|excursion_permitted_low|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 110, "text": "0", "label": "ex_low"}
+{"id": "M23-P8|0-30C excursion|excursion_permitted_high|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 117, "text": "30", "label": "ex_high"}
+{"id": "M23-P8|25C/60%RH|study_duration_demonstrated|36", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 154, "text": "36", "label": "long"}
+{"id": "M23-P8|40C/75%RH|study_duration_demonstrated|6", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 192, "text": "6", "label": "accel"}
+{"id": "M23-STAT|25C/60%RH|Assay|min", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 81, "text": "99.15", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Assay|max", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 103, "text": "100.49", "label": "high"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 77, "text": "15", "label": "tp"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|min", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 97, "text": "78.50", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|max", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 117, "text": "95.30", "label": "high"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 49, "text": "15", "label": "tp"}
+{"id": "M23-STAT|40C/75%RH|Assay|min", "section": "2.3.P.8/40C/75%RH|Assay/results", "paragraph": "results", "offset": 83, "text": "98.21", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Assay|max", "section": "2.3.P.8/40C/75%RH|Assay/results", "paragraph": "results", "offset": 105, "text": "100.25", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 79, "text": "15", "label": "tp"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|min", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 99, "text": "90.36", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|max", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 119, "text": "95.87", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 52, "text": "15", "label": "tp"}

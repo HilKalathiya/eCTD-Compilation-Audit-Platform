@@ -222,7 +222,7 @@ def _m23_regex(name, words):
             out.append(r"(?P<%s>%s)" % (g, "|".join(re.escape(a) for a in alts) if alts else r"(?!)"))
         pos = m.end()
     out.append(re.escape(text[pos:]))
-    return re.compile("^" + "".join(out) + "$")
+    return re.compile("^" + "".join(out) + r"\Z")      # \Z, not $: "$" would also accept a trailing newline
 
 
 def m23_classify(sentence, names, only=None):
@@ -248,3 +248,85 @@ def m23_vocabulary(task_words=()):
 def m23_unknown_words(text, vocab):
     """Words of text that are not in the allowed vocabulary (empty list = no claim beyond the forms)."""
     return sorted({w for w in re.findall(r"[A-Za-z][A-Za-z-]*", text) if w not in vocab})
+
+
+# ---- Module 2.3, second set (T-072): several allowed wordings per sentence kind --------------------------------------------------------
+# Still a closed list and a full match (\Z). Fields: {s} = one rendered slot (number + its unit), {test} {kind} {attr} {cond} = words the task
+# supplies. Each wording names the slots it holds, in order ("attr" stands for the dissolution time point slot when the attribute has one).
+# needs = a fact the sentence depends on: "zero" = allowed only when the graph says NO result is outside the limit, "some" = only when
+# at least one is.
+M23B_SHAPES = {
+    "shelf": [("shelf_a", "The proposed shelf life is {s} when stored at {s} to {s}.", ("shelf", "st_low", "st_high"), None),
+              ("shelf_b", "When stored at {s} to {s}, the proposed shelf life is {s}.", ("st_low", "st_high", "shelf"), None)],
+    "excursion": [("exc_a", "Excursions are permitted from {s} to {s}.", ("ex_low", "ex_high"), None),
+                  ("exc_b", "Temperature excursions between {s} and {s} are permitted.", ("ex_low", "ex_high"), None),
+                  ("exc_c", "Excursions between {s} and {s} are permitted.", ("ex_low", "ex_high"), None),
+                  ("exc_d", "Permitted temperature excursions range from {s} to {s}.", ("ex_low", "ex_high"), None)],
+    "study": [("study_a", "Stability was demonstrated for {s} at long-term conditions and {s} at accelerated conditions.", ("long", "accel"), None),
+              ("study_b", "Stability data cover {s} at long-term conditions and {s} at accelerated conditions.", ("long", "accel"), None),
+              ("study_c", "Long-term stability was demonstrated for {s}, and accelerated stability for {s}.", ("long", "accel"), None)],
+    "spec_intro": [("intro_a", M23_LABEL + "the drug product specification lists these tests and acceptance criteria.", (), None),
+                   ("intro_b", M23_LABEL + "the drug product specification below lists the tests and their acceptance criteria.", (), None)],
+    "spec_row": [("row_a", "{test}: {kind} {s}", ("limit",), None), ("row_b", "{test} {kind} {s}", ("limit",), None)],
+    "range": [("range_a", M23_LABEL + "{attr} under {cond} conditions ranged from {s} to {s}.", ("attr", "low", "high"), None),
+              ("range_b", M23_LABEL + "under {cond} conditions, {attr} ranged from {s} to {s}.", ("attr", "low", "high"), None),
+              ("range_c", M23_LABEL + "{attr} under {cond} conditions was between {s} and {s}.", ("attr", "low", "high"), None)],
+    "claim": [("claim_a", M23_LABEL + "{attr} under {cond} conditions had no results outside the limit.", ("attr",), "zero"),
+              ("claim_b", M23_LABEL + "no {attr} result under {cond} conditions was outside the limit.", ("attr",), "zero"),
+              ("claim_c", M23_LABEL + "{attr} under {cond} conditions was within the specification limits.", ("attr",), "zero"),
+              ("claim_d", M23_LABEL + "{attr} under {cond} conditions had results outside the limit.", ("attr",), "some")],
+}
+_FIELD_B = re.compile(r"\{(s|test|attr|cond|kind)\}")
+_SLOT_TEXT = r"\d+(?:\.\d+)?(?:% label claim|% area|% dissolved|%| months|°C| min)"
+
+
+@lru_cache(maxsize=None)
+def _m23b_regex(kind, shape, words):
+    allowed = dict(words)
+    template = next(t for n, t, _, _ in M23B_SHAPES[kind] if n == shape)
+    out, pos = [], 0
+    for m in _FIELD_B.finditer(template):
+        out.append(re.escape(template[pos:m.start()]))
+        f = m.group(1)
+        if f == "s":
+            out.append(_SLOT_TEXT)
+        else:
+            alts = sorted(allowed.get(f, ()), key=len, reverse=True)
+            out.append("(?:%s)" % ("|".join(re.escape(a) for a in alts) if alts else r"(?!)"))
+        pos = m.end()
+    out.append(re.escape(template[pos:]))
+    return re.compile("^" + "".join(out) + r"\Z")
+
+
+def m23b_classify(sentence, names, kinds=None):
+    """(kind, shape name, needs, slots) when the rendered sentence matches one wording completely, else None.
+    names = {"test": [...], "kind": [...], "attr": [...], "cond": [...]} = the only words the fields may hold."""
+    words = tuple(sorted((k, tuple(v)) for k, v in names.items()))
+    for kind in (kinds or M23B_SHAPES):
+        for name, _, slots, needs in M23B_SHAPES[kind]:
+            if _m23b_regex(kind, name, words).match(sentence):
+                return kind, name, needs, slots
+    return None
+
+
+def m23b_slots(slots, has_timepoint):
+    """The placeholder names a wording holds, in order: the 'attr' mark becomes the time point slot [tp] (or nothing)."""
+    out = []
+    for s in slots:
+        if s != "attr":
+            out.append(s)
+        elif has_timepoint:
+            out.append("tp")
+    return out
+
+
+def m23b_vocabulary(task_words=()):
+    """Every word the second set may hold: the words of the fixed wordings, the units, and the words the task supplies."""
+    texts = [t for shapes in M23B_SHAPES.values() for _, t, _, _ in shapes]
+    vocab = set(re.findall(r"[A-Za-z][A-Za-z-]*", _FIELD_B.sub(" ", " ".join(texts))))
+    for w in task_words:
+        vocab.update(re.findall(r"[A-Za-z][A-Za-z-]*", w))
+    vocab.update(("NLT", "NMT"))
+    vocab.update(w for u in M23_UNIT_TEXT for w in re.findall(r"[A-Za-z]+", u))
+    vocab.update(("min", "months", "C"))               # the other units a slot can end with: " months", "°C", " min"
+    return vocab

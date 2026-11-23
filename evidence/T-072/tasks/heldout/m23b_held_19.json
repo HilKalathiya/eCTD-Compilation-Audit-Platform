@@ -1,0 +1,111 @@
+{
+ "extrapolation": null,
+ "graph_file": "m23b_held_19.graph.json",
+ "note": "SYNTHETIC test case (invented numbers, not Kerendia).",
+ "public": {
+  "accel": {
+   "fact_id": "M23-P8|40C/75%RH|study_duration_demonstrated|6",
+   "label": "months of stability demonstrated at accelerated conditions"
+  },
+  "ex_high": {
+   "fact_id": "M23-P8|0-30C excursion|excursion_permitted_high|0",
+   "label": "highest permitted excursion temperature"
+  },
+  "ex_low": {
+   "fact_id": "M23-P8|0-30C excursion|excursion_permitted_low|0",
+   "label": "lowest permitted excursion temperature"
+  },
+  "long": {
+   "fact_id": "M23-P8|25C/60%RH|study_duration_demonstrated|36",
+   "label": "months of stability demonstrated at long-term conditions"
+  },
+  "shelf": {
+   "fact_id": "M23-P8|20-25C CRT|expiry_period_proposed|24",
+   "label": "proposed shelf life in months"
+  },
+  "st_high": {
+   "fact_id": "M23-P8|20-25C CRT|storage_high|24",
+   "label": "highest storage temperature"
+  },
+  "st_low": {
+   "fact_id": "M23-P8|20-25C CRT|storage_low|24",
+   "label": "lowest storage temperature"
+  }
+ },
+ "results": [
+  {
+   "attr_base": "Assay",
+   "attribute": "Assay",
+   "cond_word": "long-term",
+   "condition": "25C/60%RH",
+   "stat": {
+    "max": "M23-STAT|25C/60%RH|Assay|max",
+    "min": "M23-STAT|25C/60%RH|Assay|min"
+   }
+  },
+  {
+   "attr_base": "Dissolution",
+   "attribute": "Dissolution (15 min)",
+   "cond_word": "long-term",
+   "condition": "25C/60%RH",
+   "stat": {
+    "max": "M23-STAT|25C/60%RH|Dissolution (15 min)|max",
+    "min": "M23-STAT|25C/60%RH|Dissolution (15 min)|min",
+    "timepoint": "M23-STAT|25C/60%RH|Dissolution (15 min)|timepoint"
+   }
+  },
+  {
+   "attr_base": "Assay",
+   "attribute": "Assay",
+   "cond_word": "accelerated",
+   "condition": "40C/75%RH",
+   "stat": {
+    "max": "M23-STAT|40C/75%RH|Assay|max",
+    "min": "M23-STAT|40C/75%RH|Assay|min"
+   }
+  },
+  {
+   "attr_base": "Dissolution",
+   "attribute": "Dissolution (15 min)",
+   "cond_word": "accelerated",
+   "condition": "40C/75%RH",
+   "stat": {
+    "max": "M23-STAT|40C/75%RH|Dissolution (15 min)|max",
+    "min": "M23-STAT|40C/75%RH|Dissolution (15 min)|min",
+    "timepoint": "M23-STAT|40C/75%RH|Dissolution (15 min)|timepoint"
+   }
+  }
+ ],
+ "set": "heldout",
+ "spec": [
+  {
+   "attribute": "dissolution_av",
+   "fact_id": "M23-SPEC-LEK-dissolution_av",
+   "slot": "spec_dissolution_av"
+  },
+  {
+   "attribute": "impurity_o",
+   "fact_id": "M23-SPEC-LEK-impurity_o",
+   "slot": "spec_impurity_o"
+  },
+  {
+   "attribute": "impurity_l",
+   "fact_id": "M23-SPEC-LEK-impurity_l",
+   "slot": "spec_impurity_l"
+  },
+  {
+   "attribute": "impurities_total",
+   "fact_id": "M23-SPEC-LEK-impurities_total",
+   "slot": "spec_impurities_total"
+  },
+  {
+   "attribute": "resodual_solvent",
+   "fact_id": "M23-SPEC-LEK-resodual_solvent",
+   "slot": "spec_resodual_solvent"
+  }
+ ],
+ "synthetic": true,
+ "task_id": "m23b_held_19",
+ "title": "Quality overall summary, drug product (synthetic test case)",
+ "version": "v2"
+}

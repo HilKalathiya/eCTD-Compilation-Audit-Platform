@@ -1,0 +1,17 @@
+{
+ "accepted": false,
+ "drafts": {
+  "public": 4,
+  "result:30C/75%RH|Assay": 4,
+  "result:30C/75%RH|Dissolution (15 min)": 1,
+  "result:40C/75%RH|Degradation product": 1,
+  "spec": 1
+ },
+ "graph": "SYNTHETIC",
+ "reason": "units rejected: public",
+ "render": "",
+ "renders": 0,
+ "set": "dev",
+ "synthetic": true,
+ "task_id": "m23b_dev_10"
+}

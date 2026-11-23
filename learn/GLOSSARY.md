@@ -185,3 +185,8 @@ planted error = a mistake added on purpose to prove a check can catch it
 blind sheet = a list to judge where the correct answers are hidden in a separate key
 verdict = your right/wrong answer for one row of a blind sheet
 refuse = stop with a message instead of guessing
+copy rate = how many accepted drafts are word-for-word the same as text that was already in the prompt (high = the model copied, not wrote)
+held-out = test cases never used while tuning, and fixed (with hashes) before any tuning starts
+cross-fact gate = a check that ties a sentence to a stored fact, e.g. "no result outside the limit" is allowed only when the stored count is zero
+graph source = the numbers in the document are read from the graph database when it is built, not typed in the task file
+wrong-but-accepted = a draft that passed every gate but still shows a wrong number (the number to keep at zero)

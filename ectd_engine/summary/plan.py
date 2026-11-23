@@ -5,7 +5,7 @@ TITLE = "Quality overall summary, drug product"   # no digits on purpose: every 
 
 # How a unit is written after its number. A unit that is not listed here stops the build (nothing is guessed).
 UNIT_TEXT = {"months": " months", "C": "°C", "%": "%", "% label claim": "% label claim", "% area": "% area",
-             "% dissolved": "% dissolved"}
+             "% dissolved": "% dissolved", "min": " min"}   # "min" = the dissolution time point (T-072)
 
 LONG, INTER, ACCEL = "25C/60%RH", "30C/75%RH", "40C/75%RH"
 # Condition names hold digits, so the text uses a word for them; the number itself is never typed.

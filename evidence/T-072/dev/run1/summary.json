@@ -1,0 +1,130 @@
+{
+ "tasks": 10,
+ "accepted": 0,
+ "rejected": [
+  "m23b_dev_01",
+  "m23b_dev_02",
+  "m23b_dev_03",
+  "m23b_dev_04",
+  "m23b_dev_05",
+  "m23b_dev_06",
+  "m23b_dev_07",
+  "m23b_dev_08",
+  "m23b_dev_09",
+  "m23b_dev_10"
+ ],
+ "wrong_but_accepted": [],
+ "drafts": 91,
+ "units": 53,
+ "retries": 38,
+ "copy": {
+  "units": 43,
+  "whole": 0,
+  "sentences": 117,
+  "sentences_copied": 13,
+  "skeleton_sentences_copied": 13
+ },
+ "seconds": 487,
+ "results": [
+  {
+   "task_id": "m23b_dev_01",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_02",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_03",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 8,
+   "units": 5,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_04",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_05",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 7,
+   "units": 4,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_06",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 7,
+   "units": 4,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_07",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 14,
+   "units": 6,
+   "retries": 8,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_08",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_09",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 8,
+   "units": 5,
+   "retries": 3,
+   "renders": 0,
+   "compare_ok": null
+  },
+  {
+   "task_id": "m23b_dev_10",
+   "accepted": false,
+   "reason": "units rejected: public",
+   "drafts": 11,
+   "units": 5,
+   "retries": 6,
+   "renders": 0,
+   "compare_ok": null
+  }
+ ]
+}

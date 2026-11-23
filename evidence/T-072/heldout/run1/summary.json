@@ -1,0 +1,219 @@
+{
+ "tasks": 20,
+ "accepted": 20,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 117,
+ "units": 100,
+ "retries": 17,
+ "copy": {
+  "units": 100,
+  "whole": 0,
+  "sentences": 279,
+  "sentences_copied": 27,
+  "skeleton_sentences_copied": 27
+ },
+ "seconds": 610,
+ "results": [
+  {
+   "task_id": "m23b_held_01",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 6,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_02",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 6,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_03",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_04",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_05",
+   "accepted": true,
+   "reason": "",
+   "drafts": 8,
+   "units": 5,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_06",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_07",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_08",
+   "accepted": true,
+   "reason": "",
+   "drafts": 5,
+   "units": 5,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_09",
+   "accepted": true,
+   "reason": "",
+   "drafts": 7,
+   "units": 4,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_10",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 6,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_11",
+   "accepted": true,
+   "reason": "",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_12",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 5,
+   "retries": 1,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_13",
+   "accepted": true,
+   "reason": "",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_14",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_15",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 5,
+   "retries": 1,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_16",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 6,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_17",
+   "accepted": true,
+   "reason": "",
+   "drafts": 7,
+   "units": 4,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_18",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 6,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_19",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 6,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  },
+  {
+   "task_id": "m23b_held_20",
+   "accepted": true,
+   "reason": "",
+   "drafts": 4,
+   "units": 4,
+   "retries": 0,
+   "renders": 1,
+   "compare_ok": true
+  }
+ ]
+}
