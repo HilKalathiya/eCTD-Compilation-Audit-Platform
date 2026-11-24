@@ -1,0 +1,1 @@
+The proposed shelf life is 24 months when stored at 5°C to 25°C. Excursions are permitted from 5°C to 30°C. Stability was demonstrated for 36 months at long-term conditions and 3 months at accelerated conditions.

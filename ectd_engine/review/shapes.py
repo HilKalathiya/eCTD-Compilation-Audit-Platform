@@ -388,3 +388,51 @@ def m23c_vocabulary(task_words=()):
     vocab.update(w for u in M23_UNIT_TEXT for w in re.findall(r"[A-Za-z]+", u))
     vocab.update(("min", "months", "C"))
     return vocab
+
+
+# ---- Module 2.3, fourth set (T-074): the writer is a TEMPLATE FILLER ---------------------------------------------------------------
+# The model picks one of these sentence patterns and fills slot names; code writes every value. Same as M23C_SHAPES except that the 'study' kind is
+# trimmed to 4 patterns (study_c, "Long-term stability was demonstrated for {s}, and accelerated stability for {s}.", is dropped: it was the one
+# 'demonstrated' pattern with an unusual word order). The patterns are shown to the model in the prompt (a menu), so nothing here is "wording freedom".
+M23D_SHAPES = dict(M23C_SHAPES)
+M23D_SHAPES["study"] = [s for s in M23C_SHAPES["study"] if s[0] != "study_c"]
+
+
+@lru_cache(maxsize=None)
+def _m23d_regex(kind, shape, words):
+    allowed = dict(words)
+    template = next(t for n, t, _, _ in M23D_SHAPES[kind] if n == shape)
+    out, pos = [], 0
+    for m in _FIELD_B.finditer(template):
+        out.append(re.escape(template[pos:m.start()]))
+        f = m.group(1)
+        if f == "s":
+            out.append(_SLOT_TEXT)
+        else:
+            alts = sorted(allowed.get(f, ()), key=len, reverse=True)
+            out.append("(?:%s)" % ("|".join(re.escape(a) for a in alts) if alts else r"(?!)"))
+        pos = m.end()
+    out.append(re.escape(template[pos:]))
+    return re.compile("^" + "".join(out) + r"\Z")
+
+
+def m23d_classify(sentence, names, kinds=None):
+    """(kind, shape name, needs, slots) when the rendered sentence matches one pattern of M23D_SHAPES completely, else None."""
+    words = tuple(sorted((k, tuple(v)) for k, v in names.items()))
+    for kind in (kinds or M23D_SHAPES):
+        for name, _, slots, needs in M23D_SHAPES[kind]:
+            if _m23d_regex(kind, name, words).match(sentence):
+                return kind, name, needs, slots
+    return None
+
+
+def m23d_vocabulary(task_words=()):
+    """Every word the fourth set may hold: the words of its patterns, the units, and the words the task supplies."""
+    texts = [t for shapes in M23D_SHAPES.values() for _, t, _, _ in shapes]
+    vocab = set(re.findall(r"[A-Za-z][A-Za-z-]*", _FIELD_B.sub(" ", " ".join(texts))))
+    for w in task_words:
+        vocab.update(re.findall(r"[A-Za-z][A-Za-z-]*", w))
+    vocab.update(("NLT", "NMT"))
+    vocab.update(w for u in M23_UNIT_TEXT for w in re.findall(r"[A-Za-z]+", u))
+    vocab.update(("min", "months", "C"))
+    return vocab

@@ -74,7 +74,8 @@ class IdsOnly(unittest.TestCase):
         for line in lines:
             digest, name = line.split("  ")
             self.assertEqual(hashlib.sha256((TASKS / name).read_bytes()).hexdigest(), digest, name)
-        state = (ROOT / "STATE.md").read_text(encoding="utf-8")
+        # T-074 moved the T-071..T-073 history, text unchanged, to evidence/T-074/history.md; the hashes are searched in both files
+        state = (ROOT / "STATE.md").read_text(encoding="utf-8") + (ROOT / "evidence" / "T-074" / "history.md").read_text(encoding="utf-8")
         for line in lines:
             if line.split("  ")[1].startswith("heldout/"):
                 self.assertIn(line.split("  ")[0], state, line)

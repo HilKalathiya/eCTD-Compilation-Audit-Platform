@@ -1,0 +1,23 @@
+{"id": "M23-SPEC-LEK-dissolution_av", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:dissolution_av", "offset": 16, "text": "70", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_o", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_o", "offset": 15, "text": "0.3", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_l", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_l", "offset": 15, "text": "0.2", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurities_total", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurities_total", "offset": 21, "text": "1.0", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-resodual_solvent", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:resodual_solvent", "offset": 21, "text": "0.5", "label": "specification limit"}
+{"id": "M23-P8|10-35C excursion|excursion_permitted_low|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 31, "text": "10", "label": "ex_low"}
+{"id": "M23-P8|10-35C excursion|excursion_permitted_high|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 40, "text": "35", "label": "ex_high"}
+{"id": "M23-P8|25C/60%RH|study_duration_demonstrated|18", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 83, "text": "18", "label": "long"}
+{"id": "M23-P8|40C/75%RH|study_duration_demonstrated|3", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 121, "text": "3", "label": "accel"}
+{"id": "M23-STAT|25C/60%RH|Degradation product|min", "section": "2.3.P.8/25C/60%RH|Degradation product/results", "paragraph": "results", "offset": 95, "text": "0.065", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Degradation product|max", "section": "2.3.P.8/25C/60%RH|Degradation product/results", "paragraph": "results", "offset": 110, "text": "0.175", "label": "high"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 49, "text": "15", "label": "tp"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|min", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 96, "text": "91.46", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|max", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 116, "text": "96.32", "label": "high"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 52, "text": "15", "label": "tp"}
+{"id": "M23-STAT|30C/75%RH|Degradation product|min", "section": "2.3.P.8/30C/75%RH|Degradation product/results", "paragraph": "results", "offset": 98, "text": "0.472", "label": "low"}
+{"id": "M23-STAT|30C/75%RH|Degradation product|max", "section": "2.3.P.8/30C/75%RH|Degradation product/results", "paragraph": "results", "offset": 113, "text": "1.020", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Degradation product|min", "section": "2.3.P.8/40C/75%RH|Degradation product/results", "paragraph": "results", "offset": 97, "text": "0.277", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Degradation product|max", "section": "2.3.P.8/40C/75%RH|Degradation product/results", "paragraph": "results", "offset": 112, "text": "0.771", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 49, "text": "15", "label": "tp"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|min", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 98, "text": "92.11", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|max", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 118, "text": "94.28", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 52, "text": "15", "label": "tp"}

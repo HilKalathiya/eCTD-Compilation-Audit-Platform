@@ -1,0 +1,243 @@
+{
+ "tasks": 10,
+ "accepted": 10,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 124,
+ "units": 69,
+ "retries": 55,
+ "copy": {
+  "units": 69,
+  "whole": 0,
+  "sentences": 185,
+  "sentences_copied": 32,
+  "blanked_sentences_copied": 185
+ },
+ "gates": {
+  "fired": {
+   "a": 0,
+   "b": 8,
+   "c": 47,
+   "d": 0,
+   "e": 33,
+   "f": 0,
+   "g": 0,
+   "h": 0,
+   "i": 0
+  },
+  "units": 69,
+  "first_draft_wrong_pattern": 0
+ },
+ "gates_never_fired": [
+  "a",
+  "d",
+  "f",
+  "g",
+  "h",
+  "i"
+ ],
+ "review_route_tasks": 3,
+ "review_route_accepted": 3,
+ "seconds": 754,
+ "results": [
+  {
+   "task_id": "m23d_dev_01",
+   "profile": "clean",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 6,
+   "retries": 5,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "none",
+    "25C/60%RH|Degradation product": "none",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "30C/75%RH|Dissolution (15 min)": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_02",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 7,
+   "retries": 5,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "none",
+    "25C/60%RH|Degradation product": "none",
+    "30C/75%RH|Assay": "none",
+    "40C/75%RH|Assay": "none",
+    "40C/75%RH|Degradation product": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_03",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 16,
+   "units": 8,
+   "retries": 8,
+   "renders": 1,
+   "review_route": true,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "some",
+    "25C/60%RH|Degradation product": "none",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "40C/75%RH|Assay": "none",
+    "40C/75%RH|Degradation product": "none",
+    "40C/75%RH|Dissolution (15 min)": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_04",
+   "profile": "sig_assay",
+   "accepted": true,
+   "reason": "",
+   "drafts": 14,
+   "units": 8,
+   "retries": 6,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "none",
+    "25C/60%RH|Degradation product": "none",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "40C/75%RH|Assay": "none",
+    "40C/75%RH|Degradation product": "none",
+    "40C/75%RH|Dissolution (15 min)": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_05",
+   "profile": "outside_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 6,
+   "retries": 5,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Degradation product": "none",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "40C/75%RH|Degradation product": "none",
+    "40C/75%RH|Dissolution (15 min)": "some"
+   }
+  },
+  {
+   "task_id": "m23d_dev_06",
+   "profile": "outside_int",
+   "accepted": true,
+   "reason": "",
+   "drafts": 10,
+   "units": 5,
+   "retries": 5,
+   "renders": 1,
+   "review_route": true,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Degradation product": "none",
+    "30C/75%RH|Degradation product": "some",
+    "40C/75%RH|Degradation product": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_07",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 6,
+   "retries": 5,
+   "renders": 1,
+   "review_route": true,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Degradation product": "some",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "40C/75%RH|Degradation product": "none",
+    "40C/75%RH|Dissolution (15 min)": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_08",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 7,
+   "retries": 5,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "none",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "30C/75%RH|Assay": "none",
+    "40C/75%RH|Assay": "none",
+    "40C/75%RH|Dissolution (15 min)": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_09",
+   "profile": "sig_assay",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 8,
+   "retries": 4,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "none",
+    "25C/60%RH|Degradation product": "none",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "40C/75%RH|Assay": "none",
+    "40C/75%RH|Degradation product": "none",
+    "40C/75%RH|Dissolution (15 min)": "none"
+   }
+  },
+  {
+   "task_id": "m23d_dev_10",
+   "profile": "outside_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 15,
+   "units": 8,
+   "retries": 7,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "none",
+    "25C/60%RH|Degradation product": "none",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "40C/75%RH|Assay": "none",
+    "40C/75%RH|Degradation product": "none",
+    "40C/75%RH|Dissolution (15 min)": "some"
+   }
+  }
+ ]
+}

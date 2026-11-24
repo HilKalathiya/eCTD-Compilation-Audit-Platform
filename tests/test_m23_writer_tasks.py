@@ -44,7 +44,8 @@ class TaskFiles(unittest.TestCase):
             self.assertEqual(hashlib.sha256((TASKS / name).read_bytes()).hexdigest(), digest, name)
 
     def test_the_held_out_hashes_in_state_md_match_the_files(self):
-        state = (ROOT / "STATE.md").read_text(encoding="utf-8")
+        # T-074 moved the T-071..T-073 history, text unchanged, to evidence/T-074/history.md; the hashes are searched in both files
+        state = (ROOT / "STATE.md").read_text(encoding="utf-8") + (ROOT / "evidence" / "T-074" / "history.md").read_text(encoding="utf-8")
         for t in self.all["heldout"]:
             self.assertIn(f"{T.sha256(t)}  {t['task_id']}", state, t["task_id"])
 

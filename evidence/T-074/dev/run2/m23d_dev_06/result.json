@@ -1,0 +1,18 @@
+{
+ "accepted": false,
+ "drafts": {
+  "public": 1,
+  "result:25C/60%RH|Degradation product": 2,
+  "result:30C/75%RH|Degradation product": 2,
+  "result:40C/75%RH|Degradation product": 2,
+  "spec": 4
+ },
+ "graph": "SYNTHETIC",
+ "reason": "units rejected: spec",
+ "render": "",
+ "renders": 0,
+ "review_route": true,
+ "set": "dev",
+ "synthetic": true,
+ "task_id": "m23d_dev_06"
+}

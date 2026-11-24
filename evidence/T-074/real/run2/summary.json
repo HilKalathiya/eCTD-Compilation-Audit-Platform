@@ -1,0 +1,68 @@
+{
+ "tasks": 1,
+ "accepted": 1,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 21,
+ "units": 11,
+ "retries": 10,
+ "copy": {
+  "units": 11,
+  "whole": 0,
+  "sentences": 21,
+  "sentences_copied": 5,
+  "blanked_sentences_copied": 21
+ },
+ "gates": {
+  "fired": {
+   "a": 0,
+   "b": 2,
+   "c": 8,
+   "d": 0,
+   "e": 6,
+   "f": 0,
+   "g": 0,
+   "h": 0,
+   "i": 0
+  },
+  "units": 11,
+  "first_draft_wrong_pattern": 0
+ },
+ "gates_never_fired": [
+  "a",
+  "d",
+  "f",
+  "g",
+  "h",
+  "i"
+ ],
+ "review_route_tasks": 0,
+ "review_route_accepted": 0,
+ "seconds": 118,
+ "results": [
+  {
+   "task_id": "m23d_real",
+   "profile": null,
+   "accepted": true,
+   "reason": "",
+   "drafts": 21,
+   "units": 11,
+   "retries": 10,
+   "renders": 1,
+   "review_route": false,
+   "compare_ok": true,
+   "compare_problems": [],
+   "pattern": {
+    "25C/60%RH|Assay": "range_only",
+    "25C/60%RH|Degradation product": "range_only",
+    "25C/60%RH|Dissolution (15 min)": "none",
+    "30C/75%RH|Assay": "range_only",
+    "30C/75%RH|Degradation product": "range_only",
+    "30C/75%RH|Dissolution (15 min)": "none",
+    "40C/75%RH|Assay": "range_only",
+    "40C/75%RH|Degradation product": "range_only",
+    "40C/75%RH|Dissolution (15 min)": "none"
+   }
+  }
+ ]
+}
