@@ -330,3 +330,61 @@ def m23b_vocabulary(task_words=()):
     vocab.update(w for u in M23_UNIT_TEXT for w in re.findall(r"[A-Za-z]+", u))
     vocab.update(("min", "months", "C"))               # the other units a slot can end with: " months", "°C", " min"
     return vocab
+
+
+# ---- Module 2.3, third set (T-073): M23B without the two wordings that came from a model draft, plus neutral study wordings ----------
+# PROVENANCE (STATE.md has the evidence): exc_c and exc_d were Gemma's own DEV drafts added verbatim in T-072, so they are NOT in this set.
+# Every other wording was written by Claude Code in T-072 (most of them are the example sentences of the T-072 prompt, the plan text or the
+# T-068 sentences); the new ones (study_n, study_o) are written from the card's own example "Long-term data are available for ..." and from
+# ICH Q1E, which speaks of "data". No wording of this set was copied from a model output in T-073.
+# needs: "zero" / "some" as before (claims about results outside the limit); "clean" = the sentence says "demonstrated", so it is allowed
+# only when every long-term and intermediate result of the graph is inside its limit (ICH Q1A(R2) significant change / Q1E "little or no change").
+_M23B_DROPPED = ("exc_c", "exc_d")
+M23C_SHAPES = {kind: [s for s in shapes if s[0] not in _M23B_DROPPED] for kind, shapes in M23B_SHAPES.items()}
+M23C_SHAPES["study"] = [
+    ("study_a", "Stability was demonstrated for {s} at long-term conditions and {s} at accelerated conditions.", ("long", "accel"), "clean"),
+    ("study_b", "Stability data cover {s} at long-term conditions and {s} at accelerated conditions.", ("long", "accel"), None),
+    ("study_c", "Long-term stability was demonstrated for {s}, and accelerated stability for {s}.", ("long", "accel"), "clean"),
+    ("study_n", "Data are available for {s} at long-term conditions and {s} at accelerated conditions.", ("long", "accel"), None),
+    ("study_o", "Long-term data are available for {s}, and accelerated data for {s}.", ("long", "accel"), None),
+]
+
+
+@lru_cache(maxsize=None)
+def _m23c_regex(kind, shape, words):
+    allowed = dict(words)
+    template = next(t for n, t, _, _ in M23C_SHAPES[kind] if n == shape)
+    out, pos = [], 0
+    for m in _FIELD_B.finditer(template):
+        out.append(re.escape(template[pos:m.start()]))
+        f = m.group(1)
+        if f == "s":
+            out.append(_SLOT_TEXT)
+        else:
+            alts = sorted(allowed.get(f, ()), key=len, reverse=True)
+            out.append("(?:%s)" % ("|".join(re.escape(a) for a in alts) if alts else r"(?!)"))
+        pos = m.end()
+    out.append(re.escape(template[pos:]))
+    return re.compile("^" + "".join(out) + r"\Z")
+
+
+def m23c_classify(sentence, names, kinds=None):
+    """(kind, shape name, needs, slots) when the rendered sentence matches one wording of M23C_SHAPES completely, else None."""
+    words = tuple(sorted((k, tuple(v)) for k, v in names.items()))
+    for kind in (kinds or M23C_SHAPES):
+        for name, _, slots, needs in M23C_SHAPES[kind]:
+            if _m23c_regex(kind, name, words).match(sentence):
+                return kind, name, needs, slots
+    return None
+
+
+def m23c_vocabulary(task_words=()):
+    """Every word the third set may hold: the words of its wordings, the units, and the words the task supplies."""
+    texts = [t for shapes in M23C_SHAPES.values() for _, t, _, _ in shapes]
+    vocab = set(re.findall(r"[A-Za-z][A-Za-z-]*", _FIELD_B.sub(" ", " ".join(texts))))
+    for w in task_words:
+        vocab.update(re.findall(r"[A-Za-z][A-Za-z-]*", w))
+    vocab.update(("NLT", "NMT"))
+    vocab.update(w for u in M23_UNIT_TEXT for w in re.findall(r"[A-Za-z]+", u))
+    vocab.update(("min", "months", "C"))
+    return vocab

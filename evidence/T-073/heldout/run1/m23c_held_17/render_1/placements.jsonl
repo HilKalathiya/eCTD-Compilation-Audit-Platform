@@ -1,0 +1,23 @@
+{"id": "M23-SPEC-LEK-dissolution_av", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:dissolution_av", "offset": 16, "text": "80", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_o", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_o", "offset": 15, "text": "0.2", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_l", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_l", "offset": 15, "text": "0.7", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurities_total", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurities_total", "offset": 21, "text": "1.0", "label": "specification limit"}
+{"id": "M23-P8|5-25C CRT|expiry_period_proposed|12", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 27, "text": "12", "label": "shelf"}
+{"id": "M23-P8|5-25C CRT|storage_low|12", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 52, "text": "5", "label": "st_low"}
+{"id": "M23-P8|5-25C CRT|storage_high|12", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 59, "text": "25", "label": "st_high"}
+{"id": "M23-P8|0-30C excursion|excursion_permitted_low|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 96, "text": "0", "label": "ex_low"}
+{"id": "M23-P8|0-30C excursion|excursion_permitted_high|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 104, "text": "30", "label": "ex_high"}
+{"id": "M23-P8|25C/60%RH|study_duration_demonstrated|18", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 145, "text": "18", "label": "long"}
+{"id": "M23-P8|40C/75%RH|study_duration_demonstrated|6", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 183, "text": "6", "label": "accel"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 49, "text": "15", "label": "tp"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|min", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 96, "text": "94.39", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|max", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 116, "text": "97.56", "label": "high"}
+{"id": "M23-STAT|25C/60%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/25C/60%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 52, "text": "15", "label": "tp"}
+{"id": "M23-STAT|30C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/30C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 49, "text": "15", "label": "tp"}
+{"id": "M23-STAT|30C/75%RH|Dissolution (15 min)|min", "section": "2.3.P.8/30C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 99, "text": "77.50", "label": "low"}
+{"id": "M23-STAT|30C/75%RH|Dissolution (15 min)|max", "section": "2.3.P.8/30C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 119, "text": "95.45", "label": "high"}
+{"id": "M23-STAT|30C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/30C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 49, "text": "15", "label": "tp"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 49, "text": "15", "label": "tp"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|min", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 98, "text": "93.34", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|max", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 118, "text": "97.19", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Dissolution (15 min)|timepoint", "section": "2.3.P.8/40C/75%RH|Dissolution (15 min)/results", "paragraph": "results", "offset": 52, "text": "15", "label": "tp"}

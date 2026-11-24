@@ -1,0 +1,34 @@
+{
+ "accepted": true,
+ "counts": {
+  "docx": {
+   "checked": 28,
+   "failed": 0,
+   "matched": 28,
+   "uncovered": 0
+  },
+  "html": {
+   "checked": 28,
+   "failed": 0,
+   "matched": 28,
+   "uncovered": 0
+  }
+ },
+ "drafts": {
+  "public": 1,
+  "result:25C/60%RH|Assay": 1,
+  "result:25C/60%RH|Degradation product": 2,
+  "result:25C/60%RH|Dissolution (15 min)": 1,
+  "result:40C/75%RH|Assay": 1,
+  "result:40C/75%RH|Degradation product": 2,
+  "result:40C/75%RH|Dissolution (15 min)": 1,
+  "spec": 4
+ },
+ "graph": "SYNTHETIC",
+ "reason": "",
+ "render": "render_1",
+ "renders": 1,
+ "set": "dev",
+ "synthetic": true,
+ "task_id": "m23c_dev_03"
+}

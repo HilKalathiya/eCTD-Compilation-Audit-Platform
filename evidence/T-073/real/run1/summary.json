@@ -1,0 +1,31 @@
+{
+ "tasks": 1,
+ "accepted": 1,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 16,
+ "units": 11,
+ "retries": 5,
+ "copy": {
+  "units": 11,
+  "whole": 0,
+  "sentences": 27,
+  "sentences_copied": 5,
+  "blanked_sentences_copied": 5
+ },
+ "seconds": 81,
+ "results": [
+  {
+   "task_id": "m23c_real",
+   "profile": null,
+   "accepted": true,
+   "reason": "",
+   "drafts": 16,
+   "units": 11,
+   "retries": 5,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  }
+ ]
+}

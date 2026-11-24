@@ -1,0 +1,20 @@
+{"id": "M23-SPEC-LEK-dissolution_av", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:dissolution_av", "offset": 16, "text": "85", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_l", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_l", "offset": 15, "text": "0.3", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-resodual_solvent", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:resodual_solvent", "offset": 21, "text": "0.3", "label": "specification limit"}
+{"id": "M23-P8|2-25C CRT|expiry_period_proposed|30", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 27, "text": "30", "label": "shelf"}
+{"id": "M23-P8|2-25C CRT|storage_low|30", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 52, "text": "2", "label": "st_low"}
+{"id": "M23-P8|2-25C CRT|storage_high|30", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 59, "text": "25", "label": "st_high"}
+{"id": "M23-P8|2-30C excursion|excursion_permitted_low|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 96, "text": "2", "label": "ex_low"}
+{"id": "M23-P8|2-30C excursion|excursion_permitted_high|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 104, "text": "30", "label": "ex_high"}
+{"id": "M23-P8|25C/60%RH|study_duration_demonstrated|24", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 147, "text": "24", "label": "long"}
+{"id": "M23-P8|40C/75%RH|study_duration_demonstrated|6", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 185, "text": "6", "label": "accel"}
+{"id": "M23-STAT|25C/60%RH|Assay|min", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 81, "text": "98.16", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Assay|max", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 103, "text": "99.95", "label": "high"}
+{"id": "M23-STAT|25C/60%RH|Degradation product|min", "section": "2.3.P.8/25C/60%RH|Degradation product/results", "paragraph": "results", "offset": 95, "text": "0.053", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Degradation product|max", "section": "2.3.P.8/25C/60%RH|Degradation product/results", "paragraph": "results", "offset": 110, "text": "0.147", "label": "high"}
+{"id": "M23-STAT|30C/75%RH|Assay|min", "section": "2.3.P.8/30C/75%RH|Assay/results", "paragraph": "results", "offset": 84, "text": "98.03", "label": "low"}
+{"id": "M23-STAT|30C/75%RH|Assay|max", "section": "2.3.P.8/30C/75%RH|Assay/results", "paragraph": "results", "offset": 106, "text": "100.13", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Assay|min", "section": "2.3.P.8/40C/75%RH|Assay/results", "paragraph": "results", "offset": 83, "text": "100.72", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Assay|max", "section": "2.3.P.8/40C/75%RH|Assay/results", "paragraph": "results", "offset": 106, "text": "101.03", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Degradation product|min", "section": "2.3.P.8/40C/75%RH|Degradation product/results", "paragraph": "results", "offset": 97, "text": "0.059", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Degradation product|max", "section": "2.3.P.8/40C/75%RH|Degradation product/results", "paragraph": "results", "offset": 112, "text": "0.201", "label": "high"}

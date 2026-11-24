@@ -1,0 +1,142 @@
+{
+ "tasks": 10,
+ "accepted": 8,
+ "rejected": [
+  "m23c_dev_05",
+  "m23c_dev_06"
+ ],
+ "wrong_but_accepted": [],
+ "drafts": 112,
+ "units": 66,
+ "retries": 46,
+ "copy": {
+  "units": 64,
+  "whole": 0,
+  "sentences": 167,
+  "sentences_copied": 37,
+  "blanked_sentences_copied": 37
+ },
+ "seconds": 1048,
+ "results": [
+  {
+   "task_id": "m23c_dev_01",
+   "profile": "clean",
+   "accepted": true,
+   "reason": "",
+   "drafts": 10,
+   "units": 6,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_02",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 8,
+   "units": 5,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_03",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 13,
+   "units": 8,
+   "retries": 5,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_04",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 15,
+   "units": 9,
+   "retries": 6,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_05",
+   "profile": "sig_assay",
+   "accepted": false,
+   "reason": "units rejected: spec",
+   "drafts": 13,
+   "units": 8,
+   "retries": 5,
+   "renders": 0,
+   "compare_ok": null,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_06",
+   "profile": "outside_accel",
+   "accepted": false,
+   "reason": "units rejected: spec",
+   "drafts": 11,
+   "units": 6,
+   "retries": 5,
+   "renders": 0,
+   "compare_ok": null,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_07",
+   "profile": "outside_int",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 7,
+   "retries": 5,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_08",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 9,
+   "units": 5,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_09",
+   "profile": "no_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 10,
+   "units": 6,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_10",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 6,
+   "retries": 5,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  }
+ ]
+}

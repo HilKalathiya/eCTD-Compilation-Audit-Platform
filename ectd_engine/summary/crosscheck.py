@@ -190,7 +190,7 @@ def _saved32(fid, meta, p5, p8_dir):
     }
     attr = meta["attribute"]
     if attr == "study_duration_demonstrated":
-        pat = rf"demonstrated for ({NUM}) months at long-term conditions and ({NUM}) months at accelerated conditions"
+        pat = rf"(?:demonstrated|available) for ({NUM}) months at long-term conditions and ({NUM}) months at accelerated conditions"   # T-073: 3.2 text may be neutral
         group = {"25C/60%RH": 1, "40C/75%RH": 2}.get(meta["condition"])
         m = re.search(pat, text)
         return m.group(group) if m and group else None
@@ -236,8 +236,11 @@ def _context(fid, meta, unit):
     }.get(attr)
     if attr == "study_duration_demonstrated":
         forms = {"25C/60%RH": [rf"demonstrated for (?P<n>{n}) months at long-term conditions", rf"Stability data cover (?P<n>{n}) months at long-term conditions",
-                               rf"Long-term stability was demonstrated for (?P<n>{n}) months,"],
-                 "40C/75%RH": [rf"conditions and (?P<n>{n}) months at accelerated conditions", rf"accelerated stability for (?P<n>{n}) months"]}.get(cond)
+                               rf"Long-term stability was demonstrated for (?P<n>{n}) months,",
+                               rf"Data are available for (?P<n>{n}) months at long-term conditions",           # T-073 neutral wordings
+                               rf"Long-term data are available for (?P<n>{n}) months,"],
+                 "40C/75%RH": [rf"conditions and (?P<n>{n}) months at accelerated conditions", rf"accelerated stability for (?P<n>{n}) months",
+                               rf"accelerated data for (?P<n>{n}) months"]}.get(cond)
     return ([re.compile(x) for x in forms], "n") if forms else None
 
 

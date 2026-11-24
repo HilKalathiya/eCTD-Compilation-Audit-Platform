@@ -1,0 +1,5 @@
+numbers 24
+placements 24
+data-src spans 29
+uncovered digits 0
+rejected sections 0

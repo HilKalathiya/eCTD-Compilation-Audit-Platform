@@ -120,6 +120,13 @@ def cmd_log():
                 except ValueError:
                     pass
             line = f"{tool} {target[:LOG_CAP]}"
+            if ev == "PostToolUseFailure":
+                # T-073: a call that ENDED IN ERROR is logged too, marked FAILED with its exit code. The tool name after "FAILED" is only for reading:
+                # the first word is "FAILED", which is neither a write tool nor a shell tool, so a failed call is NOT evidence that a file was written.
+                err = str(d.get("error") or d.get("tool_response") or "")
+                m = re.search(r"exit code\s*[:=]?\s*(-?\d+)", err, re.I)
+                line = (f"FAILED {line} [exit {m.group(1) if m else '?'}{'; interrupted' if d.get('is_interrupt') else ''}]"
+                        f" keys={','.join(sorted(d))}")
         _append_log(line)
     except Exception as e:  # a logging hook must never disturb the work, but it must say when it failed
         try:

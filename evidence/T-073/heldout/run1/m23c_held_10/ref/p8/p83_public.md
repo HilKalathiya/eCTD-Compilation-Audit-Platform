@@ -1,0 +1,1 @@
+The proposed shelf life is 24 months when stored at 10°C to 30°C. Excursions are permitted from 10°C to 35°C. Data are available for 48 months at long-term conditions and 6 months at accelerated conditions.

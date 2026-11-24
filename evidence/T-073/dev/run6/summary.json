@@ -1,0 +1,139 @@
+{
+ "tasks": 10,
+ "accepted": 10,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 100,
+ "units": 66,
+ "retries": 34,
+ "copy": {
+  "units": 66,
+  "whole": 0,
+  "sentences": 175,
+  "sentences_copied": 43,
+  "blanked_sentences_copied": 43
+ },
+ "seconds": 684,
+ "results": [
+  {
+   "task_id": "m23c_dev_01",
+   "profile": "clean",
+   "accepted": true,
+   "reason": "",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_02",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 7,
+   "units": 5,
+   "retries": 2,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_03",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 8,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_04",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 13,
+   "units": 9,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_05",
+   "profile": "sig_assay",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 8,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_06",
+   "profile": "outside_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_07",
+   "profile": "outside_int",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 7,
+   "retries": 5,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_08",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 7,
+   "units": 5,
+   "retries": 2,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_09",
+   "profile": "no_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 10,
+   "units": 6,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_dev_10",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 10,
+   "units": 6,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  }
+ ]
+}

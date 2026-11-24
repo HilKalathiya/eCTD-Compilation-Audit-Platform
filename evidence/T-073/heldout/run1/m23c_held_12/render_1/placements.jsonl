@@ -1,0 +1,16 @@
+{"id": "M23-SPEC-LEK-impurity_o", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_o", "offset": 15, "text": "0.3", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurity_l", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurity_l", "offset": 15, "text": "0.7", "label": "specification limit"}
+{"id": "M23-SPEC-LEK-impurities_total", "section": "2.3.P.5/spec_table/spec_table", "paragraph": "row:impurities_total", "offset": 21, "text": "0.5", "label": "specification limit"}
+{"id": "M23-P8|5-25C CRT|expiry_period_proposed|24", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 27, "text": "24", "label": "shelf"}
+{"id": "M23-P8|5-25C CRT|storage_low|24", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 52, "text": "5", "label": "st_low"}
+{"id": "M23-P8|5-25C CRT|storage_high|24", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 59, "text": "25", "label": "st_high"}
+{"id": "M23-P8|2-30C excursion|excursion_permitted_low|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 96, "text": "2", "label": "ex_low"}
+{"id": "M23-P8|2-30C excursion|excursion_permitted_high|0", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 104, "text": "30", "label": "ex_high"}
+{"id": "M23-P8|25C/60%RH|study_duration_demonstrated|18", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 147, "text": "18", "label": "long"}
+{"id": "M23-P8|40C/75%RH|study_duration_demonstrated|6", "section": "2.3.P.8/public/public", "paragraph": "public", "offset": 185, "text": "6", "label": "accel"}
+{"id": "M23-STAT|25C/60%RH|Assay|min", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 81, "text": "100.19", "label": "low"}
+{"id": "M23-STAT|25C/60%RH|Assay|max", "section": "2.3.P.8/25C/60%RH|Assay/results", "paragraph": "results", "offset": 104, "text": "101.30", "label": "high"}
+{"id": "M23-STAT|30C/75%RH|Assay|min", "section": "2.3.P.8/30C/75%RH|Assay/results", "paragraph": "results", "offset": 84, "text": "98.06", "label": "low"}
+{"id": "M23-STAT|30C/75%RH|Assay|max", "section": "2.3.P.8/30C/75%RH|Assay/results", "paragraph": "results", "offset": 106, "text": "100.78", "label": "high"}
+{"id": "M23-STAT|40C/75%RH|Assay|min", "section": "2.3.P.8/40C/75%RH|Assay/results", "paragraph": "results", "offset": 83, "text": "99.28", "label": "low"}
+{"id": "M23-STAT|40C/75%RH|Assay|max", "section": "2.3.P.8/40C/75%RH|Assay/results", "paragraph": "results", "offset": 105, "text": "100.58", "label": "high"}

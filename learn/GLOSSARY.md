@@ -190,3 +190,7 @@ held-out = test cases never used while tuning, and fixed (with hashes) before an
 cross-fact gate = a check that ties a sentence to a stored fact, e.g. "no result outside the limit" is allowed only when the stored count is zero
 graph source = the numbers in the document are read from the graph database when it is built, not typed in the task file
 wrong-but-accepted = a draft that passed every gate but still shows a wrong number (the number to keep at zero)
+significant change = the ICH Q1A(R2) test of a study at accelerated conditions: assay moves 5% or more from its start value, or a degradation product or dissolution result breaks its limit
+extrapolation = proposing a shelf life longer than the months of real data; allowed only when the data show little or no change (ICH Q1E), so this project refuses it when anything is outside the limit or changed significantly
+data-src link = a mark on a sentence in the saved document that names the stored fact(s) it depends on, so a checker can follow the sentence back to the data
+one limit source = a limit is stored once (the specification table) and every check reads it from there, so two numbers can never disagree

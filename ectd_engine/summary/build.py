@@ -125,11 +125,28 @@ def walk(sections):
         yield "end_part", None, None
 
 
+def _para_inline(p):
+    """The HTML of one paragraph. A paragraph may carry p.claims = [(start, end, [fact id, ...]), ...] (T-073): that stretch of text is wrapped in
+    <span class="claim" data-src="id;id">, a link from a claim sentence to the derived facts it depends on (outside-limit count, significant change).
+    The claim ids are NOT numbers and never go into placements.jsonl; the number spans (class "n") inside the stretch stay as they were."""
+    claims = sorted(getattr(p, "claims", ()))
+    if not claims:
+        return H._inline(p.text, p.placements)
+    out, pos = [], 0
+    for a, b, ids in claims:
+        out.append(H._inline(p.text[pos:a], [pl for pl in p.placements if pos <= pl["offset"] and pl["offset"] + len(pl["text"]) <= a], pos))
+        inner = H._inline(p.text[a:b], [pl for pl in p.placements if a <= pl["offset"] and pl["offset"] + len(pl["text"]) <= b], a)
+        out.append(f'<span class="claim" data-src="{";".join(ids)}">{inner}</span>')
+        pos = b
+    out.append(H._inline(p.text[pos:], [pl for pl in p.placements if pos <= pl["offset"]], pos))
+    return "".join(out)
+
+
 def _section_html(sec, head):
     if sec.name == "spec_table":
         cols = "".join(f"<th>{c}</th>" for c in head)
         return f'<table data-section="spec_table"><tr>{cols}</tr>{"".join(H._row_html(p) for p in sec.paragraphs)}</table>'
-    return "".join(f'<p data-section="{sec.name}">{H._inline(p.text, p.placements)}</p>' for p in sec.paragraphs)
+    return "".join(f'<p data-section="{sec.name}">{_para_inline(p)}</p>' for p in sec.paragraphs)
 
 
 def build_html(sections, title=TITLE):

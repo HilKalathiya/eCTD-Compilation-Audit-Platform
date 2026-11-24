@@ -1,0 +1,17 @@
+{
+ "accepted": false,
+ "drafts": {
+  "public": 1,
+  "result:25C/60%RH|Assay": 4,
+  "result:30C/75%RH|Assay": 4,
+  "result:40C/75%RH|Assay": 4,
+  "spec": 4
+ },
+ "graph": "SYNTHETIC",
+ "reason": "units rejected: spec, result:25C/60%RH|Assay, result:30C/75%RH|Assay, result:40C/75%RH|Assay",
+ "render": "",
+ "renders": 0,
+ "set": "dev",
+ "synthetic": true,
+ "task_id": "m23c_dev_02"
+}

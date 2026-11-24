@@ -1,0 +1,290 @@
+{
+ "tasks": 20,
+ "accepted": 20,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 187,
+ "units": 123,
+ "retries": 64,
+ "copy": {
+  "units": 123,
+  "whole": 0,
+  "sentences": 323,
+  "sentences_copied": 77,
+  "blanked_sentences_copied": 77
+ },
+ "sources": [
+  [
+   "evidence/T-073/heldout/run1",
+   [
+    "m23c_held_01",
+    "m23c_held_02",
+    "m23c_held_03",
+    "m23c_held_04",
+    "m23c_held_05",
+    "m23c_held_06",
+    "m23c_held_07",
+    "m23c_held_08",
+    "m23c_held_09",
+    "m23c_held_10",
+    "m23c_held_11",
+    "m23c_held_12",
+    "m23c_held_13",
+    "m23c_held_14",
+    "m23c_held_15",
+    "m23c_held_16",
+    "m23c_held_17",
+    "m23c_held_18",
+    "m23c_held_19"
+   ]
+  ],
+  [
+   "evidence/T-073/heldout/run2",
+   [
+    "m23c_held_20"
+   ]
+  ]
+ ],
+ "results": [
+  {
+   "task_id": "m23c_held_01",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "clean",
+   "accepted": true,
+   "reason": "",
+   "drafts": 7,
+   "units": 5,
+   "retries": 2,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_02",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 7,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_03",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 4,
+   "retries": 2,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_04",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 7,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_05",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "sig_assay",
+   "accepted": true,
+   "reason": "",
+   "drafts": 9,
+   "units": 6,
+   "retries": 3,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_06",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "outside_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 8,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_07",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "outside_int",
+   "accepted": true,
+   "reason": "",
+   "drafts": 14,
+   "units": 9,
+   "retries": 5,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_08",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 11,
+   "units": 7,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_09",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "no_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 8,
+   "units": 5,
+   "retries": 3,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_10",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 4,
+   "retries": 2,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_11",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "clean",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 4,
+   "retries": 2,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_12",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 7,
+   "units": 5,
+   "retries": 2,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_13",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 6,
+   "units": 4,
+   "retries": 2,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_14",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 13,
+   "units": 9,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_15",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "sig_assay",
+   "accepted": true,
+   "reason": "",
+   "drafts": 10,
+   "units": 6,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_16",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "outside_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 8,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_17",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "outside_int",
+   "accepted": true,
+   "reason": "",
+   "drafts": 7,
+   "units": 5,
+   "retries": 2,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_18",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "extrap",
+   "accepted": true,
+   "reason": "",
+   "drafts": 10,
+   "units": 7,
+   "retries": 3,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_19",
+   "from": "evidence/T-073/heldout/run1",
+   "profile": "no_accel",
+   "accepted": true,
+   "reason": "",
+   "drafts": 9,
+   "units": 5,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  },
+  {
+   "task_id": "m23c_held_20",
+   "from": "evidence/T-073/heldout/run2",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 8,
+   "retries": 4,
+   "compare_ok": true,
+   "compare_problems": []
+  }
+ ]
+}

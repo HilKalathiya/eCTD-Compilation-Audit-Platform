@@ -1,0 +1,31 @@
+{
+ "tasks": 1,
+ "accepted": 1,
+ "rejected": [],
+ "wrong_but_accepted": [],
+ "drafts": 12,
+ "units": 8,
+ "retries": 4,
+ "copy": {
+  "units": 8,
+  "whole": 0,
+  "sentences": 20,
+  "sentences_copied": 4,
+  "blanked_sentences_copied": 4
+ },
+ "seconds": 93,
+ "results": [
+  {
+   "task_id": "m23c_held_20",
+   "profile": "outside_lt",
+   "accepted": true,
+   "reason": "",
+   "drafts": 12,
+   "units": 8,
+   "retries": 4,
+   "renders": 1,
+   "compare_ok": true,
+   "compare_problems": []
+  }
+ ]
+}

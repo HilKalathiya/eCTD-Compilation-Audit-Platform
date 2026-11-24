@@ -1,0 +1,20 @@
+{
+ "accepted": false,
+ "drafts": {
+  "public": 1,
+  "result:25C/60%RH|Assay": 1,
+  "result:25C/60%RH|Degradation product": 4,
+  "result:25C/60%RH|Dissolution (15 min)": 4,
+  "result:40C/75%RH|Assay": 1,
+  "result:40C/75%RH|Degradation product": 4,
+  "result:40C/75%RH|Dissolution (15 min)": 1,
+  "spec": 4
+ },
+ "graph": "SYNTHETIC",
+ "reason": "units rejected: result:25C/60%RH|Degradation product, result:25C/60%RH|Dissolution (15 min), result:40C/75%RH|Degradation product",
+ "render": "",
+ "renders": 0,
+ "set": "dev",
+ "synthetic": true,
+ "task_id": "m23c_dev_03"
+}
