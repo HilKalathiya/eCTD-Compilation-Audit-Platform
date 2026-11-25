@@ -1,0 +1,56 @@
+CHECKPOINT A DEMO - stability CSV -> facts -> stats -> draft -> gates -> HTML + Word -> two planted errors
+Model: SCRIPTED MOCK (no Gemma) | Output folder: evidence\T-076\demo\mock2
+
+[1/7] FACTS: the CSV is read into facts in memory (no database); every fact keeps its CSV line and the page of its source
+  CSV: data/stability/finerenone_stability.csv has 66 data lines -> 70 facts (stored rows + 2 storage temperatures read from the condition text + 2 specification limits read from the limit column)
+  PUBLIC fact: M23-P8|20-25C CRT|expiry_period_proposed|36 = 36 months
+    source: finerenone_stability.csv, row=5 (CSV line text: "20-25C CRT,36,expiry_period_proposed,36,months,,FDA ChemR 215341 p.3"), FDA review page 3, kind=public
+  DEMO fact: M23-P8|25C/60%RH|Assay|12 = 99.76 % label claim   label the writer must show: "In illustrative demonstration data,"
+    source: finerenone_stability.csv, row=10 (CSV line text: "25C/60%RH,12,Assay,99.76,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7"), (b)(4) redacted in FDA review page 7, kind=demo
+
+[2/7] STATS: computed by code (ICH Q1E, Decimal) from those same rows, never by the model
+  inputs: Assay at 25C/60%RH, 8 rows (row=6, row=7, row=8, row=9, row=10, row=11, row=12, row=13), points (month, % label claim): (0, 100.00), (3, 99.94), (6, 99.88), (9, 99.82), (12, 99.76), (18, 99.64), (24, 99.52), (36, 99.28)
+  limits from the rows: lower 95.0, upper 105.0
+  result: Q1E shelf-life estimate = 48.00 months (the lower 95% bound crosses the limit); cap 48 months
+  range of the same rows: lowest 99.28, highest 100.00, results outside the limit: 0 of 8
+  Dissolution at 25C/60%RH against its limit (NLT 80): 0 of 8 outside
+
+[3/7] DRAFT: the model writes sentences with [[slots]] only; here is the raw draft of one section (unit spec)
+    | In illustrative demonstration data, the drug product specification lists these tests and acceptance criteria.
+    | Dissolution: NLT [[spec_dissolution_av]]
+    | Degradation product: NMT [[spec_degradation_product]]
+  digits in this raw draft: none
+  drafts asked: 11 for 11 sections (retries after a rejection: 0)
+
+[4/7] GATES + CROSS-CHECK: wording gates (a-i), then an independent check of the saved files
+  RESULT: ACCEPTED. Cross-check html: 33 numbers checked, 33 MATCH, 0 failed
+          Cross-check docx: 33 numbers checked, 33 MATCH, 0 failed
+  HTML : evidence\T-076\demo\mock2\draft\render_1\M23.html
+  Word : evidence\T-076\demo\mock2\draft\render_1\M23.docx
+  SOURCE TRACE: every number in the saved HTML and Word file -> its fact id -> that fact's source line in finerenone_stability.csv (re-read from the file)
+    numbers in the files (html 33 + docx 33) = 66 | traced to a CSV line, value equal: 66 | not traced: 0 | cross-check total: 66
+  SOURCE TRACE OK: all 66 of 66 numbers trace to the CSV
+
+[5/7] PLANT 1: change one number in a COPY of the rendered document
+  changed 36 -> 48 next to fact M23-P8|20-25C CRT|expiry_period_proposed|36 (copy: evidence\T-076\demo\mock2\plant_number\M23.html)
+  cross-check says FAIL: number 48, fact unplaced:48, in html - number has no placement
+  cross-check says FAIL: number , fact M23-P8|20-25C CRT|expiry_period_proposed|36, in html - placement without a number in the file
+  cross-check problem: the HTML and the Word file do not hold the same numbers
+  in plain words: fact M23-P8|20-25C CRT|expiry_period_proposed|36 owns the number 36; the file now shows 48 there, and no fact owns 48
+  PLANT 1 REJECTED (good)
+
+[6/7] PLANT 2: a draft where the model typed a number itself
+  draft text: Degradation product: NMT [[spec_degradation_product]] The shelf life is 36 months.
+  gate says: (a) the draft writes a digit; use a [[placeholder]] for every value
+  PLANT 2 REJECTED by gate (a) (good) (gates fired: a)
+
+[7/7] RUN FINGERPRINT: hashes so this run can be found and checked again (a fingerprint of the files, not a ledger entry)
+  sha256 M23.html                   7310fc6b55e236319de83303b61ef4b258aa98b27111afe6df17957464d009fe
+  sha256 M23.docx                   f0816ddd4a6cd71f82eb662531e021de15304e10692076b6f123299d68025c23
+  sha256 attempts.jsonl             14bee6b24991d04c46eed835d2d2a4ecf7f18c8e5b6b13b1ebf9a0e76d8de5db
+  sha256 graph_snapshot.json        726b79bfb4117ab30869aab3600509d6647c61c83431d733279c5feb3c0fb7ad
+  sha256 finerenone_stability.csv   f6cff45346fb8ca350a749545bfe9e520c40fa325de0e0959c784569c9c0b671
+  RUN FINGERPRINT: eb265a295df042af (first 16 hex of the sha256 of the 5 hashes above)
+
+STEPS 1-4 PASS | PLANT 1 rejected | PLANT 2 rejected
+DEMO PASSED (exit 0)

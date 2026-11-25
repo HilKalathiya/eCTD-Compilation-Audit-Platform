@@ -1,0 +1,31 @@
+{
+ "run_fingerprint": "45e916b6a82784d2",
+ "steps_ok": {
+  "1": true,
+  "2": true,
+  "3": true,
+  "4": true,
+  "5": true,
+  "6": true,
+  "7": true
+ },
+ "plant_number_rejected": true,
+ "plant_digit_rejected": true,
+ "mock": true,
+ "synthetic": false,
+ "source_trace": {
+  "numbers": 66,
+  "traced": 66,
+  "untraced": 0,
+  "crosscheck_total": 66,
+  "html": 33,
+  "docx": 33
+ },
+ "hashes": {
+  "M23.html": "7310fc6b55e236319de83303b61ef4b258aa98b27111afe6df17957464d009fe",
+  "M23.docx": "62fe127ad12fb1839e827738964e8c77ae5501c33a903ba8413bb11dc7e0d280",
+  "attempts.jsonl": "14bee6b24991d04c46eed835d2d2a4ecf7f18c8e5b6b13b1ebf9a0e76d8de5db",
+  "graph_snapshot.json": "726b79bfb4117ab30869aab3600509d6647c61c83431d733279c5feb3c0fb7ad",
+  "finerenone_stability.csv": "f6cff45346fb8ca350a749545bfe9e520c40fa325de0e0959c784569c9c0b671"
+ }
+}

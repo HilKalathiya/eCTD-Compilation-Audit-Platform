@@ -1,0 +1,26 @@
+SCRIPTED CLASSMATE (a rehearsal made by code in tests/test_classmate_kit.py::ScriptedClassmate::test_ten_mixed_edits; NOT the real classmate test)
+Text below = the console output of that test run on 2026-11-25, copied by hand from the command output (the test prints it; the test itself saves it only inside a temp folder).
+
+The ten edits: 1 html number (shelf life 36->48); 2 docx number (Assay max 100.00->101.00); 3 csv number printed in the document (Assay 25C month 36 99.28->89.28, outside its limit);
+4 csv number NOT printed in the document and inside its limits (Assay 25C month 12 99.76->99.70); 5 csv public number (proposed shelf life 36->48);
+6 html claim flip; 7 docx claim flip; 8 html unit change (% area -> % dissolved); 9 docx claim sentence emptied; 10 html DEMO label removed from one sentence.
+
+CLASSMATE TEST - result for each change the person listed
+
+  # 1 [html] number   proposed shelf life                    -> CAUGHT      by: crosscheck
+  # 2 [docx] number   Assay long-term range                  -> CAUGHT      by: crosscheck
+  # 3 [csv ] number   Assay 25C/60%RH month 36               -> CAUGHT      by: csv_rules, csv_vs_document
+  # 4 [csv ] number   Assay 25C/60%RH month 12               -> NOT LOCATED by: file fingerprint
+  # 5 [csv ] number   expiry_period_proposed                 -> CAUGHT      by: csv_vs_document
+  # 6 [html] claim    Dissolution long-term claim sentence   -> CAUGHT      by: compare4, wording
+  # 7 [docx] claim    Dissolution intermediate claim sentenc -> CAUGHT      by: wording
+  # 8 [html] unit     Degradation product long-term          -> CAUGHT      by: crosscheck
+  # 9 [docx] deleted  Dissolution accelerated claim sentence -> CAUGHT      by: wording
+  #10 [html] label    Assay intermediate sentence            -> CAUGHT      by: compare4, wording
+
+  TOTAL 10 changes: CAUGHT (a content check names the place) 9 | NOT LOCATED (only the file fingerprint changed) 1 | MISSED 0
+  NOT CAUGHT: #4 csv 'Assay 25C/60%RH month 12': NOT LOCATED
+
+Reading it honestly: change #4 is NOT found by any content check. Only "the CSV file is different from the one handed out" is known; where is not. Counted as not caught.
+Nothing was "missed" in the sense of no flag at all, because every edit changes a file hash; that is why NOT LOCATED is a separate result and is not counted as caught.
+The edits were chosen by the person who wrote the checks, so this says little about what a stranger will try.

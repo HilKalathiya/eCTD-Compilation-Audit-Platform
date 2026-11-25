@@ -198,3 +198,5 @@ template filler = the 2.3 writer: the model only picks one allowed sentence patt
 human review route = when a long-term or intermediate result is outside its limit, the code writes "HUMAN REVIEW REQUIRED: ..." (linked to the facts that caused it) and no shelf life is proposed until a person looks
 checkpoint = a planned stop where the whole chain must run end to end and be shown to someone; if it fails we stop and re-plan
 sabotage test = a test that breaks the thing it guards on purpose (for example a planted error that is NOT caught) and checks that the alarm still goes off
+run fingerprint = a short code (first 16 characters of a sha256) made from the hashes of a run's saved files, so that one run can be found and checked again; it is NOT a ledger and does not stop anyone from editing files
+classmate test = a person who is not on the team changes up to 10 numbers or claims in copies of the document and the CSV, lists them privately, and we count which changes the real checks find, which they only notice as "the file changed", and which they miss

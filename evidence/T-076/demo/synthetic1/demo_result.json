@@ -1,0 +1,23 @@
+{
+ "run_fingerprint": "7195381fc5264ea0",
+ "steps_ok": {
+  "1": true,
+  "2": true,
+  "3": true,
+  "4": true,
+  "5": true,
+  "6": true,
+  "7": true
+ },
+ "plant_number_rejected": true,
+ "plant_digit_rejected": true,
+ "mock": true,
+ "synthetic": true,
+ "source_trace": null,
+ "hashes": {
+  "M23.html": "ee3e4be11aefd97904026eebcb0e60fac9107dd4e3685be142e707da50c16631",
+  "M23.docx": "98dceb08bb790cde88cc93240329324ff2e24ffcf8b8d15e8cf0d92f303b348e",
+  "attempts.jsonl": "ebc755378c0606804ad6f48ded35f6b9907e8e7dc476c705048f0c29253f24c4",
+  "graph_snapshot.json": "8b109ec9db5309d8439fca19ac38df456ec3d29506a196fe729c9173a5b63014"
+ }
+}

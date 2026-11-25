@@ -1,0 +1,21 @@
+TEST THE CHECKER - for a person who is not on the team (about 15 minutes)
+
+You have three files. Together they are a small regulatory document and the data table behind it.
+  M23.html                    the document (open it in a browser to read it; edit it with Notepad)
+  M23.docx                    the same document as a Word file (edit it in Word)
+  finerenone_stability.csv    the data table (edit it in Notepad, NOT in Excel: Excel changes the file)
+
+WHAT TO DO
+1. Make up to 10 changes. Try to fool the checker: change a number, flip a claim ("had no results outside the limit" <-> "had results outside the limit"),
+   change a unit, delete a sentence, remove the words "In illustrative demonstration data,", change a number in the CSV, and so on.
+   You may change the document, the CSV, or both. Make each change small and different. Save each file under its own name.
+2. Write down EVERY change in answers.csv (the file next to the folder for_classmate). One line per change:
+     n            1, 2, 3 ...
+     file         html, docx or csv
+     csv_line     only for csv: the line number in the CSV file (line 1 is the header)
+     near         a few words of the sentence or table row around the change, so a person can find it
+     original_text  what it said before
+     new_text     what it says now (leave empty if you deleted it)
+     kind         number, claim, unit, deleted, label or other
+3. Give the whole folder back. Do not tell the person who runs the checker what you changed before the check has run.
+Nothing you do can break anything: these are copies.

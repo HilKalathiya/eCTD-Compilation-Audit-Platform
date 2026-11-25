@@ -1,0 +1,55 @@
+CHECKPOINT A DEMO - SYNTHETIC task (invented numbers) -> facts -> stats -> draft -> gates -> HTML + Word -> two planted errors
+Model: SCRIPTED MOCK (no Gemma) | Output folder: evidence\T-076\demo\synthetic1
+*** SYNTHETIC MODE: the numbers are invented test data, not the CSV. The default mode (no --synthetic) uses the CSV. ***
+
+[1/7] FACTS (SYNTHETIC mode: invented numbers, NOT the CSV): every number enters as a fact with its source
+  public data: Laboratory.csv (Lek tablets, CC BY 4.0) has 1005 rows. One fact from it:
+    LEK-1-dissolution_av = 93.83 %  | source: Laboratory.csv, row=2
+  SYNTHETIC data (invented, labelled SYNTHETIC for the writer: "In illustrative demonstration data,"): 29 facts in task m23d_dev_01. One fact:
+    M23-P8|25C/60%RH|Assay|0 = 99.28 % label claim  | source: synthetic (SYNTHETIC test case (invented numbers, not Kerendia).), page/row: (synthetic, none)
+
+[2/7] STATS: computed by code (ICH Q1E, Decimal) from those same rows, never by the model
+  inputs: Assay at 25C/60%RH, 3 rows (synthetic), points (month, % label claim): (0, 99.28), (3, 100.50), (6, 100.51)
+  limits from the rows: lower 96.0, upper none
+  result: Q1E shelf-life estimate = 10.16 months (the lower 95% bound crosses the limit); cap 12 months
+  range of the same rows: lowest 99.28, highest 100.51, results outside the limit: 0 of 3
+  Dissolution at 25C/60%RH against its limit (NLT 80): 0 of 7 outside
+
+[3/7] DRAFT: the model writes sentences with [[slots]] only; here is the raw draft of one section (unit spec)
+    | In illustrative demonstration data, the drug product specification lists these tests and acceptance criteria.
+    | Assay: NLT [[spec_assay]]
+    | Dissolution: NLT [[spec_dissolution_av]]
+    | Impurity L: NMT [[spec_impurity_l]]
+    | Total impurities: NMT [[spec_impurities_total]]
+    | Residual solvent: NMT [[spec_resodual_solvent]]
+  digits in this raw draft: none
+  drafts asked: 6 for 6 sections (retries after a rejection: 0)
+
+[4/7] GATES + CROSS-CHECK: wording gates (a-i), then an independent check of the saved files
+  RESULT: ACCEPTED. Cross-check html: 24 numbers checked, 24 MATCH, 0 failed
+          Cross-check docx: 24 numbers checked, 24 MATCH, 0 failed
+  HTML : evidence\T-076\demo\synthetic1\draft\render_1\M23.html
+  Word : evidence\T-076\demo\synthetic1\draft\render_1\M23.docx
+
+[5/7] PLANT 1: change one number in a COPY of the rendered document
+  changed 12 -> 24 next to fact M23-P8|2-25C CRT|expiry_period_proposed|12 (copy: evidence\T-076\demo\synthetic1\plant_number\M23.html)
+  cross-check says FAIL: number 24, fact unplaced:24, in html - number has no placement
+  cross-check says FAIL: number , fact M23-P8|2-25C CRT|expiry_period_proposed|12, in html - placement without a number in the file
+  cross-check problem: the HTML and the Word file do not hold the same numbers
+  in plain words: fact M23-P8|2-25C CRT|expiry_period_proposed|12 owns the number 12; the file now shows 24 there, and no fact owns 24
+  PLANT 1 REJECTED (good)
+
+[6/7] PLANT 2: a draft where the model typed a number itself
+  draft text: Residual solvent: NMT [[spec_resodual_solvent]] The shelf life is 36 months.
+  gate says: (a) the draft writes a digit; use a [[placeholder]] for every value
+  PLANT 2 REJECTED by gate (a) (good) (gates fired: a)
+
+[7/7] RUN FINGERPRINT: hashes so this run can be found and checked again (a fingerprint of the files, not a ledger entry)
+  sha256 M23.html                   ee3e4be11aefd97904026eebcb0e60fac9107dd4e3685be142e707da50c16631
+  sha256 M23.docx                   98dceb08bb790cde88cc93240329324ff2e24ffcf8b8d15e8cf0d92f303b348e
+  sha256 attempts.jsonl             ebc755378c0606804ad6f48ded35f6b9907e8e7dc476c705048f0c29253f24c4
+  sha256 graph_snapshot.json        8b109ec9db5309d8439fca19ac38df456ec3d29506a196fe729c9173a5b63014
+  RUN FINGERPRINT: 7195381fc5264ea0 (first 16 hex of the sha256 of the 4 hashes above)
+
+STEPS 1-4 PASS | PLANT 1 rejected | PLANT 2 rejected
+DEMO PASSED (exit 0)

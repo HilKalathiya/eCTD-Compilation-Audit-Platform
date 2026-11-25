@@ -1,0 +1,67 @@
+condition,month,attribute,value,unit,limit,source
+25C/60%RH,36,study_duration_demonstrated,36,months,,FDA ChemR 215341 p.5
+30C/75%RH,36,study_duration_demonstrated,36,months,,FDA ChemR 215341 p.5
+40C/75%RH,6,study_duration_demonstrated,6,months,,FDA ChemR 215341 p.5
+20-25C CRT,36,expiry_period_proposed,36,months,,FDA ChemR 215341 p.3
+25C/60%RH,0,Assay,100.00,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,3,Assay,99.94,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,6,Assay,99.88,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,9,Assay,99.82,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,12,Assay,99.76,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,18,Assay,99.64,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,24,Assay,99.52,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,36,Assay,99.28,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,0,Assay,100.00,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,3,Assay,99.91,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,6,Assay,99.82,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,9,Assay,99.73,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,12,Assay,99.64,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,18,Assay,99.46,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,24,Assay,99.28,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+30C/75%RH,36,Assay,98.92,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+40C/75%RH,0,Assay,100.00,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+40C/75%RH,1,Assay,99.90,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+40C/75%RH,3,Assay,99.70,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+40C/75%RH,6,Assay,99.40,% label claim,95.0-105.0,DEMO: redacted (b)(4) in ChemR p.7
+25C/60%RH,0,Degradation product,0.050,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,3,Degradation product,0.056,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,6,Degradation product,0.062,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,9,Degradation product,0.068,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,12,Degradation product,0.074,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,18,Degradation product,0.086,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,24,Degradation product,0.098,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,36,Degradation product,0.122,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,0,Degradation product,0.050,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,3,Degradation product,0.062,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,6,Degradation product,0.074,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,9,Degradation product,0.086,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,12,Degradation product,0.098,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,18,Degradation product,0.122,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,24,Degradation product,0.146,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+30C/75%RH,36,Degradation product,0.194,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+40C/75%RH,0,Degradation product,0.050,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+40C/75%RH,1,Degradation product,0.070,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+40C/75%RH,3,Degradation product,0.110,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+40C/75%RH,6,Degradation product,0.170,% area,NMT 0.50,DEMO: redacted (b)(4) in ChemR p.4
+25C/60%RH,0,Dissolution (15 min),96.00,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+25C/60%RH,3,Dissolution (15 min),95.91,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+25C/60%RH,6,Dissolution (15 min),95.82,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+25C/60%RH,9,Dissolution (15 min),95.73,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+25C/60%RH,12,Dissolution (15 min),95.64,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+25C/60%RH,18,Dissolution (15 min),95.46,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+25C/60%RH,24,Dissolution (15 min),95.28,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+25C/60%RH,36,Dissolution (15 min),94.92,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,0,Dissolution (15 min),96.00,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,3,Dissolution (15 min),95.85,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,6,Dissolution (15 min),95.70,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,9,Dissolution (15 min),95.55,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,12,Dissolution (15 min),95.40,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,18,Dissolution (15 min),95.10,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,24,Dissolution (15 min),94.80,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+30C/75%RH,36,Dissolution (15 min),94.20,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+40C/75%RH,0,Dissolution (15 min),96.00,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+40C/75%RH,1,Dissolution (15 min),95.85,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+40C/75%RH,3,Dissolution (15 min),95.55,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+40C/75%RH,6,Dissolution (15 min),95.10,% dissolved,NLT 80,DEMO: redacted (b)(4) in ChemR p.5
+15-30C excursion,0,excursion_permitted_low,15,C,,FDA ChemR 215341 p.3
+15-30C excursion,0,excursion_permitted_high,30,C,,FDA ChemR 215341 p.3
