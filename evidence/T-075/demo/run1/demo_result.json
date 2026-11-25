@@ -1,0 +1,21 @@
+{
+ "run_id": "7526b53205acd7a5",
+ "steps_ok": {
+  "1": true,
+  "2": true,
+  "3": true,
+  "4": true,
+  "5": true,
+  "6": true,
+  "7": true
+ },
+ "plant_number_rejected": true,
+ "plant_digit_rejected": true,
+ "mock": false,
+ "hashes": {
+  "M23.html": "18dd01e5e3d4cff66c0419abd88180b5fb46b072653a5485028694320125b37b",
+  "M23.docx": "f5e32ae1eea5a1ae7ef3051e1eaa83525122dfe4940e071b459be15fac72374a",
+  "attempts.jsonl": "31771ec836a95dee9956821f9af06612db13ec575ce5ca623d421b853f9b46e5",
+  "graph_snapshot.json": "8b109ec9db5309d8439fca19ac38df456ec3d29506a196fe729c9173a5b63014"
+ }
+}

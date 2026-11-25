@@ -1,6 +1,7 @@
 """Tests the p83-stability Agent Skill: well formed, same entry point as the direct run, and the compare tool catches a planted verdict change."""
 import importlib.util
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -15,8 +16,13 @@ ROOT = Path(__file__).resolve().parent.parent
 SKILL = ROOT / "skills" / "p83-stability"
 
 
-def run_script(path, out):
-    return subprocess.run([sys.executable, str(path), "--backend", "mock", "--out", str(out)], capture_output=True, text=True, cwd=str(ROOT))
+def run_script(path, out, private_tmp=None):
+    """Run a script in a child process. With private_tmp the child writes no .pyc files into the repo and uses private_tmp as its temp folder (nothing shared with other tests)."""
+    env = None
+    if private_tmp is not None:
+        Path(private_tmp).mkdir(parents=True, exist_ok=True)
+        env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", TMP=str(private_tmp), TEMP=str(private_tmp), TMPDIR=str(private_tmp))
+    return subprocess.run([sys.executable, str(path), "--backend", "mock", "--out", str(out)], capture_output=True, text=True, cwd=str(ROOT), env=env)
 
 
 class SkillFile(unittest.TestCase):
@@ -84,13 +90,16 @@ class SameEntryPoint(unittest.TestCase):
 
 class CompareCanFail(unittest.TestCase):
     def setUp(self):
-        self.tmp = tempfile.mkdtemp()
+        # one private folder per test; the child process gets a private temp folder inside it; the cleanup runs even if setUp fails half way
+        self.tmp = tempfile.mkdtemp(prefix="p83_cmp_")
+        self.addCleanup(self._remove_tree)
         self.d = Path(self.tmp)
-        r = run_script(SKILL / "scripts" / "run.py", self.d / "direct")
+        r = run_script(SKILL / "scripts" / "run.py", self.d / "direct", private_tmp=self.d / "child_tmp")
         self.assertEqual(r.returncode, 0, r.stderr)
         shutil.copytree(self.d / "direct", self.d / "skill")
 
-    def tearDown(self):
+    def _remove_tree(self):
+        """Delete the private folder (cleanup only; it checks nothing, so a leftover temp folder is not a test failure)."""
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def edit_skill(self, fn):

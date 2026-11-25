@@ -196,3 +196,5 @@ data-src link = a mark on a sentence in the saved document that names the stored
 one limit source = a limit is stored once (the specification table) and every check reads it from there, so two numbers can never disagree
 template filler = the 2.3 writer: the model only picks one allowed sentence pattern per place and says which slot goes where; the code writes every value and checks the choice against the data
 human review route = when a long-term or intermediate result is outside its limit, the code writes "HUMAN REVIEW REQUIRED: ..." (linked to the facts that caused it) and no shelf life is proposed until a person looks
+checkpoint = a planned stop where the whole chain must run end to end and be shown to someone; if it fails we stop and re-plan
+sabotage test = a test that breaks the thing it guards on purpose (for example a planted error that is NOT caught) and checks that the alarm still goes off
