@@ -113,15 +113,17 @@ class CsvGraph:
         return {k: dict(r) for k, r in self._rows.items()}
 
 
-def csv_lines(path=CSV_PATH):
+def csv_lines(path=None):
     """{line number: row dict} read straight from the file with the csv module (line 1 is the header). Independent of the fact builder."""
-    with open(path, newline="", encoding="utf-8") as fh:
+    with open(path or CSV_PATH, newline="", encoding="utf-8") as fh:
         return {i: r for i, r in enumerate(csv.DictReader(fh), start=2)}
 
 
-def build_csv_world(path=CSV_PATH):
+def build_csv_world(path=None):
     """(task, rows): every fact comes from the CSV. Stability rows: G.collect_stability. The ONE specification row (Dissolution) is read from the
-    'limit' column of the CSV's first Dissolution row (NLT 80), with that CSV line as its source; the Lek specification file is NOT used."""
+    'limit' and 'unit' columns of the CSV's first row of that test, with that CSV line as its source. The Lek specification row is only a TEMPLATE
+    (it gives the field layout); every value of the new spec fact is overwritten from the CSV."""
+    path = path or CSV_PATH
     rows = G.collect_stability(path)
     lines = csv_lines(path)
     task = T4.real_task4()
@@ -132,7 +134,7 @@ def build_csv_world(path=CSV_PATH):
         kind, value = line["limit"].split()
         spec = dict(G.collect_spec()[G.spec_id("dissolution_av")])
         stab = rows[G.stab_id(line["condition"], line["attribute"], line["month"])]
-        spec.update(fact_id=fid, attribute=spec_attr, test=test, unit=stab["unit"] if csv_attr != "Dissolution (15 min)" else "%", value_text=value, limit_kind=kind,
+        spec.update(fact_id=fid, attribute=spec_attr, test=test, unit=line["unit"], value_text=value, limit_kind=kind,
                     doc_id=stab["doc_id"], doc_version=stab["doc_version"], locator=f"row={n}", page=stab["page"], basis="csv limit column", derived="yes",
                     demo_label=G.LABEL, definition=f"limit column of stability row {n} of {STAB_DOC}; source text: {line['source']}")
         rows[fid] = spec
@@ -142,6 +144,36 @@ def build_csv_world(path=CSV_PATH):
                 g["spec_fact"] = fid
     task.update(task_id="m23d_csv", set="csv", note="Facts read from finerenone_stability.csv (public rows and DEMO rows).", spec=task_spec)
     return task, rows
+
+
+STUDY_START = re.compile(r"(Stability was demonstrated for|Stability data cover|Long-term stability was demonstrated for|Data are available for|Long-term data are available for)")
+
+
+def _shift(par, at, n):
+    """Move every placement (and claim span) that starts at or after text offset `at` to the right by n characters."""
+    for pl in par.placements:
+        if pl["offset"] >= at:
+            pl["offset"] += n
+    if getattr(par, "claims", None):
+        par.claims = [(a + n if a >= at else a, b + n if b > at else b, ids) for a, b, ids in par.claims]
+
+
+def label_demo(built):
+    """The writer loop leaves the study sentence ("Stability was demonstrated for ...", which depends on DEMO results) without the label. This adds
+    the project's own label text (S.M23_LABEL) in front of it, after the gates and before the files are saved, so it shows in the HTML and the Word
+    file. It changes no number. The specification table rows are NOT labelled here: the frozen cross-check only accepts a row that is exactly
+    'test<TAB>kind number unit', so a label inside a row is rejected (tested). The table sits under the labelled specification sentence."""
+    label = S.M23_LABEL
+    for sections in built.values():
+        for sec in sections:
+            if getattr(sec, "name", "") == "public":
+                for par in sec.paragraphs:
+                    m = STUDY_START.search(par.text)
+                    if m and not par.text.startswith(label):
+                        lowered = label + m.group(1)[0].lower() + m.group(1)[1:]
+                        par.text = par.text[:m.start()] + lowered + par.text[m.start() + len(m.group(1)):]
+                        _shift(par, m.start() + 1, len(label))
+    return built
 
 
 def trace_one(fid, rows, lines):
@@ -162,7 +194,7 @@ def trace_one(fid, rows, lines):
         if r["unit"] == "min" and fid.endswith("|timepoint"):                       # the dissolution time point is written in the attribute cell
             ok = f"({r['value_text']} min)" in line["attribute"]
         elif r["family"] == "spec":                                                   # the specification limit is written in the limit cell
-            ok = line["limit"].split() == [r["limit_kind"], r["value_text"]]
+            ok = line["limit"].split() == [r["limit_kind"], r["value_text"]] and line["unit"] == r["unit"]      # the unit is the CSV's own unit cell
         else:
             ok = all(line[c] == r[k] for c, k in (("value", "value_text"), ("attribute", "attribute"), ("condition", "condition"), ("month", "month")))
         return ok, f"CSV line {n}"
@@ -205,15 +237,54 @@ def plant_digit_draft(good_draft):
     return good_draft + " The shelf life is 36 months."
 
 
-def main(argv=None, plant_number=plant_wrong_number, plant_draft=plant_digit_draft):
+def check_docx(docx, kit):
+    """Check ONE edited Word file: run the cross-check on it against the facts and the saved 3.2 files of a classmate kit (kit/trusted).
+    Prints every number it rejects. Returns 0 if no number is rejected, 1 if any is, 2 if the files are missing."""
+    import tempfile
+    docx, keep = Path(docx), Path(kit) / "trusted"
+    if not docx.is_file() or not (keep / "rows.json").is_file():
+        print("need an existing .docx and a kit folder made by tools/classmate_kit.py prepare (it holds trusted/rows.json)", file=sys.stderr)
+        return 2
+    rows = json.loads((keep / "rows.json").read_text(encoding="utf-8"))
+    with tempfile.TemporaryDirectory(prefix="check_docx_") as tmp:
+        work = Path(tmp) / "render"
+        shutil.copytree(keep / "render", work)
+        shutil.copyfile(docx, work / "M23.docx")                                   # only the Word file is theirs; the HTML is the untouched one
+        cc = X.run(work, rows, keep / "ref" / "p5_placements.jsonl", keep / "ref" / "p8")
+    word = [r for r in cc["rows"] if r["format"] == "docx"]
+    bad = [r for r in word if r["verdict"] != "MATCH"]
+    print("CHECK OF ONE WORD FILE: %s" % docx)
+    print("  numbers read from the Word file: %d | accepted: %d | rejected: %d" % (len(word), len(word) - len(bad), len(bad)))
+    for r in bad:
+        print("  REJECTED number %s next to fact %s: %s (the facts say %s)" % (r["number"] or "(none)", r["fact_id"] or "(no fact owns it)", r["reason"], r["v32_graph"] or "?"))
+    for p in cc["problems"]:
+        if "docx" in p.lower() or "word" in p.lower():
+            print("  problem: " + p)
+    print("  RESULT: %s" % ("every number matches its fact" if not bad else "REJECTED (%d numbers)" % len(bad)))
+    print("  (this checks numbers, units and their places only; use classmate_kit.py score to check sentences and the CSV)")
+    return 1 if bad else 0
+
+
+def main(argv=None, plant_number=plant_wrong_number, plant_draft=plant_digit_draft, world=None):
+    """world = the function that builds (task, rows) from the CSV; tests swap it to add a fact that cannot be traced."""
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--out", required=True, help="a NEW folder for this run (never reused)")
+    ap.add_argument("--out", help="a NEW folder for this run (never reused)")
+    ap.add_argument("--check-docx", metavar="FILE", help="instead of a demo run: check ONE edited .docx and print the numbers it rejects (needs --kit)")
+    ap.add_argument("--kit", help="a kit folder made by tools/classmate_kit.py prepare (used with --check-docx)")
     ap.add_argument("--mock", action="store_true", help="scripted model instead of Gemma")
     ap.add_argument("--synthetic", action="store_true", help="use the old SYNTHETIC invented task instead of the CSV (clearly labelled)")
     ap.add_argument("--log", help="also save the console output to this file (written by this script)")
+    ap.add_argument("--csv", help="read this stability CSV instead of data/stability/finerenone_stability.csv (same columns)")
     ap.add_argument("--model", default="gemma4:e4b")
     ap.add_argument("--base-url", default="http://localhost:11434")
     args = ap.parse_args(argv)
+    if args.check_docx:
+        return check_docx(args.check_docx, args.kit or "")
+    if not args.out:
+        ap.error("--out is required for a demo run")
+    global CSV_PATH
+    CSV_PATH = Path(args.csv).resolve() if args.csv else SF.DEFAULT_CSV
+    args.world = world or build_csv_world
     out = Path(args.out)
     if out.exists():
         print(f"{out} already exists; use a new folder (runs are never overwritten)", file=sys.stderr)
@@ -227,6 +298,7 @@ def main(argv=None, plant_number=plant_wrong_number, plant_draft=plant_digit_dra
         return _run(args, out, say, results, plant_number, plant_draft)
     finally:
         say.close()
+        CSV_PATH = SF.DEFAULT_CSV                                   # a --csv choice is for this run only
 
 
 def _facts_and_stats(args, say, results):
@@ -249,11 +321,12 @@ def _facts_and_stats(args, say, results):
         spec_lo, spec_hi = Decimal(stab[0]["limit_text"].replace("NLT", "").strip()), None
     else:
         say("\n[1/7] FACTS: the CSV is read into facts in memory (no database); every fact keeps its CSV line and the page of its source")
-        task, rows = build_csv_world()
+        task, rows = args.world()
         lines = csv_lines()
         raw = CSV_PATH.read_text(encoding="utf-8").splitlines()
+        shown = CSV_PATH.relative_to(ROOT).as_posix() if CSV_PATH.is_relative_to(ROOT) else str(CSV_PATH)
         say("  CSV: %s has %d data lines -> %d facts (stored rows + 2 storage temperatures read from the condition text + %d specification limits read from the limit column)"
-            % (CSV_PATH.relative_to(ROOT).as_posix(), len(lines), len(rows), len(SPEC_FROM_CSV)))
+            % (shown, len(lines), len(rows), len(SPEC_FROM_CSV)))
         pub = rows[P.PUBLIC_REFS["shelf"]]
         say("  PUBLIC fact: %s = %s %s" % (pub["fact_id"], pub["value_text"], pub["unit"]))
         say("    source: %s, %s (CSV line text: \"%s\"), FDA review page %s, kind=%s" % (pub["doc_id"], pub["locator"], raw[int(pub["locator"][4:]) - 1], pub["page"], pub["kind"]))
@@ -300,8 +373,13 @@ def _run(args, out, say, results, plant_number, plant_draft):
     run_kw = {}
     if not args.synthetic:                                   # the saved 3.2 stand-in files are written from the CSV facts, before any draft is asked
         run_kw["ref"] = T4.write_reference4(task, rows, out / "ref")
-        run_kw["check_rows"] = build_csv_world()[1]          # the cross-check reads the CSV a second, separate time
-    res = L.run_world(client, task, work, graph, seed=L.SEED, temperature=0.0, **run_kw)
+        run_kw["check_rows"] = args.world()[1]         # the cross-check reads the CSV a second, separate time
+    plain_build = L.build_sections
+    L.build_sections = lambda *a, **k: label_demo(plain_build(*a, **k))        # labels the spec rows and the study sentence (see label_demo)
+    try:
+        res = L.run_world(client, task, work, graph, seed=L.SEED, temperature=0.0, **run_kw)
+    finally:
+        L.build_sections = plain_build
     attempts = [json.loads(x) for x in (work / "attempts.jsonl").read_text(encoding="utf-8").splitlines()] if (work / "attempts.jsonl").exists() else []
     drafts = [a for a in attempts if "unit_id" in a and a.get("passed")]
     say("\n[3/7] DRAFT: the model writes sentences with [[slots]] only; here is the raw draft of one section (unit %s)" % (drafts[0]["unit_id"] if drafts else "none"))

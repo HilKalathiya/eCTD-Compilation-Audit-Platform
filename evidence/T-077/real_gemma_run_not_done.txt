@@ -1,0 +1,8 @@
+T-077: real Gemma run NOT DONE (the card allows it only if Available memory >= 3000 MB).
+Gemma was unloaded first (Ollama API, keep_alive 0). Then:
+  (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue  -> 2593
+  second reading a moment later                                         -> 2555
+Both are under 3000, so no run was started and no folder evidence/T-077/run1 exists.
+Largest programs at that moment (working set, MB): Memory Compression 792, claude 668, Code 537, Code 513, Code 486.
+Mock runs of the new code (scripted model, no Gemma): evidence/T-077/mock1 (spec rows labelled: cross-check REJECTED, kept as proof), mock2, mock3 (PASSED, 66 of 66 numbers traced).
+The last real Gemma run is still evidence/T-076/demo/run2, made BEFORE the T-077 changes (Dissolution unit "%", no label on the study sentence).

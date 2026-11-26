@@ -1,0 +1,38 @@
+{
+ "accepted": false,
+ "counts": {
+  "docx": {
+   "checked": 33,
+   "failed": 2,
+   "matched": 31,
+   "uncovered": 0
+  },
+  "html": {
+   "checked": 33,
+   "failed": 2,
+   "matched": 31,
+   "uncovered": 0
+  }
+ },
+ "drafts": {
+  "public": 1,
+  "result:25C/60%RH|Assay": 1,
+  "result:25C/60%RH|Degradation product": 1,
+  "result:25C/60%RH|Dissolution (15 min)": 1,
+  "result:30C/75%RH|Assay": 1,
+  "result:30C/75%RH|Degradation product": 1,
+  "result:30C/75%RH|Dissolution (15 min)": 1,
+  "result:40C/75%RH|Assay": 1,
+  "result:40C/75%RH|Degradation product": 1,
+  "result:40C/75%RH|Dissolution (15 min)": 1,
+  "spec": 4
+ },
+ "graph": "CSV (in memory, from finerenone_stability.csv)",
+ "reason": "(d) the cross-check failed and no draft is left to retry",
+ "render": "",
+ "renders": 4,
+ "review_route": false,
+ "set": "csv",
+ "synthetic": false,
+ "task_id": "m23d_csv"
+}
